@@ -34,7 +34,7 @@ namespace Kaos.Physics
             life: Nutrition.BulkEssential,
             known: 1766, credit: "Henry Cavindish",
             naming: "From Greek, meaning water-former",
-            isotopes: new Isotope[] { new Isotope (1, 99.98), new Isotope (2, 0.02), new Isotope (3, 0.0, 12.32*365.25*24*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (1, 99.98), new Isotope (2, 0.02), new Isotope (3, 0.0, 12.32*31556952.0, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string> { { "de","Wasserstoff" }, { "es","Hidrógeno" }, { "fr","Hydrogène" }, { "it","Hydrogène" }, { "ru","Нейтрон" } }
         );
 
@@ -71,7 +71,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1798, credit: "Louis Nicolas Vauquelin",
             naming: "From the Greek beryllos, meaning beryl mineral",
-            isotopes: new Isotope[] { new Isotope (7, 0.0, 53.12*24*3600, Decay.ElectronCap1|Decay.Gamma), new Isotope (9, 100.0), new Isotope (10, 0.0, 1.39E6*365.25*24*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (7, 0.0, 53.12*86400.0, Decay.ElectronCap1|Decay.Gamma), new Isotope (9, 100.0), new Isotope (10, 0.0, 1.39E6*31556952.0, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string> { { "es","Berilio" }, { "fr","Béryllium" }, { "it","Berillio" }, { "ru","Бериллий" } }
         );
 
@@ -97,7 +97,7 @@ namespace Kaos.Physics
             life: Nutrition.BulkEssential,
             known: 1789, credit: "Antoine Lavoisier",
             naming: "From the Latin carbo, meaning coal",
-            isotopes: new Isotope[] { new Isotope (11, null, 20.0*60, Decay.BetaPlus), new Isotope (12, 98.9), new Isotope (13, 1.1), new Isotope (14, 0.0, 5730.0*365.25*24*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (11, null, 20.0*60, Decay.BetaPlus), new Isotope (12, 98.9), new Isotope (13, 1.1), new Isotope (14, 0.0, 5730*31556952.0, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string> { { "de","Kohlensto" }, { "es","Carbono" }, { "fr","Carbone" }, { "it","Carbonio" }, { "ru","Углерод" } }
         );
 
@@ -161,7 +161,7 @@ namespace Kaos.Physics
             life: Nutrition.BulkEssential,
             known: 1807, credit: "Humphry Davy",
             naming: "Possibly from the Arabic suda, meaning headache",
-            isotopes: new Isotope[] { new Isotope (22, 0.0, 2.602*365.25*24*3600, Decay.BetaPlus), new Isotope (23, 100.0), new Isotope (24, 0.0, 14.96*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (22, 0.0, 2.602*31556952.0, Decay.BetaPlus), new Isotope (23, 100.0), new Isotope (24, 0.0, 14.96*3600, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string> { { "de","Natrium" }, { "es","Sodio" }, { "it","Sodio" }, { "ru","Натрий" } }
         );
 
@@ -187,7 +187,7 @@ namespace Kaos.Physics
             life: Nutrition.Absorbed,
             known: 1824, credit: "Hans Christian Ørsted",
             naming: "From the Latin alum, the mineral from which it was isolated",
-            isotopes: new Isotope[] { new Isotope (26, 0.0, 7.17E5*365.25*24*3600, Decay.BetaPlus|Decay.ElectronCap1|Decay.Gamma), new Isotope (27, 100.0) },
+            isotopes: new Isotope[] { new Isotope (26, 0.0, 7.17E5*31556952.0, Decay.BetaPlus|Decay.ElectronCap1|Decay.Gamma), new Isotope (27, 100.0) },
             nameMap: new Dictionary<string,string> { { "en-US","Aluminum" }, { "es","Aluminio" }, { "it","Alluminio" }, { "ru","Алюминий" } }
         );
 
@@ -200,7 +200,7 @@ namespace Kaos.Physics
             life: Nutrition.Beneficial,
             known: 1823, credit: "Jöns Jacob Berzelius",
             naming: "From the Latin silicis, meaning flint",
-            isotopes: new Isotope[] { new Isotope (28, 92.2), new Isotope (29, 4.7), new Isotope (30, 3.1), new Isotope (31, 0.0, 2.62*3600, Decay.BetaMinus), new Isotope (32, 0.0, 1.53*365.25*24*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (28, 92.2), new Isotope (29, 4.7), new Isotope (30, 3.1), new Isotope (31, 0.0, 2.62*3600, Decay.BetaMinus), new Isotope (32, 0.0, 1.53*31556952.0, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string> { { "de","Silicium" }, { "es","Silicio" }, { "fr","Silicium" }, { "it","Silicio" }, { "ru","Кремний" } }
         );
 
@@ -213,7 +213,7 @@ namespace Kaos.Physics
             life: Nutrition.BulkEssential,
             known: 1669, credit: "Hennig Brand",
             naming: "From the Greek φῶς and -φέρω, meaning light-bringer",
-            isotopes: new Isotope[] { new Isotope (31, 100.0), new Isotope (32, 0.0, 14.28*24*3600, Decay.BetaMinus), new Isotope (33, 0.0, 25.3*24*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (31, 100.0), new Isotope (32, 0.0, 14.28*86400.0, Decay.BetaMinus), new Isotope (33, 0.0, 25.3*86400.0, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string> { { "de","Phosphor" }, { "es","Fósforo" }, { "fr","Phosphore" }, { "it","Fosforo" }, { "ru","Фосфор" } }
         );
 
@@ -226,7 +226,7 @@ namespace Kaos.Physics
             life: Nutrition.BulkEssential,
             known: 0,
             naming: "from the Latin sulpur",
-            isotopes: new Isotope[] { new Isotope (32, 94.99), new Isotope (33, 0.75), new Isotope (34, 4.25), new Isotope (35, 0.0, 87.37*24*3600, Decay.BetaMinus), new Isotope (36, 0.01) },
+            isotopes: new Isotope[] { new Isotope (32, 94.99), new Isotope (33, 0.75), new Isotope (34, 4.25), new Isotope (35, 0.0, 87.37*86400.0, Decay.BetaMinus), new Isotope (36, 0.01) },
             nameMap: new Dictionary<string,string> { { "de","Schwefel" }, { "en-GB","Sulphur" }, { "es","Azufre" }, { "fr","Soufre" }, { "it","Zolfo" }, { "ru","Сера" } }
         );
 
@@ -239,7 +239,7 @@ namespace Kaos.Physics
             life: Nutrition.BulkEssential,
             known: 1774, credit: "Carl Wilhelm Scheele",
             naming: "from the Greek χλωρος (chlōros), meaning green-yellow",
-            isotopes: new Isotope[] { new Isotope (35, 76.0), new Isotope (36, 0.0, 3.01E5*365.25*24*3600, Decay.BetaMinus|Decay.ElectronCap1), new Isotope (37, 24.0) },
+            isotopes: new Isotope[] { new Isotope (35, 76.0), new Isotope (36, 0.0, 3.01E5*31556952.0, Decay.BetaMinus|Decay.ElectronCap1), new Isotope (37, 24.0) },
             nameMap: new Dictionary<string,string> { { "de","Chlor" }, { "es","Cloro" }, { "fr","Chlore" }, { "it","Cloro" }, { "ru","Хлор" } }
         );
 
@@ -251,7 +251,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1894, credit: "Lord Rayleigh, William Ramsay",
             naming: "From the Greek ἀργόν, meaning inactive",
-            isotopes: new Isotope[] { new Isotope (36, 0.334), new Isotope (37, null, 35*24*3600, Decay.ElectronCap1), new Isotope (38, 0.063), new Isotope (39, 0.0, 269.0*365.25*24*3600, Decay.BetaMinus), new Isotope (40, 99.604), new Isotope (41, null, 109.34, Decay.BetaMinus), new Isotope (42, null, 32.9*365.25*24*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (36, 0.334), new Isotope (37, null, 35*86400.0, Decay.ElectronCap1), new Isotope (38, 0.063), new Isotope (39, 0.0, 269*31556952.0, Decay.BetaMinus), new Isotope (40, 99.604), new Isotope (41, null, 109.34, Decay.BetaMinus), new Isotope (42, null, 32.9*31556952.0, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string> { { "es","Argón" }, { "ru","Аргон" } }
         );
 
@@ -264,7 +264,7 @@ namespace Kaos.Physics
             life: Nutrition.BulkEssential,
             known: 1807, credit: "Humphry Davy",
             naming: "From placing in a pot the ash of burnt wood",
-            isotopes: new Isotope[] { new Isotope (39, 93.258), new Isotope (40, 0.012, 1.248E9*365.25*24*3600, Decay.BetaMinus|Decay.ElectronCap1|Decay.BetaPlus), new Isotope (41, 6.730) },
+            isotopes: new Isotope[] { new Isotope (39, 93.258), new Isotope (40, 0.012, 1.248E9*31556952.0, Decay.BetaMinus|Decay.ElectronCap1|Decay.BetaPlus), new Isotope (41, 6.730) },
             nameMap: new Dictionary<string,string> { { "de","Kalium" }, { "es","Potasio" }, { "it","Potassio" }, { "ru","Калий" } }
         );
 
@@ -277,7 +277,7 @@ namespace Kaos.Physics
             life: Nutrition.BulkEssential,
             known: 1808, credit: "Humphry Davy",
             naming: "from the Latin calx, meaning lime",
-            isotopes: new Isotope[] { new Isotope (40, 96.941), new Isotope (41, 0.0, 9.94E4*365.25*24*3600, Decay.ElectronCap1), new Isotope (42, 0.647), new Isotope (43, 0.135), new Isotope (44, 2.086), new Isotope (45, null, 162.6*24*3600, Decay.BetaMinus), new Isotope (46, 0.004), new Isotope (47, null, 4.5*24*3600, Decay.BetaMinus|Decay.Gamma), new Isotope (48, 0.187, 6.4E19*365.25*24*3600, Decay.Beta2) },
+            isotopes: new Isotope[] { new Isotope (40, 96.941), new Isotope (41, 0.0, 9.94E4*31556952.0, Decay.ElectronCap1), new Isotope (42, 0.647), new Isotope (43, 0.135), new Isotope (44, 2.086), new Isotope (45, null, 162.6*86400.0, Decay.BetaMinus), new Isotope (46, 0.004), new Isotope (47, null, 4.5*86400.0, Decay.BetaMinus|Decay.Gamma), new Isotope (48, 0.187, 6.4E19*31556952.0, Decay.Beta2) },
             nameMap: new Dictionary<string,string>() { { "es","Calcio" }, { "it","Calcio" }, { "ru","Кальций" } }
         );
         public static Nuclide Scandium { get; } = new Nuclide
@@ -288,7 +288,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1879, credit: "Lars Fredrik Nilson",
             naming: "From the Latin Scandia, meaning Scandinavia",
-            isotopes: new Isotope[] { new Isotope (44, null, 58.61*3600, Decay.IC|Decay.Gamma|Decay.ElectronCap1), new Isotope (45, 100.0), new Isotope (46, null, 83.79*24*3600, Decay.BetaMinus|Decay.Gamma), new Isotope (47, null, 80.38*24*3600, Decay.BetaMinus|Decay.Gamma), new Isotope (48, null, 43.67*3600, Decay.BetaMinus|Decay.Gamma) },
+            isotopes: new Isotope[] { new Isotope (44, null, 58.61*3600, Decay.IC|Decay.Gamma|Decay.ElectronCap1), new Isotope (45, 100.0), new Isotope (46, null, 83.79*86400.0, Decay.BetaMinus|Decay.Gamma), new Isotope (47, null, 80.38*86400.0, Decay.BetaMinus|Decay.Gamma), new Isotope (48, null, 43.67*3600, Decay.BetaMinus|Decay.Gamma) },
             nameMap: new Dictionary<string,string>() { { "es","Escandio" }, { "it","Scandio" }, { "ru","Скандий" } }
         );
 
@@ -300,7 +300,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1791, credit: "William Gregor",
             naming: "For the Titans of Greek mythology",
-            isotopes: new Isotope[] { new Isotope (44, null, 63*365.25*24*3600, Decay.ElectronCap1|Decay.Gamma), new Isotope (46, 8.25), new Isotope (47, 7.44), new Isotope (48, 73.72), new Isotope (49, 5.41), new Isotope (50, 5.18) },
+            isotopes: new Isotope[] { new Isotope (44, null, 63*31556952.0, Decay.ElectronCap1|Decay.Gamma), new Isotope (46, 8.25), new Isotope (47, 7.44), new Isotope (48, 73.72), new Isotope (49, 5.41), new Isotope (50, 5.18) },
             nameMap: new Dictionary<string,string>() { { "de","Titan" }, { "es","Titanio" }, { "fr","Titane" }, { "it","Titanio" }, { "ru","Титан" } }
         );
 
@@ -313,7 +313,7 @@ namespace Kaos.Physics
             life: Nutrition.Beneficial,
             known: 1867, credit: "Henry Enfield Roscoe",
             naming: "For the Scandinavian goddess of beauty and fertility, Vanadís",
-            isotopes: new Isotope[] { new Isotope (48, null, 16.0*24*3600, Decay.BetaPlus), new Isotope (49, null, 330.0*24*3600, Decay.ElectronCap1), new Isotope (50, 0.25, 1.5E17*365.25*24*3600, Decay.ElectronCap1|Decay.BetaMinus), new Isotope (51, 99.75) },
+            isotopes: new Isotope[] { new Isotope (48, null, 16.0*86400.0, Decay.BetaPlus), new Isotope (49, null, 330.0*86400.0, Decay.ElectronCap1), new Isotope (50, 0.25, 1.5E17*31556952.0, Decay.ElectronCap1|Decay.BetaMinus), new Isotope (51, 99.75) },
             nameMap: new Dictionary<string,string>() { { "es","Vanadio" }, { "it","Vanadio" }, { "ru","Ванадий" } }
         );
 
@@ -326,7 +326,7 @@ namespace Kaos.Physics
             life: Nutrition.Absorbed,
             known: 1797, credit: "Louis Nicolas Vauquelin",
             naming: "From the Greek Chroma, meaing color",
-            isotopes: new Isotope[] { new Isotope (50, 4.345), new Isotope (51, null, 27.7025*24*3600, Decay.ElectronCap1|Decay.Gamma), new Isotope (52, 83.789), new Isotope (53, 9.501), new Isotope (54, 2.365) },
+            isotopes: new Isotope[] { new Isotope (50, 4.345), new Isotope (51, null, 27.7025*86400.0, Decay.ElectronCap1|Decay.Gamma), new Isotope (52, 83.789), new Isotope (53, 9.501), new Isotope (54, 2.365) },
             nameMap: new Dictionary<string,string>() { { "de","Chrom" }, { "es","Cromo" }, { "fr","Chrome" }, { "it","Cromo" }, { "ru","Хром" } }
         );
 
@@ -339,7 +339,7 @@ namespace Kaos.Physics
             life: Nutrition.TraceEssential,
             known: 1774, credit: "Johann Gottlieb Gahn",
             naming: "From the Greek word for Magnesia (now in Turkey)",
-            isotopes: new Isotope[] { new Isotope (52, null, 5.6*24*3600, Decay.ElectronCap1|Decay.BetaPlus|Decay.Gamma), new Isotope (53, 0.0, 3.74E6*365.25*24*3600, Decay.ElectronCap1), new Isotope (54, null, 312.03*24*3600, Decay.ElectronCap1|Decay.Gamma), new Isotope (55, 100.0) },
+            isotopes: new Isotope[] { new Isotope (52, null, 5.6*86400.0, Decay.ElectronCap1|Decay.BetaPlus|Decay.Gamma), new Isotope (53, 0.0, 3.74E6*31556952.0, Decay.ElectronCap1), new Isotope (54, null, 312.03*86400.0, Decay.ElectronCap1|Decay.Gamma), new Isotope (55, 100.0) },
             nameMap: new Dictionary<string,string>() { { "de","Mangan" }, { "es","Manganeso" }, { "fr","Manganèse" }, { "ru","Марганец" } }
         );
 
@@ -352,7 +352,7 @@ namespace Kaos.Physics
             life: Nutrition.TraceEssential,
             known: 0,
             naming: "From proto-Germanic isarnan",
-            isotopes: new Isotope[] { new Isotope (54, 5.85), new Isotope (55, null, 2.73*365.25*24*3600, Decay.ElectronCap1), new Isotope (56, 91.75), new Isotope (57, 2.12), new Isotope (58, 0.28), new Isotope (59, null, 44.6*24*3600, Decay.BetaMinus), new Isotope (60, 0.0, 2.6E6*365.25*24*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (54, 5.85), new Isotope (55, null, 2.73*31556952.0, Decay.ElectronCap1), new Isotope (56, 91.75), new Isotope (57, 2.12), new Isotope (58, 0.28), new Isotope (59, null, 44.6*86400.0, Decay.BetaMinus), new Isotope (60, 0.0, 2.6E6*31556952.0, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "de","Eisen" }, { "es","Hierro" }, { "fr","Fer" }, { "it","Ferro" }, { "ru","Железо" } }
         );
 
@@ -365,7 +365,7 @@ namespace Kaos.Physics
             life: Nutrition.TraceEssential,
             known: 1735, credit: "Georg Brandt",
             naming: "From the German kobold, meaning goblin",
-            isotopes: new Isotope[] { new Isotope (56, null, 77.27*24*3600, Decay.ElectronCap1), new Isotope (57, null, 271.79*24*3600, Decay.ElectronCap1), new Isotope (58, null, 70.86*24*3600, Decay.ElectronCap1), new Isotope (59, 100.0), new Isotope (60, null, 5.2714*365.25*24*3600, Decay.BetaMinus|Decay.Gamma) },
+            isotopes: new Isotope[] { new Isotope (56, null, 77.27*86400.0, Decay.ElectronCap1), new Isotope (57, null, 271.79*86400.0, Decay.ElectronCap1), new Isotope (58, null, 70.86*86400.0, Decay.ElectronCap1), new Isotope (59, 100.0), new Isotope (60, null, 5.2714*31556952.0, Decay.BetaMinus|Decay.Gamma) },
             nameMap: new Dictionary<string,string>() { { "es","Cobalto" }, { "it","Cobalto" }, { "ru","Кобальт" } }
         );
 
@@ -378,7 +378,7 @@ namespace Kaos.Physics
             life: Nutrition.Absorbed,
             known: 1751, credit: "Axel Fredrik Cronstedt",
             naming: "After a mischievous sprite of German mythology, Nickel",
-            isotopes: new Isotope[] { new Isotope (58, 68.077), new Isotope (59, 0.0, 7.6E4*365.25*24*3600, Decay.ElectronCap1), new Isotope (60, 26.223), new Isotope (61, 1.140), new Isotope (62, 3.635), new Isotope (63, null, 100.0*365.25*24*3600, Decay.BetaMinus), new Isotope (64, 0.926) },
+            isotopes: new Isotope[] { new Isotope (58, 68.077), new Isotope (59, 0.0, 7.6E4*31556952.0, Decay.ElectronCap1), new Isotope (60, 26.223), new Isotope (61, 1.140), new Isotope (62, 3.635), new Isotope (63, null, 100*31556952.0, Decay.BetaMinus), new Isotope (64, 0.926) },
             nameMap: new Dictionary<string,string>() { { "es","Niquel" }, { "it","Nichel" }, { "ru","Никель" } }
         );
 
@@ -404,7 +404,7 @@ namespace Kaos.Physics
             life: Nutrition.TraceEssential,
             known: 1746, credit: "Andreas Sigismund Marggraf",
             naming: "probably from the German zinke, meaning pointed or jagged",
-            isotopes: new Isotope[] { new Isotope (64, 49.2), new Isotope (65, null, 244.0*24*3600, Decay.ElectronCap1|Decay.Gamma), new Isotope (66, 27.7), new Isotope (67, 4.0), new Isotope (68, 18.5), new Isotope (69, null, 56.0*60, Decay.BetaMinus), new Isotope (70, 0.6), new Isotope (71, null, 2.4*60, Decay.BetaMinus), new Isotope (72, null, 46.5*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (64, 49.2), new Isotope (65, null, 244.0*86400.0, Decay.ElectronCap1|Decay.Gamma), new Isotope (66, 27.7), new Isotope (67, 4.0), new Isotope (68, 18.5), new Isotope (69, null, 56.0*60, Decay.BetaMinus), new Isotope (70, 0.6), new Isotope (71, null, 2.4*60, Decay.BetaMinus), new Isotope (72, null, 46.5*3600, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "de","Zink" }, { "it","Zinco" }, { "ru","Цинк" } }
         );
 
@@ -416,7 +416,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1875, credit: "Lecoq de Boisbaudran",
             naming: "From Latin Gallia, meaning Gaul",
-            isotopes: new Isotope[] { new Isotope (66, null, 95*3600, Decay.BetaPlus), new Isotope (67, null, 3.3*24*3600, Decay.ElectronCap1), new Isotope (68, null, 1.2*3600, Decay.BetaPlus), new Isotope (69, 60.11), new Isotope (70, null, 21.0*60, Decay.BetaMinus|Decay.ElectronCap1), new Isotope (71, 39.89), new Isotope (72, null, 14.1*3600, Decay.BetaMinus), new Isotope (73, null, 4.9*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (66, null, 95*3600, Decay.BetaPlus), new Isotope (67, null, 3.3*86400.0, Decay.ElectronCap1), new Isotope (68, null, 1.2*3600, Decay.BetaPlus), new Isotope (69, 60.11), new Isotope (70, null, 21.0*60, Decay.BetaMinus|Decay.ElectronCap1), new Isotope (71, 39.89), new Isotope (72, null, 14.1*3600, Decay.BetaMinus), new Isotope (73, null, 4.9*3600, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "es","Galio" }, { "it","Gallio" }, { "ru","Галлий" } }
         );
 
@@ -428,7 +428,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1886, credit: "Clemens Winkler",
             naming: "From the Latin Germania, meaning Germany",
-            isotopes: new Isotope[] { new Isotope (68, null, 270.95*24*3600, Decay.ElectronCap1), new Isotope (70, 20.52), new Isotope (71, null, 11.3*24*3600, Decay.ElectronCap1), new Isotope (72, 27.45), new Isotope (73, 7.76), new Isotope (74, 36.7), new Isotope (76, 7.75, 1.78E21*365.25*24*3600, Decay.Beta2) },
+            isotopes: new Isotope[] { new Isotope (68, null, 270.95*86400.0, Decay.ElectronCap1), new Isotope (70, 20.52), new Isotope (71, null, 11.3*86400.0, Decay.ElectronCap1), new Isotope (72, 27.45), new Isotope (73, 7.76), new Isotope (74, 36.7), new Isotope (76, 7.75, 1.78E21*31556952.0, Decay.Beta2) },
             nameMap: new Dictionary<string,string>() { { "es","Germanio" }, { "it","Germanio" }, { "ru","Германий" } }
         );
 
@@ -441,7 +441,7 @@ namespace Kaos.Physics
             life: Nutrition.Absorbed,
             known: 0,
             naming: "from Arabic al-zarnīḵ, meaning yellow orpiment",
-            isotopes: new Isotope[] { new Isotope (73, null, 80.3*24*3600, Decay.ElectronCap1|Decay.Gamma), new Isotope (74, null, 17.8*24*3600, Decay.ElectronCap1|Decay.BetaPlus|Decay.Gamma|Decay.BetaMinus), new Isotope (75, 100.0) },
+            isotopes: new Isotope[] { new Isotope (73, null, 80.3*86400.0, Decay.ElectronCap1|Decay.Gamma), new Isotope (74, null, 17.8*86400.0, Decay.ElectronCap1|Decay.BetaPlus|Decay.Gamma|Decay.BetaMinus), new Isotope (75, 100.0) },
             nameMap: new Dictionary<string,string>() { { "de","Arsen" }, { "es","Arsénico" }, { "it","Arsenico" }, { "ru","Мышьяк" } }
         );
 
@@ -454,7 +454,7 @@ namespace Kaos.Physics
             life: Nutrition.TraceEssential,
             known: 1817, credit: "Jöns Jakob Berzelius, Johann Gottlieb Gahn",
             naming: "From Greek σελήνη (selḗnē), meaning Moon",
-            isotopes: new Isotope[] { new Isotope (72, null, 8.4*24*3600, Decay.ElectronCap1|Decay.Gamma), new Isotope (74, 0.86), new Isotope (75, null, 119.8*24*3600, Decay.ElectronCap1|Decay.Gamma), new Isotope (76, 9.23), new Isotope (77, 7.60), new Isotope (78, 23.69), new Isotope (79, 0.0, 3.27E5*365.25*24*3600, Decay.BetaMinus), new Isotope (80, 49.80), new Isotope (82, 8.82, 1.08E20*365.25*24*3600, Decay.Beta2) },
+            isotopes: new Isotope[] { new Isotope (72, null, 8.4*86400.0, Decay.ElectronCap1|Decay.Gamma), new Isotope (74, 0.86), new Isotope (75, null, 119.8*86400.0, Decay.ElectronCap1|Decay.Gamma), new Isotope (76, 9.23), new Isotope (77, 7.60), new Isotope (78, 23.69), new Isotope (79, 0.0, 3.27E5*31556952.0, Decay.BetaMinus), new Isotope (80, 49.80), new Isotope (82, 8.82, 1.08E20*31556952.0, Decay.Beta2) },
             nameMap: new Dictionary<string,string>() { { "de","Selen" }, { "es","Selenio" }, { "fr","Sélénium" }, { "it","Selenio" }, { "ru","Селен" } }
         );
 
@@ -479,7 +479,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1898, credit: "William Ramsay, Morris Travers",
             naming: "From the Greek kryptos, meaning hidden",
-            isotopes: new Isotope[] { new Isotope (78, 0.36, 9.2E21*365.25*24*3600, Decay.ElectronCap2), new Isotope (79, null, 35*3600, Decay.ElectronCap1|Decay.BetaPlus|Decay.Gamma), new Isotope (80, 2.29), new Isotope (81, 0.0, 2.3E5*365.25*24*3600, Decay.ElectronCap1|Decay.Gamma), new Isotope (82, 11.59), new Isotope (83, 11.50), new Isotope (84, 56.99), new Isotope (85, null, 11.0*365.25*24*3600, Decay.BetaMinus), new Isotope (86, 17.28) },
+            isotopes: new Isotope[] { new Isotope (78, 0.36, 9.2E21*31556952.0, Decay.ElectronCap2), new Isotope (79, null, 35*3600, Decay.ElectronCap1|Decay.BetaPlus|Decay.Gamma), new Isotope (80, 2.29), new Isotope (81, 0.0, 2.3E5*31556952.0, Decay.ElectronCap1|Decay.Gamma), new Isotope (82, 11.59), new Isotope (83, 11.50), new Isotope (84, 56.99), new Isotope (85, null, 11*31556952.0, Decay.BetaMinus), new Isotope (86, 17.28) },
             nameMap: new Dictionary<string,string>() { { "es","Kriptón" }, { "it","Kripton" }, { "ru","Криптон" } }
         );
 
@@ -492,7 +492,7 @@ namespace Kaos.Physics
             life: Nutrition.Absorbed,
             known: 1861, credit: "Robert Bunsen, Gustav Kirchhoff",
             naming: "From the Latin rubidus, meaning deep red",
-            isotopes: new Isotope[] { new Isotope (83, null, 86.2*24*3600, Decay.ElectronCap1|Decay.Gamma), new Isotope (84, null, 32.9*24*3600, Decay.ElectronCap1|Decay.BetaPlus|Decay.Gamma|Decay.BetaMinus), new Isotope (85, 72.17), new Isotope (86, null, 18.7*24*3600, Decay.BetaMinus|Decay.Gamma), new Isotope (87, 27.83, 4.9E10*365.25*24*3600, Decay.BetaMinus), },
+            isotopes: new Isotope[] { new Isotope (83, null, 86.2*86400.0, Decay.ElectronCap1|Decay.Gamma), new Isotope (84, null, 32.9*86400.0, Decay.ElectronCap1|Decay.BetaPlus|Decay.Gamma|Decay.BetaMinus), new Isotope (85, 72.17), new Isotope (86, null, 18.7*86400.0, Decay.BetaMinus|Decay.Gamma), new Isotope (87, 27.83, 4.9E10*31556952.0, Decay.BetaMinus), },
             nameMap: new Dictionary<string,string>() { { "es","Rubidoo" }, { "it","Rubidoo" }, { "ru","Рубидий" } }
         );
 
@@ -505,7 +505,7 @@ namespace Kaos.Physics
             life: Nutrition.Absorbed,
             known: 1787, credit: "William Cruickshank",
             naming: "From the Scottish village of Strontian",
-            isotopes: new Isotope[] { new Isotope (82, null, 25.36*24*3600, Decay.ElectronCap1), new Isotope (83, null, 1.35*24*3600, Decay.ElectronCap1|Decay.BetaPlus|Decay.Gamma), new Isotope (84, 0.56), new Isotope (85, null, 64.84*24*3600, Decay.ElectronCap1|Decay.Gamma), new Isotope (86, 9.86), new Isotope (87, 7.0), new Isotope (88, 82.58), new Isotope (89, null, 50.52*24*3600, Decay.ElectronCap1|Decay.BetaMinus), new Isotope (90, 0.0, 28.90*365.25*24*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (82, null, 25.36*86400.0, Decay.ElectronCap1), new Isotope (83, null, 1.35*86400.0, Decay.ElectronCap1|Decay.BetaPlus|Decay.Gamma), new Isotope (84, 0.56), new Isotope (85, null, 64.84*86400.0, Decay.ElectronCap1|Decay.Gamma), new Isotope (86, 9.86), new Isotope (87, 7.0), new Isotope (88, 82.58), new Isotope (89, null, 50.52*86400.0, Decay.ElectronCap1|Decay.BetaMinus), new Isotope (90, 0.0, 28.90*31556952.0, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "es","Estronzio" }, { "it","Stronzio" }, { "ru","Стронций" } }
         );
 
@@ -517,7 +517,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1794, credit: "Johan Gadolin",
             naming: "After the Swedish village of Ytterby",
-            isotopes: new Isotope[] { new Isotope (87, null, 3.4*24*3600, Decay.ElectronCap1|Decay.Gamma), new Isotope (88, null, 106.6*24*3600, Decay.ElectronCap1|Decay.Gamma), new Isotope (89, 100.0), new Isotope (90, null, 2.7*24*3600, Decay.BetaMinus|Decay.Gamma), new Isotope (91, null, 58.5*24*3600, Decay.BetaMinus|Decay.Gamma) },
+            isotopes: new Isotope[] { new Isotope (87, null, 3.4*86400.0, Decay.ElectronCap1|Decay.Gamma), new Isotope (88, null, 106.6*86400.0, Decay.ElectronCap1|Decay.Gamma), new Isotope (89, 100.0), new Isotope (90, null, 2.7*86400.0, Decay.BetaMinus|Decay.Gamma), new Isotope (91, null, 58.5*86400.0, Decay.BetaMinus|Decay.Gamma) },
             nameMap: new Dictionary<string,string>() { { "es","Itrio" }, { "it","Ittrio" }, { "ru","Иттрий" } }
         );
 
@@ -529,7 +529,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1789, credit: "Martin Heinrich Klaproth",
             naming: "From the mineral zircon",
-            isotopes: new Isotope[] { new Isotope (88, null, 83.4*24*3600, Decay.ElectronCap1|Decay.Gamma), new Isotope (89, null, 78.4*3600, Decay.ElectronCap1|Decay.BetaPlus|Decay.Gamma), new Isotope (90, 51.45), new Isotope (91, 11.22), new Isotope (92, 17.15), new Isotope (93, 0.0, 1.53E6*365.25*24*3600, Decay.BetaMinus), new Isotope (94, 17.38), new Isotope (96, 2.8, 2E19*365.25*24*3600, Decay.Beta2) },
+            isotopes: new Isotope[] { new Isotope (88, null, 83.4*86400.0, Decay.ElectronCap1|Decay.Gamma), new Isotope (89, null, 78.4*3600, Decay.ElectronCap1|Decay.BetaPlus|Decay.Gamma), new Isotope (90, 51.45), new Isotope (91, 11.22), new Isotope (92, 17.15), new Isotope (93, 0.0, 1.53E6*31556952.0, Decay.BetaMinus), new Isotope (94, 17.38), new Isotope (96, 2.8, 2E19*31556952.0, Decay.Beta2) },
             nameMap: new Dictionary<string,string>() { { "es","Zirconio" }, { "it","Zirconio" }, { "ru","Цирконий" } }
         );
 
@@ -541,7 +541,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1801, credit: "Charles Hatchett",
             naming: "From Niobe, the daughter of Tantalus",
-            isotopes: new Isotope[] { new Isotope (90, null, 15*3600, Decay.BetaPlus), new Isotope (91, null, 680.0*365.25*24*3600, Decay.ElectronCap1), new Isotope (92, 0.0, 3.47E7*365.25*24*3600, Decay.ElectronCap1|Decay.Gamma), new Isotope (93, 100.0), new Isotope (94, 0.0, 20.3E3*365.25*24*3600, Decay.BetaMinus|Decay.Gamma), new Isotope (95, null, 35.0*24*3600, Decay.BetaMinus|Decay.Gamma), new Isotope (96, null, 24.0*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (90, null, 15*3600, Decay.BetaPlus), new Isotope (91, null, 680*31556952.0, Decay.ElectronCap1), new Isotope (92, 0.0, 3.47E7*31556952.0, Decay.ElectronCap1|Decay.Gamma), new Isotope (93, 100.0), new Isotope (94, 0.0, 20.3E3*31556952.0, Decay.BetaMinus|Decay.Gamma), new Isotope (95, null, 35.0*86400.0, Decay.BetaMinus|Decay.Gamma), new Isotope (96, null, 86400.0, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "de","Niob" }, { "es","Niobo" }, { "it","Niobio" }, { "ru","Ниобий" } }
         );
 
@@ -554,7 +554,7 @@ namespace Kaos.Physics
             known: 1778, credit: "Carl Wilhelm Scheele",
             life: Nutrition.TraceEssential,
             naming: "From the ore molybdena",
-            isotopes: new Isotope[] { new Isotope (92, 14.65), new Isotope (93, null, 4.0E3*365.25*24*3600, Decay.ElectronCap1), new Isotope (94, 9.19), new Isotope (95, 15.87), new Isotope (96, 16.67), new Isotope (97, 9.58), new Isotope (98, 24.29), new Isotope (99, null, 65.94*3600, Decay.BetaMinus|Decay.Gamma), new Isotope (100, 9.74, 7.8E18*365.25*24*3600, Decay.Beta2) },
+            isotopes: new Isotope[] { new Isotope (92, 14.65), new Isotope (93, null, 4.0E3*31556952.0, Decay.ElectronCap1), new Isotope (94, 9.19), new Isotope (95, 15.87), new Isotope (96, 16.67), new Isotope (97, 9.58), new Isotope (98, 24.29), new Isotope (99, null, 65.94*3600, Decay.BetaMinus|Decay.Gamma), new Isotope (100, 9.74, 7.8E18*31556952.0, Decay.Beta2) },
             nameMap: new Dictionary<string,string>() { { "de","Molybdän" }, { "es","Molibdeno" }, { "fr","Molybdène" }, { "it","Molibdeno" }, { "ru","Молибден" } }
         );
 
@@ -566,7 +566,7 @@ namespace Kaos.Physics
             occurrence: Origin.Decay,
             known: 1937, credit: "Emilio Segrè, Carlo Perrier",
             naming: "From the Greek τεχνητός, meaning artificial",
-            isotopes: new Isotope[] { new Isotope (95, null, 61.0*24*3600, Decay.ElectronCap1|Decay.Gamma|Decay.IC), new Isotope (96, null, 4.3*24*3600, Decay.ElectronCap1|Decay.Gamma), new Isotope (97, null, 4.21E6*365.25*24*3600, Decay.ElectronCap1), new Isotope (98, null, 4.2E6*365.25*24*3600, Decay.BetaMinus|Decay.Gamma), new Isotope (99, null, 2.111E5*365.25*24*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (95, null, 61.0*86400.0, Decay.ElectronCap1|Decay.Gamma|Decay.IC), new Isotope (96, null, 4.3*86400.0, Decay.ElectronCap1|Decay.Gamma), new Isotope (97, null, 4.21E6*31556952.0, Decay.ElectronCap1), new Isotope (98, null, 4.2E6*31556952.0, Decay.BetaMinus|Decay.Gamma), new Isotope (99, null, 2.111E5*31556952.0, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "fr","Technétium" }, { "es","Tecnecio" }, { "it","Tecnezio" }, { "ru","Технеций" } }
         );
 
@@ -578,7 +578,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1844, credit: "Karl Ernst Claus",
             naming: "From the Latin Ruthenia, meaning Russia",
-            isotopes: new Isotope[] { new Isotope (96, 5.54), new Isotope (97, null, 2.9*24*3600, Decay.ElectronCap1|Decay.Gamma), new Isotope (98, 1.87), new Isotope (99, 12.76), new Isotope (100, 12.60), new Isotope (101, 17.06), new Isotope (102, 31.55), new Isotope (103, null, 39.26*24*3600, Decay.BetaMinus|Decay.Gamma), new Isotope (104, 18.62), new Isotope (106, null, 373.59*24*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (96, 5.54), new Isotope (97, null, 2.9*86400.0, Decay.ElectronCap1|Decay.Gamma), new Isotope (98, 1.87), new Isotope (99, 12.76), new Isotope (100, 12.60), new Isotope (101, 17.06), new Isotope (102, 31.55), new Isotope (103, null, 39.26*86400.0, Decay.BetaMinus|Decay.Gamma), new Isotope (104, 18.62), new Isotope (106, null, 373.59*86400.0, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "fr","Ruthénium" }, { "es","Rutenio" }, { "it","Rutenio" }, { "ru","Рутений" } }
         );
 
@@ -590,7 +590,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1804, credit: "William Hyde Wollaston",
             naming: "From Greek ῥόδον (rhodon), meaning rose",
-            isotopes: new Isotope[] { new Isotope (99, null, 16.1*24*3600, Decay.ElectronCap1|Decay.Gamma), new Isotope (101, null, 4.34*24*3600, Decay.ElectronCap1|Decay.IC|Decay.Gamma), new Isotope (101, null, 3.3*365.25*24*3600, Decay.ElectronCap1|Decay.Gamma), new Isotope (102, null, 3.7*365.25*24*3600, Decay.ElectronCap1|Decay.Gamma), new Isotope (102, null, 207.0*24*3600, Decay.ElectronCap1|Decay.BetaPlus|Decay.BetaMinus|Decay.Gamma), new Isotope (103, 100.0), new Isotope (105, null, 35.36*3600, Decay.BetaMinus|Decay.Gamma) },
+            isotopes: new Isotope[] { new Isotope (99, null, 16.1*86400.0, Decay.ElectronCap1|Decay.Gamma), new Isotope (101, null, 4.34*86400.0, Decay.ElectronCap1|Decay.IC|Decay.Gamma), new Isotope (101, null, 3.3*31556952.0, Decay.ElectronCap1|Decay.Gamma), new Isotope (102, null, 3.7*31556952.0, Decay.ElectronCap1|Decay.Gamma), new Isotope (102, null, 207.0*86400.0, Decay.ElectronCap1|Decay.BetaPlus|Decay.BetaMinus|Decay.Gamma), new Isotope (103, 100.0), new Isotope (105, null, 35.36*3600, Decay.BetaMinus|Decay.Gamma) },
             nameMap: new Dictionary<string,string>() { { "es","Rodio" }, { "it","Rodio" }, { "ru","Родий" } }
         );
 
@@ -602,7 +602,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1802, credit: "William Hyde Wollaston",
             naming: "After the asteroid 2 Pallas",
-            isotopes: new Isotope[] { new Isotope (100, null, 3.63*24*3600, Decay.ElectronCap1|Decay.Gamma), new Isotope (102, 1.02), new Isotope (103, null, 16.991*24*3600, Decay.ElectronCap1), new Isotope (104, 11.14), new Isotope (105, 22.33), new Isotope (106, 27.33), new Isotope (107, 0.0, 6.5E6*365.25*24*3600, Decay.BetaMinus), new Isotope (108, 26.46), new Isotope (110, 11.72) },
+            isotopes: new Isotope[] { new Isotope (100, null, 3.63*86400.0, Decay.ElectronCap1|Decay.Gamma), new Isotope (102, 1.02), new Isotope (103, null, 16.991*86400.0, Decay.ElectronCap1), new Isotope (104, 11.14), new Isotope (105, 22.33), new Isotope (106, 27.33), new Isotope (107, 0.0, 6.5E6*31556952.0, Decay.BetaMinus), new Isotope (108, 26.46), new Isotope (110, 11.72) },
             nameMap: new Dictionary<string,string>() { { "es","Paladio" }, { "it","Palladio" }, { "ru","Палладий" } }
         );
 
@@ -614,7 +614,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 0,
             naming: "From Proto-Germanic silubra",
-            isotopes: new Isotope[] { new Isotope (105, null, 41.2*24*3600, Decay.ElectronCap1|Decay.Gamma), new Isotope (106, null, 8.28*24*3600, Decay.ElectronCap1|Decay.Gamma), new Isotope (107, 51.839), new Isotope (108, null, 418.0*365.25*24*3600, Decay.ElectronCap1|Decay.IT|Decay.Gamma), new Isotope (109, 48.161), new Isotope (110, null, 249.95*24*3600, Decay.BetaMinus|Decay.Gamma), new Isotope (111, null, 7.45*24*3600, Decay.BetaMinus|Decay.Gamma) },
+            isotopes: new Isotope[] { new Isotope (105, null, 41.2*86400.0, Decay.ElectronCap1|Decay.Gamma), new Isotope (106, null, 8.28*86400.0, Decay.ElectronCap1|Decay.Gamma), new Isotope (107, 51.839), new Isotope (108, null, 418*31556952.0, Decay.ElectronCap1|Decay.IT|Decay.Gamma), new Isotope (109, 48.161), new Isotope (110, null, 249.95*86400.0, Decay.BetaMinus|Decay.Gamma), new Isotope (111, null, 7.45*86400.0, Decay.BetaMinus|Decay.Gamma) },
             nameMap: new Dictionary<string,string>() { { "de","Silber" }, { "es","Plata" }, { "fr","Argent" }, { "it","Argento" }, { "ru","Серебро" } }
         );
 
@@ -626,7 +626,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1817, credit: "Karl Samuel Leberecht Hermann, Friedrich Stromeyer",
             naming: "From the mineral calamine named after the Greek mythological character Κάδμος (Cadmus)",
-            isotopes: new Isotope[] { new Isotope (106, 1.25), new Isotope (107, null, 6.5*3600, Decay.ElectronCap1), new Isotope (108, 0.89), new Isotope (109, null, 462.6*24*3600, Decay.ElectronCap1), new Isotope (110, 12.47), new Isotope (111, 12.80), new Isotope (112, 24.11), new Isotope (113, 12.23, 7.7E15*365.25*24*3600, Decay.BetaMinus), new Isotope (113, null, 14.1*365.25*24*3600, Decay.BetaMinus|Decay.IT), new Isotope (114, 28.75), new Isotope (115, null, 53.46*3600, Decay.BetaMinus), new Isotope (116, 7.51, 3.1E19*365.25*3600, Decay.Beta2) },
+            isotopes: new Isotope[] { new Isotope (106, 1.25), new Isotope (107, null, 6.5*3600, Decay.ElectronCap1), new Isotope (108, 0.89), new Isotope (109, null, 462.6*86400.0, Decay.ElectronCap1), new Isotope (110, 12.47), new Isotope (111, 12.80), new Isotope (112, 24.11), new Isotope (113, 12.23, 7.7E15*31556952.0, Decay.BetaMinus), new Isotope (113, null, 14.1*31556952.0, Decay.BetaMinus|Decay.IT), new Isotope (114, 28.75), new Isotope (115, null, 53.46*3600, Decay.BetaMinus), new Isotope (116, 7.51, 3.1E19*365.25*3600, Decay.Beta2) },
             nameMap: new Dictionary<string,string>() { { "es","Cadmio" }, { "it","Cadmio" }, { "ru","Кадмий" } }
         );
 
@@ -638,7 +638,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1863, credit: "Ferdinand Reich, Hieronymous Theodor Richter",
             naming: "From the indigo color seen in its spectrum, after the Latin indicum, meaning 'of India'",
-            isotopes: new Isotope[] { new Isotope (111, null, 2.8*24*3600, Decay.ElectronCap1), new Isotope (113, 4.28), new Isotope (115, 95.72, 4.41E14*365.25*24*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (111, null, 2.8*86400.0, Decay.ElectronCap1), new Isotope (113, 4.28), new Isotope (115, 95.72, 4.41E14*31556952.0, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "es","Indio" }, { "it","Indio" }, { "ru","Индий" } }
         );
 
@@ -651,7 +651,7 @@ namespace Kaos.Physics
             life: Nutrition.Absorbed,
             known: 0,
             naming: "From proto-Germanic 'tin-om'",
-            isotopes: new Isotope[] { new Isotope (112, 0.97), new Isotope (114, 0.66), new Isotope (115, 0.34), new Isotope (116, 14.54), new Isotope (117, 7.68), new Isotope (118, 24.22), new Isotope (119, 8.59), new Isotope (120, 32.58), new Isotope (122, 4.63), new Isotope (124, 5.79), new Isotope (126, 0.0, 2.3E5*365.25*24*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (112, 0.97), new Isotope (114, 0.66), new Isotope (115, 0.34), new Isotope (116, 14.54), new Isotope (117, 7.68), new Isotope (118, 24.22), new Isotope (119, 8.59), new Isotope (120, 32.58), new Isotope (122, 4.63), new Isotope (124, 5.79), new Isotope (126, 0.0, 2.3E5*31556952.0, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "de","Zinn" }, { "es","Estaño" }, { "fr","Etain" }, { "it","Stagno" }, { "ru","Олово" } }
         );
 
@@ -663,7 +663,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 0,
             naming: "From Latin antimonium",
-            isotopes: new Isotope[] { new Isotope (121, 57.21), new Isotope (123, 42.79), new Isotope (125, null, 2.7582*365.25*24*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (121, 57.21), new Isotope (123, 42.79), new Isotope (125, null, 2.7582*31556952.0, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "de","Antimon" }, { "es","Antimonio" }, { "fr","Antimoine" }, { "it","Antimonio" }, { "ru","Сурьма" } }
         );
 
@@ -675,7 +675,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1782, credit: "Franz-Joseph Müller von Reichenstein",
             naming: "From Latin tellus, meaning 'earth'",
-            isotopes: new Isotope[] { new Isotope (120, 0.09), new Isotope (121, null, 16.78*24*3600, Decay.ElectronCap1), new Isotope (122, 2.55), new Isotope (123, 0.89), new Isotope (124, 4.74), new Isotope (125, 7.07), new Isotope (126, 18.84), new Isotope (127, null, 9.35*3600, Decay.BetaMinus), new Isotope (128, 31.74, 2.2E24*365.25*24*3600, Decay.Beta2), new Isotope (129, null, 69.6*60, Decay.BetaMinus), new Isotope (130, 34.08, 7.9E20*365.25*24*3600, Decay.Beta2) },
+            isotopes: new Isotope[] { new Isotope (120, 0.09), new Isotope (121, null, 16.78*86400.0, Decay.ElectronCap1), new Isotope (122, 2.55), new Isotope (123, 0.89), new Isotope (124, 4.74), new Isotope (125, 7.07), new Isotope (126, 18.84), new Isotope (127, null, 9.35*3600, Decay.BetaMinus), new Isotope (128, 31.74, 2.2E24*31556952.0, Decay.Beta2), new Isotope (129, null, 69.6*60, Decay.BetaMinus), new Isotope (130, 34.08, 7.9E20*31556952.0, Decay.Beta2) },
             nameMap: new Dictionary<string,string>() { { "de","Tellur" }, { "es","Teluro" }, { "fr","Tellure" }, { "it","Tellurio" }, { "ru","Теллур" } }
         );
 
@@ -688,7 +688,7 @@ namespace Kaos.Physics
             known: 1811, credit: "Bernard Courtois",
             life: Nutrition.TraceEssential,
             naming: "From the Greek ἰοειδής (ioeidēs), meaning 'violet'",
-            isotopes: new Isotope[] { new Isotope (123, null, 13.0*3600, Decay.ElectronCap1|Decay.Gamma), new Isotope (124, null, 4.176*24*3600, Decay.ElectronCap1), new Isotope (125, null, 59.40*24*3600, Decay.ElectronCap1), new Isotope (127, 100.0), new Isotope (129, 0.0, 1.57E7*365.25*24*3600, Decay.BetaMinus), new Isotope (131, null, 8.02070*24*3600, Decay.BetaMinus|Decay.Gamma), new Isotope (135, null, 6.57*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (123, null, 13.0*3600, Decay.ElectronCap1|Decay.Gamma), new Isotope (124, null, 4.176*86400.0, Decay.ElectronCap1), new Isotope (125, null, 59.40*86400.0, Decay.ElectronCap1), new Isotope (127, 100.0), new Isotope (129, 0.0, 1.57E7*31556952.0, Decay.BetaMinus), new Isotope (131, null, 8.02070*86400.0, Decay.BetaMinus|Decay.Gamma), new Isotope (135, null, 6.57*3600, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "de","Iod" }, { "es","Yodo" }, { "fr","Iode" }, { "it","Iodio" }, { "ru","Иод" } }
         );
 
@@ -700,7 +700,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1898, credit: "William Ramsay, Morris Travers",
             naming: "From the Greek ξένον (xénon), meaning 'foreigner'",
-            isotopes: new Isotope[] { new Isotope (124, 0.095, 1.8E22*365.25*24*3600, Decay.ElectronCap2), new Isotope (125, null, 16.9*3600, Decay.ElectronCap1), new Isotope (126, 0.89), new Isotope (127, null, 36.345*24*3600, Decay.ElectronCap1), new Isotope (128, 1.910), new Isotope (129, 26.401), new Isotope (130, 4.071), new Isotope (131, 21.232), new Isotope (132, 26.909), new Isotope (133, null, 5.247*24*3600, Decay.BetaMinus), new Isotope (134, 10.436), new Isotope (135, null, 9.14*3600, Decay.BetaMinus), new Isotope (136, 8.857, 2.165E21*365.25*24*3600, Decay.Beta2) },
+            isotopes: new Isotope[] { new Isotope (124, 0.095, 1.8E22*31556952.0, Decay.ElectronCap2), new Isotope (125, null, 16.9*3600, Decay.ElectronCap1), new Isotope (126, 0.89), new Isotope (127, null, 36.345*86400.0, Decay.ElectronCap1), new Isotope (128, 1.910), new Isotope (129, 26.401), new Isotope (130, 4.071), new Isotope (131, 21.232), new Isotope (132, 26.909), new Isotope (133, null, 5.247*86400.0, Decay.BetaMinus), new Isotope (134, 10.436), new Isotope (135, null, 9.14*3600, Decay.BetaMinus), new Isotope (136, 8.857, 2.165E21*31556952.0, Decay.Beta2) },
             nameMap: new Dictionary<string,string>() { { "es","Xénon" }, { "fr","Xénon" }, { "ru","Ксенон" } }
         );
 
@@ -712,7 +712,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1860, credit: "Robert Bunsen, Gustav Kirchhoff",
             naming: "From the Latin word caesius, meaning 'sky-blue'",
-            isotopes: new Isotope[] { new Isotope (133, 100.0), new Isotope (134, null, 2.0648*365.25*24*3600, Decay.ElectronCap1|Decay.BetaMinus), new Isotope (135, 0.0, 2.3E6*365.25*24*3600, Decay.BetaMinus), new Isotope (137, null, 30.17*365.25*24*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (133, 100.0), new Isotope (134, null, 2.0648*31556952.0, Decay.ElectronCap1|Decay.BetaMinus), new Isotope (135, 0.0, 2.3E6*31556952.0, Decay.BetaMinus), new Isotope (137, null, 30.17*31556952.0, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "de","Cäsium" }, { "en-US","Cesium" }, { "es","Cesio" }, { "fr","Césium" }, { "it","Cesio" }, { "ru","Цезий" } }
         );
 
@@ -724,7 +724,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1772, credit: "Carl Wilhelm Scheele",
             naming: "After the mineral 'baryta'",
-            isotopes: new Isotope[] { new Isotope (130, 0.11, 0.5E21*365.25*24*3600, Decay.ElectronCap2), new Isotope (132, 0.10), new Isotope (133, null, 10.51*365.25*24*3600, Decay.ElectronCap1), new Isotope (134, 2.42), new Isotope (135, 6.59), new Isotope (136, 7.85), new Isotope (137, 11.23), new Isotope (138, 71.70) },
+            isotopes: new Isotope[] { new Isotope (130, 0.11, 0.5E21*31556952.0, Decay.ElectronCap2), new Isotope (132, 0.10), new Isotope (133, null, 10.51*31556952.0, Decay.ElectronCap1), new Isotope (134, 2.42), new Isotope (135, 6.59), new Isotope (136, 7.85), new Isotope (137, 11.23), new Isotope (138, 71.70) },
             nameMap: new Dictionary<string,string>() { { "es","Bario" }, { "fr","Baryum" }, { "it","Bario" }, { "ru","Барий" } }
         );
 
@@ -736,7 +736,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1838, credit: "Carl Gustaf Mosander",
             naming: "From Greek λανθάνειν (lanthanein), meaning to lie hidden",
-            isotopes: new Isotope[] { new Isotope (137, null, 6E4*365.25*24*3600, Decay.ElectronCap1), new Isotope (138, 0.089, 1.05E11*365.25*24*3600, Decay.ElectronCap1|Decay.BetaMinus), new Isotope (139, 99.911) },
+            isotopes: new Isotope[] { new Isotope (137, null, 6E4*31556952.0, Decay.ElectronCap1), new Isotope (138, 0.089, 1.05E11*31556952.0, Decay.ElectronCap1|Decay.BetaMinus), new Isotope (139, 99.911) },
             nameMap: new Dictionary<string,string>() { { "de","Lanthan" }, { "es","Lantano" }, { "fr","Lanthane" }, { "it","Lantanio" }, { "ru","Лантан" } }
         );
 
@@ -748,7 +748,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1803, credit: "Martin Heinrich Klaproth, Jöns Jakob Berzelius, Wilhelm Hisinger",
             naming: "After the dwarf planet Ceres",
-            isotopes: new Isotope[] { new Isotope (134, null, 3.16*24*3600, Decay.ElectronCap1), new Isotope (136, 0.186), new Isotope (138, 0.251), new Isotope (139, null, 137.640*24*3600, Decay.ElectronCap1), new Isotope (140, 88.449), new Isotope (141, null, 32.501*24*3600, Decay.BetaMinus), new Isotope (142, 11.114), new Isotope (143, null, 33.039*3600, Decay.BetaMinus), new Isotope (144, null, 284.893*24*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (134, null, 3.16*86400.0, Decay.ElectronCap1), new Isotope (136, 0.186), new Isotope (138, 0.251), new Isotope (139, null, 137.640*86400.0, Decay.ElectronCap1), new Isotope (140, 88.449), new Isotope (141, null, 32.501*86400.0, Decay.BetaMinus), new Isotope (142, 11.114), new Isotope (143, null, 33.039*3600, Decay.BetaMinus), new Isotope (144, null, 284.893*86400.0, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "de","Cer" }, { "es","Cerio" }, { "fr","Cérium" }, { "it","Cerio" }, { "ru","Церий" } }
         );
 
@@ -760,7 +760,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1885, credit: "Carl Auer von Welsbach",
             naming: "From the Greek πρασιος, meaning 'leek green'",
-            isotopes: new Isotope[] { new Isotope (141, 100.0), new Isotope (142, null, 19.12*3600, Decay.BetaMinus|Decay.ElectronCap1), new Isotope (143, null, 13.57*24*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (141, 100.0), new Isotope (142, null, 19.12*3600, Decay.BetaMinus|Decay.ElectronCap1), new Isotope (143, null, 13.57*86400.0, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "de","Praseodym" }, { "es","Praseodimio" }, { "fr","Raséodyme" }, { "it","Praseodimio" }, { "ru","Празеодим" } }
         );
 
@@ -772,7 +772,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1885, credit: "Carl Auer von Welsbach",
             naming: "From the Greek νέος (neos) and διδύμος (didymos), meaning 'new twin'",
-            isotopes: new Isotope[] { new Isotope (142, 27.2), new Isotope (143, 12.2), new Isotope (144, 23.8, 2.29E15*365.25*24*3600, Decay.Alpha), new Isotope (145, 8.3), new Isotope (146, 17.2), new Isotope (148, 5.8, 2.7E18*365.25*24*3600, Decay.Beta2), new Isotope (150, 5.6, 21.0E18*365.25*24*3600, Decay.Beta2) },
+            isotopes: new Isotope[] { new Isotope (142, 27.2), new Isotope (143, 12.2), new Isotope (144, 23.8, 2.29E15*31556952.0, Decay.Alpha), new Isotope (145, 8.3), new Isotope (146, 17.2), new Isotope (148, 5.8, 2.7E18*31556952.0, Decay.Beta2), new Isotope (150, 5.6, 21.0E18*31556952.0, Decay.Beta2) },
             nameMap: new Dictionary<string,string>() { { "de","Neodym" }, { "es","Neodimio" }, { "fr","Néodyme" }, { "it","Neodimio" }, { "ru","Неодим" } }
         );
 
@@ -784,7 +784,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1942, credit: "Chien Shiung Wu, Emilio Segrè, Hans Bethe",
             naming: "After Prometheus, a Titan in Greek mythology",
-            isotopes: new Isotope[] { new Isotope (145, 0.0, 17.7*365.25*24*3600, Decay.ElectronCap1), new Isotope (146, null, 5.53*365.25*24*3600, Decay.ElectronCap1|Decay.BetaMinus), new Isotope (147, 0.0, 2.6234*365.25*24*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (145, 0.0, 17.7*31556952.0, Decay.ElectronCap1), new Isotope (146, null, 5.53*31556952.0, Decay.ElectronCap1|Decay.BetaMinus), new Isotope (147, 0.0, 2.6234*31556952.0, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "es","Prometio" }, { "fr","Prométhium" }, { "it","Promezio" }, { "ru","Прометий" } }
         );
 
@@ -796,7 +796,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1879, credit: "Lecoq de Boisbaudran",
             naming: "After the mineral samarskite",
-            isotopes: new Isotope[] { new Isotope (144, 3.08), new Isotope (145, null, 340.0*24*3600, Decay.ElectronCap1), new Isotope (146, null, 6.8E7*365.25*24*3600, Decay.Alpha), new Isotope (147, 15.0, 1.06E11*365.25*24*3600, Decay.Alpha), new Isotope (148, 11.25, 7E15*365.25*24*3600, Decay.Alpha), new Isotope (149, 13.82), new Isotope (150, 7.37), new Isotope (151, null, 90*365.25*24*3600, Decay.BetaMinus), new Isotope (152, 26.74), new Isotope (153, null, 46.284*3600, Decay.BetaMinus), new Isotope (154, 22.74) },
+            isotopes: new Isotope[] { new Isotope (144, 3.08), new Isotope (145, null, 340.0*86400.0, Decay.ElectronCap1), new Isotope (146, null, 6.8E7*31556952.0, Decay.Alpha), new Isotope (147, 15.0, 1.06E11*31556952.0, Decay.Alpha), new Isotope (148, 11.25, 7E15*31556952.0, Decay.Alpha), new Isotope (149, 13.82), new Isotope (150, 7.37), new Isotope (151, null, 90*31556952.0, Decay.BetaMinus), new Isotope (152, 26.74), new Isotope (153, null, 46.284*3600, Decay.BetaMinus), new Isotope (154, 22.74) },
             nameMap: new Dictionary<string,string>() { { "es","Samario" }, { "it","Samario" }, { "ru","Самарий" } }
         );
 
@@ -808,7 +808,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1896, credit: "Eugène-Anatole Demarçay",
             naming: "After the continent of Europe",
-            isotopes: new Isotope[] { new Isotope (150, null, 36.9*365.25*24*3600, Decay.ElectronCap1), new Isotope (151, 47.8, 5E18*365.25*24*3600, Decay.Alpha), new Isotope (152, null, 13.54*365.25*24*3600, Decay.ElectronCap1|Decay.BetaMinus), new Isotope (153, 52.2), new Isotope (154, null, 8.59*365.25*24*3600, Decay.BetaMinus), new Isotope (155, null, 4.76*365.25*24*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (150, null, 36.9*31556952.0, Decay.ElectronCap1), new Isotope (151, 47.8, 5E18*31556952.0, Decay.Alpha), new Isotope (152, null, 13.54*31556952.0, Decay.ElectronCap1|Decay.BetaMinus), new Isotope (153, 52.2), new Isotope (154, null, 8.59*31556952.0, Decay.BetaMinus), new Isotope (155, null, 4.76*31556952.0, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "es","Europio" }, { "it","Europio" }, { "ru","Европий" } }
         );
 
@@ -820,7 +820,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1880, credit: "Jean Charles Galissard de Marignac",
             naming: "After the mineral gadolinite, itself named for the Finnish chemist Johan Gadolin",
-            isotopes: new Isotope[] { new Isotope (148, null, 75.0*365.25*24*3600, Decay.Alpha), new Isotope (150, null, 1.8E6*365.25*24*3600, Decay.Alpha), new Isotope (152, 0.20, 1.08E14*365.25*24*3600, Decay.Alpha), new Isotope (154, 2.18), new Isotope (155, 14.80), new Isotope (156, 20.47), new Isotope (157, 15.65), new Isotope (158, 24.84), new Isotope (160, 21.86) },
+            isotopes: new Isotope[] { new Isotope (148, null, 75*31556952.0, Decay.Alpha), new Isotope (150, null, 1.8E6*31556952.0, Decay.Alpha), new Isotope (152, 0.20, 1.08E14*31556952.0, Decay.Alpha), new Isotope (154, 2.18), new Isotope (155, 14.80), new Isotope (156, 20.47), new Isotope (157, 15.65), new Isotope (158, 24.84), new Isotope (160, 21.86) },
             nameMap: new Dictionary<string,string>() { { "es","Gadolinio" }, { "it","Gadolinio" }, { "ru","Гадолиний" } }
         );
 
@@ -832,7 +832,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1843, credit: "Carl Gustaf Mosander",
             naming: "After the Swedish village of Ytterby",
-            isotopes: new Isotope[] { new Isotope (157, null, 71.0*365.25*24*3600, Decay.ElectronCap1), new Isotope (158, null, 180.0*365.25*24*3600, Decay.ElectronCap1|Decay.BetaMinus), new Isotope (159, 100.0) },
+            isotopes: new Isotope[] { new Isotope (157, null, 71*31556952.0, Decay.ElectronCap1), new Isotope (158, null, 180*31556952.0, Decay.ElectronCap1|Decay.BetaMinus), new Isotope (159, 100.0) },
             nameMap: new Dictionary<string,string>() { { "es","Terbio" }, { "it","Terbio" }, { "ru","Тербий" } }
         );
 
@@ -844,7 +844,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1886, credit: "Lecoq de Boisbaudran",
             naming: "From the Greek δυσπρόσιτος (dysprositos), meaning 'hard to get'",
-            isotopes: new Isotope[] { new Isotope (154, null, 3.0E6*365.25*24*3600, Decay.Alpha), new Isotope (156, 0.056), new Isotope (158, 0.095), new Isotope (160, 2.329), new Isotope (161, 18.889), new Isotope (162, 25.475), new Isotope (163, 24.896), new Isotope (164, 28.260) },
+            isotopes: new Isotope[] { new Isotope (154, null, 3.0E6*31556952.0, Decay.Alpha), new Isotope (156, 0.056), new Isotope (158, 0.095), new Isotope (160, 2.329), new Isotope (161, 18.889), new Isotope (162, 25.475), new Isotope (163, 24.896), new Isotope (164, 28.260) },
             nameMap: new Dictionary<string,string>() { { "es","Disprosio" }, { "it","Disprosio" }, { "ru","Диспрозий" } }
         );
 
@@ -856,7 +856,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1878, credit: "Jacques-Louis Soret, Marc Delafontaine",
             naming: "after the Latin name for Stockholm",
-            isotopes: new Isotope[] { new Isotope (163, null, 4570*365.25*24*3600, Decay.ElectronCap1), new Isotope (164, null, 29.0*60, Decay.ElectronCap1), new Isotope (165, 100.0), new Isotope (166, null, 26.763*3600, Decay.BetaMinus), new Isotope (167, null, 3.1*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (163, null, 4570*31556952.0, Decay.ElectronCap1), new Isotope (164, null, 29.0*60, Decay.ElectronCap1), new Isotope (165, 100.0), new Isotope (166, null, 26.763*3600, Decay.BetaMinus), new Isotope (167, null, 3.1*3600, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "es","Holmio" }, { "it","Olmio" }, { "ru","Гольмий" } }
         );
 
@@ -868,7 +868,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1843, credit: "Carl Gustaf Mosander",
             naming: "After the Swedish village of Ytterby",
-            isotopes: new Isotope[] { new Isotope (160, null, 28.58*3600, Decay.ElectronCap1), new Isotope (162, 0.139), new Isotope (164, 1.601), new Isotope (165, null, 10.36*3600, Decay.ElectronCap1), new Isotope (166, 33.503), new Isotope (167, 22.869), new Isotope (168, 26.978), new Isotope (169, null, 9.4*24*3600, Decay.BetaMinus), new Isotope (170, 14.910), new Isotope (171, null, 7.516*3600, Decay.BetaMinus), new Isotope (172, null, 49.3*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (160, null, 28.58*3600, Decay.ElectronCap1), new Isotope (162, 0.139), new Isotope (164, 1.601), new Isotope (165, null, 10.36*3600, Decay.ElectronCap1), new Isotope (166, 33.503), new Isotope (167, 22.869), new Isotope (168, 26.978), new Isotope (169, null, 9.4*86400.0, Decay.BetaMinus), new Isotope (170, 14.910), new Isotope (171, null, 7.516*3600, Decay.BetaMinus), new Isotope (172, null, 49.3*3600, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "es","Erbio" }, { "it","Erbio" }, { "ru","Эрбий" } }
         );
 
@@ -880,7 +880,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1879, credit: "Per Teodor Cleve",
             naming: "after Thule, a Greek name associated with Scandinavia",
-            isotopes: new Isotope[] { new Isotope (167, null, 9.25*24*3600, Decay.ElectronCap1), new Isotope (168, null, 93.0*24*3600, Decay.ElectronCap1), new Isotope (169, 100.0), new Isotope (170, null, 128.6*24*3600, Decay.BetaMinus), new Isotope (171, null, 1.92*365.25*24*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (167, null, 9.25*86400.0, Decay.ElectronCap1), new Isotope (168, null, 93.0*86400.0, Decay.ElectronCap1), new Isotope (169, 100.0), new Isotope (170, null, 128.6*86400.0, Decay.BetaMinus), new Isotope (171, null, 1.92*31556952.0, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "es","Tulio" }, { "it","Tulio" }, { "ru","Тулий" } }
         );
 
@@ -892,7 +892,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1878, credit: "Jean Charles Galissard de Marignac",
             naming: "After the Swedish village of Ytterby",
-            isotopes: new Isotope[] { new Isotope (166, null, 56.7*3600, Decay.ElectronCap1), new Isotope (168, 0.126), new Isotope (169, null, 32.026*24*3600, Decay.ElectronCap1), new Isotope (170, 3.023), new Isotope (171, 14.216), new Isotope (172, 21.754), new Isotope (173, 16.098), new Isotope (174, 31.896), new Isotope (175, null, 4.185*24*3600, Decay.BetaMinus), new Isotope (176, 12.887), new Isotope (177, null, 1.911*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (166, null, 56.7*3600, Decay.ElectronCap1), new Isotope (168, 0.126), new Isotope (169, null, 32.026*86400.0, Decay.ElectronCap1), new Isotope (170, 3.023), new Isotope (171, 14.216), new Isotope (172, 21.754), new Isotope (173, 16.098), new Isotope (174, 31.896), new Isotope (175, null, 4.185*86400.0, Decay.BetaMinus), new Isotope (176, 12.887), new Isotope (177, null, 1.911*3600, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "es","Iterbio" }, { "it","Itterbio" }, { "ru","Иттербий" } }
         );
 
@@ -904,7 +904,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1906, credit: "Carl Auer von Welsbach, Georges Urbain",
             naming: "From the Latin Lutetia, meaning 'Paris'",
-            isotopes: new Isotope[] { new Isotope (173, null, 1.37*365.25*24*3600, Decay.ElectronCap1), new Isotope (174, null, 3.31*365.25*24*3600, Decay.ElectronCap1), new Isotope (175, 97.401), new Isotope (176, 2.599, 3.78*365.25*24*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (173, null, 1.37*31556952.0, Decay.ElectronCap1), new Isotope (174, null, 3.31*31556952.0, Decay.ElectronCap1), new Isotope (175, 97.401), new Isotope (176, 2.599, 3.78*31556952.0, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "es","Lutecio" }, { "fr","Lutétium" }, { "it","Lutezio" }, { "ru","Лютеций" } }
         );
 
@@ -916,7 +916,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1922, credit: "Dirk Coster, George de Hevesy",
             naming: "From the Latin Hafnia, meaning 'Copenhagen'",
-            isotopes: new Isotope[] { new Isotope (172, null, 1.87*365.25*24*3600, Decay.ElectronCap1), new Isotope (174, 0.16, 2E15*365.25*24*3600, Decay.Alpha), new Isotope (176, 5.26), new Isotope (177, 18.60), new Isotope (178, 27.28), new Isotope (178, null, 31.0*365.25*24*3600, Decay.IT), new Isotope (179, 13.62), new Isotope (180, 35.08), new Isotope (182, null, 8.9E6*365.25*24*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (172, null, 1.87*31556952.0, Decay.ElectronCap1), new Isotope (174, 0.16, 2E15*31556952.0, Decay.Alpha), new Isotope (176, 5.26), new Isotope (177, 18.60), new Isotope (178, 27.28), new Isotope (178, null, 31*31556952.0, Decay.IT), new Isotope (179, 13.62), new Isotope (180, 35.08), new Isotope (182, null, 8.9E6*31556952.0, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "es","Hafnio" }, { "it","Afnio" }, { "ru","Гафний" } }
         );
 
@@ -928,7 +928,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1844, credit: "Heinrich Rose",
             naming: "From Tantalus, the father of Niobe in Greek mythology",
-            isotopes: new Isotope[] { new Isotope (177, null, 56.56*3600, Decay.ElectronCap1), new Isotope (178, null, 2.36*3600, Decay.ElectronCap1), new Isotope (179, null, 1.82*365.25*24*3600, Decay.ElectronCap1), new Isotope (180, 0.012), new Isotope (180, null, 8.125*3600, Decay.ElectronCap1|Decay.BetaMinus), new Isotope (181, 99.988), new Isotope (182, null, 114.43*24*3600, Decay.BetaMinus), new Isotope (183, null, 5.1*24*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (177, null, 56.56*3600, Decay.ElectronCap1), new Isotope (178, null, 2.36*3600, Decay.ElectronCap1), new Isotope (179, null, 1.82*31556952.0, Decay.ElectronCap1), new Isotope (180, 0.012), new Isotope (180, null, 8.125*3600, Decay.ElectronCap1|Decay.BetaMinus), new Isotope (181, 99.988), new Isotope (182, null, 114.43*86400.0, Decay.BetaMinus), new Isotope (183, null, 5.1*86400.0, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "de","Tantal" }, { "es","Tantalio" }, { "fr","Tantale" }, { "it","Tantalio" }, { "ru","Тантал" } }
         );
 
@@ -940,7 +940,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1783, credit: "Juan José Elhuyar, Fausto Elhuyar",
             naming: "From the Swedish word for heavy stone",
-            isotopes: new Isotope[] { new Isotope (180, 0.12, 1.8E18*365.25*24*3600, Decay.Alpha), new Isotope (181, null, 121.2*24*3600, Decay.ElectronCap1), new Isotope (182, 26.50), new Isotope (183, 14.31), new Isotope (184, 30.64), new Isotope (185, null, 75.1*24*3600, Decay.BetaMinus), new Isotope (186, 28.43) },
+            isotopes: new Isotope[] { new Isotope (180, 0.12, 1.8E18*31556952.0, Decay.Alpha), new Isotope (181, null, 121.2*86400.0, Decay.ElectronCap1), new Isotope (182, 26.50), new Isotope (183, 14.31), new Isotope (184, 30.64), new Isotope (185, null, 75.1*86400.0, Decay.BetaMinus), new Isotope (186, 28.43) },
             nameMap: new Dictionary<string,string>() { { "de","Wolfram" }, { "es","Wolframio" }, { "fr","Tungstène" }, { "it","Tunsteno" }, { "ru","Вольфрам" } }
         );
 
@@ -952,7 +952,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1908, credit: "Masataka Ogawa",
             naming: "From Latin Rhenus, meaning 'Rhine'",
-            isotopes: new Isotope[] { new Isotope (185, 37.4), new Isotope (187, 62.6, 4.12E10*365.25*24*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (185, 37.4), new Isotope (187, 62.6, 4.12E10*31556952.0, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "de","Rhénium" }, { "es","Renio" }, { "it","Renio" }, { "ru","Рений" } }
         );
 
@@ -964,7 +964,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1803, credit: "Smithson Tennant",
             naming: "After Greek osme, meaning 'a smell'",
-            isotopes: new Isotope[] { new Isotope (184, 0.02), new Isotope (185, null, 93.6*24*3600, Decay.ElectronCap1), new Isotope (186, 1.59, 2.0E15*365.25*24*3600, Decay.Alpha), new Isotope (187, 1.96), new Isotope (188, 13.24), new Isotope (189, 16.15), new Isotope (190, 26.26), new Isotope (191, null, 15.4*24*3600, Decay.BetaMinus), new Isotope (192, 40.78), new Isotope (193, null, 30.11*24*3600, Decay.BetaMinus), new Isotope (194, null, 6.0*365.25*24*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (184, 0.02), new Isotope (185, null, 93.6*86400.0, Decay.ElectronCap1), new Isotope (186, 1.59, 2.0E15*31556952.0, Decay.Alpha), new Isotope (187, 1.96), new Isotope (188, 13.24), new Isotope (189, 16.15), new Isotope (190, 26.26), new Isotope (191, null, 15.4*86400.0, Decay.BetaMinus), new Isotope (192, 40.78), new Isotope (193, null, 30.11*86400.0, Decay.BetaMinus), new Isotope (194, null, 6*31556952.0, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "es","Osmio" }, { "it","Osmio" }, { "ru","Осмий" } }
         );
 
@@ -976,7 +976,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1803, credit: "Smithson Tennant",
             naming: "After the Greek goddess Iris, personification of the rainbow",
-            isotopes: new Isotope[] { new Isotope (188, null, 1.73*24*3600, Decay.ElectronCap1), new Isotope (189, null, 13.2*24*3600, Decay.ElectronCap1), new Isotope (190, null, 11.8*24*3600, Decay.ElectronCap1), new Isotope (191, 37.3), new Isotope (192, null, 73.827*24*3600, Decay.ElectronCap1), new Isotope (192, null, 241.0*365.25*24*3600, Decay.IT), new Isotope (193, 62.7), new Isotope (193, null, 10.5*24*3600, Decay.IT), new Isotope (194, null, 19.3*3600, Decay.BetaMinus), new Isotope (194, null, 171.0*24*3600, Decay.IT) },
+            isotopes: new Isotope[] { new Isotope (188, null, 1.73*86400.0, Decay.ElectronCap1), new Isotope (189, null, 13.2*86400.0, Decay.ElectronCap1), new Isotope (190, null, 11.8*86400.0, Decay.ElectronCap1), new Isotope (191, 37.3), new Isotope (192, null, 73.827*86400.0, Decay.ElectronCap1), new Isotope (192, null, 241*31556952.0, Decay.IT), new Isotope (193, 62.7), new Isotope (193, null, 10.5*86400.0, Decay.IT), new Isotope (194, null, 19.3*3600, Decay.BetaMinus), new Isotope (194, null, 171.0*86400.0, Decay.IT) },
             nameMap: new Dictionary<string,string>() { { "es","Iridio" }, { "it","Iridio" }, { "ru","Иридий" } }
         );
 
@@ -988,7 +988,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1735, credit: "Antonio de Ulloa",
             naming: "From the Spanish platina, meaning 'silver'",
-            isotopes: new Isotope[] { new Isotope (190, 0.012, 6.5E11*365.25*24*3600, Decay.Alpha), new Isotope (192, 0.782), new Isotope (193, null, 50.0*365.25*24*3600, Decay.ElectronCap1), new Isotope (194, 32.864), new Isotope (195, 33.775), new Isotope (196, 25.211), new Isotope (198, 7.356) },
+            isotopes: new Isotope[] { new Isotope (190, 0.012, 6.5E11*31556952.0, Decay.Alpha), new Isotope (192, 0.782), new Isotope (193, null, 50*31556952.0, Decay.ElectronCap1), new Isotope (194, 32.864), new Isotope (195, 33.775), new Isotope (196, 25.211), new Isotope (198, 7.356) },
             nameMap: new Dictionary<string,string>() { { "de","Platin" }, { "es","Platino" }, { "fr","Platine" }, { "it","Platino" }, { "ru","Платина" } }
         );
 
@@ -1000,7 +1000,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 0,
             naming: "From Proto-Germanic gulþą",
-            isotopes: new Isotope[] { new Isotope (195, null, 186.10*24*3600, Decay.ElectronCap1), new Isotope (196, null, 6.183*24*3600, Decay.ElectronCap1|Decay.BetaMinus), new Isotope (197, 100.0), new Isotope (198, null, 2.69517*24*3600, Decay.BetaMinus), new Isotope (199, null, 3.169*24*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (195, null, 186.10*86400.0, Decay.ElectronCap1), new Isotope (196, null, 6.183*86400.0, Decay.ElectronCap1|Decay.BetaMinus), new Isotope (197, 100.0), new Isotope (198, null, 2.69517*86400.0, Decay.BetaMinus), new Isotope (199, null, 3.169*86400.0, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "es","Oro" }, { "fr","Or" }, { "it","Oro" }, { "ru","Золото" } }
         );
 
@@ -1012,7 +1012,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 0,
             naming: "After the Roman god Mercury",
-            isotopes: new Isotope[] { new Isotope (194, null, 444.0*365.25*24*3600, Decay.ElectronCap1), new Isotope (195, null, 9.9*3600, Decay.ElectronCap1), new Isotope (196, 0.15), new Isotope (197, null, 64.14*3600, Decay.ElectronCap1), new Isotope (198, 10.04), new Isotope (199, 16.94), new Isotope (200, 23.14), new Isotope (201, 13.17), new Isotope (202, 29.74), new Isotope (203, null, 46.612*24*3600, Decay.BetaMinus), new Isotope (204, 6.82) },
+            isotopes: new Isotope[] { new Isotope (194, null, 444*31556952.0, Decay.ElectronCap1), new Isotope (195, null, 9.9*3600, Decay.ElectronCap1), new Isotope (196, 0.15), new Isotope (197, null, 64.14*3600, Decay.ElectronCap1), new Isotope (198, 10.04), new Isotope (199, 16.94), new Isotope (200, 23.14), new Isotope (201, 13.17), new Isotope (202, 29.74), new Isotope (203, null, 46.612*86400.0, Decay.BetaMinus), new Isotope (204, 6.82) },
             nameMap: new Dictionary<string,string>() { { "de","Quecksilber" }, { "es","Mercurio" }, { "fr","Mercure" }, { "it","Mercurio" }, { "ru","Ртуть" } }
         );
 
@@ -1024,7 +1024,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1861, credit: "William Crookes",
             naming: "From Greek θαλλός (thallos), meaning 'a green shoot or twig'",
-            isotopes: new Isotope[] { new Isotope (203, 29.5), new Isotope (204, null, 3.78*365.25*24*3600, Decay.BetaMinus|Decay.ElectronCap1), new Isotope (205, 70.5) },
+            isotopes: new Isotope[] { new Isotope (203, 29.5), new Isotope (204, null, 3.78*31556952.0, Decay.BetaMinus|Decay.ElectronCap1), new Isotope (205, 70.5) },
             nameMap: new Dictionary<string,string>() { { "es","Talio" }, { "it","Tallio" }, { "ru","Таллий" } }
         );
 
@@ -1049,7 +1049,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 0,
             naming: "Perhaps related to Old High German hwiz, meaning 'white'",
-            isotopes: new Isotope[] { new Isotope (207, null, 31.55*365.25*24*3600, Decay.BetaPlus), new Isotope (208, null, 3.68E5*365.25*24*3600, Decay.BetaPlus), new Isotope (209, 100.0, 2.01E19*365.25*24*3600, Decay.Alpha), new Isotope (210, 0.0, 5.012*24*3600, Decay.BetaMinus|Decay.Alpha), new Isotope (210, null, 3.04E6*365.25*24*3600, Decay.IT|Decay.Alpha) },
+            isotopes: new Isotope[] { new Isotope (207, null, 31.55*31556952.0, Decay.BetaPlus), new Isotope (208, null, 3.68E5*31556952.0, Decay.BetaPlus), new Isotope (209, 100.0, 2.01E19*31556952.0, Decay.Alpha), new Isotope (210, 0.0, 5.012*86400.0, Decay.BetaMinus|Decay.Alpha), new Isotope (210, null, 3.04E6*31556952.0, Decay.IT|Decay.Alpha) },
             nameMap: new Dictionary<string,string>() { { "de","Bismut" }, { "es","Bismuto" }, { "it","Bismuto" }, { "ru","Висмут" } }
         );
 
@@ -1061,7 +1061,7 @@ namespace Kaos.Physics
             occurrence: Origin.Decay,
             known: 1898, credit: "Pierre Curie, Marie Curie",
             naming: "After Latin Polonia, meaning Poland",
-            isotopes: new Isotope[] { new Isotope (208, null, 2.898*365.25*24*3600, Decay.Alpha|Decay.BetaPlus), new Isotope (209, null, 125.2*365.25*24*3600, Decay.Alpha|Decay.BetaPlus), new Isotope (210, 0.0, 138.376*24*3600, Decay.Alpha) },
+            isotopes: new Isotope[] { new Isotope (208, null, 2.898*31556952.0, Decay.Alpha|Decay.BetaPlus), new Isotope (209, null, 125.2*31556952.0, Decay.Alpha|Decay.BetaPlus), new Isotope (210, 0.0, 138.376*86400.0, Decay.Alpha) },
             nameMap: new Dictionary<string,string>() { { "es","Polono" }, { "it","Polonio" }, { "ru","Полоний" } }
         );
 
@@ -1085,7 +1085,7 @@ namespace Kaos.Physics
             occurrence: Origin.Decay,
             known: 1899, credit: "Ernest Rutherford, Robert B. Owens",
             naming: "After 'radium emanation'",
-            isotopes: new Isotope[] { new Isotope (210, null, 2.4*3600, Decay.Alpha), new Isotope (211, null, 14.6*3600, Decay.ElectronCap1|Decay.Alpha), new Isotope (222, 0.0, 3.8235*24*3600, Decay.Alpha), new Isotope (224, null, 1.8*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (210, null, 2.4*3600, Decay.Alpha), new Isotope (211, null, 14.6*3600, Decay.ElectronCap1|Decay.Alpha), new Isotope (222, 0.0, 3.8235*86400.0, Decay.Alpha), new Isotope (224, null, 1.8*3600, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "es","Radón" }, { "ru","Радон" } }
         );
 
@@ -1109,7 +1109,7 @@ namespace Kaos.Physics
             occurrence: Origin.Decay,
             known: 1898, credit: "Pierre Curie, Marie Curie",
             naming: "From Latin radius, meaning 'ray'",
-            isotopes: new Isotope[] { new Isotope (223, 0.0, 11.43*24*3600, Decay.Alpha), new Isotope (224, 0.0, 3.6319*24*3600, Decay.Alpha), new Isotope (225, 0.0, 14.9*24*3600, Decay.BetaMinus), new Isotope (226, 0.0, 1600.0*365.25*24*3600, Decay.Alpha), new Isotope (228, 0.0, 5.75*365.25*24*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (223, 0.0, 11.43*86400.0, Decay.Alpha), new Isotope (224, 0.0, 3.6319*86400.0, Decay.Alpha), new Isotope (225, 0.0, 14.9*86400.0, Decay.BetaMinus), new Isotope (226, 0.0, 1600*31556952.0, Decay.Alpha), new Isotope (228, 0.0, 5.75*31556952.0, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "es","Radio" }, { "it","Radio" }, { "ru","Радий" } }
         );
 
@@ -1121,7 +1121,7 @@ namespace Kaos.Physics
             occurrence: Origin.Decay,
             known: 1899, credit: "André-Louis Debierne",
             naming: "From Greek ακτίνος (aktinos), meaning beam or ray",
-            isotopes: new Isotope[] { new Isotope (225, 0.0, 10.0*24*3600, Decay.Alpha), new Isotope (226, null, 29.37*3600, Decay.BetaMinus|Decay.ElectronCap1|Decay.Alpha), new Isotope (227, 0.0, 21.772*365.25*24*3600, Decay.BetaMinus|Decay.Alpha) },
+            isotopes: new Isotope[] { new Isotope (225, 0.0, 10.0*86400.0, Decay.Alpha), new Isotope (226, null, 29.37*3600, Decay.BetaMinus|Decay.ElectronCap1|Decay.Alpha), new Isotope (227, 0.0, 21.772*31556952.0, Decay.BetaMinus|Decay.Alpha) },
             nameMap: new Dictionary<string,string>() { { "es","Actinio" }, { "it","Attinio" }, { "ru","Актиний" } }
         );
 
@@ -1133,7 +1133,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1829, credit: "Jöns Jakob Berzelius",
             naming: "After the Norse god of thunder 'Thor'",
-            isotopes: new Isotope[] { new Isotope (227, 0.0, 18.68*24*3600, Decay.Alpha), new Isotope (228, 0.0, 1.9116*365.25*24*3600, Decay.Alpha), new Isotope (229, 0.0, 7917.0*365.25*24*3600, Decay.Alpha), new Isotope (230, 0.02, 75400.0*365.25*24*3600, Decay.Alpha), new Isotope (231, 0.0, 25.5*3600, Decay.BetaMinus), new Isotope (232, 99.98, 1.405E10*365.25*24*3600, Decay.Alpha), new Isotope (234, 0.0, 24.1*24*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (227, 0.0, 18.68*86400.0, Decay.Alpha), new Isotope (228, 0.0, 1.9116*31556952.0, Decay.Alpha), new Isotope (229, 0.0, 7917*31556952.0, Decay.Alpha), new Isotope (230, 0.02, 75400*31556952.0, Decay.Alpha), new Isotope (231, 0.0, 25.5*3600, Decay.BetaMinus), new Isotope (232, 99.98, 1.405E10*31556952.0, Decay.Alpha), new Isotope (234, 0.0, 24.1*86400.0, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "es","Torio" }, { "it","Torio" }, { "ru","Торий" } }
         );
 
@@ -1145,7 +1145,7 @@ namespace Kaos.Physics
             occurrence: Origin.Decay,
             known: 1913, credit: "Kasimir Fajans, Oswald Helmuth Göhring",
             naming: "from 'proto-actinium'",
-            isotopes: new Isotope[] { new Isotope (229, null, 1.5*24*3600, Decay.ElectronCap1), new Isotope (230, null, 17.4*24*3600, Decay.ElectronCap1), new Isotope (231, 100.0, 3.276E4*365.25*24*3600, Decay.Alpha), new Isotope (232, 0.0, 1.31*24*3600, Decay.BetaMinus), new Isotope (233, 0.0, 26.967*24*3600, Decay.BetaMinus), new Isotope (234, 0.0, 6.75*3600, Decay.BetaMinus), new Isotope (234, 0.0, 1.17*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (229, null, 1.5*86400.0, Decay.ElectronCap1), new Isotope (230, null, 17.4*86400.0, Decay.ElectronCap1), new Isotope (231, 100.0, 3.276E4*31556952.0, Decay.Alpha), new Isotope (232, 0.0, 1.31*86400.0, Decay.BetaMinus), new Isotope (233, 0.0, 26.967*86400.0, Decay.BetaMinus), new Isotope (234, 0.0, 6.75*3600, Decay.BetaMinus), new Isotope (234, 0.0, 1.17*3600, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "de","Protaktinium" }, { "es","Protactinio" }, { "it","Protoattinio" }, { "ru","Протактиний" } }
         );
 
@@ -1157,7 +1157,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1789, credit: "Martin Heinrich Klaproth",
             naming: "After the planet Uranus",
-            isotopes: new Isotope[] { new Isotope (232, null, 68.9*365.25*24*3600, Decay.Fission|Decay.Alpha), new Isotope (233, 0.0, 1.592E5*365.25*24*3600, Decay.Fission|Decay.Alpha), new Isotope (234, 0.005, 2.455E5*365.25*24*3600, Decay.Fission|Decay.Alpha), new Isotope (235, 0.720, 7.04E8*365.25*24*3600, Decay.Fission|Decay.Alpha), new Isotope (236, 0.0, 2.342E7*365.25*24*3600, Decay.Fission|Decay.Alpha), new Isotope (238, 99.274, 4.468E9*365.25*24*3600, Decay.Fission|Decay.Alpha|Decay.Beta2) },
+            isotopes: new Isotope[] { new Isotope (232, null, 68.9*31556952.0, Decay.Fission|Decay.Alpha), new Isotope (233, 0.0, 1.592E5*31556952.0, Decay.Fission|Decay.Alpha), new Isotope (234, 0.005, 2.455E5*31556952.0, Decay.Fission|Decay.Alpha), new Isotope (235, 0.720, 7.04E8*31556952.0, Decay.Fission|Decay.Alpha), new Isotope (236, 0.0, 2.342E7*31556952.0, Decay.Fission|Decay.Alpha), new Isotope (238, 99.274, 4.468E9*31556952.0, Decay.Fission|Decay.Alpha|Decay.Beta2) },
             nameMap: new Dictionary<string,string>() { { "de","Uran" }, { "es","Uranio" }, { "it","Uranio" }, { "ru","Уран" } }
         );
 
@@ -1169,7 +1169,7 @@ namespace Kaos.Physics
             occurrence: Origin.Decay,
             known: 1940, credit: "Edwin McMillan and Philip H. Abelson",
             naming: "After the planet Neptune",
-            isotopes: new Isotope[] { new Isotope (235, null, 396.1*24*3600, Decay.Alpha|Decay.ElectronCap1), new Isotope (236, null, 1.54E5, Decay.ElectronCap1|Decay.BetaMinus|Decay.Alpha), new Isotope (237, 0.0, 2.144E6*365.25*24*3600, Decay.Alpha), new Isotope (239, 0.0, 2.356*24*3600, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (235, null, 396.1*86400.0, Decay.Alpha|Decay.ElectronCap1), new Isotope (236, null, 1.54E5, Decay.ElectronCap1|Decay.BetaMinus|Decay.Alpha), new Isotope (237, 0.0, 2.144E6*31556952.0, Decay.Alpha), new Isotope (239, 0.0, 2.356*86400.0, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "es","Neptunio" }, { "it","Nettunio" }, { "ru","Нептуний" } }
         );
 
@@ -1181,7 +1181,7 @@ namespace Kaos.Physics
             occurrence: Origin.Decay,
             known: 1940, credit: "Glenn T. Seaborg, Arthur Wahl, Joseph W. Kennedy, Edwin McMillan",
             naming: "after the dwarf planet Pluto",
-            isotopes: new Isotope[] { new Isotope (238, 0.0, 87.74*365.25*24*3600, Decay.Fission|Decay.Alpha), new Isotope (239, 0.0, 2.41E4*365.25*24*3600, Decay.Fission|Decay.Alpha), new Isotope (240, 0.0, 6500*365.25*24*3600, Decay.Fission|Decay.Alpha), new Isotope (241, null, 14.0*365.25*24*3600, Decay.BetaMinus|Decay.Fission), new Isotope (242, null, 3.73E5*365.25*24*3600, Decay.Fission|Decay.Alpha), new Isotope (244, 0.0, 8.08E7*365.25*24*3600, Decay.Fission|Decay.Alpha) },
+            isotopes: new Isotope[] { new Isotope (238, 0.0, 87.74*31556952.0, Decay.Fission|Decay.Alpha), new Isotope (239, 0.0, 2.41E4*31556952.0, Decay.Fission|Decay.Alpha), new Isotope (240, 0.0, 6500*31556952.0, Decay.Fission|Decay.Alpha), new Isotope (241, null, 14*31556952.0, Decay.BetaMinus|Decay.Fission), new Isotope (242, null, 3.73E5*31556952.0, Decay.Fission|Decay.Alpha), new Isotope (244, 0.0, 8.08E7*31556952.0, Decay.Fission|Decay.Alpha) },
             nameMap: new Dictionary<string,string>() { { "es","Plutonio" }, { "it","Plutonio" }, { "ru","Плутоний" } }
         );
 
@@ -1193,7 +1193,7 @@ namespace Kaos.Physics
             occurrence: Origin.Synthetic,
             known: 1944, credit: "Glenn T. Seaborg, Ralph A. James, Leon O. Morgan, Albert Ghiorso",
             naming: "After the Americas",
-            isotopes: new Isotope[] { new Isotope (241, null, 432.2*365.25*24*3600, Decay.Fission|Decay.Alpha), new Isotope (242, null, 141*365.25*24*3600, Decay.IT|Decay.Alpha|Decay.Fission), new Isotope (243, null, 7370*365.25*24*3600, Decay.Fission|Decay.Alpha) },
+            isotopes: new Isotope[] { new Isotope (241, null, 432.2*31556952.0, Decay.Fission|Decay.Alpha), new Isotope (242, null, 141*31556952.0, Decay.IT|Decay.Alpha|Decay.Fission), new Isotope (243, null, 7370*31556952.0, Decay.Fission|Decay.Alpha) },
             nameMap: new Dictionary<string,string>() { { "es","Americio" }, { "fr","Américium" }, { "it","Americio" }, { "ru","Америций" } }
         );
 
@@ -1205,7 +1205,7 @@ namespace Kaos.Physics
             occurrence: Origin.Synthetic,
             known: 1944, credit: "Glenn T. Seaborg, Ralph A. James, Albert Ghiorso",
             naming: "After Marie Skłodowska-Curie and Pierre Curie",
-            isotopes: new Isotope[] { new Isotope (242, null, 160.0*24*3600, Decay.Fission|Decay.Alpha), new Isotope (243, null, 29.1*365.25*24*3600, Decay.Alpha|Decay.ElectronCap1|Decay.Fission), new Isotope (244, null, 18.1*365.25*24*3600, Decay.Fission|Decay.Alpha), new Isotope (245, null, 8500.0*365.25*24*3600, Decay.Fission|Decay.Alpha), new Isotope (246, null, 4730.0*365.25*24*3600, Decay.Alpha|Decay.Fission), new Isotope (247, null, 1.56E7*365.25*24*3600, Decay.Alpha), new Isotope (248, null, 3.4E5*365.25*24*3600, Decay.Alpha|Decay.Fission), new Isotope (250, null, 9000*365.25*24*3600, Decay.Fission|Decay.Alpha|Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (242, null, 160.0*86400.0, Decay.Fission|Decay.Alpha), new Isotope (243, null, 29.1*31556952.0, Decay.Alpha|Decay.ElectronCap1|Decay.Fission), new Isotope (244, null, 18.1*31556952.0, Decay.Fission|Decay.Alpha), new Isotope (245, null, 8500*31556952.0, Decay.Fission|Decay.Alpha), new Isotope (246, null, 4730*31556952.0, Decay.Alpha|Decay.Fission), new Isotope (247, null, 1.56E7*31556952.0, Decay.Alpha), new Isotope (248, null, 3.4E5*31556952.0, Decay.Alpha|Decay.Fission), new Isotope (250, null, 9000*31556952.0, Decay.Fission|Decay.Alpha|Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "es","Curio" }, { "it","Curio" }, { "ru","Кюрий" } }
         );
 
@@ -1217,7 +1217,7 @@ namespace Kaos.Physics
             occurrence: Origin.Synthetic,
             known: 1949, credit: "Lawrence Berkeley National Laboratory",
             naming: "After Berkeley, California",
-            isotopes: new Isotope[] { new Isotope (245, null, 4.94*24*3600, Decay.ElectronCap1|Decay.Alpha), new Isotope (246, null, 1.8*24*3600, Decay.Alpha|Decay.ElectronCap1), new Isotope (247, null, 1380.0*365.25*24*3600, Decay.Alpha), new Isotope (248, null, 300.0*365.25*24*3600, Decay.Alpha), new Isotope (249, null, 330.0*24*3600, Decay.Alpha|Decay.Fission|Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (245, null, 4.94*86400.0, Decay.ElectronCap1|Decay.Alpha), new Isotope (246, null, 1.8*86400.0, Decay.Alpha|Decay.ElectronCap1), new Isotope (247, null, 1380*31556952.0, Decay.Alpha), new Isotope (248, null, 300*31556952.0, Decay.Alpha), new Isotope (249, null, 330.0*86400.0, Decay.Alpha|Decay.Fission|Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "es","Berkelio" }, { "fr","Berkélium" }, { "it","Berkelio" }, { "ru","Берклий" } }
         );
 
@@ -1229,7 +1229,7 @@ namespace Kaos.Physics
             occurrence: Origin.Synthetic,
             known: 1950, credit: "Lawrence Berkeley National Laboratory",
             naming: "After California",
-            isotopes: new Isotope[] { new Isotope (248, null, 333.5*24*3600, Decay.Alpha|Decay.Fission), new Isotope (249, null, 351.0*365.25*24*3600, Decay.Alpha|Decay.Fission), new Isotope (250, null, 13.08*365.25*24*3600, Decay.Alpha|Decay.Fission), new Isotope (251, null, 898.0*365.25*24*3600, Decay.Alpha), new Isotope (252, null, 2.645*365.25*24*3600, Decay.Alpha|Decay.Fission), new Isotope (253, null, 17.81*24*3600, Decay.BetaMinus|Decay.Alpha), new Isotope (254, null, 60.5*24*3600, Decay.Fission|Decay.Alpha) },
+            isotopes: new Isotope[] { new Isotope (248, null, 333.5*86400.0, Decay.Alpha|Decay.Fission), new Isotope (249, null, 351*31556952.0, Decay.Alpha|Decay.Fission), new Isotope (250, null, 13.08*31556952.0, Decay.Alpha|Decay.Fission), new Isotope (251, null, 898*31556952.0, Decay.Alpha), new Isotope (252, null, 2.645*31556952.0, Decay.Alpha|Decay.Fission), new Isotope (253, null, 17.81*86400.0, Decay.BetaMinus|Decay.Alpha), new Isotope (254, null, 60.5*86400.0, Decay.Fission|Decay.Alpha) },
             nameMap: new Dictionary<string,string>() { { "es","Californio" }, { "it","Californio" }, { "ru","Калифорний" } }
         );
 
@@ -1241,7 +1241,7 @@ namespace Kaos.Physics
             occurrence: Origin.Synthetic,
             known: 1952, credit: "Lawrence Berkeley National Laboratory",
             naming: "After Albert Einstein",
-            isotopes: new Isotope[] { new Isotope (252, null, 471.7*24*3600, Decay.Alpha|Decay.ElectronCap1|Decay.BetaMinus), new Isotope (253, null, 20.47*24*3600, Decay.Fission|Decay.Alpha), new Isotope (254, null, 275.7*24*3600, Decay.ElectronCap1|Decay.BetaMinus|Decay.Alpha), new Isotope (255, null, 39.8*24*3600, Decay.BetaMinus|Decay.Alpha|Decay.Fission) },
+            isotopes: new Isotope[] { new Isotope (252, null, 471.7*86400.0, Decay.Alpha|Decay.ElectronCap1|Decay.BetaMinus), new Isotope (253, null, 20.47*86400.0, Decay.Fission|Decay.Alpha), new Isotope (254, null, 275.7*86400.0, Decay.ElectronCap1|Decay.BetaMinus|Decay.Alpha), new Isotope (255, null, 39.8*86400.0, Decay.BetaMinus|Decay.Alpha|Decay.Fission) },
             nameMap: new Dictionary<string,string>() { { "es","Einsteinio" }, { "it","Einsteinio" }, { "ru","Эйнштейний" } }
         );
 
@@ -1253,7 +1253,7 @@ namespace Kaos.Physics
             occurrence: Origin.Synthetic,
             known: 1952, credit: "Lawrence Berkeley National Laboratory",
             naming: "After Enrico Fermi",
-            isotopes: new Isotope[] { new Isotope (252, null, 25.39*3600, Decay.Fission|Decay.Alpha), new Isotope (253, null, 3.0*24*3600, Decay.ElectronCap1|Decay.Alpha), new Isotope (255, null, 20.07*3600, Decay.Fission|Decay.Alpha), new Isotope (257, null, 100.5*24*3600, Decay.Alpha|Decay.Fission) },
+            isotopes: new Isotope[] { new Isotope (252, null, 25.39*3600, Decay.Fission|Decay.Alpha), new Isotope (253, null, 3.0*86400.0, Decay.ElectronCap1|Decay.Alpha), new Isotope (255, null, 20.07*3600, Decay.Fission|Decay.Alpha), new Isotope (257, null, 100.5*86400.0, Decay.Alpha|Decay.Fission) },
             nameMap: new Dictionary<string,string>() { { "es","Fermio" }, { "it","Fermio" }, { "ru","Фермий" } }
         );
 
@@ -1265,7 +1265,7 @@ namespace Kaos.Physics
             occurrence: Origin.Synthetic,
             known: 1955, credit: "Lawrence Berkeley National Laboratory",
             naming: "After Dmitri Mendeleev",
-            isotopes: new Isotope[] { new Isotope (256, null, 1.17*3600, Decay.ElectronCap1), new Isotope (257, null, 5.52*3600, Decay.ElectronCap1|Decay.Alpha|Decay.Fission), new Isotope (258, null, 51.5*24*3600, Decay.Alpha|Decay.ElectronCap1|Decay.BetaMinus), new Isotope (259, null, 1.6*3600, Decay.Fission|Decay.Alpha), new Isotope (260, null, 31.8*24*3600, Decay.Fission|Decay.Alpha|Decay.ElectronCap1|Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (256, null, 1.17*3600, Decay.ElectronCap1), new Isotope (257, null, 5.52*3600, Decay.ElectronCap1|Decay.Alpha|Decay.Fission), new Isotope (258, null, 51.5*86400.0, Decay.Alpha|Decay.ElectronCap1|Decay.BetaMinus), new Isotope (259, null, 1.6*3600, Decay.Fission|Decay.Alpha), new Isotope (260, null, 31.8*86400.0, Decay.Fission|Decay.Alpha|Decay.ElectronCap1|Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "es","Mendelevio" }, { "fr","Mendelévium" }, { "it","Mendelevio" }, { "ru","Менделевий" } }
         );
 
@@ -1561,13 +1561,13 @@ namespace Kaos.Physics
             }
             if (StableCount > 0)
                 StabilityIndex = 0;
-            else if (hl0 >= 2000000.0*365.25*24*3600)
+            else if (hl0 >= 2000000*31556952.0)
                 StabilityIndex = 1;
-            else if (hl0 >= 800.0*365.25*24*3600)
+            else if (hl0 >= 800*31556952.0)
                 StabilityIndex = 2;
-            else if (hl0 >= 24.0*3600)
+            else if (hl0 >= 86400.0)
                 StabilityIndex = 3;
-            else if (hl0 >= 10.0*60)
+            else if (hl0 >= 10*60)
                 StabilityIndex = 4;
             else
                 StabilityIndex = 5;
