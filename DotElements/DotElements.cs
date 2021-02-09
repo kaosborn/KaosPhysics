@@ -15,7 +15,7 @@ namespace AppMain
                 Console.WriteLine (nuc.ToFixedText (lang));
 
             Console.WriteLine ();
-            Console.WriteLine ("; Z,symbol,A,percent,decayChars,halflife");
+            Console.WriteLine ("; Z,symbol,A,abundance,decayChars,halflife");
             foreach (var nuc in Nuclide.Table)
             {
                 double total = 0.0;

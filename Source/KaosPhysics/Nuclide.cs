@@ -27,7 +27,7 @@ namespace Kaos.Physics
 
         public static Nuclide Hydrogen { get; } = new Nuclide
         (
-            1, "H", nameof (Hydrogen), Category.Nonmetal, 1, 1,
+            z: 1, symbol: "H", name: nameof (Hydrogen), category: Category.Nonmetal, period: 1, group: 1,
             melt: 13.99, boil: 20.271,
             weight: 1.008,
             occurrence: Origin.Primordial,
@@ -71,7 +71,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 1798, credit: "Louis Nicolas Vauquelin",
             naming: "From the Greek beryllos, meaning beryl mineral",
-            isotopes: new Isotope[] { new Isotope (7, 0.0, 53.12*3600, Decay.ElectronCap1|Decay.Gamma), new Isotope (9, 100.0), new Isotope (10, 0.0, 1.39E6*365.25*24*360, Decay.BetaMinus) },
+            isotopes: new Isotope[] { new Isotope (7, 0.0, 53.12*24*3600, Decay.ElectronCap1|Decay.Gamma), new Isotope (9, 100.0), new Isotope (10, 0.0, 1.39E6*365.25*24*3600, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string> { { "es","Berilio" }, { "fr","Béryllium" }, { "it","Berillio" }, { "ru","Бериллий" } }
         );
 
@@ -378,7 +378,7 @@ namespace Kaos.Physics
             life: Nutrition.Absorbed,
             known: 1751, credit: "Axel Fredrik Cronstedt",
             naming: "After a mischievous sprite of German mythology, Nickel",
-            isotopes: new Isotope[] { new Isotope (58, 68.077), new Isotope (59, 0.0, 7.6E4*365.25*24*3600, Decay.ElectronCap1), new Isotope (60, 26.223), new Isotope (61, 1.140), new Isotope (62, 3.635), new Isotope (63, null, 100.0*365*25*24*3600, Decay.BetaMinus), new Isotope (64, 0.926) },
+            isotopes: new Isotope[] { new Isotope (58, 68.077), new Isotope (59, 0.0, 7.6E4*365.25*24*3600, Decay.ElectronCap1), new Isotope (60, 26.223), new Isotope (61, 1.140), new Isotope (62, 3.635), new Isotope (63, null, 100.0*365.25*24*3600, Decay.BetaMinus), new Isotope (64, 0.926) },
             nameMap: new Dictionary<string,string>() { { "es","Niquel" }, { "it","Nichel" }, { "ru","Никель" } }
         );
 
@@ -614,7 +614,7 @@ namespace Kaos.Physics
             occurrence: Origin.Primordial,
             known: 0,
             naming: "From Proto-Germanic silubra",
-            isotopes: new Isotope[] { new Isotope (105, null, 41.2*24*3600, Decay.ElectronCap1|Decay.Gamma), new Isotope (106, null, 8.28*2483600, Decay.ElectronCap1|Decay.Gamma), new Isotope (107, 51.839), new Isotope (108, null, 418.0*365.25*24*3600, Decay.ElectronCap1|Decay.IT|Decay.Gamma), new Isotope (109, 48.161), new Isotope (110, null, 249.95*24*3600, Decay.BetaMinus|Decay.Gamma), new Isotope (111, null, 7.45*24*3600, Decay.BetaMinus|Decay.Gamma) },
+            isotopes: new Isotope[] { new Isotope (105, null, 41.2*24*3600, Decay.ElectronCap1|Decay.Gamma), new Isotope (106, null, 8.28*24*3600, Decay.ElectronCap1|Decay.Gamma), new Isotope (107, 51.839), new Isotope (108, null, 418.0*365.25*24*3600, Decay.ElectronCap1|Decay.IT|Decay.Gamma), new Isotope (109, 48.161), new Isotope (110, null, 249.95*24*3600, Decay.BetaMinus|Decay.Gamma), new Isotope (111, null, 7.45*24*3600, Decay.BetaMinus|Decay.Gamma) },
             nameMap: new Dictionary<string,string>() { { "de","Silber" }, { "es","Plata" }, { "fr","Argent" }, { "it","Argento" }, { "ru","Серебро" } }
         );
 
@@ -1062,7 +1062,7 @@ namespace Kaos.Physics
             known: 1898, credit: "Pierre Curie, Marie Curie",
             naming: "After Latin Polonia, meaning Poland",
             isotopes: new Isotope[] { new Isotope (208, null, 2.898*365.25*24*3600, Decay.Alpha|Decay.BetaPlus), new Isotope (209, null, 125.2*365.25*24*3600, Decay.Alpha|Decay.BetaPlus), new Isotope (210, 0.0, 138.376*24*3600, Decay.Alpha) },
-            nameMap: new Dictionary<string,string>() { { "de","Polonium" }, { "es","Polono" }, { "it","Polonio" }, { "ru","Полоний" } }
+            nameMap: new Dictionary<string,string>() { { "es","Polono" }, { "it","Polonio" }, { "ru","Полоний" } }
         );
 
         public static Nuclide Astatine { get; } = new Nuclide

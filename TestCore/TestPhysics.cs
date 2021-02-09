@@ -17,7 +17,6 @@ namespace TestCore
                 var nuc = Nuclide.Table[ex];
                 Assert.AreEqual (ex, nuc.Z);
                 Assert.IsTrue (nuc.Symbol.Length >= 1 && nuc.Symbol.Length <= 3, "Z="+nuc.Z);
-                Assert.IsTrue (nuc.Name.Length >= 1, "Z="+nuc.Z);
                 Assert.IsTrue (nuc.Group >= 0 && nuc.Group <= 18, "Z="+ nuc.Z);
                 Assert.IsTrue (nuc.Z == 0 || nuc.Period >= 1 && nuc.Period <= 7, "Z="+nuc.Z);
                 Assert.IsTrue (nuc.Z == 0 || nuc.Block == 's' || nuc.Block == 'p' || nuc.Block == 'd' || nuc.Block == 'f', "Z="+nuc.Z);
@@ -28,28 +27,16 @@ namespace TestCore
         }
 
         [TestMethod]
-        public void AbundanceTotal()
-        {
-            foreach (Nuclide nuc in Nuclide.Table)
-            {
-                double total = 0.0;
-                foreach (var iso in nuc.Isotopes)
-                {
-                    if (iso.IsNatural)
-                        total += iso.Abundance.Value;
-                }
-                Assert.IsTrue (total < 0.05 || (total > 99.5 && total < 101.0), "Z="+nuc.Z+", total="+total);
-            }
-        }
-
-        [TestMethod]
         public void CheckLangs()
         {
             foreach (Nuclide nuc in Nuclide.Table)
             {
-                foreach (var lang in nuc.NameMap.Keys)
+                Assert.IsTrue (nuc.Name.Length >= 1, "Z="+nuc.Z);
+
+                foreach (var kv in nuc.NameMap)
                 {
-                    Assert.IsTrue (langWhiteList.Any (x => x == lang), "Z="+nuc.Z+", lang="+lang);
+                    Assert.IsTrue (langWhiteList.Any (x => x == kv.Key), "Z="+nuc.Z+", lang="+kv.Key);
+                    Assert.IsTrue (kv.Value.Length > 0 && kv.Value != nuc.Name, "Z="+nuc.Z);
                 }
             }
         }
@@ -72,13 +59,23 @@ namespace TestCore
         {
             foreach (Nuclide nuc in Nuclide.Table)
             {
-                foreach (var isos in nuc.Isotopes)
+                Assert.IsTrue (nuc.Isotopes.Count > 0);
+
+                double total = 0.0;
+
+                foreach (Isotope iso in nuc.Isotopes)
                 {
-                    if (isos.Halflife != null)
-                    {
-                        Assert.IsTrue (isos.DecayMode != Decay.Stable);
-                    }
+                    Assert.IsTrue (iso.Halflife == null || iso.Halflife > 0);
+                    Assert.IsTrue ((iso.Halflife == null) == (iso.DecayMode == Decay.Stable));
+                    Assert.IsTrue (iso.A >= nuc.Z);
+                    Assert.IsTrue (iso.Abundance == null || (iso.Abundance >= 0 && iso.Abundance <= 100));
+                    Assert.IsTrue ((iso.Abundance != null) == iso.IsNatural);
+
+                    if (iso.Abundance != null)
+                        total += iso.Abundance.Value;
                 }
+
+                Assert.IsTrue (total < 0.05 || (total > 99.5 && total < 101.0), "Z="+nuc.Z+", total="+total);
             }
         }
     }
