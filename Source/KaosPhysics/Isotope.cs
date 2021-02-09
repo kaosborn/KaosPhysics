@@ -17,18 +17,31 @@ namespace Kaos.Physics
         Fission=1024
     }
 
+    /// <summary>Variant of an element that differs by neutron number.</summary>
     public class Isotope
     {
-        private static readonly string[] _decayCodes = new string[] { "Stable", "α", "β+", "β−", "β−β−", "ε", "εε", "n", "γ", "IT", "IC", "SF" };
+        private static readonly string[] _decayCodes = new string[] { "α", "β+", "β−", "β−β−", "ε", "εε", "n", "γ", "IT", "IC", "SF" };
 
+        /// <summary>
+        /// Returns all the possible characters that the DecayCodes property may consist of.
+        /// </summary>
         public static string DecayChars => "apbBeEngTCF";
         public static ReadOnlyCollection<string> DecayCodes { get; } = new ReadOnlyCollection<string>(_decayCodes);
 
+        /// <summary>Nucleon count.</summary>
         public int A { get; private set; }
+
+        /// <summary>Percent of Earth's total for this isotope. A null value indicates a synthetic isotope. A zero value indicates trace abundance.</summary>
         public double? Abundance { get; private set; }
+
+        /// <summary>Time to decay by half. A null value indicates a stable isotope.</summary>
         public double? Halflife { get; private set; }
+
         public Decay DecayMode { get; private set; }
 
+        /// <summary>Instantiate a stable isotope.</summary>
+        /// <param name="a">Nucleon count</param>
+        /// <param name="abundance">Percentage of the isotope to all the element's isotopes.</param>
         public Isotope (int a, double abundance)
         {
             A = a;
@@ -37,18 +50,30 @@ namespace Kaos.Physics
             DecayMode = Decay.Stable;
         }
 
+        /// <summary>Instantiate a stable isotope.</summary>
+        /// <param name="a">Nucleon count</param>
+        /// <param name="abundance">Percentage of the isotope to all the element's isotopes.</param>
+        /// <param name="halflife">Time to decay by half.</param>
+        /// <param name="decayMode">Or'ed list of isotope mutations.</param>
         public Isotope (int a, double? abundance, double halflife, Decay decayMode)
         {
             A = a;
             Abundance = abundance;
             Halflife = halflife;
-            DecayMode = decayMode; 
+            DecayMode = decayMode;
         }
 
+        /// <summary>Returns true if the isotope is not sythetic.</summary>
         public bool IsNatural => Abundance != null;
+
+        /// <summary>Returns true if the isotope is not radioactive.</summary>
         public bool IsStable => Halflife == null;
         public int DecayBits => (int) DecayMode;
 
+        /// <summary>
+        /// Returns a string containing a character for each decay mode of the isotope.
+        /// This string provides a consise method of output in a human readable form.
+        /// </summary>
         public string DecayCode
         {
             get
@@ -64,6 +89,8 @@ namespace Kaos.Physics
             }
         }
 
+        /// <summary>Provide fixed-width contents isotope.</summary>
+        /// <returns>Fixed length string of contents.</returns>
         public string FixedText()
         {
             var sb = new StringBuilder();
