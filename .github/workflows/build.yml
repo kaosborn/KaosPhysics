@@ -1,0 +1,23 @@
+name: Build
+on: push
+jobs:
+  Job1:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+    - name: Initialize
+      run: mkdir RunResults
+    - name: Build executables
+      run: |
+        dotnet build -c Release DotElements
+        dotnet build -c Release DotGenJson
+    - name: Run executables
+      run: |
+        DotElements\bin\Release\netcoreapp3.1\DotElements.exe > .\RunResults\nuclides.txt
+        DotGenJson\bin\Release\netcoreapp3.1\DotGenJson.exe > .\RunResults\nuclides.json
+    - uses: actions/upload-artifact@v1
+      with:
+        name: KaosPhysics-Run
+        path: RunResults
