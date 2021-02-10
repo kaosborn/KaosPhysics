@@ -21,7 +21,7 @@ namespace AppMain
                 double total = 0.0;
                 foreach (var iso in nuc.Isotopes)
                 {
-                    Console.WriteLine ("{0,3} {1,-3} {2}", nuc.Z, nuc.Symbol, iso.FixedText());
+                    Console.WriteLine ("{0,3} {1,-3} {2}", nuc.Z, nuc.Symbol, iso.ToFixedColumns());
                     if (iso.IsNatural)
                         total += iso.Abundance.Value;
                 }

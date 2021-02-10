@@ -1688,6 +1688,66 @@ namespace Kaos.Physics
             return sb.ToString();
         }
 
+        public string ToJson (string quote)
+        {
+            var sb = new StringBuilder();
+            sb.Append ($"{quote}z{quote}:");
+            string ts = Z.ToString();
+            sb.Append (' ', 3 - ts.Length);
+            sb.Append (ts);
+            sb.Append ($", {quote}symbol{quote}: \"{Symbol}\",");
+            sb.Append (' ', 3 - Symbol.Length);
+            sb.Append ($"{quote}period{quote}: ");
+            sb.Append (Period);
+            sb.Append ($", {quote}group{quote}:");
+            ts = Group.ToString();
+            sb.Append (' ', 2 - ts.Length);
+            sb.Append (ts);
+            sb.Append ($", {quote}categoryIndex{quote}: ");
+            sb.Append (CategoryIndex);
+            sb.Append ($", {quote}block{quote}: \"");
+            sb.Append (Block);
+            sb.Append ($"\", {quote}occurrenceIndex{quote}: ");
+            sb.Append (OccurrenceIndex);
+            sb.Append ($", {quote}lifeIndex{quote}: ");
+            sb.Append (LifeIndex);
+            sb.Append ($", {quote}discoveryYear{quote}:");
+            ts = Known.ToString();
+            sb.Append (' ', 5 - ts.Length);
+            sb.Append (ts);
+            sb.Append ($", {quote}discoveryIndex{quote}: ");
+            sb.Append (KnownIndex);
+            sb.Append ($", {quote}atm0StateIndex{quote}: ");
+            sb.Append (Atm0StateIndex);
+            sb.Append ($", {quote}melt{quote}:");
+            ts = Melt == null ? "null" : Melt.Value.ToString ("F4");
+            sb.Append (' ', 9 - ts.Length);
+            sb.Append (ts);
+            sb.Append ($", {quote}boil{quote}:");
+            ts = Boil == null ? "null" : Boil.Value.ToString ("F4");
+            sb.Append (' ', 9 - ts.Length);
+            sb.Append (ts);
+            sb.Append ($", {quote}weight{quote}:");
+            ts = Weight.ToString ("F4");
+            sb.Append (' ', 9 - ts.Length);
+            sb.Append (ts);
+            sb.Append ($", {quote}stableCount{quote}:");
+            ts = StableCount.ToString();
+            sb.Append (' ', 2 - ts.Length);
+            sb.Append (ts);
+            sb.Append ($", {quote}stabilityIndex{quote}: ");
+            sb.Append (StabilityIndex);
+            sb.Append ($", {quote}isotopes{quote}: [");
+            for (var ix = 0; ix < Isotopes.Count; ++ix)
+            {
+                if (ix != 0)
+                    sb.Append (',');
+                sb.Append (Isotopes[ix].ToJson());
+            }
+
+            return sb.ToString();
+        }
+
         public static IEnumerable<Nuclide> GetElements()
         {
             for (int ix = 1; ix < _nuclides.Length; ++ix)

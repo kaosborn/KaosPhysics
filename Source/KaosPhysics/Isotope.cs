@@ -68,7 +68,6 @@ namespace Kaos.Physics
 
         /// <summary>Returns true if the isotope is not radioactive.</summary>
         public bool IsStable => Halflife == null;
-        public int DecayBits => (int) DecayMode;
 
         /// <summary>
         /// Returns a string containing a character for each decay mode of the isotope.
@@ -90,8 +89,8 @@ namespace Kaos.Physics
         }
 
         /// <summary>Provide fixed-width contents isotope.</summary>
-        /// <returns>Fixed length string of contents.</returns>
-        public string FixedText()
+        /// <returns>Fixed-column formatted string.</returns>
+        public string ToFixedColumns()
         {
             var sb = new StringBuilder();
             var ts = A.ToString();
@@ -99,15 +98,35 @@ namespace Kaos.Physics
             sb.Append (ts);
             sb.Append (' ');
             ts = Abundance == null ? string.Empty : Abundance.Value.ToString ("F3");
-            sb.Append(' ', 7 - ts.Length);
+            sb.Append (' ', 7 - ts.Length);
             sb.Append (ts);
-            sb.Append(' ');
+            sb.Append (' ');
             ts = DecayCode;
             sb.Append (ts);
-            sb.Append(' ', 5 - ts.Length);
+            sb.Append (' ', 5 - ts.Length);
             ts = Halflife.ToString();
             sb.Append (ts);
             //sb.Append (' ', 16 - ts.Length);
+            return sb.ToString();
+        }
+
+        /// <summary>Provide JSON format contents of isotope.</summary>
+        /// <returns>JSON formatted string.</returns>
+        public string ToJson()
+        {
+            var sb = new StringBuilder();
+            sb.Append ('[');
+            sb.Append (A);
+            sb.Append (',');
+            sb.Append (IsNatural ? Abundance.ToString() : "null");
+            if (DecayMode != 0 || Halflife != null)
+            {
+                sb.Append (',');
+                sb.Append ((int) DecayMode);
+                sb.Append (',');
+                sb.Append (Halflife.Value);
+            }
+            sb.Append (']');
             return sb.ToString();
         }
     }
