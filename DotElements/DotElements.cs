@@ -8,7 +8,7 @@ namespace AppMain
     {
         static void Main (string[] args)
         {
-            string lang = args.Length==1 ? args[0] : null;
+            string lang = args.Length == 0 || ! Nuclide.MaxNameLengths.ContainsKey (args[0]) ? "en-US" : args[0];
 
             Console.WriteLine ("; Z,symbol,name,period,group,category,discoveryYear,discoveryIndex,stableCount,instabilityCode,block,occurrenceCode,lifeCode,atm0StateCode,melt,boil,weight");
             foreach (var nuc in Nuclide.Table)
@@ -30,7 +30,7 @@ namespace AppMain
             }
 
             Console.WriteLine ();
-            Console.WriteLine ("; Translation totals");
+            Console.WriteLine ("; language, totalTranslations");
             var langHits = new Dictionary<string,int>();
             foreach (var nuc in Nuclide.Table)
                 foreach (var kv in nuc.NameMap)
@@ -40,6 +40,11 @@ namespace AppMain
                 }
             foreach (var lg in langHits)
                 Console.WriteLine (lg.Key + ": " + lg.Value);
+
+            Console.WriteLine ();
+            Console.WriteLine ("; maxNameLength,language");
+            foreach (var kv in Nuclide.MaxNameLengths)
+                Console.WriteLine (kv.Value + " " + kv.Key);
 
             Console.WriteLine();
             foreach (var lx in Nuclide.GetLongTable())

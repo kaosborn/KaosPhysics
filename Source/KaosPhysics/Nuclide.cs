@@ -1491,18 +1491,41 @@ namespace Kaos.Physics
             Nihonium, Flerovium, Moscovium, Livermorium, Tennessine, Oganesson
         };
 
-        private static readonly string[] _categoryNames = new string[]
+        private static readonly string[] _okLanguages = new string[] { "de", "en", "en-GB", "en-US", "es", "fr", "it", "ru" };
+        private static readonly Dictionary<string,int> _maxNameLengths = new Dictionary<string,int>();
+
+        static Nuclide()
+        {
+            foreach (var lg in _okLanguages)
+                _maxNameLengths.Add (lg, 0);
+
+            foreach (var nuc in _nuclides)
+                foreach (var lg in _okLanguages)
+                {
+                    var name = nuc.GetName (lg);
+                    if (_maxNameLengths[lg] < name.Length)
+                        _maxNameLengths[lg] = name.Length;
+                }
+        }
+
+        public static ReadOnlyDictionary<string,int> MaxNameLengths
+        = new ReadOnlyDictionary<string,int> (_maxNameLengths);
+
+        public static ReadOnlyCollection<string> CategoryNames { get; }
+        = new ReadOnlyCollection<string> (new string[]
         {
             "Alkali metal", "Alkaline earth metal", "Lanthanoid", "Actinoid",
             "Transition metal", "Post-transition metal", "Metalloid", "Nonmetal", "Halogen", "Noble gas"
-        };
+        });
 
-        private static readonly string[] _lifeCodes = new string[] { "", "EB", "ET", "BT", "A" };
+        public static ReadOnlyCollection<string> LifeCodes { get; }
+        = new ReadOnlyCollection<string> (new string[]
+        {
+            "", "EB", "ET", "BT", "A"
+        });
 
-        public static int MaxNameLength { get; } = _nuclides.Max (e => e.Name.Length);
-        public static ReadOnlyCollection<string> CategoryNames { get; } = new ReadOnlyCollection<string> (_categoryNames);
-        public static ReadOnlyCollection<string> LifeCodes { get; } = new ReadOnlyCollection<string> (_lifeCodes);
-        public static ReadOnlyCollection<Nuclide> Table { get; } = new ReadOnlyCollection<Nuclide> (_nuclides);
+        public static ReadOnlyCollection<Nuclide> Table { get; }
+        = new ReadOnlyCollection<Nuclide> (_nuclides);
 
         public Nuclide
         (
@@ -1598,7 +1621,7 @@ namespace Kaos.Physics
         public char OccurrenceCode => " PD"[(int) Occurrence];
         public Nutrition Life { get; }
         public int LifeIndex => (int) Life;
-        public string LifeCode => _lifeCodes[(int) Life];
+        public string LifeCode => LifeCodes[(int) Life];
         public int StabilityIndex { get; }
         public int StableCount { get; }
         public int CategoryIndex => (int) Category;
@@ -1638,7 +1661,7 @@ namespace Kaos.Physics
 
         public override string ToString() => Symbol;
 
-        public string ToFixedText (string lang=null)
+        public string ToFixedText (string lang)
         {
             var sb = new StringBuilder();
 
@@ -1650,7 +1673,7 @@ namespace Kaos.Physics
             sb.Append (' ', 3 - Symbol.Length);
             ts = lang == null ? Name : GetName (lang);
             sb.Append (ts);
-            sb.Append (' ', MaxNameLength - ts.Length + 1);
+            sb.Append (' ', Nuclide.MaxNameLengths[lang ?? "en"] - ts.Length + 1);
             sb.Append (Period);
             ts = Group.ToString();
             sb.Append (' ', 3 - ts.Length);

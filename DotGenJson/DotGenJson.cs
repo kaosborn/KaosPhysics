@@ -6,8 +6,6 @@ namespace AppMain
 {
     class DotGenJson
     {
-        static readonly string[] allLangs = new string[] { "de", "en", "en-GB", "en-US", "es", "fr", "it", "ru" };
-
         static readonly ReadOnlyCollection<string> nutritionDescriptions = new ReadOnlyCollection<string> (new string[]
         {
             "Not absorbed",
@@ -29,7 +27,7 @@ namespace AppMain
 
         static void Main()
         {
-            string quote = "";
+            string quote = "\"";
 
             Console.WriteLine ('{');
             Console.Write ($"  {quote}categoryNames{quote}: [ ");
@@ -112,25 +110,25 @@ namespace AppMain
             Console.WriteLine ();
 
             var maxLens = new int[Nuclide.Table.Count];
-            for (var ex = 0; ex < Nuclide.Table.Count; ++ex)
-                for (var lx = 0; lx < allLangs.Length; ++lx)
+            for (var nx = 0; nx < Nuclide.Table.Count; ++nx)
+                foreach (var lg in Nuclide.MaxNameLengths.Keys)
                 {
-                    var nm = Nuclide.Table[ex].GetName (allLangs[lx]);
-                    if (maxLens[ex] < nm.Length)
-                        maxLens[ex] = nm.Length;
+                    var nm = Nuclide.Table[nx].GetName (lg);
+                    if (maxLens[nx] < nm.Length)
+                        maxLens[nx] = nm.Length;
                 }
-            for (var lx = 0; lx < allLangs.Length; ++lx)
+            foreach (var lg in Nuclide.MaxNameLengths.Keys)
             {
-                Console.Write ($"  {quote}lang-{allLangs[lx]}{quote}");
-                Console.Write (new string (' ', 5 - allLangs[lx].Length));
+                Console.Write ($"  {quote}lang-{lg}{quote}");
+                Console.Write (new string (' ', 5 - lg.Length));
                 Console.Write (": [ ");
-                for (int ex = 0; ex < Nuclide.Table.Count; ++ex)
+                for (int nx = 0; nx < Nuclide.Table.Count; ++nx)
                 {
-                    var nm = Nuclide.Table[ex].GetName (allLangs[lx]);
+                    var nm = Nuclide.Table[nx].GetName (lg);
                     Console.Write ($"\"{nm}\"");
-                    if (ex+1 < Nuclide.Table.Count)
+                    if (nx+1 < Nuclide.Table.Count)
                         Console.Write (',');
-                    Console.Write (new string (' ', maxLens[ex] - nm.Length + 1));
+                    Console.Write (new string (' ', maxLens[nx] - nm.Length + 1));
                 }
                 Console.WriteLine ("],");
             }
