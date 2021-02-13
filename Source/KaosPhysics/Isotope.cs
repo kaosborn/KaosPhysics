@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 
 namespace Kaos.Physics
@@ -20,13 +21,13 @@ namespace Kaos.Physics
     /// <summary>Variant of an element that differs by neutron number.</summary>
     public class Isotope
     {
-        private static readonly string[] _decayCodes = new string[] { "α", "β+", "β−", "β−β−", "ε", "εε", "n", "γ", "IT", "IC", "SF" };
+        private static readonly int maxDecay = Enum.GetValues (typeof (Decay)).Cast<int>().Max();
 
-        /// <summary>
-        /// Returns all the possible characters that the DecayCodes property may consist of.
-        /// </summary>
-        public static string DecayChars => "apbBeEngTCF";
-        public static ReadOnlyCollection<string> DecayCodes { get; } = new ReadOnlyCollection<string>(_decayCodes);
+        /// <summary>Returns all the possible characters that may be returned by the DecayCodes property.</summary>
+        public static string DecayCodes => "apbBeEngTCF";
+
+        public static ReadOnlyCollection<string> DecaySymbols { get; } = new ReadOnlyCollection<string>(new string[]
+        { "α", "β+", "β−", "β−β−", "ε", "εε", "n", "γ", "IT", "IC", "SF" });
 
         /// <summary>Nucleon count.</summary>
         public int A { get; private set; }
@@ -63,8 +64,10 @@ namespace Kaos.Physics
             DecayMode = decayMode;
         }
 
-        /// <summary>Returns true if the isotope is not sythetic.</summary>
+        /// <summary>Returns true if the isotope is not synthetic.</summary>
         public bool IsNatural => Abundance != null;
+
+        public Origin Occurrence => Abundance == null ? Origin.Synthetic : Halflife < Nuclide.PrimordialCutoff ? Origin.Decay : Origin.Primordial;
 
         /// <summary>Returns true if the isotope is not radioactive.</summary>
         public bool IsStable => Halflife == null;
@@ -73,15 +76,15 @@ namespace Kaos.Physics
         /// Returns a string containing a character for each decay mode of the isotope.
         /// This string provides a consise method of output in a human readable form.
         /// </summary>
-        public string DecayCode
+        public string DecayModeCodes
         {
             get
             {
                 var result = string.Empty;
-                for (int mask = 1, ix = 0; mask <= 1024; mask <<= 1)
+                for (int mask = 1, ix = 0; mask <= maxDecay; mask <<= 1)
                 {
                     if ((((int) DecayMode) & mask) != 0)
-                        result += DecayChars[ix];
+                        result += DecayCodes[ix];
                     ++ix;
                 }
                 return result;
@@ -101,7 +104,7 @@ namespace Kaos.Physics
             sb.Append (' ', 7 - ts.Length);
             sb.Append (ts);
             sb.Append (' ');
-            ts = DecayCode;
+            ts = DecayModeCodes;
             sb.Append (ts);
             sb.Append (' ', 5 - ts.Length);
             ts = Halflife.ToString();

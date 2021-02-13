@@ -1,4 +1,10 @@
-﻿using System;
+﻿// Usage:
+//   DotElements.exe [lang]
+// Purpose:
+//   Output elements and isotopes as fixed-column lists.
+//   Provide element name for the supplied language. (default="en").
+
+using System;
 using System.Collections.Generic;
 using Kaos.Physics;
 
@@ -10,18 +16,18 @@ namespace AppMain
         {
             string lang = args.Length == 0 || ! Nuclide.MaxNameLengths.ContainsKey (args[0]) ? "en-US" : args[0];
 
-            Console.WriteLine ("; Z,symbol,name,period,group,category,discoveryYear,discoveryIndex,stableCount,instabilityCode,block,occurrenceCode,lifeCode,atm0StateCode,melt,boil,weight");
+            Console.WriteLine ("; Z,symbol,name,period,group,category,discoveryYear,discoveryIndex,stableCount,stabilityIndex,block,occurrenceCode,lifeCode,atm0StateCode,melt,boil,weight");
             foreach (var nuc in Nuclide.Table)
                 Console.WriteLine (nuc.ToFixedText (lang));
 
             Console.WriteLine ();
-            Console.WriteLine ("; Z,symbol,A,abundance,decayChars,halflife");
+            Console.WriteLine ("; Z,symbol,A,abundance,decayCodes,halflife");
             foreach (var nuc in Nuclide.Table)
             {
                 double total = 0.0;
                 foreach (var iso in nuc.Isotopes)
                 {
-                    Console.WriteLine ("{0,3} {1,-3} {2}", nuc.Z, nuc.Symbol, iso.ToFixedColumns());
+                    Console.WriteLine ($"{nuc.Z,3} {nuc.Symbol,-3} {iso.ToFixedColumns()}");
                     if (iso.IsNatural)
                         total += iso.Abundance.Value;
                 }
@@ -30,7 +36,7 @@ namespace AppMain
             }
 
             Console.WriteLine ();
-            Console.WriteLine ("; language, totalTranslations");
+            Console.WriteLine ("; language,totalTranslations");
             var langHits = new Dictionary<string,int>();
             foreach (var nuc in Nuclide.Table)
                 foreach (var kv in nuc.NameMap)
@@ -39,17 +45,11 @@ namespace AppMain
                     langHits[kv.Key] = v + 1;
                 }
             foreach (var lg in langHits)
-                Console.WriteLine (lg.Key + ": " + lg.Value);
-
-            Console.WriteLine ();
-            Console.WriteLine ("; maxNameLength,language");
-            foreach (var kv in Nuclide.MaxNameLengths)
-                Console.WriteLine (kv.Value + " " + kv.Key);
+                Console.WriteLine ($"{lg.Key,-5}{lg.Value,4}");
 
             Console.WriteLine();
             foreach (var lx in Nuclide.GetLongTable())
                 Console.WriteLine (lx);
-            Console.WriteLine();
         }
     }
 }

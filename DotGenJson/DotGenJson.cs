@@ -1,113 +1,65 @@
-﻿using System;
+﻿// Usage:
+//   DotGenJson.exe [-js]
+// Purpose:
+//   Output JSON data (media type application/json) of KaosPhysics model.
+//   Or output JavaScript of same with -js command line switch.
+
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Text;
 using Kaos.Physics;
 
 namespace AppMain
 {
     class DotGenJson
     {
-        static readonly ReadOnlyCollection<string> nutritionDescriptions = new ReadOnlyCollection<string> (new string[]
+        static int Main (string[] args)
         {
-            "Not absorbed",
-            "Essential element (> .1% by mass)",
-            "Essential element (< .1% by mass)",
-            "Beneficial trace element",
-            "Nonbeneficial trace element"
-        });
-
-        static readonly ReadOnlyCollection<string> stabilityDescriptions = new ReadOnlyCollection<string>(new string[]
-        {
-            "Stable",
-            "Slightly radioactive",
-            "Somewhat radioactive",
-            "Significantly radioactive",
-            "Highly radioactive",
-            "Extremely radioactive"
-        });
-
-        static void Main()
-        {
-            string quote = "\"";
+            string quote = (args.Length == 1 && args[0] == "-js") ? "" : "\"";
+            string binop = (args.Length == 1 && args[0] == "-js") ? " =" : ":";
 
             Console.WriteLine ('{');
-            Console.Write ($"  {quote}categoryNames{quote}: [ ");
-            for (int ix = 0; ix < Nuclide.CategoryNames.Count; ++ix)
-            {
-                if (ix != 0)
-                    Console.Write (", ");
-                Console.Write ($"\"{Nuclide.CategoryNames[ix]}\"");
-            }
-            Console.WriteLine (" ],");
+
+            Console.Write (toJsonSB2 ("categoryGroupNames", Nuclide.CategoryGroupNames).ToString());
+            Console.WriteLine (',');
             Console.WriteLine ();
 
-            Console.Write ($"  {quote}occurrenceNames{quote}: [ ");
-            var occurrenceNames = Enum.GetNames (typeof (Origin));
-            for (int ix = 0; ix < occurrenceNames.Length; ++ix)
-            {
-                if (ix != 0)
-                    Console.Write (", ");
-                Console.Write ($"\"{occurrenceNames[ix]}\"");
-            }
-            Console.WriteLine (" ],");
+            Console.Write (toJsonSB2 ("categoryNames", Nuclide.CategoryNames).ToString());
+            Console.WriteLine (',');
             Console.WriteLine ();
 
-            Console.Write ($"  {quote}stateNames{quote}: [ ");
-            var stateNames = Enum.GetNames (typeof (State));
-            for (int ix = 0; ix < stateNames.Length; ++ix)
-            {
-                if (ix != 0)
-                    Console.Write (", ");
-                Console.Write ($"\"{stateNames[ix]}\"");
-            }
-            Console.WriteLine (" ],");
+            Console.WriteLine ($"  {quote}decayCodes{quote}{binop} \"{Isotope.DecayCodes}\",");
             Console.WriteLine ();
 
-            Console.WriteLine ($"  {quote}decayChars{quote}: \"{Isotope.DecayChars}\",");
-            Console.WriteLine();
-
-            Console.Write ($"  {quote}decayCodes{quote}: [ ");
-            for (int dx = 1; dx < Isotope.DecayCodes.Count; ++dx)
-            {
-                if (dx > 1)
-                    Console.Write (", ");
-                Console.Write ($"\"{Isotope.DecayCodes[dx]}\"");
-            }
-            Console.WriteLine (" ],");
+            Console.Write (toJsonSB1 ("decaySymbols", Isotope.DecaySymbols).ToString());
+            Console.WriteLine (',');
             Console.WriteLine ();
 
-            Console.Write ($"  {quote}biologyCodes{quote}: [ ");
-            for (var bx = 0; bx < Nuclide.LifeCodes.Count; ++bx)
-            {
-                if (bx != 0)
-                    Console.Write (", ");
-                Console.Write ($"\"{Nuclide.LifeCodes[bx]}\"");
-            }
-            Console.WriteLine (" ],");
+            Console.Write (toJsonSB1 ("biologyCodes", Nuclide.LifeCodes).ToString());
+            Console.WriteLine (',');
             Console.WriteLine ();
 
-            Console.WriteLine ($"  {quote}biologyDescriptions{quote}:");
-            Console.WriteLine ("  [");
-            for (int ix = 0; ix < nutritionDescriptions.Count; ++ix)
-            {
-                Console.Write ($"    \"{nutritionDescriptions[ix]}\"");
-                if (ix+1 < nutritionDescriptions.Count)
-                    Console.Write (",");
-                Console.WriteLine();
-            }
-            Console.WriteLine ("  ],");
+            Console.Write (toJsonSB2 ("biologyDescriptions", Nuclide.LifeDescriptions).ToString());
+            Console.WriteLine (',');
             Console.WriteLine ();
 
-            Console.WriteLine ($"  {quote}stabilityDescriptions{quote}:");
-            Console.WriteLine ("  [");
-            for (int ix = 0; ix < stabilityDescriptions.Count; ++ix)
-            {
-                Console.Write ($"    \"{stabilityDescriptions[ix]}\"");
-                if (ix + 1 < stabilityDescriptions.Count)
-                    Console.Write (',');
-                Console.WriteLine();
-            }
-            Console.WriteLine ("  ],");
+            Console.Write (toJsonSB2 ("occurrenceNames", Nuclide.OccurrenceNames).ToString());
+            Console.WriteLine (',');
             Console.WriteLine ();
+
+            Console.Write (toJsonSB2 ("stabilityDescriptions", Nuclide.StabilityDescriptions).ToString());
+            Console.WriteLine (',');
+            Console.WriteLine ();
+
+            Console.WriteLine ($"  {quote}stateCodes{quote}{binop} \"{Nuclide.StateChars}\",");
+            Console.WriteLine ();
+
+            Console.Write (toJsonSB2 ("stateNames", Nuclide.StateNames).ToString());
+            Console.WriteLine (',');
+            Console.WriteLine ();
+
+            // Output fixed-width element names by language:
 
             var maxLens = new int[Nuclide.Table.Count];
             for (var nx = 0; nx < Nuclide.Table.Count; ++nx)
@@ -117,11 +69,15 @@ namespace AppMain
                     if (maxLens[nx] < nm.Length)
                         maxLens[nx] = nm.Length;
                 }
+            Console.WriteLine ($"  {quote}nuclideNames{quote}{binop} {{");
+            int c1 = 0;
             foreach (var lg in Nuclide.MaxNameLengths.Keys)
             {
-                Console.Write ($"  {quote}lang-{lg}{quote}");
-                Console.Write (new string (' ', 5 - lg.Length));
-                Console.Write (": [ ");
+                var lg2 = lg.Length != 5 ? lg : lg.Substring (0, 2) + lg.Substring (3);
+                if (c1++ != 0) Console.WriteLine (',');
+                Console.Write ($"    \"{lg2}\"");
+                Console.Write (new string (' ', 4 - lg2.Length));
+                Console.Write ($": [ ");
                 for (int nx = 0; nx < Nuclide.Table.Count; ++nx)
                 {
                     var nm = Nuclide.Table[nx].GetName (lg);
@@ -130,24 +86,82 @@ namespace AppMain
                         Console.Write (',');
                     Console.Write (new string (' ', maxLens[nx] - nm.Length + 1));
                 }
-                Console.WriteLine ("],");
+                Console.Write (']');
             }
-            Console.WriteLine();
+            Console.WriteLine ();
+            Console.WriteLine ("  },");
+            Console.WriteLine ();
 
-            Console.WriteLine ($"  {quote}nuclides{quote}:");
+            // Output the nuclides:
+
+            Console.WriteLine ($"  {quote}nuclides{quote}{binop}");
             Console.WriteLine ("  [");
             for (int nx = 0; nx < Nuclide.Table.Count; ++nx)
             {
                 if (nx != 0)
-                    Console.WriteLine (",");
+                    Console.WriteLine (',');
                 Console.Write ("    { ");
-                Console.Write (Nuclide.Table[nx].ToJson (quote));
-                Console.Write ("] }");
+                Console.Write (Nuclide.Table[nx].ToJsonSB (quote).ToString());
+                Console.Write (" }");
             }
             Console.WriteLine ();
             Console.WriteLine ("  ]");
 
-            Console.WriteLine ("}");
+            Console.WriteLine ('}');
+            return 0;
+
+            StringBuilder toJsonSB1 (string propertyName, IList<string> values)
+            {
+                var sb = new StringBuilder();
+                sb.Append ("  ");
+                sb.Append (quote);
+                sb.Append (propertyName);
+                sb.Append (quote);
+                sb.Append (binop);
+                sb.Append (" [ ");
+                for (int ix = 0; ix < values.Count; ++ix)
+                {
+                    if (ix != 0)
+                        sb.Append (", ");
+                    sb.Append ('\"');
+                    sb.Append (values[ix]);
+                    sb.Append ('\"');
+                }
+                sb.Append (" ]");
+                return sb;
+            }
+
+            StringBuilder toJsonSB2 (string propertyName, ReadOnlyDictionary<string,string[]> vals)
+            {
+                var sb = new StringBuilder();
+                sb.Append ("  ");
+                sb.Append (quote);
+                sb.Append (propertyName);
+                sb.Append (quote);
+                sb.Append (binop);
+                sb.Append (" {");
+                sb.Append (Environment.NewLine);
+                int cx1 = 0;
+                foreach (var kv in vals)
+                {
+                    if (cx1++ != 0) { sb.Append (','); sb.Append (Environment.NewLine); }
+                    sb.Append ("    \"");
+                    sb.Append (kv.Key);
+                    sb.Append ("\": [");
+                    int cx2 = 0;
+                    foreach (var nm in kv.Value)
+                    {
+                        if (cx2++ != 0) sb.Append (", ");
+                        sb.Append ('\"');
+                        sb.Append (nm);
+                        sb.Append ('\"');
+                    }
+                    sb.Append (" ]");
+                }
+                sb.Append (Environment.NewLine);
+                sb.Append ("  }");
+                return sb;
+            }
         }
     }
 }
