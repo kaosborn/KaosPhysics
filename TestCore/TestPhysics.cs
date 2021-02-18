@@ -84,6 +84,14 @@ namespace TestCore
                     expected = kv.Value.Length;
                 else
                     Assert.AreEqual (expected, kv.Value.Length, "ix="+ix);
+
+            ix = 0;
+            expected = 0;
+            foreach (var kv in Nuclide.ThemeNames)
+                if (ix++ == 0)
+                    expected = kv.Value.Length;
+                else
+                    Assert.AreEqual (expected, kv.Value.Length, "ix="+ix);
         }
 
         [TestMethod]

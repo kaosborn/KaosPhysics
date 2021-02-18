@@ -89,7 +89,7 @@ Here is an excerpt:
 }
 ```
 
-Next is a Javscript example that pops up the symbol for Z=2 followed by its name in Spain.
+Next is a Javscript example that shows the symbol for Z=2 followed by its name in Spain.
 
 ```js
 alert ("Symbol = " + nuclides[2].symbol);

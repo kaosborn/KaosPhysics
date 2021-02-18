@@ -1580,6 +1580,17 @@ namespace Kaos.Physics
                 { "ru", new string[] { "Неизвестно", "Твердый", "жидкость", "Газ" } }
             });
 
+        public static ReadOnlyDictionary<string,string[]> ThemeNames { get; } = new ReadOnlyDictionary<string,string[]>
+            (new Dictionary<string,string[]>()
+            {
+                { "de", new string[] { "Thema", "Elementkategorien", "Blöcke", "Geschichte", "Unterschiede", "Biologie", "Vorkommen", "Stabilität", "Aggregatzustände", "Einfarbig" } },
+                { "en", new string[] { "Theme", "Categories", "Blocks", "History", "Differences", "Biology", "Occurrence", "Stability", "States", "Monochrome" } },
+                { "es", new string[] { "Tema", "Categorías", "Bloques", "Historia", "Diferencias", "Biología", "Aparición", "Estabilidad", "Estados", "Monocromo" } },
+                { "fr", new string[] { "Thème", "Familles", "Blocs", "Historique", "Différences", "La biologie", "Désintégration", "La stabilité", "États", "Monocromo" } },
+                { "it", new string[] { "Teme", "Categorie", "Blocchi", "Storia", "Differenze", "Biologia", "Presenza", "Stabilità", "Stati", "Monocromo" } },
+                { "ru", new string[] { "Тема", "Категории", "блоки", "История", "Отличия", "Биология", "Появление", "Стабильность", "Состояния", "Монохромный" } }
+            });
+
         public static ReadOnlyCollection<Nuclide> Table { get; } = new ReadOnlyCollection<Nuclide> (_nuclides);
 
         private Nuclide

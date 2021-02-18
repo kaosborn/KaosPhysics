@@ -59,6 +59,10 @@ namespace AppMain
             Console.WriteLine (',');
             Console.WriteLine ();
 
+            Console.Write (toJsonSB2 ("themeNames", Nuclide.ThemeNames).ToString());
+            Console.WriteLine (',');
+            Console.WriteLine ();
+
             // Output fixed-width element names by language:
 
             var maxLens = new int[Nuclide.Table.Count];
