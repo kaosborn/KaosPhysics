@@ -21,7 +21,7 @@ namespace AppMain
                 Console.WriteLine (nuc.ToFixedText (lang));
 
             Console.WriteLine ();
-            Console.WriteLine ("; Z,symbol,A,abundance,decayCodes,halflife");
+            Console.WriteLine ("; Z,symbol,A,abundance,occurrenceCode,decayCodes,halflife");
             foreach (var nuc in Nuclide.Table)
             {
                 double total = 0.0;

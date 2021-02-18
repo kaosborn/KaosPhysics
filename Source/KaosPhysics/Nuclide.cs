@@ -13,7 +13,8 @@ namespace Kaos.Physics
 
     public class Nuclide
     {
-        public const double PrimordialCutoff = 5.0E14;
+        public const double PrimordialCutoff = 5.0E15;  // seconds
+        public const double secondYears = 31556952.0;
 
         public static Nuclide Neutron { get; } = new Nuclide
         (
@@ -1530,6 +1531,8 @@ namespace Kaos.Physics
                 }
             });
 
+        public static string OccurrenceCodes => "SDP";
+
         public static ReadOnlyDictionary<string,string[]> OccurrenceNames { get; } = new ReadOnlyDictionary<string,string[]>
             (new Dictionary<string, string[]>()
             {
@@ -1564,7 +1567,7 @@ namespace Kaos.Physics
                 }
             });
 
-        public static string StateChars => " SLG";
+        public static string StateCodes => " SLG";
 
         public static ReadOnlyDictionary<string,string[]> StateNames { get; } = new ReadOnlyDictionary<string,string[]>
             (new Dictionary<string, string[]>()
@@ -1673,21 +1676,32 @@ namespace Kaos.Physics
         public double Weight { get; }
         public State Atm0State => GetState (273.15);
         public int Atm0StateIndex => (int) GetState (273.15);
-        public char Atm0StateCode => " SLG"[(int) GetState (273.15)];
+        public char Atm0StateCode => StateCodes[(int) GetState (273.15)];
         public int Known { get; }
         public int KnownIndex { get; }
         public string Credit { get; }
         public string Naming { get; }
         public Origin Occurrence { get; }
         public int OccurrenceIndex => (int) Occurrence;
-        public char OccurrenceCode => "SDP"[(int) Occurrence];
+        public char OccurrenceCode => OccurrenceCodes[(int) Occurrence];
         public Nutrition Life { get; }
         public int LifeIndex => (int) Life;
         public string LifeCode => LifeCodes[(int) Life];
         public int StabilityIndex { get; }
         public int StableCount { get; }
         public int CategoryIndex => (int) Category;
-        public string CategoryName => Enum.GetName (typeof (Category), Category);
+        public string CategoryAbbr => Enum.GetName (typeof (Category), Category);
+
+        public Isotope this[int a]
+        {
+            get
+            {
+                for (var ix = 0; ix < Isotopes.Count; ++ix)
+                    if (Isotopes[ix].A == a)
+                        return Isotopes[ix];
+                return null;
+            }
+        }
 
         public string GetName (string lang)
         {
@@ -1741,8 +1755,8 @@ namespace Kaos.Physics
             sb.Append (' ', 3 - ts.Length);
             sb.Append (ts);
             sb.Append (' ');
-            sb.Append (CategoryName);
-            sb.Append (' ', 11 - CategoryName.Length);
+            sb.Append (CategoryAbbr);
+            sb.Append (' ', 11 - CategoryAbbr.Length);
             ts = Known.ToString();
             sb.Append (' ', 4 - ts.Length);
             sb.Append (ts);

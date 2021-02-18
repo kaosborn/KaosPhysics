@@ -155,6 +155,9 @@ namespace TestCore
             Assert.AreEqual (Origin.Synthetic, Nuclide.Table[117].Isotopes[0].Occurrence);
             Assert.AreEqual (Origin.Decay, Nuclide.Table[1].Isotopes[2].Occurrence);
             Assert.AreEqual (Origin.Primordial, Nuclide.Table[5].Isotopes[0].Occurrence);
+
+            Assert.AreEqual (Origin.Primordial, Nuclide.Table[92][235].Occurrence);
+            Assert.AreEqual (Origin.Decay, Nuclide.Table[94][244].Occurrence);
         }
 
         [TestMethod]

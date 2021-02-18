@@ -38,6 +38,7 @@ namespace Kaos.Physics
         /// <summary>Time to decay by half. A null value indicates a stable isotope.</summary>
         public double? Halflife { get; private set; }
 
+        /// <summary>Or'ed bit flags of all possible transmutations.</summary>
         public Decay DecayMode { get; private set; }
 
         /// <summary>Instantiate a stable isotope.</summary>
@@ -68,6 +69,8 @@ namespace Kaos.Physics
         public bool IsNatural => Abundance != null;
 
         public Origin Occurrence => Abundance == null ? Origin.Synthetic : Halflife < Nuclide.PrimordialCutoff ? Origin.Decay : Origin.Primordial;
+        public int OccurrenceIndex => (int) Occurrence;
+        public char OccurrenceCode => Nuclide.OccurrenceCodes[(int) Occurrence];
 
         /// <summary>Returns true if the isotope is not radioactive.</summary>
         public bool IsStable => Halflife == null;
@@ -103,6 +106,8 @@ namespace Kaos.Physics
             ts = Abundance == null ? string.Empty : Abundance.Value.ToString ("F3");
             sb.Append (' ', 7 - ts.Length);
             sb.Append (ts);
+            sb.Append (' ');
+            sb.Append (OccurrenceCode);
             sb.Append (' ');
             ts = DecayModeCodes;
             sb.Append (ts);

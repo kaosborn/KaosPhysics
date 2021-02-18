@@ -78,23 +78,23 @@ Here is an excerpt:
 
 ```json
   "nuclideNames": {
-    "de"  : [ "Neutron",  "Wasserstoff", "Helium",
-    "en"  : [ "Neutron",  "Hydrogen",    "Helium",
-    "enGB": [ "Neutron",  "Hydrogen",    "Helium",
-    "enUS": [ "Neutron",  "Hydrogen",    "Helium",
-    "es"  : [ "Neutrón",  "Hidrógeno",   "Helio",
-    "fr"  : [ "Neutron",  "Hydrogène",   "Hélium",
-    "it"  : [ "Neutrone", "Hydrogène",   "Elio",
-    "ru"  : [ "Водород",  "Нейтрон",     "Гелий",
+    "de"  : [ "Neutron",  "Wasserstoff", "Helium", "Lithium", "..." ],
+    "en"  : [ "Neutron",  "Hydrogen",    "Helium", "Lithium", "..." ],
+    "enGB": [ "Neutron",  "Hydrogen",    "Helium", "Lithium", "..." ],
+    "enUS": [ "Neutron",  "Hydrogen",    "Helium", "Lithium", "..." ],
+    "es"  : [ "Neutrón",  "Hidrógeno",   "Helio",  "Litio",   "..." ],
+    "fr"  : [ "Neutron",  "Hydrogène",   "Hélium", "Lithium", "..." ],
+    "it"  : [ "Neutrone", "Hydrogène",   "Elio",   "Litio",   "..." ],
+    "ru"  : [ "Водород",  "Нейтрон",     "Гелий",  "Литий",   "..." ]
 }
-
 ```
+
 Next is a Javscript example that pops up the symbol for Z=2 followed by its name in Spain.
 
 ```js
 alert ("Symbol = " + nuclides[2].symbol);
 alert ("Name in Spain = " + nuclideNames["es"][2]);
-```js
+```
 
 Several columns are index values that require lookups.
 Appropriate lookup tables are provided.
@@ -106,7 +106,7 @@ Isotopes are represented as an array:
 
 ### C# Data
 
-The source data for JSON is the KaosPhysics C# shared project.
+The source data for JSON produced above is from the *KaosPhysics* C# shared project.
 Here is an excerpt of a constructor:
 
 ```cs
@@ -124,6 +124,7 @@ public static Nuclide Hydrogen { get; } = new Nuclide
 ```
 
 Elements may be accessed as singletons but will usually be addressed by Z index such as `Nuclides.Table[1]`.
+Access isotopes with an element's index operator.
 
 Nuclide name translations are provided by the `nameMap` dictionary constructor parameter.
 If no entry exists for a language, then it will default to the value of `name`.

@@ -52,7 +52,7 @@ namespace AppMain
             Console.WriteLine (',');
             Console.WriteLine ();
 
-            Console.WriteLine ($"  {quote}stateCodes{quote}{binop} \"{Nuclide.StateChars}\",");
+            Console.WriteLine ($"  {quote}stateCodes{quote}{binop} \"{Nuclide.StateCodes}\",");
             Console.WriteLine ();
 
             Console.Write (toJsonSB2 ("stateNames", Nuclide.StateNames).ToString());
