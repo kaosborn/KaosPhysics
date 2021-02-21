@@ -11,17 +11,16 @@ namespace Kaos.Physics
         Stable=0,
         Alpha=1,
         BetaPlus=2, BetaMinus=4, Beta2=8,
-        ElectronCap1=16, ElectronCap2=32,
-        NeutronEmit=64,
-        Gamma=128,
-        IC=256, IT=512,
-        Fission=1024
+        ECap1=16, ECap2=32,
+        NEmit=64, Gamma=128,
+        IC=256, IT=512, Fission=1024
     }
 
     /// <summary>Variant of an element that differs by neutron number.</summary>
     public class Isotope
     {
-        private static readonly int maxDecay = Enum.GetValues (typeof (Decay)).Cast<int>().Max();
+        /// <summary>Returns the number of valid decay mode flags.</summary>
+        public static int DecayModeCount { get; } = Enum.GetValues (typeof (Decay)).Cast<int>().Max();
 
         /// <summary>Returns all the possible characters that may be returned by the DecayCodes property.</summary>
         public static string DecayCodes => "apbBeEngTCF";
@@ -29,20 +28,20 @@ namespace Kaos.Physics
         public static ReadOnlyCollection<string> DecaySymbols { get; } = new ReadOnlyCollection<string>(new string[]
         { "α", "β+", "β−", "β−β−", "ε", "εε", "n", "γ", "IT", "IC", "SF" });
 
-        /// <summary>Nucleon count.</summary>
+        /// <summary>Mass number (nucleon count).</summary>
         public int A { get; private set; }
 
         /// <summary>Percent of Earth's total for this isotope. A null value indicates a synthetic isotope. A zero value indicates trace abundance.</summary>
         public double? Abundance { get; private set; }
 
-        /// <summary>Time to decay by half. A null value indicates a stable isotope.</summary>
+        /// <summary>Time to decay by 50%. Stable isotopes are indicated by a null value.</summary>
         public double? Halflife { get; private set; }
 
-        /// <summary>Or'ed bit flags of all possible transmutations.</summary>
+        /// <summary>Or'ed bitflags of all possible transmutations.</summary>
         public Decay DecayMode { get; private set; }
 
         /// <summary>Instantiate a stable isotope.</summary>
-        /// <param name="a">Nucleon count</param>
+        /// <param name="a">Nucleon count.</param>
         /// <param name="abundance">Percentage of the isotope to all the element's isotopes.</param>
         public Isotope (int a, double abundance)
         {
@@ -53,10 +52,10 @@ namespace Kaos.Physics
         }
 
         /// <summary>Instantiate a stable isotope.</summary>
-        /// <param name="a">Nucleon count</param>
+        /// <param name="a">Nucleon count.</param>
         /// <param name="abundance">Percentage of the isotope to all the element's isotopes.</param>
         /// <param name="halflife">Time to decay by half.</param>
-        /// <param name="decayMode">Or'ed list of isotope mutations.</param>
+        /// <param name="decayMode">Ored bitflags of isotope mutations.</param>
         public Isotope (int a, double? abundance, double halflife, Decay decayMode)
         {
             A = a;
@@ -65,32 +64,55 @@ namespace Kaos.Physics
             DecayMode = decayMode;
         }
 
-        /// <summary>Returns true if the isotope is not synthetic.</summary>
+        /// <summary>Returns <b>true</b> if the isotope is not synthetic.</summary>
         public bool IsNatural => Abundance != null;
 
+        /// <summary>Returns abundance in nature, or synthetic.</summary>
         public Origin Occurrence => Abundance == null ? Origin.Synthetic : Halflife < Nuclide.PrimordialCutoff ? Origin.Decay : Origin.Primordial;
+
+        /// <summary>Returns index value for Occurrence.</summary>
         public int OccurrenceIndex => (int) Occurrence;
+
+        /// <summary>Returns letter code for Occurrence.</summary>
         public char OccurrenceCode => Nuclide.OccurrenceCodes[(int) Occurrence];
 
-        /// <summary>Returns true if the isotope is not radioactive.</summary>
+        /// <summary>Returns <b>true</b> if the isotope is not radioactive.</summary>
         public bool IsStable => Halflife == null;
 
-        /// <summary>
-        /// Returns a string containing a character for each decay mode of the isotope.
-        /// This string provides a consise method of output in a human readable form.
-        /// </summary>
+        /// <summary>Returns a string containing a letter for each possible decay mode of the isotope.</summary>
+        /// <remarks>The returned value provides concise output in a human-readable form.</remarks>
         public string DecayModeCodes
         {
             get
             {
                 var result = string.Empty;
-                for (int mask = 1, ix = 0; mask <= maxDecay; mask <<= 1)
+                for (int mask = 1, ix = 0; mask <= DecayModeCount; mask <<= 1)
                 {
                     if ((((int) DecayMode) & mask) != 0)
                         result += DecayCodes[ix];
                     ++ix;
                 }
                 return result;
+            }
+        }
+
+        /// <summary>Returns index of radioactivity from 0 to 5.</summary>
+        /// <remarks>A value of 0 indicates a stable isotope and 5 the least stable.</remarks>
+        public int StabilityIndex
+        {
+            get
+            {
+                if (Halflife == null)
+                    return 0;
+                if (Halflife >= 2000000.0*31556952.0)
+                    return 1;
+                if (Halflife >= 800.0*31556952.0)
+                    return 2;
+                if (Halflife >= 86400.0)
+                    return 3;
+                if (Halflife >= 600.0)
+                    return 4;
+                return 5;
             }
         }
 
@@ -118,7 +140,7 @@ namespace Kaos.Physics
             return sb.ToString();
         }
 
-        /// <summary>Provide JSON format contents of isotope.</summary>
+        /// <summary>Provide JSON format contents of the isotope.</summary>
         /// <returns>JSON formatted string.</returns>
         public string ToJson()
         {

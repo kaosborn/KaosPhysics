@@ -2,7 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using Kaos.Physics;
 
-namespace TestCore
+namespace TestPhysics
 {
     [TestClass]
     public class Test_Nuclide
@@ -71,14 +71,6 @@ namespace TestCore
 
             ix = 0;
             expected = 0;
-            foreach (var kv in Nuclide.StabilityDescriptions)
-                if (ix++ == 0)
-                    expected = kv.Value.Length;
-                else
-                    Assert.AreEqual (expected, kv.Value.Length, "ix="+ix);
-
-            ix = 0;
-            expected = 0;
             foreach (var kv in Nuclide.StateNames)
                 if (ix++ == 0)
                     expected = kv.Value.Length;
@@ -133,6 +125,20 @@ namespace TestCore
                     Assert.IsTrue (kv.Value.Length > 0 && kv.Value != nuc.Name, "Z="+nuc.Z);
                 }
             }
+        }
+
+        [TestMethod]
+        public void CheckStability()
+        {
+            int ix = 0, expected = 0;
+            foreach (var kv in Nuclide.StabilityDescriptions)
+                if (ix++ == 0)
+                    expected = kv.Value.Length;
+                else
+                    Assert.AreEqual (expected, kv.Value.Length, "ix="+ix);
+
+            var enStabilityCount = Nuclide.StabilityDescriptions["en"].Length;
+            Assert.AreEqual (enStabilityCount - 1, Nuclide.StabilityIndexMax);
         }
 
         [TestMethod]
