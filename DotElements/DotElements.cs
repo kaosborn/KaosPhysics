@@ -18,10 +18,10 @@ namespace AppMain
 
             Console.WriteLine ("; Z,symbol,name,period,group,category,discoveryYear,discoveryIndex,stableCount,stabilityIndex,block,occurrenceCode,lifeCode,atm0StateCode,melt,boil,weight");
             foreach (var nuc in Nuclide.Table)
-                Console.WriteLine (nuc.ToFixedText (lang));
+                Console.WriteLine (nuc.ToFixedColumns (lang));
 
             Console.WriteLine ();
-            Console.WriteLine ("; Z,symbol,A,stabilityIndex,decayModeCode,daughterZ,daughterSymbol,daughterA");
+            Console.WriteLine ("; Z,symbol,A,occurrenceCode,stabilityIndex,decayModeCode,productZ,productSymbol,productA");
             foreach (var nuc in Nuclide.Table)
                 foreach (var iso in nuc.Isotopes)
                 {
@@ -30,18 +30,12 @@ namespace AppMain
                         Console.WriteLine (part1);
                     else
                     {
-                        int mask = 1;
-                        for (var decayIndex = 0; decayIndex < Isotope.DecayModeCount; ++decayIndex)
+                        var orgChar = iso.Occurrence == Origin.Synthetic ? ' ' : Nuclide.OccurrenceCodes[(int) iso.Occurrence];
+                        foreach (var decayIndex in iso.GetDecayIndexes())
                         {
-                            if (((int) iso.DecayMode & mask) != 0)
-                            {
-                                var decayCode = Isotope.DecayCodes[decayIndex];
-                                var daughterA = iso.A;
-                                var daughter = nuc.Transmute ((Decay) mask, ref daughterA);
-                                Console.Write (part1);
-                                Console.WriteLine ($" {iso.StabilityIndex}{decayCode} {daughter.Z,3} {daughter.Symbol,-3}{daughterA,3}");
-                            }
-                            mask <<= 1;
+                            var productZ = iso.Transmute (decayIndex, out int productA);
+                            Console.Write (part1);
+                            Console.WriteLine ($" {orgChar}{iso.StabilityIndex}{Isotope.DecayCodes[decayIndex]} {productZ,3} {Nuclide.Table[productZ].Symbol,-3}{productA,3}");
                         }
                     }
                 }

@@ -44,6 +44,9 @@ namespace AppMain
             Console.WriteLine (',');
             Console.WriteLine ();
 
+            Console.WriteLine ($"  {quote}occurrenceCodes{quote}{binop} \"{Nuclide.OccurrenceCodes}\",");
+            Console.WriteLine ();
+
             Console.Write (toJsonSB2 ("occurrenceNames", Nuclide.OccurrenceNames).ToString());
             Console.WriteLine (',');
             Console.WriteLine ();

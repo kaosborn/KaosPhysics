@@ -89,9 +89,11 @@ namespace TestPhysics
         [TestMethod]
         public void CheckProperties()
         {
-            Assert.AreEqual ('P', Nuclide.Table[2].OccurrenceCode);
-            Assert.AreEqual ('D', Nuclide.Table[43].OccurrenceCode);
             Assert.AreEqual ('S', Nuclide.Table[118].OccurrenceCode);
+            Assert.AreEqual ('D', Nuclide.Table[43].OccurrenceCode);
+            Assert.AreEqual ('D', Nuclide.Table[86].OccurrenceCode);
+            Assert.AreEqual ('D', Nuclide.Table[93].OccurrenceCode);
+            Assert.AreEqual ('P', Nuclide.Table[2].OccurrenceCode);
         }
 
         [TestMethod]
@@ -151,6 +153,14 @@ namespace TestPhysics
                 Assert.IsTrue (nuc.Melt == null || nuc.Boil == null || nuc.Melt <= nuc.Boil, "Z="+nuc.Z);
             }
         }
+
+        [TestMethod]
+        public void CheckIsotopes()
+        {
+            foreach (Nuclide nuc in Nuclide.Table)
+                foreach (Isotope iso in nuc.Isotopes)
+                    Assert.AreEqual (nuc.Z, iso.Z);
+        }
     }
 
     [TestClass]
@@ -167,11 +177,12 @@ namespace TestPhysics
         public void CheckProperties()
         {
             Assert.AreEqual (Origin.Synthetic, Nuclide.Table[117].Isotopes[0].Occurrence);
-            Assert.AreEqual (Origin.Decay, Nuclide.Table[1].Isotopes[2].Occurrence);
+            Assert.AreEqual (Origin.Cosmogenic, Nuclide.Table[1].Isotopes[2].Occurrence);
             Assert.AreEqual (Origin.Primordial, Nuclide.Table[5].Isotopes[0].Occurrence);
 
+            Assert.AreEqual (Origin.Decay, Nuclide.Table[84][210].Occurrence);
             Assert.AreEqual (Origin.Primordial, Nuclide.Table[92][235].Occurrence);
-            Assert.AreEqual (Origin.Decay, Nuclide.Table[94][244].Occurrence);
+            Assert.AreEqual (Origin.Cosmogenic, Nuclide.Table[94][244].Occurrence);
         }
 
         [TestMethod]

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
@@ -28,47 +29,74 @@ namespace Kaos.Physics
         public static ReadOnlyCollection<string> DecaySymbols { get; } = new ReadOnlyCollection<string>(new string[]
         { "α", "β+", "β−", "β−β−", "ε", "εε", "n", "γ", "IT", "IC", "SF" });
 
+        /// <summary>Atomic number (proton count).</summary>
+        public int Z { get; private set; }
+
         /// <summary>Mass number (nucleon count).</summary>
         public int A { get; private set; }
 
-        /// <summary>Percent of Earth's total for this isotope. A null value indicates a synthetic isotope. A zero value indicates trace abundance.</summary>
+        /// <summary>Percent of Earth's total for this isotope. A value of <b>null</b> indicates a synthetic isotope. A zero value indicates trace abundance.</summary>
         public double? Abundance { get; private set; }
 
-        /// <summary>Time to decay by 50%. Stable isotopes are indicated by a null value.</summary>
+        /// <summary>Time to decay by 50%. Stable isotopes are indicated by <b>null</b>.</summary>
         public double? Halflife { get; private set; }
 
         /// <summary>Or'ed bitflags of all possible transmutations.</summary>
         public Decay DecayMode { get; private set; }
 
+        /// <summary>Returns index of radioactivity from 0 to 5.</summary>
+        /// <remarks>A value of 0 indicates a stable isotope and 5 the most radioactive.</remarks>
+        public int StabilityIndex { get; private set; }
+
         /// <summary>Instantiate a stable isotope.</summary>
+        /// <param name="z">Proton count.</param>
         /// <param name="a">Nucleon count.</param>
         /// <param name="abundance">Percentage of the isotope to all the element's isotopes.</param>
-        public Isotope (int a, double abundance)
+        public Isotope (int z, int a, double abundance)
         {
+            Z = z;
             A = a;
             Abundance = abundance;
             Halflife = null;
             DecayMode = Decay.Stable;
+            StabilityIndex = 0;
         }
 
         /// <summary>Instantiate a stable isotope.</summary>
+        /// <param name="z">Proton count.</param>
         /// <param name="a">Nucleon count.</param>
         /// <param name="abundance">Percentage of the isotope to all the element's isotopes.</param>
         /// <param name="halflife">Time to decay by half.</param>
         /// <param name="decayMode">Ored bitflags of isotope mutations.</param>
-        public Isotope (int a, double? abundance, double halflife, Decay decayMode)
+        public Isotope (int z, int a, double? abundance, double halflife, Decay decayMode)
         {
+            Z = z;
             A = a;
             Abundance = abundance;
             Halflife = halflife;
             DecayMode = decayMode;
+            StabilityIndex =
+                Halflife >= 2000000.0*31556952.0 ?  1 :
+                Halflife >= 800.0*31556952.0 ? 2 :
+                Halflife >= 86400.0 ? 3 :
+                Halflife >= 600.0 ? 4 : 5;
         }
 
         /// <summary>Returns <b>true</b> if the isotope is not synthetic.</summary>
         public bool IsNatural => Abundance != null;
 
-        /// <summary>Returns abundance in nature, or synthetic.</summary>
-        public Origin Occurrence => Abundance == null ? Origin.Synthetic : Halflife < Nuclide.PrimordialCutoff ? Origin.Decay : Origin.Primordial;
+        private Origin? _occurrence = null;
+
+        /// <summary>Returns origin in nature, or synthetic.</summary>
+        public Origin Occurrence
+        {
+            get
+            {
+                if (_occurrence == null)
+                    _occurrence = Isotope.CalcOrigin (Nuclide.Table[Z], this);
+                return _occurrence.Value;
+            }
+        }
 
         /// <summary>Returns index value for Occurrence.</summary>
         public int OccurrenceIndex => (int) Occurrence;
@@ -96,25 +124,50 @@ namespace Kaos.Physics
             }
         }
 
-        /// <summary>Returns index of radioactivity from 0 to 5.</summary>
-        /// <remarks>A value of 0 indicates a stable isotope and 5 the least stable.</remarks>
-        public int StabilityIndex
+        private static Origin CalcOrigin (Nuclide nuc, Isotope iso)
         {
-            get
-            {
-                if (Halflife == null)
-                    return 0;
-                if (Halflife >= 2000000.0*31556952.0)
-                    return 1;
-                if (Halflife >= 800.0*31556952.0)
-                    return 2;
-                if (Halflife >= 86400.0)
-                    return 3;
-                if (Halflife >= 600.0)
-                    return 4;
-                return 5;
-            }
+            if (iso.Abundance == null)
+                return Origin.Synthetic;
+            if (iso.Halflife == null || iso.Halflife > Nuclide.PrimordialCutoff)
+                return Origin.Primordial;
+
+            if (nuc.Z > 0)
+                foreach (var iso2 in Nuclide.Table[nuc.Z - 1].Isotopes)
+                    if (iso2.IsNatural && ! iso2.IsStable)
+                        foreach (var dx in iso2.GetDecayIndexes())
+                        {
+                            var tryZ = iso2.Transmute (dx, out int tryA);
+                            if (tryZ == nuc.Z && tryA == iso.A)
+                               return Origin.Decay;
+                        }
+
+            if (nuc.Z < Nuclide.Table.Count - 1)
+                foreach (var iso2 in Nuclide.Table[nuc.Z + 1].Isotopes)
+                    if (iso2.IsNatural && ! iso2.IsStable)
+                        foreach (var dx in iso2.GetDecayIndexes())
+                        {
+                            var tryZ = iso2.Transmute (dx, out int tryA);
+                            if (tryZ == nuc.Z && tryA == iso.A)
+                               return Origin.Decay;
+                        }
+
+            if (nuc.Z < Nuclide.Table.Count - 2)
+                foreach (var iso2 in Nuclide.Table[nuc.Z + 2].Isotopes)
+                    if (iso2.IsNatural && ! iso2.IsStable)
+                        foreach (var dx in iso2.GetDecayIndexes())
+                        {
+                            var tryZ = iso2.Transmute (dx, out int tryA);
+                            if (tryZ == nuc.Z && tryA == iso.A)
+                               return Origin.Decay;
+                        }
+
+            // Uranium SF exceptions:
+            if (nuc.Z == 43 || nuc.Z == 93)
+                return Origin.Decay;
+
+            return Origin.Cosmogenic;
         }
+
 
         /// <summary>Provide fixed-width contents isotope.</summary>
         /// <returns>Fixed-column formatted string.</returns>
@@ -158,6 +211,50 @@ namespace Kaos.Physics
             }
             sb.Append (']');
             return sb.ToString();
+        }
+
+        public override string ToString() => "Z,A="+Z+","+A;
+
+        /// <summary>Convert this isotope to another.</summary>
+        /// <returns>Z of product.</returns>
+        /// <param name="decayModeBitflag">Bitflag of isotope mutation.</param>
+        /// <param name="nucleonCount">Nucleon count (A) of product.</param>
+        public int Transmute (Decay decayModeBitflag, out int nucleonCount)
+        {
+            nucleonCount = A;
+            if (decayModeBitflag == Decay.Alpha)
+            {
+                nucleonCount -= 4;
+                return Z - 2;
+            }
+            else if (decayModeBitflag == Decay.ECap2)
+                return Z - 2;
+            else if (decayModeBitflag == Decay.BetaPlus || decayModeBitflag == Decay.ECap1)
+                return Z - 1;
+            else if (decayModeBitflag == Decay.BetaMinus)
+                return Z + 1;
+            else if (decayModeBitflag == Decay.Beta2)
+                return Z + 2;
+            else if (decayModeBitflag == Decay.NEmit)
+                --nucleonCount;
+            return Z;
+        }
+
+        public int Transmute (int decayIndex, out int nucleonCount)
+         => Transmute ((Decay) (1<<decayIndex), out nucleonCount);
+
+
+        /// <summary>Returns an enumerator that iterates thru the possible decay mode indexes of the isotope.</summary>
+        /// <returns>An enumerator that iterates thru the possible indexes.</returns>
+        public IEnumerable<int> GetDecayIndexes()
+        {
+            int mask = 1;
+            for (var decayIndex = 0; decayIndex < Isotope.DecayModeCount; ++decayIndex)
+            {
+                if (((int) DecayMode & mask) != 0)
+                    yield return decayIndex;
+                mask <<= 1;
+            }
         }
     }
 }
