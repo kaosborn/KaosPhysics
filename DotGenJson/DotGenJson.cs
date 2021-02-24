@@ -36,11 +36,11 @@ namespace AppMain
             Console.WriteLine (',');
             Console.WriteLine ();
 
-            Console.Write (toJsonSB1 ("biologyCodes", Nuclide.LifeCodes).ToString());
+            Console.Write (toJsonSB1 ("lifeCodes", Nuclide.LifeCodes).ToString());
             Console.WriteLine (',');
             Console.WriteLine ();
 
-            Console.Write (toJsonSB2 ("biologyDescriptions", Nuclide.LifeDescriptions).ToString());
+            Console.Write (toJsonSB2 ("lifeDescriptions", Nuclide.LifeDescriptions).ToString());
             Console.WriteLine (',');
             Console.WriteLine ();
 

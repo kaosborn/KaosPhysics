@@ -202,8 +202,12 @@ namespace Kaos.Physics
             sb.Append (A);
             sb.Append (',');
             sb.Append (IsNatural ? Abundance.ToString() : "null");
+            sb.Append (',');
+            sb.Append (OccurrenceIndex);
             if (DecayMode != 0 || Halflife != null)
             {
+                sb.Append (',');
+                sb.Append (StabilityIndex);
                 sb.Append (',');
                 sb.Append ((int) DecayMode);
                 sb.Append (',');
@@ -216,7 +220,7 @@ namespace Kaos.Physics
         public override string ToString() => "Z,A="+Z+","+A;
 
         /// <summary>Convert this isotope to another.</summary>
-        /// <returns>Z of product.</returns>
+        /// <returns>Proton count (Z) of product.</returns>
         /// <param name="decayModeBitflag">Bitflag of isotope mutation.</param>
         /// <param name="nucleonCount">Nucleon count (A) of product.</param>
         public int Transmute (Decay decayModeBitflag, out int nucleonCount)
