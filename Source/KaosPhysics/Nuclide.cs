@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Kaos.Physics
 {
-    public enum Category { AlMetal, AlEMetal, Lanthanoid, Actinoid, TMetal, PtMetal, Metaloid, Nonmetal, Halogen, NobleGas }
+    public enum Category { AlMetal, AlEMetal, Lanthan, Actin, TMetal, PtMetal, Metaloid, Nonmetal, Halogen, NobleGas }
     public enum Origin { Synthetic, Cosmogenic, Decay, Primordial }
     public enum Nutrition { None, BulkEssential, TraceEssential, Beneficial, Absorbed }
     public enum State { Unknown, Solid, Liquid, Gas }
@@ -14,13 +14,13 @@ namespace Kaos.Physics
     public class Nuclide
     {
         public const double PrimordialCutoff = 5.0E15;  // seconds
-        public const double secondsPerYear = 31556952.0;
+        public const double SecondsPerYear = 31556952.0;
 
         public static Nuclide Neutron { get; } = new Nuclide
         (
             0, "n", nameof (Neutron), Category.Nonmetal, 0, 0,
             melt: null, boil: null,
-            weight: 1.008,
+            weight: 1.0,
             known: 1932, credit: "James Chadwick",
             naming: "After Latin neuter, meaning neutral",
             isotopes: new Isotope[] { new Isotope (0, 1, 0.0, 610.1, Decay.BetaMinus) },
@@ -137,7 +137,7 @@ namespace Kaos.Physics
         (
             10, "Ne", nameof (Neon), Category.NobleGas, 2, 18,
             melt: 24.56, boil: 27.104,
-            weight: 20.1797,
+            weight: 20.180,
             known: 1898, credit: "William Ramsay, Morris Travers",
             naming: "From Latin novum via Greek, meaning new",
             isotopes: new Isotope[] { new Isotope (10, 20, 90.48), new Isotope (10, 21, 0.27), new Isotope (10, 22, 9.25) },
@@ -148,7 +148,7 @@ namespace Kaos.Physics
         (
             11, "Na", nameof (Sodium), Category.AlMetal, 3, 1,
             melt: 370.944, boil: 1156.090,
-            weight: 22.989,
+            weight: 22.990,
             life: Nutrition.BulkEssential,
             known: 1807, credit: "Humphry Davy",
             naming: "Possibly from the Arabic suda, meaning headache",
@@ -172,7 +172,7 @@ namespace Kaos.Physics
         (
             13, "Al", nameof (Aluminium), Category.PtMetal, 3, 13,
             melt: 933.47, boil: 2743.0,
-            weight: 26.981,
+            weight: 26.982,
             life: Nutrition.Absorbed,
             known: 1824, credit: "Hans Christian Ørsted",
             naming: "From the Latin alum, the mineral from which it was isolated",
@@ -196,7 +196,7 @@ namespace Kaos.Physics
         (
             15, "P", nameof (Phosphorus), Category.Nonmetal, 3, 15,
             melt: 317.3, boil: 553.7, // white phosphorus
-            weight: 30.973,
+            weight: 30.974,
             life: Nutrition.BulkEssential,
             known: 1669, credit: "Hennig Brand",
             naming: "From the Greek φῶς and -φέρω, meaning light-bringer",
@@ -243,7 +243,7 @@ namespace Kaos.Physics
         (
             19, "K", nameof (Potassium), Category.AlMetal, 4, 1,
             melt: 336.7, boil: 1032.0,
-            weight: 39.0983,
+            weight: 39.098,
             life: Nutrition.BulkEssential,
             known: 1807, credit: "Humphry Davy",
             naming: "From placing in a pot the ash of burnt wood",
@@ -266,7 +266,7 @@ namespace Kaos.Physics
         (
             21, "Sc", nameof (Scandium), Category.TMetal, 4, 3,
             melt: 1814.0, boil: 3109.0,
-            weight: 44.955,
+            weight: 44.956,
             known: 1879, credit: "Lars Fredrik Nilson",
             naming: "From the Latin Scandia, meaning Scandinavia",
             isotopes: new Isotope[] { new Isotope (21, 44, null, 58.61*3600, Decay.IC|Decay.Gamma|Decay.ECap1), new Isotope (21, 45, 100.0), new Isotope (21, 46, null, 83.79*86400.0, Decay.BetaMinus|Decay.Gamma), new Isotope (21, 47, null, 80.38*86400.0, Decay.BetaMinus|Decay.Gamma), new Isotope (21, 48, null, 43.67*3600, Decay.BetaMinus|Decay.Gamma) },
@@ -288,7 +288,7 @@ namespace Kaos.Physics
         (
             23, "V", nameof (Vanadium), Category.TMetal, 4, 5,
             melt: 2183.0, boil: 3680.0,
-            weight: 50.9415,
+            weight: 50.942,
             life: Nutrition.Beneficial,
             known: 1867, credit: "Henry Enfield Roscoe",
             naming: "For the Scandinavian goddess of beauty and fertility, Vanadís",
@@ -300,7 +300,7 @@ namespace Kaos.Physics
         (
             24, "Cr", nameof (Chromium), Category.TMetal, 4, 6,
             melt: 2180.0, boil: 2944.0,
-            weight: 51.9961,
+            weight: 51.996,
             life: Nutrition.Absorbed,
             known: 1797, credit: "Louis Nicolas Vauquelin",
             naming: "From the Greek Chroma, meaing color",
@@ -348,7 +348,7 @@ namespace Kaos.Physics
         (
             28, "Ni", nameof (Nickel), Category.TMetal, 4, 10,
             melt: 1728.0, boil: 3003.0,
-            weight: 58.6934,
+            weight: 58.693,
             life: Nutrition.Absorbed,
             known: 1751, credit: "Axel Fredrik Cronstedt",
             naming: "After a mischievous sprite of German mythology, Nickel",
@@ -406,7 +406,7 @@ namespace Kaos.Physics
         (
             33, "As", nameof (Arsenic), Category.Metaloid, 4, 15,
             melt: 887.0, boil: 887.0,
-            weight: 74.921,
+            weight: 74.922,
             life: Nutrition.Absorbed,
             known: 0,
             naming: "From Arabic al-zarnīḵ, meaning yellow orpiment",
@@ -453,7 +453,7 @@ namespace Kaos.Physics
         (
             37, "Rb", nameof (Rubidium), Category.AlMetal, 5, 1,
             melt: 312.45, boil: 961.0,
-            weight: 85.4678,
+            weight: 85.468,
             life: Nutrition.Absorbed,
             known: 1861, credit: "Robert Bunsen, Gustav Kirchhoff",
             naming: "From the Latin rubidus, meaning deep red",
@@ -477,7 +477,7 @@ namespace Kaos.Physics
         (
             39, "Y", nameof (Yttrium), Category.TMetal, 5, 3,
             melt: 1799.0, boil: 3203.0,
-            weight: 88.905,
+            weight: 88.906,
             known: 1794, credit: "Johan Gadolin",
             naming: "After the Swedish village of Ytterby",
             isotopes: new Isotope[] { new Isotope (39, 87, null, 3.4*86400.0, Decay.ECap1|Decay.Gamma), new Isotope (39, 88, null, 106.6*86400.0, Decay.ECap1|Decay.Gamma), new Isotope (39, 89, 100.0), new Isotope (39, 90, null, 2.7*86400.0, Decay.BetaMinus|Decay.Gamma), new Isotope (39, 91, null, 58.5*86400.0, Decay.BetaMinus|Decay.Gamma) },
@@ -522,7 +522,7 @@ namespace Kaos.Physics
         (
             43, "Tc", nameof (Technetium), Category.TMetal, 5, 7,
             melt: 2430.0, boil: 4538.0,
-            weight: 97,
+            weight: 97.0,
             known: 1937, credit: "Emilio Segrè, Carlo Perrier",
             naming: "From the Greek τεχνητός, meaning artificial",
             isotopes: new Isotope[] { new Isotope (43, 95, null, 61.0*86400.0, Decay.ECap1|Decay.Gamma|Decay.IC), new Isotope (43, 96, null, 4.3*86400.0, Decay.ECap1|Decay.Gamma), new Isotope (43, 97, null, 4.21E6*31556952.0, Decay.ECap1), new Isotope (43, 98, null, 4.2E6*31556952.0, Decay.BetaMinus|Decay.Gamma), new Isotope (43, 99, 0.0, 2.111E5*31556952.0, Decay.BetaMinus) },
@@ -544,7 +544,7 @@ namespace Kaos.Physics
         (
             45, "Rh", nameof (Rhodium), Category.TMetal, 5, 9,
             melt: 2237.0, boil: 3968.0,
-            weight: 102.905,
+            weight: 102.91,
             known: 1804, credit: "William Hyde Wollaston",
             naming: "From Greek ῥόδον (rhodon), meaning rose",
             isotopes: new Isotope[] { new Isotope (45, 99, null, 16.1*86400.0, Decay.ECap1|Decay.Gamma), new Isotope (45, 101, null, 4.34*86400.0, Decay.ECap1|Decay.IC|Decay.Gamma), new Isotope (45, 101, null, 3.3*31556952.0, Decay.ECap1|Decay.Gamma), new Isotope (45, 102, null, 3.7*31556952.0, Decay.ECap1|Decay.Gamma), new Isotope (45, 102, null, 207.0*86400.0, Decay.ECap1|Decay.BetaPlus|Decay.BetaMinus|Decay.Gamma), new Isotope (45, 103, 100.0), new Isotope (45, 105, null, 35.36*3600, Decay.BetaMinus|Decay.Gamma) },
@@ -566,7 +566,7 @@ namespace Kaos.Physics
         (
             47, "Ag", nameof (Silver), Category.TMetal, 5, 11,
             melt: 1234.93, boil: 2435.0,
-            weight: 107.8682,
+            weight: 107.87,
             known: 0,
             naming: "From Proto-Germanic silubra",
             isotopes: new Isotope[] { new Isotope (47, 105, null, 41.2*86400.0, Decay.ECap1|Decay.Gamma), new Isotope (47, 106, null, 8.28*86400.0, Decay.ECap1|Decay.Gamma), new Isotope (47, 107, 51.839), new Isotope (47, 108, null, 418*31556952.0, Decay.ECap1|Decay.IT|Decay.Gamma), new Isotope (47, 109, 48.161), new Isotope (47, 110, null, 249.95*86400.0, Decay.BetaMinus|Decay.Gamma), new Isotope (47, 111, null, 7.45*86400.0, Decay.BetaMinus|Decay.Gamma) },
@@ -576,7 +576,7 @@ namespace Kaos.Physics
         public static Nuclide Cadmium { get; } = new Nuclide
         (
             48, "Cd", nameof (Cadmium), Category.TMetal, 5, 12,
-            weight: 112.414,
+            weight: 112.41,
             melt: 594.22, boil: 1040.0,
             known: 1817, credit: "Karl Samuel Leberecht Hermann, Friedrich Stromeyer",
             naming: "From the mineral calamine named after the Greek mythological character Κάδμος (Cadmus)",
@@ -588,7 +588,7 @@ namespace Kaos.Physics
         (
             49, "In", nameof (Indium), Category.PtMetal, 5, 13,
             melt: 429.7485, boil: 2345.0,
-            weight: 114.818,
+            weight: 114.82,
             known: 1863, credit: "Ferdinand Reich, Hieronymous Theodor Richter",
             naming: "From the indigo color seen in its spectrum, after the Latin indicum, meaning 'of India'",
             isotopes: new Isotope[] { new Isotope (49, 111, null, 2.8*86400.0, Decay.ECap1), new Isotope (49, 113, 4.28), new Isotope (49, 115, 95.72, 4.41E14*31556952.0, Decay.BetaMinus) },
@@ -633,7 +633,7 @@ namespace Kaos.Physics
         (
             53, "I", nameof (Iodine), Category.Halogen, 5, 17,
             melt: 386.85, boil: 457.4,
-            weight: 126.904,
+            weight: 126.9,
             known: 1811, credit: "Bernard Courtois",
             life: Nutrition.TraceEssential,
             naming: "From the Greek ἰοειδής (ioeidēs), meaning 'violet'",
@@ -645,7 +645,7 @@ namespace Kaos.Physics
         (
             54, "Xe", nameof (Xenon), Category.NobleGas, 5, 18,
             melt: 161.40, boil: 165.051,
-            weight: 131.293,
+            weight: 131.29,
             known: 1898, credit: "William Ramsay, Morris Travers",
             naming: "From the Greek ξένον (xénon), meaning 'foreigner'",
             isotopes: new Isotope[] { new Isotope (54, 124, 0.095, 1.8E22*31556952.0, Decay.ECap2), new Isotope (54, 125, null, 16.9*3600, Decay.ECap1), new Isotope (54, 126, 0.89), new Isotope (54, 127, null, 36.345*86400.0, Decay.ECap1), new Isotope (54, 128, 1.910), new Isotope (54, 129, 26.401), new Isotope (54, 130, 4.071), new Isotope (54, 131, 21.232), new Isotope (54, 132, 26.909), new Isotope (54, 133, null, 5.247*86400.0, Decay.BetaMinus), new Isotope (54, 134, 10.436), new Isotope (54, 135, null, 9.14*3600, Decay.BetaMinus), new Isotope (54, 136, 8.857, 2.165E21*31556952.0, Decay.Beta2) },
@@ -656,7 +656,7 @@ namespace Kaos.Physics
         (
             55, "Cs", nameof (Caesium), Category.AlMetal, 6, 1,
             melt: 301.7, boil: 944.0,
-            weight: 132.905,
+            weight: 132.91,
             known: 1860, credit: "Robert Bunsen, Gustav Kirchhoff",
             naming: "From the Latin word caesius, meaning 'sky-blue'",
             isotopes: new Isotope[] { new Isotope (55, 133, 100.0), new Isotope (55, 134, null, 2.0648*31556952.0, Decay.ECap1|Decay.BetaMinus), new Isotope (55, 135, 0.0, 2.3E6*31556952.0, Decay.BetaMinus), new Isotope (55, 137, null, 30.17*31556952.0, Decay.BetaMinus) },
@@ -667,7 +667,7 @@ namespace Kaos.Physics
         (
             56, "Ba", nameof (Barium), Category.AlEMetal, 6, 2,
             melt: 1000.0, boil: 2118.0,
-            weight: 137.327,
+            weight: 137.33,
             known: 1772, credit: "Carl Wilhelm Scheele",
             naming: "After the mineral 'baryta'",
             isotopes: new Isotope[] { new Isotope (56, 130, 0.11, 0.5E21*31556952.0, Decay.ECap2), new Isotope (56, 132, 0.10), new Isotope (56, 133, null, 10.51*31556952.0, Decay.ECap1), new Isotope (56, 134, 2.42), new Isotope (56, 135, 6.59), new Isotope (56, 136, 7.85), new Isotope (56, 137, 11.23), new Isotope (56, 138, 71.70) },
@@ -676,9 +676,9 @@ namespace Kaos.Physics
 
         public static Nuclide Lanthanum { get; } = new Nuclide
         (
-            57, "La", nameof (Lanthanum), Category.Lanthanoid, 6, 0,
+            57, "La", nameof (Lanthanum), Category.Lanthan, 6, 0,
             melt: 1193.0, boil: 3737.0,
-            weight: 138.905,
+            weight: 138.91,
             known: 1838, credit: "Carl Gustaf Mosander",
             naming: "From Greek λανθάνειν (lanthanein), meaning to lie hidden",
             isotopes: new Isotope[] { new Isotope (57, 137, null, 6E4*31556952.0, Decay.ECap1), new Isotope (57, 138, 0.089, 1.05E11*31556952.0, Decay.ECap1|Decay.BetaMinus), new Isotope (57, 139, 99.911) },
@@ -687,9 +687,9 @@ namespace Kaos.Physics
 
         public static Nuclide Cerium { get; } = new Nuclide
         (
-            58, "Ce", nameof (Cerium), Category.Lanthanoid, 6, 0,
+            58, "Ce", nameof (Cerium), Category.Lanthan, 6, 0,
             melt: 1068.0, boil: 3716.0,
-            weight: 140.116,
+            weight: 140.12,
             known: 1803, credit: "Martin Heinrich Klaproth, Jöns Jakob Berzelius, Wilhelm Hisinger",
             naming: "After the dwarf planet Ceres",
             isotopes: new Isotope[] { new Isotope (58, 134, null, 3.16*86400.0, Decay.ECap1), new Isotope (58, 136, 0.186), new Isotope (58, 138, 0.251), new Isotope (58, 139, null, 137.640*86400.0, Decay.ECap1), new Isotope (58, 140, 88.449), new Isotope (58, 141, null, 32.501*86400.0, Decay.BetaMinus), new Isotope (58, 142, 11.114), new Isotope (58, 143, null, 33.039*3600, Decay.BetaMinus), new Isotope (58, 144, null, 284.893*86400.0, Decay.BetaMinus) },
@@ -698,9 +698,9 @@ namespace Kaos.Physics
 
         public static Nuclide Praseodymium { get; } = new Nuclide
         (
-            59, "Pr", nameof (Praseodymium), Category.Lanthanoid, 6, 0,
+            59, "Pr", nameof (Praseodymium), Category.Lanthan, 6, 0,
             melt: 1208.0, boil: 3403.0,
-            weight: 140.907,
+            weight: 140.91,
             known: 1885, credit: "Carl Auer von Welsbach",
             naming: "From the Greek πρασιος, meaning 'leek green'",
             isotopes: new Isotope[] { new Isotope (59, 141, 100.0), new Isotope (59, 142, null, 19.12*3600, Decay.BetaMinus|Decay.ECap1), new Isotope (59, 143, null, 13.57*86400.0, Decay.BetaMinus) },
@@ -709,9 +709,9 @@ namespace Kaos.Physics
 
         public static Nuclide Neodymium { get; } = new Nuclide
         (
-            60, "Nd", nameof (Neodymium), Category.Lanthanoid, 6, 0,
+            60, "Nd", nameof (Neodymium), Category.Lanthan, 6, 0,
             melt: 1297.0, boil: 3347.0,
-            weight: 144.242,
+            weight: 144.24,
             known: 1885, credit: "Carl Auer von Welsbach",
             naming: "From the Greek νέος (neos) and διδύμος (didymos), meaning 'new twin'",
             isotopes: new Isotope[] { new Isotope (60, 142, 27.2), new Isotope (60, 143, 12.2), new Isotope (60, 144, 23.8, 2.29E15*31556952.0, Decay.Alpha), new Isotope (60, 145, 8.3), new Isotope (60, 146, 17.2), new Isotope (60, 148, 5.8, 2.7E18*31556952.0, Decay.Beta2), new Isotope (60, 150, 5.6, 21.0E18*31556952.0, Decay.Beta2) },
@@ -720,7 +720,7 @@ namespace Kaos.Physics
 
         public static Nuclide Promethium { get; } = new Nuclide
         (
-            61, "Pm", nameof (Promethium), Category.Lanthanoid, 6, 0,
+            61, "Pm", nameof (Promethium), Category.Lanthan, 6, 0,
             melt: 1315.0, boil: 3273.0,
             weight: 145,
             known: 1942, credit: "Chien Shiung Wu, Emilio Segrè, Hans Bethe",
@@ -731,7 +731,7 @@ namespace Kaos.Physics
 
         public static Nuclide Samarium { get; } = new Nuclide
         (
-            62, "Sm", nameof (Samarium), Category.Lanthanoid, 6, 0,
+            62, "Sm", nameof (Samarium), Category.Lanthan, 6, 0,
             melt: 1345.0, boil: 2173.0,
             weight: 150.36,
             known: 1879, credit: "Lecoq de Boisbaudran",
@@ -742,9 +742,9 @@ namespace Kaos.Physics
 
         public static Nuclide Europium { get; } = new Nuclide
         (
-            63, "Eu", nameof (Europium), Category.Lanthanoid, 6, 0,
+            63, "Eu", nameof (Europium), Category.Lanthan, 6, 0,
             melt: 1099.0, boil: 1802.0,
-            weight: 151.964,
+            weight: 151.96,
             known: 1896, credit: "Eugène-Anatole Demarçay",
             naming: "After the continent of Europe",
             isotopes: new Isotope[] { new Isotope (63, 150, null, 36.9*31556952.0, Decay.ECap1), new Isotope (63, 151, 47.8, 5E18*31556952.0, Decay.Alpha), new Isotope (63, 152, null, 13.54*31556952.0, Decay.ECap1|Decay.BetaMinus), new Isotope (63, 153, 52.2), new Isotope (63, 154, null, 8.59*31556952.0, Decay.BetaMinus), new Isotope (63, 155, null, 4.76*31556952.0, Decay.BetaMinus) },
@@ -753,7 +753,7 @@ namespace Kaos.Physics
 
         public static Nuclide Gadolinium { get; } = new Nuclide
         (
-            64, "Gd", nameof (Gadolinium), Category.Lanthanoid, 6, 0,
+            64, "Gd", nameof (Gadolinium), Category.Lanthan, 6, 0,
             melt: 1585.0, boil: 3273.0,
             weight: 157.25,
             known: 1880, credit: "Jean Charles Galissard de Marignac",
@@ -764,9 +764,9 @@ namespace Kaos.Physics
 
         public static Nuclide Terbium { get; } = new Nuclide
         (
-            65, "Tb", nameof (Terbium), Category.Lanthanoid, 6, 0,
+            65, "Tb", nameof (Terbium), Category.Lanthan, 6, 0,
             melt: 1629.0, boil: 3396.0,
-            weight: 158.925,
+            weight: 158.93,
             known: 1843, credit: "Carl Gustaf Mosander",
             naming: "After the Swedish village of Ytterby",
             isotopes: new Isotope[] { new Isotope (65, 157, null, 71*31556952.0, Decay.ECap1), new Isotope (65, 158, null, 180*31556952.0, Decay.ECap1|Decay.BetaMinus), new Isotope (65, 159, 100.0) },
@@ -775,7 +775,7 @@ namespace Kaos.Physics
 
         public static Nuclide Dysprosium { get; } = new Nuclide
         (
-            66, "Dy", nameof (Dysprosium), Category.Lanthanoid, 6, 0,
+            66, "Dy", nameof (Dysprosium), Category.Lanthan, 6, 0,
             melt: 1680.0, boil: 2840.0,
             weight: 162.500,
             known: 1886, credit: "Lecoq de Boisbaudran",
@@ -786,7 +786,7 @@ namespace Kaos.Physics
 
         public static Nuclide Holmium { get; } = new Nuclide
         (
-            67, "Ho", nameof (Holmium), Category.Lanthanoid, 6, 0,
+            67, "Ho", nameof (Holmium), Category.Lanthan, 6, 0,
             melt: 1734.0, boil: 2873.0,
             weight: 164.930,
             known: 1878, credit: "Jacques-Louis Soret, Marc Delafontaine",
@@ -797,9 +797,9 @@ namespace Kaos.Physics
 
         public static Nuclide Erbium { get; } = new Nuclide
         (
-            68, "Er", nameof (Erbium), Category.Lanthanoid, 6, 0,
+            68, "Er", nameof (Erbium), Category.Lanthan, 6, 0,
             melt: 1802.0, boil: 3141.0,
-            weight: 167.259,
+            weight: 167.26,
             known: 1843, credit: "Carl Gustaf Mosander",
             naming: "After the Swedish village of Ytterby",
             isotopes: new Isotope[] { new Isotope (68, 160, null, 28.58*3600, Decay.ECap1), new Isotope (68, 162, 0.139), new Isotope (68, 164, 1.601), new Isotope (68, 165, null, 10.36*3600, Decay.ECap1), new Isotope (68, 166, 33.503), new Isotope (68, 167, 22.869), new Isotope (68, 168, 26.978), new Isotope (68, 169, null, 9.4*86400.0, Decay.BetaMinus), new Isotope (68, 170, 14.910), new Isotope (68, 171, null, 7.516*3600, Decay.BetaMinus), new Isotope (68, 172, null, 49.3*3600, Decay.BetaMinus) },
@@ -808,9 +808,9 @@ namespace Kaos.Physics
 
         public static Nuclide Thulium { get; } = new Nuclide
         (
-            69, "Tm", nameof (Thulium), Category.Lanthanoid, 6, 0,
+            69, "Tm", nameof (Thulium), Category.Lanthan, 6, 0,
             melt: 1818.0, boil: 2223.0,
-            weight: 168.934,
+            weight: 168.93,
             known: 1879, credit: "Per Teodor Cleve",
             naming: "after Thule, a Greek name associated with Scandinavia",
             isotopes: new Isotope[] { new Isotope (69, 167, null, 9.25*86400.0, Decay.ECap1), new Isotope (69, 168, null, 93.0*86400.0, Decay.ECap1), new Isotope (69, 169, 100.0), new Isotope (69, 170, null, 128.6*86400.0, Decay.BetaMinus), new Isotope (69, 171, null, 1.92*31556952.0, Decay.BetaMinus) },
@@ -819,9 +819,9 @@ namespace Kaos.Physics
 
         public static Nuclide Ytterbium { get; } = new Nuclide
         (
-            70, "Yb", nameof (Ytterbium), Category.Lanthanoid, 6, 0,
+            70, "Yb", nameof (Ytterbium), Category.Lanthan, 6, 0,
             melt: 1097.0, boil: 1469.0,
-            weight: 173.045,
+            weight: 173.05,
             known: 1878, credit: "Jean Charles Galissard de Marignac",
             naming: "After the Swedish village of Ytterby",
             isotopes: new Isotope[] { new Isotope (70, 166, null, 56.7*3600, Decay.ECap1), new Isotope (70, 168, 0.126), new Isotope (70, 169, null, 32.026*86400.0, Decay.ECap1), new Isotope (70, 170, 3.023), new Isotope (70, 171, 14.216), new Isotope (70, 172, 21.754), new Isotope (70, 173, 16.098), new Isotope (70, 174, 31.896), new Isotope (70, 175, null, 4.185*86400.0, Decay.BetaMinus), new Isotope (70, 176, 12.887), new Isotope (70, 177, null, 1.911*3600, Decay.BetaMinus) },
@@ -832,7 +832,7 @@ namespace Kaos.Physics
         (
             71, "Lu", nameof (Lutetium), Category.TMetal, 6, 3,
             melt: 1925.0, boil: 3675.0,
-            weight: 174.9668,
+            weight: 174.97,
             known: 1906, credit: "Carl Auer von Welsbach, Georges Urbain",
             naming: "From the Latin Lutetia, meaning 'Paris'",
             isotopes: new Isotope[] { new Isotope (71, 173, null, 1.37*31556952.0, Decay.ECap1), new Isotope (71, 174, null, 3.31*31556952.0, Decay.ECap1), new Isotope (71, 175, 97.401), new Isotope (71, 176, 2.599, 3.78*31556952.0, Decay.BetaMinus) },
@@ -843,7 +843,7 @@ namespace Kaos.Physics
         (
             72, "Hf", nameof (Hafnium), Category.TMetal, 6, 4,
             melt: 2506.0, boil: 4876.0,
-            weight: 178.486,
+            weight: 178.49,
             known: 1922, credit: "Dirk Coster, George de Hevesy",
             naming: "From the Latin Hafnia, meaning 'Copenhagen'",
             isotopes: new Isotope[] { new Isotope (72, 172, null, 1.87*31556952.0, Decay.ECap1), new Isotope (72, 174, 0.16, 2E15*31556952.0, Decay.Alpha), new Isotope (72, 176, 5.26), new Isotope (72, 177, 18.60), new Isotope (72, 178, 27.28), new Isotope (72, 178, null, 31*31556952.0, Decay.IT), new Isotope (72, 179, 13.62), new Isotope (72, 180, 35.08), new Isotope (72, 182, null, 8.9E6*31556952.0, Decay.BetaMinus) },
@@ -854,7 +854,7 @@ namespace Kaos.Physics
         (
             73, "Ta", nameof (Tantalum), Category.TMetal, 6, 5,
             melt: 3290.0, boil: 5731.0,
-            weight: 180.947,
+            weight: 180.95,
             known: 1844, credit: "Heinrich Rose",
             naming: "From Tantalus, the father of Niobe in Greek mythology",
             isotopes: new Isotope[] { new Isotope (73, 177, null, 56.56*3600, Decay.ECap1), new Isotope (73, 178, null, 2.36*3600, Decay.ECap1), new Isotope (73, 179, null, 1.82*31556952.0, Decay.ECap1), new Isotope (73, 180, 0.012), new Isotope (73, 180, null, 8.125*3600, Decay.ECap1|Decay.BetaMinus), new Isotope (73, 181, 99.988), new Isotope (73, 182, null, 114.43*86400.0, Decay.BetaMinus), new Isotope (73, 183, null, 5.1*86400.0, Decay.BetaMinus) },
@@ -876,7 +876,7 @@ namespace Kaos.Physics
         (
             75, "Re", nameof (Rhenium), Category.TMetal, 6, 7,
             melt: 3459.0, boil: 5903.0,
-            weight: 186.207,
+            weight: 186.21,
             known: 1908, credit: "Masataka Ogawa",
             naming: "From Latin Rhenus, meaning 'Rhine'",
             isotopes: new Isotope[] { new Isotope (75, 185, 37.4), new Isotope (75, 187, 62.6, 4.12E10*31556952.0, Decay.BetaMinus) },
@@ -898,7 +898,7 @@ namespace Kaos.Physics
         (
             77, "Ir", nameof (Iridium), Category.TMetal, 6, 9,
             melt: 2719.0, boil: 4403.0,
-            weight: 192.217,
+            weight: 192.22,
             known: 1803, credit: "Smithson Tennant",
             naming: "After the Greek goddess Iris, personification of the rainbow",
             isotopes: new Isotope[] { new Isotope (77, 188, null, 1.73*86400.0, Decay.ECap1), new Isotope (77, 189, null, 13.2*86400.0, Decay.ECap1), new Isotope (77, 190, null, 11.8*86400.0, Decay.ECap1), new Isotope (77, 191, 37.3), new Isotope (77, 192, null, 73.827*86400.0, Decay.ECap1), new Isotope (77, 192, null, 241*31556952.0, Decay.IT), new Isotope (77, 193, 62.7), new Isotope (77, 193, null, 10.5*86400.0, Decay.IT), new Isotope (77, 194, null, 19.3*3600, Decay.BetaMinus), new Isotope (77, 194, null, 171.0*86400.0, Decay.IT) },
@@ -909,7 +909,7 @@ namespace Kaos.Physics
         (
             78, "Pt", nameof (Platinum), Category.TMetal, 6, 10,
             melt: 2041.4, boil: 4098.0,
-            weight: 195.084,
+            weight: 195.08,
             known: 1735, credit: "Antonio de Ulloa",
             naming: "From the Spanish platina, meaning 'silver'",
             isotopes: new Isotope[] { new Isotope (78, 190, 0.012, 6.5E11*31556952.0, Decay.Alpha), new Isotope (78, 192, 0.782), new Isotope (78, 193, null, 50*31556952.0, Decay.ECap1), new Isotope (78, 194, 32.864), new Isotope (78, 195, 33.775), new Isotope (78, 196, 25.211), new Isotope (78, 198, 7.356) },
@@ -920,7 +920,7 @@ namespace Kaos.Physics
         (
             79, "Au", nameof (Gold), Category.TMetal, 6, 11,
             melt: 1337.33, boil: 3243.0,
-            weight: 196.966,
+            weight: 196.97,
             known: 0,
             naming: "From Proto-Germanic gulþą",
             isotopes: new Isotope[] { new Isotope (79, 195, null, 186.10*86400.0, Decay.ECap1), new Isotope (79, 196, null, 6.183*86400.0, Decay.ECap1|Decay.BetaMinus), new Isotope (79, 197, 100.0), new Isotope (79, 198, null, 2.69517*86400.0, Decay.BetaMinus), new Isotope (79, 199, null, 3.169*86400.0, Decay.BetaMinus) },
@@ -931,7 +931,7 @@ namespace Kaos.Physics
         (
             80, "Hg", nameof (Mercury), Category.TMetal, 6, 12,
             melt: 234.3210, boil: 629.88,
-            weight: 200.592,
+            weight: 200.59,
             known: 0,
             naming: "After the Roman god Mercury",
             isotopes: new Isotope[] { new Isotope (80, 194, null, 444*31556952.0, Decay.ECap1), new Isotope (80, 195, null, 9.9*3600, Decay.ECap1), new Isotope (80, 196, 0.15), new Isotope (80, 197, null, 64.14*3600, Decay.ECap1), new Isotope (80, 198, 10.04), new Isotope (80, 199, 16.94), new Isotope (80, 200, 23.14), new Isotope (80, 201, 13.17), new Isotope (80, 202, 29.74), new Isotope (80, 203, null, 46.612*86400.0, Decay.BetaMinus), new Isotope (80, 204, 6.82) },
@@ -945,7 +945,7 @@ namespace Kaos.Physics
             weight: 204.38,
             known: 1861, credit: "William Crookes",
             naming: "From Greek θαλλός (thallos), meaning 'a green shoot or twig'",
-            isotopes: new Isotope[] { new Isotope (81, 203, 29.5), new Isotope (81, 204, null, 3.78*31556952.0, Decay.BetaMinus|Decay.ECap1), new Isotope (81, 205, 70.5) },
+            isotopes: new Isotope[] { new Isotope (81, 203, 29.5), new Isotope (81, 204, null, 3.78*31556952.0, Decay.BetaMinus|Decay.ECap1), new Isotope (81, 205, 70.5), new Isotope (81, 206, 0.0, 252.0, Decay.BetaMinus), new Isotope (81, 210, 0.0, 78.0, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "es","Talio" }, { "it","Tallio" }, { "ru","Таллий" } }
         );
 
@@ -957,7 +957,7 @@ namespace Kaos.Physics
             life: Nutrition.Absorbed,
             known: 0,
             naming: "From the Old English lēad",
-            isotopes: new Isotope[] { new Isotope (82, 204, 1.4), new Isotope (82, 206, 24.1), new Isotope (82, 207, 22.1), new Isotope (82, 208, 52.4) },
+            isotopes: new Isotope[] { new Isotope (82, 204, 1.4), new Isotope (82, 206, 24.1), new Isotope (82, 207, 22.1), new Isotope (82, 208, 52.4), new Isotope (82, 210, 0.0, 22.3*31556952.0, Decay.BetaMinus), new Isotope (82, 214, 0.0, 26.8*60, Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "de","Blei" }, { "es","Plomo" }, { "fr","Plomb" }, { "it","Piombo" }, { "ru","Свинец" } }
         );
 
@@ -965,10 +965,10 @@ namespace Kaos.Physics
         (
             83, "Bi", nameof (Bismuth), Category.PtMetal, 6, 15,
             melt: 544.7, boil: 1837.0,
-            weight: 208.980,
+            weight: 208.98,
             known: 0,
             naming: "Perhaps related to Old High German hwiz, meaning 'white'",
-            isotopes: new Isotope[] { new Isotope (83, 207, null, 31.55*31556952.0, Decay.BetaPlus), new Isotope (83, 208, null, 3.68E5*31556952.0, Decay.BetaPlus), new Isotope (83, 209, 100.0, 2.01E19*31556952.0, Decay.Alpha), new Isotope (83, 210, 0.0, 5.012*86400.0, Decay.BetaMinus|Decay.Alpha), new Isotope (83, 210, null, 3.04E6*31556952.0, Decay.IT|Decay.Alpha) },
+            isotopes: new Isotope[] { new Isotope (83, 207, null, 31.55*31556952.0, Decay.BetaPlus), new Isotope (83, 208, null, 3.68E5*31556952.0, Decay.BetaPlus), new Isotope (83, 209, 100.0, 2.01E19*31556952.0, Decay.Alpha), new Isotope (83, 210, 0.0, 5.012*86400.0, Decay.BetaMinus|Decay.Alpha), new Isotope (83, 210, 0.0, 5.012*24*3600, Decay.Alpha|Decay.BetaMinus), new Isotope (83, 210, null, 3.04E6*31556952.0, Decay.IT|Decay.Alpha), new Isotope (83, 214, 0.0, 19.9*60, Decay.Alpha|Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "de","Bismut" }, { "es","Bismuto" }, { "it","Bismuto" }, { "ru","Висмут" } }
         );
 
@@ -979,7 +979,7 @@ namespace Kaos.Physics
             weight: 209,
             known: 1898, credit: "Pierre Curie, Marie Curie",
             naming: "After Latin Polonia, meaning Poland",
-            isotopes: new Isotope[] { new Isotope (84, 208, null, 2.898*31556952.0, Decay.Alpha|Decay.BetaPlus), new Isotope (84, 209, null, 125.2*31556952.0, Decay.Alpha|Decay.BetaPlus), new Isotope (84, 210, 0.0, 138.376*86400.0, Decay.Alpha) },
+            isotopes: new Isotope[] { new Isotope (84, 208, null, 2.898*31556952.0, Decay.Alpha|Decay.BetaPlus), new Isotope (84, 209, null, 125.2*31556952.0, Decay.Alpha|Decay.BetaPlus), new Isotope (84, 210, 0.0, 138.376*86400.0, Decay.Alpha), new Isotope (84, 214, 0.0, 0.000164, Decay.Alpha), new Isotope (84, 218, 0.0, 3.1*60, Decay.Alpha|Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "es","Polono" }, { "it","Polonio" }, { "ru","Полоний" } }
         );
 
@@ -990,7 +990,7 @@ namespace Kaos.Physics
             weight: 210,
             known: 1940, credit: "Dale R. Corson, Kenneth Ross MacKenzie, Emilio Segrè",
             naming: "From the Greek αστατος (astatos), meaning 'unstable'",
-            isotopes: new Isotope[] { new Isotope (85, 209, null, 5.41*3600, Decay.BetaPlus|Decay.Alpha), new Isotope (85, 210, null, 8.1*3600, Decay.BetaPlus|Decay.Alpha), new Isotope (85, 211, null, 7.21*3600, Decay.ECap1|Decay.Alpha) },
+            isotopes: new Isotope[] { new Isotope (85, 209, null, 5.41*3600, Decay.BetaPlus|Decay.Alpha), new Isotope (85, 210, null, 8.1*3600, Decay.BetaPlus|Decay.Alpha), new Isotope (85, 211, null, 7.21*3600, Decay.ECap1|Decay.Alpha), new Isotope (85, 217, null, 0.0323, Decay.Alpha|Decay.BetaMinus), new Isotope (85, 218, null, 1.5, Decay.Alpha|Decay.BetaMinus), new Isotope (85, 219, null, 56.0, Decay.Alpha|Decay.BetaMinus) },
             nameMap: new Dictionary<string,string>() { { "de","Astat" }, { "es","Astato" }, { "fr","Astate" }, { "it","Astato" }, { "ru","Астат" } }
         );
 
@@ -1029,7 +1029,7 @@ namespace Kaos.Physics
 
         public static Nuclide Actinium { get; } = new Nuclide
         (
-            89, "Ac", nameof (Actinium), Category.Actinoid, 7, 0,
+            89, "Ac", nameof (Actinium), Category.Actin, 7, 0,
             melt: 1500.0, boil: 5800.0,
             weight: 227,
             known: 1899, credit: "André-Louis Debierne",
@@ -1040,7 +1040,7 @@ namespace Kaos.Physics
 
         public static Nuclide Thorium { get; } = new Nuclide
         (
-            90, "Th", nameof (Thorium), Category.Actinoid, 7, 0,
+            90, "Th", nameof (Thorium), Category.Actin, 7, 0,
             melt: 2023.0, boil: 5061.0,
             weight: 232.0377,
             known: 1829, credit: "Jöns Jakob Berzelius",
@@ -1051,7 +1051,7 @@ namespace Kaos.Physics
 
         public static Nuclide Protactinium { get; } = new Nuclide
         (
-            91, "Pa", nameof (Protactinium), Category.Actinoid, 7, 0,
+            91, "Pa", nameof (Protactinium), Category.Actin, 7, 0,
             melt: 1841.0, boil: 4300.0,
             weight: 231.03588,
             known: 1913, credit: "Kasimir Fajans, Oswald Helmuth Göhring",
@@ -1062,7 +1062,7 @@ namespace Kaos.Physics
 
         public static Nuclide Uranium { get; } = new Nuclide
         (
-            92, "U", nameof (Uranium), Category.Actinoid, 7, 0,
+            92, "U", nameof (Uranium), Category.Actin, 7, 0,
             melt: 1405.3, boil: 4404.0,
             weight: 238.02891,
             known: 1789, credit: "Martin Heinrich Klaproth",
@@ -1073,7 +1073,7 @@ namespace Kaos.Physics
 
         public static Nuclide Neptunium { get; } = new Nuclide
         (
-            93, "Np", nameof (Neptunium), Category.Actinoid, 7, 0,
+            93, "Np", nameof (Neptunium), Category.Actin, 7, 0,
             melt: 912.0, boil: 4447.0,
             weight: 237,
             known: 1940, credit: "Edwin McMillan and Philip H. Abelson",
@@ -1084,7 +1084,7 @@ namespace Kaos.Physics
 
         public static Nuclide Plutonium { get; } = new Nuclide
         (
-            94, "Pu", nameof (Plutonium), Category.Actinoid, 7, 0,
+            94, "Pu", nameof (Plutonium), Category.Actin, 7, 0,
             melt: 912.5, boil: 3505.0,
             weight: 244,
             known: 1940, credit: "Glenn T. Seaborg, Arthur Wahl, Joseph W. Kennedy, Edwin McMillan",
@@ -1095,7 +1095,7 @@ namespace Kaos.Physics
 
         public static Nuclide Americium { get; } = new Nuclide
         (
-            95, "Am", nameof (Americium), Category.Actinoid, 7, 0,
+            95, "Am", nameof (Americium), Category.Actin, 7, 0,
             melt: 1449.0, boil: 2880.0,
             weight: 243,
             known: 1944, credit: "Glenn T. Seaborg, Ralph A. James, Leon O. Morgan, Albert Ghiorso",
@@ -1106,7 +1106,7 @@ namespace Kaos.Physics
 
         public static Nuclide Curium { get; } = new Nuclide
         (
-            96, "Cm", nameof (Curium), Category.Actinoid, 7, 0,
+            96, "Cm", nameof (Curium), Category.Actin, 7, 0,
             melt: 1613.0, boil: 3383.0,
             weight: 247,
             known: 1944, credit: "Glenn T. Seaborg, Ralph A. James, Albert Ghiorso",
@@ -1117,7 +1117,7 @@ namespace Kaos.Physics
 
         public static Nuclide Berkelium { get; } = new Nuclide
         (
-            97, "Bk", nameof (Berkelium), Category.Actinoid, 7, 0,
+            97, "Bk", nameof (Berkelium), Category.Actin, 7, 0,
             melt: 1259.0, boil: 2900.0,
             weight: 247,
             known: 1949, credit: "Lawrence Berkeley National Laboratory",
@@ -1128,7 +1128,7 @@ namespace Kaos.Physics
 
         public static Nuclide Californium { get; } = new Nuclide
         (
-            98, "Cf", nameof (Californium), Category.Actinoid, 7, 0,
+            98, "Cf", nameof (Californium), Category.Actin, 7, 0,
             melt: 1173.0, boil: 1743.0,
             weight: 251,
             known: 1950, credit: "Lawrence Berkeley National Laboratory",
@@ -1139,7 +1139,7 @@ namespace Kaos.Physics
 
         public static Nuclide Einsteinium { get; } = new Nuclide
         (
-            99, "Es", nameof (Einsteinium), Category.Actinoid, 7, 0,
+            99, "Es", nameof (Einsteinium), Category.Actin, 7, 0,
             melt: 1133.0, boil: 1269.0,
             weight: 252,
             known: 1952, credit: "Lawrence Berkeley National Laboratory",
@@ -1150,7 +1150,7 @@ namespace Kaos.Physics
 
         public static Nuclide Fermium { get; } = new Nuclide
         (
-            100, "Fm", nameof (Fermium), Category.Actinoid, 7, 0,
+            100, "Fm", nameof (Fermium), Category.Actin, 7, 0,
             melt: 1800.0, boil: null,
             weight: 257,
             known: 1952, credit: "Lawrence Berkeley National Laboratory",
@@ -1161,9 +1161,9 @@ namespace Kaos.Physics
 
         public static Nuclide Mendelevium { get; } = new Nuclide
         (
-            101, "Md", nameof (Mendelevium), Category.Actinoid, 7, 0,
+            101, "Md", nameof (Mendelevium), Category.Actin, 7, 0,
             melt: 1100.0, boil: null,
-            weight: 257,
+            weight: 258,
             known: 1955, credit: "Lawrence Berkeley National Laboratory",
             naming: "After Dmitri Mendeleev",
             isotopes: new Isotope[] { new Isotope (101, 256, null, 1.17*3600, Decay.ECap1), new Isotope (101, 257, null, 5.52*3600, Decay.ECap1|Decay.Alpha|Decay.Fission), new Isotope (101, 258, null, 51.5*86400.0, Decay.Alpha|Decay.ECap1|Decay.BetaMinus), new Isotope (101, 259, null, 1.6*3600, Decay.Fission|Decay.Alpha), new Isotope (101, 260, null, 31.8*86400.0, Decay.Fission|Decay.Alpha|Decay.ECap1|Decay.BetaMinus) },
@@ -1172,7 +1172,7 @@ namespace Kaos.Physics
 
         public static Nuclide Nobelium { get; } = new Nuclide
         (
-            102, "No", nameof (Nobelium), Category.Actinoid, 7, 0,
+            102, "No", nameof (Nobelium), Category.Actin, 7, 0,
             melt: 1100.0, boil: null,
             weight: 259,
             known: 1966, credit: "Joint Institute for Nuclear Research",
@@ -1188,7 +1188,7 @@ namespace Kaos.Physics
             weight: 266,
             known: 1961, credit: "Lawrence Berkeley National Laboratory, Joint Institute for Nuclear Research",
             naming: "After Ernest Lawrence",
-            isotopes: new Isotope[] { new Isotope (103, 254, null, 13.0, Decay.Alpha|Decay.ECap1), new Isotope (103, 255, null, 21.5, Decay.Alpha), new Isotope (103, 256, null, 27.0, Decay.Alpha), new Isotope (103, 259, null, 6.2, Decay.Alpha|Decay.Fission), new Isotope (103, 260, null, 2.7*60, Decay.Alpha), new Isotope (103, 261, null, 44.0*60, Decay.Fission), new Isotope (103, 262, null, 3.6*3600, Decay.ECap1), new Isotope (103, 263, null, 10.0*3600, Decay.Fission) },
+            isotopes: new Isotope[] { new Isotope (103, 254, null, 13.0, Decay.Alpha|Decay.ECap1), new Isotope (103, 255, null, 21.5, Decay.Alpha), new Isotope (103, 256, null, 27.0, Decay.Alpha), new Isotope (103, 259, null, 6.2, Decay.Alpha|Decay.Fission), new Isotope (103, 260, null, 2.7*60, Decay.Alpha), new Isotope (103, 261, null, 44.0*60, Decay.Fission), new Isotope (103, 262, null, 3.6*3600, Decay.ECap1), new Isotope (103, 264, null, 3.0*3600, Decay.Fission), new Isotope (103, 266, null, 10.0*3600, Decay.Fission) },
             nameMap: new Dictionary<string,string>() { { "es","Laurencio" }, { "it","Laurenzio" }, { "ru","Лоуренсий" } }
         );
 
@@ -1232,7 +1232,7 @@ namespace Kaos.Physics
             weight: 270,
             known: 1981, credit: "Gesellschaft für Schwerionenforschung",
             naming: "After Niels Bohr",
-            isotopes: new Isotope[] { new Isotope (107, 267, null, 17.0, Decay.Alpha), new Isotope (107, 270, null, 60.0, Decay.Alpha), new Isotope (107, 271, null, 1.5, Decay.Alpha), new Isotope (107, 272, null, 11.0, Decay.Alpha), new Isotope (107, 274, null, 44.0, Decay.Alpha), new Isotope (107, 278, null, 11.5*60, Decay.Fission) },
+            isotopes: new Isotope[] { new Isotope (107, 267, null, 17.0, Decay.Alpha), new Isotope (107, 270, null, 60.0, Decay.Alpha), new Isotope (107, 271, null, 1.5, Decay.Alpha), new Isotope (107, 272, null, 11.0, Decay.Alpha), new Isotope (107, 274, null, 44.0, Decay.Alpha) },
             nameMap: new Dictionary<string,string>() { { "es","Bohrio" }, { "it","Bohrio" }, { "ru","Борий" } }
         );
 
@@ -1243,7 +1243,7 @@ namespace Kaos.Physics
             weight: 269,
             known: 1984, credit: "Gesellschaft für Schwerionenforschung",
             naming: "After Latin Hassia, for Hesse, Germany",
-            isotopes: new Isotope[] { new Isotope (108, 269, null, 16.0, Decay.Alpha), new Isotope (108, 271, null, 9.0, Decay.Alpha), new Isotope (108, 277, null, 110.0, Decay.Fission) },
+            isotopes: new Isotope[] { new Isotope (108, 269, null, 16.0, Decay.Alpha), new Isotope (108, 271, null, 9.0, Decay.Alpha) },
             nameMap: new Dictionary<string,string>() { { "es","Hassio" }, { "it","Hassio" }, { "ru","Хассий" } }
         );
 
@@ -1254,7 +1254,7 @@ namespace Kaos.Physics
             weight: 278,
             known: 1982, credit: "Gesellschaft für Schwerionenforschung",
             naming: "After Lise Meitner",
-            isotopes: new Isotope[] { new Isotope (109, 274, null, 0.4, Decay.Alpha), new Isotope (109, 276, null, 0.6, Decay.Alpha), new Isotope (109, 278, null, 4.0, Decay.Alpha), new Isotope (109, 282, null, 67.0, Decay.Alpha) },
+            isotopes: new Isotope[] { new Isotope (109, 274, null, 0.4, Decay.Alpha), new Isotope (109, 276, null, 0.6, Decay.Alpha), new Isotope (109, 278, null, 4.0, Decay.Alpha) },
             nameMap: new Dictionary<string,string>() { { "es","Meitnerio" }, { "fr","Meitnérium" }, { "it","Meitnerio" }, { "ru","Мейтнерий" } }
         );
 
@@ -1276,7 +1276,7 @@ namespace Kaos.Physics
             weight: 282,
             known: 1994, credit: "Gesellschaft für Schwerionenforschung",
             naming: "After Wilhelm Röntgen",
-            isotopes: new Isotope[] { new Isotope (111, 272, null, 0.002, Decay.Alpha), new Isotope (111, 274, null, 0.012, Decay.Alpha), new Isotope (111, 278, null, 0.004, Decay.Alpha), new Isotope (111, 279, null, 0.09, Decay.Alpha), new Isotope (111, 280, null, 4.6, Decay.Alpha), new Isotope (111, 281, null, 17.0, Decay.Fission|Decay.Alpha), new Isotope (111, 282, null, 100.0, Decay.Alpha), new Isotope (111, 283, null, 5.1*60, Decay.Fission), new Isotope (111, 286, null, 10.7*60, Decay.Alpha) },
+            isotopes: new Isotope[] { new Isotope (111, 272, null, 0.002, Decay.Alpha), new Isotope (111, 274, null, 0.012, Decay.Alpha), new Isotope (111, 278, null, 0.004, Decay.Alpha), new Isotope (111, 279, null, 0.09, Decay.Alpha), new Isotope (111, 280, null, 4.6, Decay.Alpha), new Isotope (111, 281, null, 17.0, Decay.Fission|Decay.Alpha), new Isotope (111, 282, null, 100.0, Decay.Alpha) },
             nameMap: new Dictionary<string,string>() { { "es","Roentgenio" }, { "it","Roentgenio" }, { "ru","Рентгений" } }
         );
 
@@ -1306,10 +1306,10 @@ namespace Kaos.Physics
         (
             114, "Fl", nameof (Flerovium), Category.PtMetal, 7, 14,
             melt: null, boil: 210.0,
-            weight: 286,
+            weight: 289,
             known: 1999, credit: "Joint Institute for Nuclear Research, Lawrence Livermore National Laboratory",
             naming: "After Flerov Laboratory of Nuclear Reactions",
-            isotopes: new Isotope[] { new Isotope (114, 284, null, 0.0025, Decay.Fission), new Isotope (114, 285, null, 0.10, Decay.Alpha), new Isotope (114, 286, null, 0.12, Decay.Alpha|Decay.Fission), new Isotope (114, 287, null, 0.48, Decay.Alpha), new Isotope (114, 288, null, 0.66, Decay.Alpha), new Isotope (114, 289, null, 1.9, Decay.Alpha), new Isotope (114, 290, null, 19.0, Decay.ECap1|Decay.Alpha) },
+            isotopes: new Isotope[] { new Isotope (114, 284, null, 0.0025, Decay.Fission), new Isotope (114, 285, null, 0.10, Decay.Alpha), new Isotope (114, 286, null, 0.12, Decay.Alpha|Decay.Fission), new Isotope (114, 287, null, 0.48, Decay.Alpha), new Isotope (114, 288, null, 0.66, Decay.Alpha), new Isotope (114, 289, null, 1.9, Decay.Alpha) },
             nameMap: new Dictionary<string,string>() { { "es","Flerovio" }, { "fr","Flérovium" }, { "it","Flerovio" }, { "ru","Флеровий" } }
         );
 
@@ -1342,7 +1342,7 @@ namespace Kaos.Physics
             weight: 294,
             known: 2009, credit: "Joint Institute for Nuclear Research, Lawrence Livermore National Laboratory, Vanderbilt University, Oak Ridge National Laboratory",
             naming: "After Tennessee",
-            isotopes: new Isotope[] { new Isotope (117, 293, null, 0.022, Decay.Alpha), new Isotope (117, 293, null, 0.051, Decay.Alpha) },
+            isotopes: new Isotope[] { new Isotope (117, 293, null, 0.022, Decay.Alpha), new Isotope (117, 294, null, 0.051, Decay.Alpha) },
             nameMap: new Dictionary<string,string>() { { "es","Teneso" }, { "fr","Tennesse" }, { "it","Tennesso" }, { "ru","Теннессин" } }
         );
 
@@ -1353,7 +1353,7 @@ namespace Kaos.Physics
             weight: 294,
             known: 2002, credit: "Joint Institute for Nuclear Research, Lawrence Livermore National Laboratory",
             naming: "After Yuri Oganessian",
-            isotopes: new Isotope[] { new Isotope (118, 294, null, 0.00069, Decay.Fission|Decay.Alpha), new Isotope (118, 295, null, 0.181, Decay.Alpha) },
+            isotopes: new Isotope[] { new Isotope (118, 294, null, 0.00069, Decay.Fission|Decay.Alpha) },
             nameMap: new Dictionary<string,string>() { { "es","Oganesón" }, { "ru","Оганесон" } }
         );
 
@@ -1405,7 +1405,6 @@ namespace Kaos.Physics
         public static ReadOnlyDictionary<string,int> MaxNameLengths
         = new ReadOnlyDictionary<string,int> (_maxNameLengths);
 
-
         public static ReadOnlyDictionary<string,string[]> CategoryGroupNames { get; } = new ReadOnlyDictionary<string,string[]>
             (new Dictionary<string,string[]>()
             {
@@ -1417,9 +1416,11 @@ namespace Kaos.Physics
                 { "ru", new string[] { "Металлы", "Металлоид", "Неметаллы" } }
             });
 
-        // * suitable for legends
-        // * singular form, sentence casing
-        // * favor IUPAC recommendations
+        /// <summary>Provide localized category terms.</summary>
+        /// <remarks>
+        /// These terms are suitable for legends.
+        /// They are in singular form, sentence casing, and they tend to favor IUPAC recommendations.
+        /// </remarks>
         public static ReadOnlyDictionary<string,string[]> CategoryNames { get; } = new ReadOnlyDictionary<string,string[]>
             (new Dictionary<string,string[]>()
             {
@@ -1473,7 +1474,7 @@ namespace Kaos.Physics
                 }
             });
 
-        public static ReadOnlyDictionary<string,string[]> DecayModeHeadings { get; } = new ReadOnlyDictionary<string,string[]>
+        public static ReadOnlyDictionary<string,string[]> IsotopesHeadings { get; } = new ReadOnlyDictionary<string,string[]>
             (new Dictionary<string,string[]>()
             {
                 { "de", new string[] { "Isotop", "NH", ",5t", "ZA", "Zerfallsprodukt" } },
@@ -1481,7 +1482,7 @@ namespace Kaos.Physics
                 { "es", new string[] { "Isótopo", "Abundancia natural", "Periodo", "MD", "Producto" } },
                 { "fr", new string[] { "Isotope", "Abondance naturelle", "Période", "MD", "Produit" } },
                 { "it", new string[] { "Isotopo", "Abbondanza in natura", "TD", "DM", "Prodotto" } },
-                { "ru", new string[] { "RRR", "RRR", "RRR", "RRR", "RRR" } }
+                { "ru", new string[] { "Изотоп", "Распространенность", "Период полураспада", "Режим распада", "Продукт" } }
             });
 
         public static ReadOnlyCollection<string> LifeCodes { get; } = new ReadOnlyCollection<string> (new string[]
@@ -1552,10 +1553,11 @@ namespace Kaos.Physics
                 }
             });
 
+        /// <summary>First letter of origin codes in most languages.</summary>
         public static string OccurrenceCodes => "SCDP";
 
         public static ReadOnlyDictionary<string,string[]> OccurrenceNames { get; } = new ReadOnlyDictionary<string,string[]>
-            (new Dictionary<string, string[]>()
+            (new Dictionary<string,string[]>()
             {
                 { "de", new string[] { "Künstlichen", "Kosmogen", "Zerfall", "Primordial" } },
                 { "en", new string[] { "Synthetic", "Cosmogenic", "Decay", "Primordial" } },
@@ -1593,7 +1595,7 @@ namespace Kaos.Physics
         public static string StateCodes => " SLG";
 
         public static ReadOnlyDictionary<string,string[]> StateNames { get; } = new ReadOnlyDictionary<string,string[]>
-            (new Dictionary<string, string[]>()
+            (new Dictionary<string,string[]>()
             {
                 { "de", new string[] { "Unbekannt", "Solide", "Flüssigkeit", "Gas" } },
                 { "en", new string[] { "Unknown", "Solid", "Liquid", "Gas" } },
@@ -1614,6 +1616,8 @@ namespace Kaos.Physics
                 { "ru", new string[] { "Тема", "Категории", "блоки", "История", "Отличия", "Биология", "Появление", "Стабильность", "Состояния", "Монохромный" } }
             });
 
+        /// <summary>The immutable table of the elements (and n too).</summary>
+        /// <remarks>Use Z as the indexer.</remarks>
         public static ReadOnlyCollection<Nuclide> Table { get; } = new ReadOnlyCollection<Nuclide> (_nuclides);
 
         private Nuclide
@@ -1679,34 +1683,10 @@ namespace Kaos.Physics
         public ReadOnlyDictionary<string,string> NameMap { get; }
         public ReadOnlyCollection<Isotope> Isotopes { get; }
 
-        public int Z { get; }
-        public string Symbol { get; }
-        public string Name { get; }
-        public int Period { get; }
-        public int Group { get; }
-        public Category Category { get; }
-        public char Block { get; }
-        public double? Melt { get; }
-        public double? Boil { get; }
-        public double Weight { get; }
-        public State Atm0State => GetState (273.15);
-        public int Atm0StateIndex => (int) GetState (273.15);
-        public char Atm0StateCode => StateCodes[(int) GetState (273.15)];
-        public int Known { get; }
-        public int KnownIndex { get; }
-        public string Credit { get; }
-        public string Naming { get; }
-        public Origin Occurrence { get; private set; }
-        public int OccurrenceIndex => (int) Occurrence;
-        public char OccurrenceCode => OccurrenceCodes[(int) Occurrence];
-        public Nutrition Life { get; }
-        public int LifeIndex => (int) Life;
-        public string LifeCode => LifeCodes[(int) Life];
-        public int StabilityIndex { get; }
-        public int StableCount { get; }
-        public int CategoryIndex => (int) Category;
-        public string CategoryAbbr => Enum.GetName (typeof (Category), Category);
-
+        /// <summary>Find the <see cref="Isotope"/> with the supplied nucleon count.</summary>
+        /// <param name="a">Nucleon count.</param>
+        /// <returns>Collection item if exists, else <b>null</b>.</returns>
+        /// <remarks>Use the <see cref="Isotopes"/> collection to access as an array.</remarks>
         public Isotope this[int a]
         {
             get
@@ -1718,6 +1698,95 @@ namespace Kaos.Physics
             }
         }
 
+        /// <summary>Proton count. Also known as atomic number.</summary>
+        public int Z { get; }
+
+        /// <summary>One- or two-digit universal representation of the nuclide.</summary>
+        public string Symbol { get; }
+
+        /// <summary>Name of the nuclide in world English (en).</summary>
+        public string Name { get; }
+
+        public int Period { get; }
+        public int Group { get; }
+
+        public char Block { get; }
+
+        public Category Category { get; }
+
+        /// <summary>Returns integer value representing the category.</summary>
+        public int CategoryIndex => (int) Category;
+
+        /// <summary>Returns a string abbreviation of the category name.</summary>
+        public string CategoryAbbr => Enum.GetName (typeof (Category), Category);
+
+        /// <summary>Returns the temperature at which the nuclide changes state from solid to liquid at standard pressure (1 atm).</summary>
+        /// <remarks>The returned value is in kelvins if known, else <b>null</b>.</remarks>
+        public double? Melt { get; }
+
+        /// <summary>Returns the temperature at which the nuclide changes state from liquid to gas at standard pressure (1 atm).</summary>
+        /// <remarks>The returned value is in kelvins if known, else <b>null</b>.</remarks>
+        public double? Boil { get; }
+
+        public int Known { get; }
+        public int KnownIndex { get; }
+        public string Credit { get; }
+        public string Naming { get; }
+
+        /// <summary>Returns the nuclide's origin in nature, or synthetic.</summary>
+        public Origin Occurrence { get; private set; }
+
+        /// <summary>Returns index value (0-3) of <see cref="Occurrence"/>.</summary>
+        public int OccurrenceIndex => (int) Occurrence;
+
+        /// <summary>Returns letter code of <see cref="Occurrence"/>.</summary>
+        public char OccurrenceCode => OccurrenceCodes[(int) Occurrence];
+
+        /// <summary>Returns the biological significance of the element.</summary>
+        public Nutrition Life { get; }
+
+        /// <summary>Returns index value (0-4) of <see cref="Life"/>.</summary>
+        public int LifeIndex => (int) Life;
+
+        /// <summary>Returns 1- or 2-digit string code of Life.</summary>
+        public string LifeCode => LifeCodes[(int) Life];
+
+        /// <summary>Returns the column number of the element's placement in a 32-column standard table.</summary>
+        /// <remarks>Numbering starts at 1. Use <see cref="Period"/> for the row number.</remarks>
+        public int LongColumn
+        {
+            get
+            {
+                if (Group > 2) return Group + 14;
+                if (Group > 0) return Group;
+                if (Z >= 89) return Z - 86;
+                return Z - 54;
+            }
+        }
+
+        /// <summary>Returns index of radioactivity of the most stable isotope.</summary>
+        /// <remarks>A value of 0 indicates stable and 5 the most radioactive.</remarks>
+        public int StabilityIndex { get; }
+
+        /// <summary>Returns the number of stable isotopes.</summary>
+        public int StableCount { get; }
+
+        /// <summary>Returns state at 0 °C, standard atmosphere (1 atm).</summary>
+        public State StateAt0C => GetState (273.15);
+
+        /// <summary>Returns index value (0-3) of state at 0 °C, standard atmosphere (1 atm).</summary>
+        public int StateAt0CIndex => (int) GetState (273.15);
+
+        /// <summary>Returns character code of state at 0 °C, standard atmosphere (1 atm).</summary>
+        public char StateAt0CCode => StateCodes[(int) GetState (273.15)];
+
+        /// <summary>Returns conventional atomic weight (IUPAC 2009–2017).</summary>
+        /// <remarks>For elements with no stable isotope, returns atomic mass of least unstable isotope.</remarks>
+        public double Weight { get; }
+
+        /// <summary>Get the local element name.</summary>
+        /// <param name="lang">A 2- or 5 character language code.</param>
+        /// <returns>Element name for the supplied language if available, else returns <see cref="Name"/>.</returns>
         public string GetName (string lang)
         {
             lang = lang.ToUpper();
@@ -1727,6 +1796,9 @@ namespace Kaos.Physics
             return Name;
         }
 
+        /// <summary>Get the state of the nuclide at the supplied temperature.</summary>
+        /// <param name="kelvins">Temperature in K.</param>
+        /// <returns>State at the supplied K and standard atmosphere (atm 1) if known, else returns <c>Unknown</c>.</returns>
         public State GetState (double kelvins)
         {
             if (Melt != null && kelvins < Melt.Value)
@@ -1739,19 +1811,13 @@ namespace Kaos.Physics
             return State.Unknown;
         }
 
-        public int LongColumn
-        {
-            get
-            {
-                if (Group > 2) return Group + 14;
-                if (Group > 0) return Group;
-                if (Z >= 89) return Z - 86;
-                return Z - 54;
-            }
-        }
-
+        /// <summary>Provide nuclide contents in short form.</summary>
+        /// <returns>A <b>string</b> containing the symbol of the nuclide.</returns>
         public override string ToString() => Symbol;
 
+        /// <summary>Provide nuclide contents in human readable form.</summary>
+        /// <param name="lang">Language for element names or <b>null</b> for <c>en</c>.</param>
+        /// <returns>Fixed-column formatted string.</returns>
         public string ToFixedColumns (string lang)
         {
             var sb = new StringBuilder();
@@ -1771,7 +1837,7 @@ namespace Kaos.Physics
             sb.Append (ts);
             sb.Append (' ');
             sb.Append (CategoryAbbr);
-            sb.Append (' ', 11 - CategoryAbbr.Length);
+            sb.Append (' ', 9 - CategoryAbbr.Length);
             ts = Known.ToString();
             sb.Append (' ', 4 - ts.Length);
             sb.Append (ts);
@@ -1789,27 +1855,36 @@ namespace Kaos.Physics
             sb.Append (' ');
             sb.Append (LifeCode);
             sb.Append (' ', 3 - LifeCode.Length);
-            sb.Append (Atm0StateCode);
-            ts = Melt == null ? string.Empty : Melt.Value.ToString ("F4");
-            sb.Append (' ', 10 - ts.Length);
-            sb.Append (ts);
-            ts = Boil == null ? string.Empty : Boil.Value.ToString ("F4");
-            sb.Append (' ', 10 - ts.Length);
-            sb.Append (ts);
-            ts = Weight.ToString ("F4");
+            sb.Append (StateAt0CCode);
+            ts = Melt == null ? string.Empty : Melt.Value.ToString ("F3");
             sb.Append (' ', 9 - ts.Length);
+            sb.Append (ts);
+            ts = Boil == null ? string.Empty : Boil.Value.ToString ("F3");
+            sb.Append (' ', 9 - ts.Length);
+            sb.Append (ts);
+            ts = Weight.ToString ("F3");
+            sb.Append (' ', 8 - ts.Length);
             sb.Append (ts);
             return sb.ToString();
         }
 
-        public StringBuilder ToJsonSB (string quote)
+        /// <summary>Provide nuclide contents in JSON form.</summary>
+        /// <param name="quote">Name delimiter, or empty string for none.</param>
+        /// <returns>JSON formatted string.</returns>
+        /// <remarks>
+        /// Use a string with a single quote character for JSON results
+        /// or an empty string to produce JavaScript.
+        /// </remarks>
+        public string ToJson (string quote)
         {
             var sb = new StringBuilder();
             sb.Append ($"{quote}z{quote}:");
             string ts = Z.ToString();
             sb.Append (' ', 3 - ts.Length);
             sb.Append (ts);
-            sb.Append ($", {quote}symbol{quote}: \"{Symbol}\",");
+            sb.Append ($", {quote}symbol{quote}: \"");
+            sb.Append (Symbol);
+            sb.Append ("\",");
             sb.Append (' ', 3 - Symbol.Length);
             sb.Append ($"{quote}period{quote}: ");
             sb.Append (Period);
@@ -1831,19 +1906,19 @@ namespace Kaos.Physics
             sb.Append (ts);
             sb.Append ($", {quote}discoveryIndex{quote}: ");
             sb.Append (KnownIndex);
-            sb.Append ($", {quote}atm0StateIndex{quote}: ");
-            sb.Append (Atm0StateIndex);
+            sb.Append ($", {quote}stateIndex{quote}: ");
+            sb.Append (StateAt0CIndex);
             sb.Append ($", {quote}melt{quote}:");
-            ts = Melt == null ? "null" : Melt.Value.ToString ("F4");
+            ts = Melt == null ? "null" : Melt.Value.ToString ("F3");
             sb.Append (' ', 9 - ts.Length);
             sb.Append (ts);
             sb.Append ($", {quote}boil{quote}:");
-            ts = Boil == null ? "null" : Boil.Value.ToString ("F4");
+            ts = Boil == null ? "null" : Boil.Value.ToString ("F3");
             sb.Append (' ', 9 - ts.Length);
             sb.Append (ts);
             sb.Append ($", {quote}weight{quote}:");
-            ts = Weight.ToString ("F4");
-            sb.Append (' ', 9 - ts.Length);
+            ts = Weight.ToString ("F3");
+            sb.Append (' ', 8 - ts.Length);
             sb.Append (ts);
             sb.Append ($", {quote}stableCount{quote}:");
             ts = StableCount.ToString();
@@ -1855,19 +1930,22 @@ namespace Kaos.Physics
             for (var ix = 0; ix < Isotopes.Count; ++ix)
             {
                 if (ix != 0)
-                    sb.Append (',');
-                sb.Append (Isotopes[ix].ToJson());
+                    sb.Append (", ");
+                sb.Append (Isotopes[ix].ToJson (quote));
             }
             sb.Append (']');
-            return sb;
+            return sb.ToString();
         }
 
+        /// <summary>Iterate thru all the elements.</summary>
+        /// <remarks>This returns all nuclides except the neutron (Z=0).</remarks>
         public static IEnumerable<Nuclide> GetElements()
         {
             for (int ix = 1; ix < _nuclides.Length; ++ix)
                 yield return _nuclides[ix];
         }
 
+        /// <summary>Iterate thru the ASCII lines of a 32-column formatted table.</summary>
         public static IEnumerable<string> GetLongTable()
         {
             var sb = new StringBuilder();

@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Linq;
 using Kaos.Physics;
 
@@ -89,11 +90,24 @@ namespace TestPhysics
         [TestMethod]
         public void CheckProperties()
         {
+            Assert.IsNull (Nuclide.Table[5][15]);
+            Assert.AreEqual (6, Nuclide.Table[5][11].N);
+
             Assert.AreEqual ('S', Nuclide.Table[118].OccurrenceCode);
             Assert.AreEqual ('D', Nuclide.Table[43].OccurrenceCode);
-            Assert.AreEqual ('D', Nuclide.Table[86].OccurrenceCode);
-            Assert.AreEqual ('D', Nuclide.Table[93].OccurrenceCode);
             Assert.AreEqual ('P', Nuclide.Table[2].OccurrenceCode);
+
+            Assert.AreEqual (Origin.Decay, Nuclide.Table[86].Occurrence);
+            Assert.AreEqual (2, Nuclide.Table[93].OccurrenceIndex);
+
+            Assert.AreEqual (Category.NobleGas, Nuclide.Table[2].Category);
+            Assert.AreEqual (1, Nuclide.Table[20].CategoryIndex);
+            Assert.AreEqual (12.011, Nuclide.Table[6].Weight);
+            Assert.AreEqual ("BT", Nuclide.Table[5].LifeCode);
+            Assert.AreEqual (Nutrition.BulkEssential, Nuclide.Table[1].Life);
+            Assert.AreEqual (1, Nuclide.Table[1].LifeIndex);
+
+            Assert.AreEqual (32, Nuclide.Table[10].LongColumn);
         }
 
         [TestMethod]
@@ -132,6 +146,9 @@ namespace TestPhysics
         [TestMethod]
         public void CheckStability()
         {
+            Assert.AreEqual (1, Nuclide.Table[43].StabilityIndex);
+            Assert.AreEqual (10, Nuclide.Table[50].StableCount);
+
             int ix = 0, expected = 0;
             foreach (var kv in Nuclide.StabilityDescriptions)
                 if (ix++ == 0)
@@ -146,12 +163,32 @@ namespace TestPhysics
         [TestMethod]
         public void CheckTemperatures()
         {
-            Assert.AreEqual ("Gas", Nuclide.StateNames["en"][Nuclide.Table[2].Atm0StateIndex]);
+            Assert.AreEqual ("Gas", Nuclide.StateNames["en"][Nuclide.Table[18].StateAt0CIndex]);
+            Assert.AreEqual ('L', Nuclide.Table[80].StateAt0CCode);
 
             foreach (Nuclide nuc in Nuclide.Table)
             {
                 Assert.IsTrue (nuc.Melt == null || nuc.Boil == null || nuc.Melt <= nuc.Boil, "Z="+nuc.Z);
             }
+        }
+
+        [TestMethod]
+        public void CheckWeight()
+        {
+            foreach (Nuclide nuc in Nuclide.Table)
+                if (nuc.Occurrence < Origin.Decay)
+                {
+                    var expected = Math.Truncate (nuc.Weight);
+                    Assert.AreEqual (expected, nuc.Weight, "Z="+nuc.Z);
+                    double? maxHL = null;
+                    int maxA = 0;
+                    foreach (Isotope iso in nuc.Isotopes)
+                    {
+                        if (maxHL == null || maxHL < iso.Halflife)
+                        { maxHL = iso.Halflife; maxA = iso.A; }
+                    }
+                    Assert.AreEqual (nuc.Weight, maxA, "Z="+nuc.Z);
+                }
         }
 
         [TestMethod]
@@ -167,6 +204,26 @@ namespace TestPhysics
     public class Test_Isotope
     {
         [TestMethod]
+        public void TestCtor()
+        {
+            var iso1 = new Isotope (2, 5, 0.0);
+            Assert.AreEqual (2, iso1.Z);
+            Assert.AreEqual (5, iso1.A);
+            Assert.AreEqual (null, iso1.Halflife);
+            Assert.AreEqual (Decay.Stable, iso1.DecayMode);
+            Assert.AreEqual (0, iso1.StabilityIndex);
+
+            var iso2 = new Isotope (z: 118, a: 300, abundance: null, halflife: 0.01, decayMode: Decay.Alpha);
+            Assert.AreEqual (300, iso2.A);
+            Assert.AreEqual (Decay.Alpha, iso2.DecayMode);
+            Assert.AreEqual (5, iso2.StabilityIndex);
+
+            int productZ = iso2.Transmute (Decay.Alpha, out int productA);
+            Assert.AreEqual (296, productA);
+            Assert.AreEqual (116, productZ);
+        }
+
+        [TestMethod]
         public void CheckGlobals()
         {
             Assert.IsTrue (Isotope.DecayCodes.Length > 0);
@@ -178,11 +235,11 @@ namespace TestPhysics
         {
             Assert.AreEqual (Origin.Synthetic, Nuclide.Table[117].Isotopes[0].Occurrence);
             Assert.AreEqual (Origin.Cosmogenic, Nuclide.Table[1].Isotopes[2].Occurrence);
+            Assert.AreEqual (Origin.Decay, Nuclide.Table[84][210].Occurrence);
             Assert.AreEqual (Origin.Primordial, Nuclide.Table[5].Isotopes[0].Occurrence);
 
-            Assert.AreEqual (Origin.Decay, Nuclide.Table[84][210].Occurrence);
-            Assert.AreEqual (Origin.Primordial, Nuclide.Table[92][235].Occurrence);
-            Assert.AreEqual (Origin.Cosmogenic, Nuclide.Table[94][244].Occurrence);
+            Assert.AreEqual (3, Nuclide.Table[92][235].OccurrenceIndex);
+            Assert.AreEqual ('C', Nuclide.Table[94][244].OccurrenceCode);
         }
 
         [TestMethod]

@@ -36,6 +36,10 @@ namespace AppMain
             Console.WriteLine (',');
             Console.WriteLine ();
 
+            Console.Write (toJsonSB2 ("IsotopesHeading", Nuclide.IsotopesHeadings).ToString());
+            Console.WriteLine (',');
+            Console.WriteLine ();
+
             Console.Write (toJsonSB1 ("lifeCodes", Nuclide.LifeCodes).ToString());
             Console.WriteLine (',');
             Console.WriteLine ();
@@ -89,7 +93,7 @@ namespace AppMain
                 {
                     var nm = Nuclide.Table[nx].GetName (lg);
                     Console.Write ($"\"{nm}\"");
-                    if (nx+1 < Nuclide.Table.Count)
+                    if (nx + 1 < Nuclide.Table.Count)
                         Console.Write (',');
                     Console.Write (new string (' ', maxLens[nx] - nm.Length + 1));
                 }
@@ -99,16 +103,15 @@ namespace AppMain
             Console.WriteLine ("  },");
             Console.WriteLine ();
 
-            // Output the nuclides:
+            // The nuclides:
 
-            Console.WriteLine ($"  {quote}nuclides{quote}{binop}");
-            Console.WriteLine ("  [");
+            Console.WriteLine ($"  {quote}nuclides{quote}{binop} [");
             for (int nx = 0; nx < Nuclide.Table.Count; ++nx)
             {
                 if (nx != 0)
                     Console.WriteLine (',');
                 Console.Write ("    { ");
-                Console.Write (Nuclide.Table[nx].ToJsonSB (quote).ToString());
+                Console.Write (Nuclide.Table[nx].ToJson (quote));
                 Console.Write (" }");
             }
             Console.WriteLine ();
@@ -138,7 +141,7 @@ namespace AppMain
                 return sb;
             }
 
-            StringBuilder toJsonSB2 (string propertyName, ReadOnlyDictionary<string,string[]> vals)
+            StringBuilder toJsonSB2 (string propertyName, ReadOnlyDictionary<string,string[]> map)
             {
                 var sb = new StringBuilder();
                 sb.Append ("  ");
@@ -149,7 +152,7 @@ namespace AppMain
                 sb.Append (" {");
                 sb.Append (Environment.NewLine);
                 int cx1 = 0;
-                foreach (var kv in vals)
+                foreach (var kv in map)
                 {
                     if (cx1++ != 0) { sb.Append (','); sb.Append (Environment.NewLine); }
                     sb.Append ("    \"");

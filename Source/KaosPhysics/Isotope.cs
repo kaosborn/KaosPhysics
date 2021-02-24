@@ -41,7 +41,7 @@ namespace Kaos.Physics
         /// <summary>Time to decay by 50%. Stable isotopes are indicated by <b>null</b>.</summary>
         public double? Halflife { get; private set; }
 
-        /// <summary>Or'ed bitflags of all possible transmutations.</summary>
+        /// <summary>Ored bitflags of all possible transmutations.</summary>
         public Decay DecayMode { get; private set; }
 
         /// <summary>Returns index of radioactivity from 0 to 5.</summary>
@@ -62,12 +62,12 @@ namespace Kaos.Physics
             StabilityIndex = 0;
         }
 
-        /// <summary>Instantiate a stable isotope.</summary>
+        /// <summary>Instantiate an unstable isotope.</summary>
         /// <param name="z">Proton count.</param>
         /// <param name="a">Nucleon count.</param>
         /// <param name="abundance">Percentage of the isotope to all the element's isotopes.</param>
         /// <param name="halflife">Time to decay by half.</param>
-        /// <param name="decayMode">Ored bitflags of isotope mutations.</param>
+        /// <param name="decayMode">Ored bitflags of possible isotope mutations.</param>
         public Isotope (int z, int a, double? abundance, double halflife, Decay decayMode)
         {
             Z = z;
@@ -76,14 +76,17 @@ namespace Kaos.Physics
             Halflife = halflife;
             DecayMode = decayMode;
             StabilityIndex =
-                Halflife >= 2000000.0*31556952.0 ?  1 :
-                Halflife >= 800.0*31556952.0 ? 2 :
-                Halflife >= 86400.0 ? 3 :
-                Halflife >= 600.0 ? 4 : 5;
+                Halflife >= 2000000.0 * Nuclide.SecondsPerYear ?  1 :
+                Halflife >= 800.0 * Nuclide.SecondsPerYear ? 2 :
+                Halflife >= 24.0 * 60.00 * 60.0 ? 3 :
+                Halflife >= 10.0 * 60.0 ? 4 : 5;
         }
 
         /// <summary>Returns <b>true</b> if the isotope is not synthetic.</summary>
         public bool IsNatural => Abundance != null;
+
+        /// <summary>Returns the neutron count (A - Z).</summary>
+        public int N => A - Z;
 
         private Origin? _occurrence = null;
 
@@ -98,10 +101,10 @@ namespace Kaos.Physics
             }
         }
 
-        /// <summary>Returns index value for Occurrence.</summary>
+        /// <summary>Returns index value (0-3) of <see cref="Occurrence"/>.</summary>
         public int OccurrenceIndex => (int) Occurrence;
 
-        /// <summary>Returns letter code for Occurrence.</summary>
+        /// <summary>Returns letter code of <see cref="Occurrence"/>.</summary>
         public char OccurrenceCode => Nuclide.OccurrenceCodes[(int) Occurrence];
 
         /// <summary>Returns <b>true</b> if the isotope is not radioactive.</summary>
@@ -194,35 +197,39 @@ namespace Kaos.Physics
         }
 
         /// <summary>Provide JSON format contents of the isotope.</summary>
+        /// <param name="quote">Typically the quote character or empty string.</param>
         /// <returns>JSON formatted string.</returns>
-        public string ToJson()
+        public string ToJson (string quote)
         {
             var sb = new StringBuilder();
-            sb.Append ('[');
+            sb.Append ('{');
+            sb.Append ($"{quote}z{quote}:");
+            sb.Append (Z);
+            sb.Append ($",{quote}a{quote}:");
             sb.Append (A);
-            sb.Append (',');
+            sb.Append ($",{quote}abundance{quote}:");
             sb.Append (IsNatural ? Abundance.ToString() : "null");
-            sb.Append (',');
+            sb.Append ($",{quote}occurrenceIndex{quote}:");
             sb.Append (OccurrenceIndex);
             if (DecayMode != 0 || Halflife != null)
             {
-                sb.Append (',');
+                sb.Append ($",{quote}stabilityIndex{quote}:");
                 sb.Append (StabilityIndex);
-                sb.Append (',');
+                sb.Append ($",{quote}decayFlags{quote}:");
                 sb.Append ((int) DecayMode);
-                sb.Append (',');
+                sb.Append ($",{quote}halflife{quote}:");
                 sb.Append (Halflife.Value);
             }
-            sb.Append (']');
+            sb.Append ('}');
             return sb.ToString();
         }
 
         public override string ToString() => "Z,A="+Z+","+A;
 
         /// <summary>Convert this isotope to another.</summary>
-        /// <returns>Proton count (Z) of product.</returns>
         /// <param name="decayModeBitflag">Bitflag of isotope mutation.</param>
         /// <param name="nucleonCount">Nucleon count (A) of product.</param>
+        /// <returns>Proton count (Z) of product.</returns>
         public int Transmute (Decay decayModeBitflag, out int nucleonCount)
         {
             nucleonCount = A;

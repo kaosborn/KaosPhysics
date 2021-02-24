@@ -1,7 +1,7 @@
 ﻿// Usage:
 //   DotElements.exe [lang]
 // Purpose:
-// * Output elements and isotopes as fixed-column lists.
+// * Output elements and isotopes in concise, fixed-column lists.
 // * Provide element name for the supplied language. (default="en").
 
 using System;
@@ -16,7 +16,7 @@ namespace AppMain
         {
             string lang = args.Length == 0 || ! Nuclide.MaxNameLengths.ContainsKey (args[0]) ? "en-US" : args[0];
 
-            Console.WriteLine ("; Z,symbol,name,period,group,category,discoveryYear,discoveryIndex,stableCount,stabilityIndex,block,occurrenceCode,lifeCode,atm0StateCode,melt,boil,weight");
+            Console.WriteLine ("; Z,symbol,name,period,group,category,discoveryYear,discoveryIndex,stableCount,stabilityIndex,block,occurrenceCode,lifeCode,stateCode,melt,boil,weight");
             foreach (var nuc in Nuclide.Table)
                 Console.WriteLine (nuc.ToFixedColumns (lang));
 
