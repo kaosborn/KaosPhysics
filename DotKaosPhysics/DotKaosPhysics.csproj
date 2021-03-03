@@ -7,12 +7,14 @@
     <Version>0.1.0</Version>
     <Authors>github.com/kaosborn</Authors>
     <Company />
-    <Description>Immutable table of the elements</Description>
-    <RepositoryUrl>github.com/kaosborn/kaosphysics</RepositoryUrl>
+    <Description>Immutable table of the elements.</Description>
+    <RepositoryUrl>https://github.com/kaosborn/KaosPhysics</RepositoryUrl>
     <Copyright>Copyright © 2021 github.com/kaosborn</Copyright>
     <RepositoryType>Git</RepositoryType>
-    <PackageTags>chemistry elements isotopes</PackageTags>
+    <PackageTags>chemistry elements nuclides isotopes atomic periodic table</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/kaosborn/KaosPhysics</PackageProjectUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -20,7 +22,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile></DocumentationFile>
+    <DocumentationFile>obj\Release\netcoreapp3.1\KaosPhysics.xml</DocumentationFile>
   </PropertyGroup>
 
   <Import Project="..\Source\KaosPhysics\KaosPhysics.projitems" Label="Shared" />

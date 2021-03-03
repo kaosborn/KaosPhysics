@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Kaos.Physics;
 
@@ -11,7 +12,7 @@ namespace TestPhysics
         private static string[] langWhiteList = new string[]
         { "de", "en", "en-GB", "en-US", "es", "fr", "it", "nl", "pl", "pt", "ru" };
 
-        private static string[] expectedTable = new string[]
+        private static string[] expectedASCII = new string[]
         {
             "H . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . He",
             "LiBe. . . . . . . . . . . . . . . . . . . . . . . . B C N O F Ne",
@@ -23,20 +24,104 @@ namespace TestPhysics
         };
 
         [TestMethod]
-        public void CheckTable()
+        public void TestNuclide_GetLongTable()
         {
             int ix = 0;
-            foreach (var lx in Nuclide.GetLongTable())
+            foreach (string actualASCII in Nuclide.GetLongTable())
             {
-                Assert.AreEqual (expectedTable[ix], lx);
+                Assert.AreEqual (expectedASCII[ix], actualASCII);
                 ++ix;
             }
         }
 
         [TestMethod]
-        public void CheckGlobals()
+        public void TestNuclide_CheckGlobals()
         {
             Assert.IsTrue (Nuclide.Table.Count >= 119);
+            Assert.IsTrue (Nuclide.MaxNameLengths["en"] > 8);
+
+            int ix = 0;
+            int expected = 0;
+            foreach (var kv in Nuclide.DecayModeNames)
+            {
+                foreach (var nm in kv.Value)
+                    Assert.IsFalse (nm.Contains ('\''), "nm="+nm);
+
+                if (ix++ == 0)
+                    expected = kv.Value.Length;
+                else
+                    Assert.AreEqual (expected, kv.Value.Length, "ix="+ix);
+            }
+
+            ix = 0;
+            expected = 0;
+            foreach (var kv in Nuclide.ThemeNames)
+                if (ix++ == 0)
+                    expected = kv.Value.Length;
+                else
+                    Assert.AreEqual (expected, kv.Value.Length, "ix="+ix);
+
+            ix = 0;
+            expected = 0;
+            foreach (var kv in Nuclide.IsotopesHeadings)
+                if (ix++ == 0)
+                    expected = kv.Value.Length;
+                else
+                    Assert.AreEqual (expected, kv.Value.Length, "ix="+ix);
+        }
+
+        [TestMethod]
+        public void TestNuclide_CheckProperties1()
+        {
+            Assert.IsNull (Nuclide.Table[5][15]);
+            Assert.AreEqual (6, Nuclide.Table[5][11].N);
+            Assert.AreEqual (32, Nuclide.Table[10].LongColumn);
+        }
+
+        [TestMethod]
+        public void TestNuclide_CheckProperties2()
+        {
+            for (int nx = 0; nx < Nuclide.Table.Count; ++nx)
+            {
+                var nuc = Nuclide.Table[nx];
+
+                Assert.AreEqual (nx, nuc.Z);
+                Assert.IsTrue (nuc.Symbol.Length >= 1 && nuc.Symbol.Length <= 3, "Z="+nuc.Z);
+                Assert.IsTrue (nuc.Z == 0 || nuc.Period >= 1 && nuc.Period <= 7, "Z="+nuc.Z);
+                Assert.IsTrue (nuc.Z == 0 || nuc.Block == 'f' || nuc.Group >= 1 && nuc.Group <= 18, "Z="+ nuc.Z);
+                Assert.IsTrue (nuc.Z == 0 || nuc.Block == 's' || nuc.Block == 'p' || nuc.Block == 'd' || nuc.Block == 'f', "Z="+nuc.Z);
+                Assert.IsTrue (nuc.Z == 0 || nuc.LongColumn >= 1 && nuc.LongColumn <= 32, "Z="+nuc.Z);
+                Assert.IsTrue (nuc.Known >= 0 && nuc.Known <= 2030, "Z="+nuc.Z);
+                Assert.IsTrue (nuc.KnownIndex >= 0 && nuc.KnownIndex <= 6, "Z="+nuc.Z);
+                Assert.IsTrue (nuc.Naming.Length > 0, "Z="+nuc.Z);
+                Assert.IsTrue (nuc.Known == 0 || nuc.Credit.Length > 0, "Z="+nuc.Z);
+                Assert.IsTrue (nuc.ToString().Length > 0);
+                Assert.IsTrue (nuc.ToFixedWidthString("en").Length > 0);
+                Assert.IsTrue (nuc.ToJsonString("").Length > 0);
+            }
+        }
+
+        [TestMethod]
+        public void TestNuclide_CheckLangs()
+        {
+            foreach (Nuclide nuc in Nuclide.Table)
+            {
+                Assert.IsTrue (nuc.Name.Length >= 1, "Z="+nuc.Z);
+
+                foreach (var kv in nuc.NameMap)
+                {
+                    Assert.IsTrue (langWhiteList.Any (x => x == kv.Key), "Z="+nuc.Z+", lang="+kv.Key);
+                    Assert.IsTrue (kv.Value.Length > 0 && kv.Value != nuc.Name, "Z="+nuc.Z);
+                }
+            }
+        }
+
+        [TestMethod]
+        public void TestNuclide_Category()
+        {
+            Assert.AreEqual (Category.NobleGas, Nuclide.Table[2].Category);
+            Assert.AreEqual (1, Nuclide.Table[20].CategoryIndex);
+            Assert.AreEqual ("NobleGas", Nuclide.Table[18].CategoryAbbr);
 
             int ix = 0;
             int expected = 0;
@@ -53,34 +138,19 @@ namespace TestPhysics
                     expected = kv.Value.Length;
                 else
                     Assert.AreEqual (expected, kv.Value.Length, "ix="+ix);
+        }
 
-            ix = 0;
-            expected = 0;
+        [TestMethod]
+        public void TestNuclide_Life()
+        {
+            Assert.AreEqual ("BT", Nuclide.Table[5].LifeCode);
+            Assert.AreEqual (Nutrition.BulkEssential, Nuclide.Table[1].Life);
+            Assert.AreEqual (1, Nuclide.Table[1].LifeIndex);
+            Assert.AreEqual ("A", Nuclide.LifeCodes[Nuclide.Table[82].LifeIndex]);
+
+            int ix = 0;
+            int expected = 0;
             foreach (var kv in Nuclide.LifeDescriptions)
-                if (ix++ == 0)
-                    expected = kv.Value.Length;
-                else
-                    Assert.AreEqual (expected, kv.Value.Length, "ix="+ix);
-
-            ix = 0;
-            expected = 0;
-            foreach (var kv in Nuclide.OccurrenceNames)
-                if (ix++ == 0)
-                    expected = kv.Value.Length;
-                else
-                    Assert.AreEqual (expected, kv.Value.Length, "ix="+ix);
-
-            ix = 0;
-            expected = 0;
-            foreach (var kv in Nuclide.StateNames)
-                if (ix++ == 0)
-                    expected = kv.Value.Length;
-                else
-                    Assert.AreEqual (expected, kv.Value.Length, "ix="+ix);
-
-            ix = 0;
-            expected = 0;
-            foreach (var kv in Nuclide.ThemeNames)
                 if (ix++ == 0)
                     expected = kv.Value.Length;
                 else
@@ -88,63 +158,27 @@ namespace TestPhysics
         }
 
         [TestMethod]
-        public void CheckProperties()
+        public void TestNuclide_Occurrence()
         {
-            Assert.IsNull (Nuclide.Table[5][15]);
-            Assert.AreEqual (6, Nuclide.Table[5][11].N);
-
             Assert.AreEqual ('S', Nuclide.Table[118].OccurrenceCode);
             Assert.AreEqual ('D', Nuclide.Table[43].OccurrenceCode);
             Assert.AreEqual ('P', Nuclide.Table[2].OccurrenceCode);
 
             Assert.AreEqual (Origin.Decay, Nuclide.Table[86].Occurrence);
             Assert.AreEqual (2, Nuclide.Table[93].OccurrenceIndex);
+            Assert.AreEqual ('S', Nuclide.OccurrenceCodes[Nuclide.Table[118].OccurrenceIndex]);
 
-            Assert.AreEqual (Category.NobleGas, Nuclide.Table[2].Category);
-            Assert.AreEqual (1, Nuclide.Table[20].CategoryIndex);
-            Assert.AreEqual (12.011, Nuclide.Table[6].Weight);
-            Assert.AreEqual ("BT", Nuclide.Table[5].LifeCode);
-            Assert.AreEqual (Nutrition.BulkEssential, Nuclide.Table[1].Life);
-            Assert.AreEqual (1, Nuclide.Table[1].LifeIndex);
-
-            Assert.AreEqual (32, Nuclide.Table[10].LongColumn);
+            int ix = 0;
+            int expected = 0;
+            foreach (var kv in Nuclide.OccurrenceNames)
+                if (ix++ == 0)
+                    expected = kv.Value.Length;
+                else
+                    Assert.AreEqual (expected, kv.Value.Length, "ix="+ix);
         }
 
         [TestMethod]
-        public void CheckAllProperties()
-        {
-            for (int nx = 0; nx < Nuclide.Table.Count; ++nx)
-            {
-                var nuc = Nuclide.Table[nx];
-
-                Assert.AreEqual (nx, nuc.Z);
-                Assert.IsTrue (nuc.Symbol.Length >= 1 && nuc.Symbol.Length <= 3, "Z="+nuc.Z);
-                Assert.IsTrue (nuc.Group >= 0 && nuc.Group <= 18, "Z="+ nuc.Z);
-                Assert.IsTrue (nuc.Z == 0 || nuc.Period >= 1 && nuc.Period <= 7, "Z="+nuc.Z);
-                Assert.IsTrue (nuc.Z == 0 || nuc.Block == 's' || nuc.Block == 'p' || nuc.Block == 'd' || nuc.Block == 'f', "Z="+nuc.Z);
-                Assert.IsTrue (nuc.Z == 0 || nuc.LongColumn >= 1 && nuc.LongColumn <= 32, "Z="+nuc.Z);
-                Assert.IsTrue (nuc.Known >= 0 && nuc.Known <= 2030, "Z="+nuc.Z);
-                Assert.IsTrue (nuc.Naming.Length > 0, "Z="+nuc.Z);
-            }
-        }
-
-        [TestMethod]
-        public void CheckLangs()
-        {
-            foreach (Nuclide nuc in Nuclide.Table)
-            {
-                Assert.IsTrue (nuc.Name.Length >= 1, "Z="+nuc.Z);
-
-                foreach (var kv in nuc.NameMap)
-                {
-                    Assert.IsTrue (langWhiteList.Any (x => x == kv.Key), "Z="+nuc.Z+", lang="+kv.Key);
-                    Assert.IsTrue (kv.Value.Length > 0 && kv.Value != nuc.Name, "Z="+nuc.Z);
-                }
-            }
-        }
-
-        [TestMethod]
-        public void CheckStability()
+        public void TestNuclide_Stability()
         {
             Assert.AreEqual (1, Nuclide.Table[43].StabilityIndex);
             Assert.AreEqual (10, Nuclide.Table[50].StableCount);
@@ -161,20 +195,31 @@ namespace TestPhysics
         }
 
         [TestMethod]
-        public void CheckTemperatures()
+        public void TestNuclide_State()
         {
             Assert.AreEqual ("Gas", Nuclide.StateNames["en"][Nuclide.Table[18].StateAt0CIndex]);
             Assert.AreEqual ('L', Nuclide.Table[80].StateAt0CCode);
+            Assert.AreEqual (State.Solid, Nuclide.Table[15].StateAt0C);
+            Assert.AreEqual (State.Liquid, Nuclide.Table[30].GetState(500+273.15));
+            Assert.AreEqual ('S', Nuclide.StateCodes[(int) Nuclide.Table[6].GetState(3000)]);
 
             foreach (Nuclide nuc in Nuclide.Table)
-            {
                 Assert.IsTrue (nuc.Melt == null || nuc.Boil == null || nuc.Melt <= nuc.Boil, "Z="+nuc.Z);
-            }
+
+            int ix = 0;
+            int expected = 0;
+            foreach (var kv in Nuclide.StateNames)
+                if (ix++ == 0)
+                    expected = kv.Value.Length;
+                else
+                    Assert.AreEqual (expected, kv.Value.Length, "ix="+ix);
         }
 
         [TestMethod]
-        public void CheckWeight()
+        public void TestNuclide_Weight()
         {
+            Assert.AreEqual (12.011, Nuclide.Table[6].Weight);
+
             foreach (Nuclide nuc in Nuclide.Table)
                 if (nuc.Occurrence < Origin.Decay)
                 {
@@ -192,11 +237,39 @@ namespace TestPhysics
         }
 
         [TestMethod]
-        public void CheckIsotopes()
+        public void TestNuclide_GetBySymbol()
         {
+            Nuclide actual1 = Nuclide.Table.FirstOrDefault (x => x.Symbol == "W");
+            Assert.AreEqual (74, actual1.Z); 
+
+            Nuclide actual2 = Nuclide.GetBySymbol ("W");
+            Assert.AreEqual (74, actual2.Z);
+
+            Nuclide actual3 = Nuclide.GetBySymbol ("Xy");
+            Assert.IsNull (actual3);
+        }
+
+        [TestMethod]
+        public void TestNuclide_CheckAll()
+        {
+            int expected = 0;
+
             foreach (Nuclide nuc in Nuclide.Table)
                 foreach (Isotope iso in nuc.Isotopes)
+                {
                     Assert.AreEqual (nuc.Z, iso.Z);
+                    ++expected;
+                }
+
+            Assert.AreEqual (expected, Nuclide.GetIsotopes().Count() + 1);
+        }
+
+        [TestMethod]
+        public void TestNuclide_CheckMethods()
+        {
+            Assert.AreEqual (Nuclide.Table.Count() - 1, Nuclide.GetElements().Count());
+            Assert.IsTrue (Nuclide.GetLongTable().Count() >= 7);
+            Assert.AreEqual ("Kalium", Nuclide.Table[19].GetName("de"));
         }
     }
 
@@ -204,13 +277,13 @@ namespace TestPhysics
     public class Test_Isotope
     {
         [TestMethod]
-        public void TestCtor()
+        public void TestIsotope_Ctor()
         {
             var iso1 = new Isotope (2, 5, 0.0);
             Assert.AreEqual (2, iso1.Z);
             Assert.AreEqual (5, iso1.A);
             Assert.AreEqual (null, iso1.Halflife);
-            Assert.AreEqual (Decay.Stable, iso1.DecayMode);
+            Assert.AreEqual (Decay.None, iso1.DecayMode);
             Assert.AreEqual (0, iso1.StabilityIndex);
 
             var iso2 = new Isotope (z: 118, a: 300, abundance: null, halflife: 0.01, decayMode: Decay.Alpha);
@@ -218,20 +291,25 @@ namespace TestPhysics
             Assert.AreEqual (Decay.Alpha, iso2.DecayMode);
             Assert.AreEqual (5, iso2.StabilityIndex);
 
-            int productZ = iso2.Transmute (Decay.Alpha, out int productA);
-            Assert.AreEqual (296, productA);
-            Assert.AreEqual (116, productZ);
+            int product2Z = iso2.Transmute (Decay.Alpha, out int product2A);
+            Assert.AreEqual (116, product2Z);
+            Assert.AreEqual (296, product2A);
+
+            var iso3 = new Isotope (1, 4, null, 0.001, Decay.NEmit);
+            int product3Z = iso3.Transmute (Decay.NEmit, out int product3A);
+            Assert.AreEqual (1, product3Z);
+            Assert.AreEqual (3, product3A);
         }
 
         [TestMethod]
-        public void CheckGlobals()
+        public void TestIsotope_CheckGlobals()
         {
-            Assert.IsTrue (Isotope.DecayCodes.Length > 0);
-            Assert.AreEqual (Isotope.DecayCodes.Length, Isotope.DecaySymbols.Count);
+            Assert.AreEqual (Nuclide.DecayModeCount, Nuclide.DecayModeCodes.Length);
+            Assert.AreEqual (Nuclide.DecayModeCount, Nuclide.DecayModeSymbols.Count);
         }
 
         [TestMethod]
-        public void CheckProperties()
+        public void TestIsotope_CheckProperties1()
         {
             Assert.AreEqual (Origin.Synthetic, Nuclide.Table[117].Isotopes[0].Occurrence);
             Assert.AreEqual (Origin.Cosmogenic, Nuclide.Table[1].Isotopes[2].Occurrence);
@@ -240,10 +318,20 @@ namespace TestPhysics
 
             Assert.AreEqual (3, Nuclide.Table[92][235].OccurrenceIndex);
             Assert.AreEqual ('C', Nuclide.Table[94][244].OccurrenceCode);
+
+            Assert.AreEqual (82, Nuclide.Table[82][210].Nuclide.Z);
         }
 
         [TestMethod]
-        public void CheckAllProperties()
+        [ExpectedException (typeof (ArgumentOutOfRangeException))]
+        public void TestIsotope_Nuclide_ArgumentOutOfRange()
+        {
+            var badIsotope = new Isotope (200, 400, 0.0);
+            Nuclide unreachableResult = badIsotope.Nuclide;
+        }
+
+        [TestMethod]
+        public void TestIsotope_CheckProperties2()
         {
             foreach (Nuclide nuc in Nuclide.Table)
             {
@@ -251,16 +339,20 @@ namespace TestPhysics
                 foreach (Isotope iso in nuc.Isotopes)
                 {
                     Assert.IsTrue (iso.A >= nuc.Z);
-                    Assert.IsTrue (iso.Halflife == null || iso.Halflife > 0);
-                    Assert.AreEqual (iso.DecayMode != Decay.Stable, iso.Halflife != null);
-                    Assert.AreEqual (iso.DecayMode != Decay.Stable, iso.DecayModeCodes.Length > 0);
-                    Assert.AreEqual (iso.DecayMode != Decay.Stable, ! iso.IsStable);
+                    Assert.AreEqual (iso.IsStable, iso.DecayModeCodes.Length == 0);
+                    Assert.AreEqual (iso.IsStable, iso.DecayMode == Decay.None);
+                    Assert.AreEqual (iso.IsStable, iso.StabilityIndex == 0);
+                    Assert.AreEqual (iso.IsStable, iso.Halflife == null);
+                    Assert.IsTrue (iso.Halflife == null || iso.Halflife > 0.0);
+                    Assert.IsTrue (iso.ToString().Length > 0);
+                    Assert.IsTrue (iso.ToFixedWidthString().Length > 0);
+                    Assert.IsTrue (iso.ToJsonString("").Length > 0);
                 }
             }
         }
 
         [TestMethod]
-        public void CheckAbundance()
+        public void TestIsotope_Abundance()
         {
             foreach (Nuclide nuc in Nuclide.Table)
             {
@@ -268,13 +360,28 @@ namespace TestPhysics
                 foreach (Isotope iso in nuc.Isotopes)
                 {
                     Assert.IsTrue (iso.Abundance == null || (iso.Abundance >= 0 && iso.Abundance <= 100));
-                    Assert.IsTrue ((iso.Abundance != null) == iso.IsNatural);
+                    Assert.AreEqual (iso.IsNatural, iso.Abundance != null);
                     if (iso.Abundance != null)
                         total += iso.Abundance.Value;
                 }
 
                 Assert.IsTrue (total < 0.05 || (total > 99.5 && total < 101.0), "Z="+nuc.Z+", total="+total);
             }
+        }
+
+        [TestMethod]
+        public void TestIsotope_GetDecayIndexes()
+        {
+            var nuc = Nuclide.Table[19][40];
+            var actualBe9 = 0;
+            foreach (int decayIndex in Nuclide.Table[4][9].GetDecayIndexes())
+                ++actualBe9;
+            Assert.AreEqual (0, actualBe9);
+
+            var actualK40 = 0;
+            foreach (int decayIndex in Nuclide.Table[19][40].GetDecayIndexes())
+                ++actualK40;
+            Assert.AreEqual (3, actualK40);
         }
     }
 }

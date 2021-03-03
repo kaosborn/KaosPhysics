@@ -13,10 +13,14 @@ jobs:
       run: |
         dotnet build -c Release DotElements
         dotnet build -c Release DotGenJson
+        dotnet build -c Release DotKaosPhysics
+    - name: Copy build artifacts
+      run: move DotKaosPhysics\bin\Release\*.nupkg .\RunResults
     - name: Run executables
       run: |
         DotElements\bin\Release\netcoreapp3.1\DotElements.exe > .\RunResults\nuclides.txt
         DotGenJson\bin\Release\netcoreapp3.1\DotGenJson.exe > .\RunResults\nuclides.json
+        DotGenJson\bin\Release\netcoreapp3.1\DotGenJson.exe -js > .\RunResults\nuclides.js
     - uses: actions/upload-artifact@v1
       with:
         name: KaosPhysics-Run

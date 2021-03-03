@@ -29,14 +29,18 @@ namespace AppMain
             Console.WriteLine (',');
             Console.WriteLine ();
 
-            Console.WriteLine ($"  {quote}decayCodes{quote}{binop} \"{Isotope.DecayCodes}\",");
+            Console.WriteLine ($"  {quote}decayModeCodes{quote}{binop} \"{Nuclide.DecayModeCodes}\",");
             Console.WriteLine ();
 
-            Console.Write (toJsonSB1 ("decaySymbols", Isotope.DecaySymbols).ToString());
+            Console.Write (toJsonSB2 ("decayModeNames", Nuclide.DecayModeNames).ToString());
             Console.WriteLine (',');
             Console.WriteLine ();
 
-            Console.Write (toJsonSB2 ("IsotopesHeading", Nuclide.IsotopesHeadings).ToString());
+            Console.Write (toJsonSB1 ("decayModeSymbols", Nuclide.DecayModeSymbols).ToString());
+            Console.WriteLine (',');
+            Console.WriteLine ();
+
+            Console.Write (toJsonSB2 ("IsotopesHeadings", Nuclide.IsotopesHeadings).ToString());
             Console.WriteLine (',');
             Console.WriteLine ();
 
@@ -70,7 +74,7 @@ namespace AppMain
             Console.WriteLine (',');
             Console.WriteLine ();
 
-            // Output fixed-width element names by language:
+            // Fixed-width element names by language:
 
             var maxLens = new int[Nuclide.Table.Count];
             for (var nx = 0; nx < Nuclide.Table.Count; ++nx)
@@ -84,11 +88,10 @@ namespace AppMain
             int c1 = 0;
             foreach (var lg in Nuclide.MaxNameLengths.Keys)
             {
-                var lg2 = lg.Length != 5 ? lg : lg.Substring (0, 2) + lg.Substring (3);
                 if (c1++ != 0) Console.WriteLine (',');
-                Console.Write ($"    \"{lg2}\"");
-                Console.Write (new string (' ', 4 - lg2.Length));
-                Console.Write ($": [ ");
+                Console.Write ($"    \"{lg.ToLower()}\":");
+                Console.Write (new string (' ', 5 - lg.Length));
+                Console.Write ("[ ");
                 for (int nx = 0; nx < Nuclide.Table.Count; ++nx)
                 {
                     var nm = Nuclide.Table[nx].GetName (lg);
@@ -111,7 +114,7 @@ namespace AppMain
                 if (nx != 0)
                     Console.WriteLine (',');
                 Console.Write ("    { ");
-                Console.Write (Nuclide.Table[nx].ToJson (quote));
+                Console.Write (Nuclide.Table[nx].ToJsonString (quote));
                 Console.Write (" }");
             }
             Console.WriteLine ();

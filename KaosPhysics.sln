@@ -15,7 +15,7 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "KaosPhysics", "Source\KaosP
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pages", "Pages", "{6C15CAF7-5361-459A-AFB3-0874FD2588BA}"
 	ProjectSection(SolutionItems) = preProject
-		Pages\Elements.html = Pages\Elements.html
+		Pages\elements.html = Pages\elements.html
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotKaosPhysics", "DotKaosPhysics\DotKaosPhysics.csproj", "{7C6378F5-6856-4070-A388-9B51CD27E4F4}"
