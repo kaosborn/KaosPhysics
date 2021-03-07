@@ -20,7 +20,7 @@ Stable versions are periodically posted here:
 
 https://kaosborn.github.io/elements.html
 
-The *Elements* web page:
+The **Elements** web page:
 
 * Displays the Periodic Table of the Elements in either standard, 32-column, or left-step format.
 * Provides a plethora of switchable themes.
@@ -48,11 +48,11 @@ This program:
   * Names of states of matter
   * And more
 
-The *Elements* web page (above) uses data from this program's output to produce its content.
+The **Elements** web page (above) uses data from this program's output to produce its content.
 For example,
 the following potassium isotopes table is built dynamically from data emitted by `DotGenJson.exe`.
 
-[[Images/element-19-isotopes.png]]
+![Potassium-40 isotopes](Images/element-19-isotopes.png)
 
 See the original page here:
 
@@ -146,7 +146,7 @@ Corresponding lookup tables are provided with language translations.
 The `isotopes` arrays vary in length depending on isotope radioactivity:
 
 * Stable isotopes
-  * Neutron count (**A**)
+  * Neutron count (*A*)
   * Natural abundance percentage
   * Natural occurrence index
 * Radioactive isotopes include 3 more values
@@ -154,11 +154,11 @@ The `isotopes` arrays vary in length depending on isotope radioactivity:
   * Decay mode bitflags
   * Half-life
 
-See tritium (**Z**=1, **A**=3) for an example of a radioactive isotope.
+See tritium (*Z*=1, *A*=3) for an example of a radioactive isotope.
 
 ### C# data
 
-The source for the JSON data above is the *KaosPhysics* C# shared project.
+The source for the JSON data above is the **KaosPhysics** C# shared project.
 Here is an excerpt of a constructor:
 
 ```cs
