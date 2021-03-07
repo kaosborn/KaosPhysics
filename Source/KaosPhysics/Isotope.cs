@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Kaos.Physics
 {
-    /// <summary>Variant of an element that differs by neutron count.</summary>
+    /// <summary>Variant of a chemical element that differs by neutron count.</summary>
     /// <remarks>
     /// <para>
     /// Use the <see cref="Z"/>, <see cref="A"/>, and <see cref="N"/> properties for their respective nucleon counts.

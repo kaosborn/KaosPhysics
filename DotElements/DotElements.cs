@@ -1,7 +1,7 @@
 ﻿// Usage:
 //   DotElements.exe [languageCode]
 // Purpose:
-// * Output elements and isotopes in concise, fixed-column lists.
+// * Output elements and isotopes in concise, fixed-width lists.
 // * Provide element and decay mode names for the supplied language (default en-US).
 
 using System;
@@ -16,7 +16,7 @@ namespace AppMain
         {
             string lang = args.Length == 0 || ! Nuclide.MaxNameLengths.ContainsKey (args[0]) ? "en-US" : args[0];
 
-            Console.WriteLine ("; Z,symbol,name,period,group,category,discoveryYear,discoveryIndex,stableCount,stabilityIndex,block,occurrenceCode,lifeCode,stateCode,melt,boil,weight");
+            Console.WriteLine ("; z,symbol,name,period,group,category,discoveryYear,discoveryIndex,stableCount,stabilityIndex,block,occurrenceCode,lifeCode,stateCode,melt,boil,weight");
             foreach (var nuc in Nuclide.Table)
                 Console.WriteLine (nuc.ToFixedWidthString (lang));
 
@@ -26,7 +26,7 @@ namespace AppMain
                 Console.WriteLine ($"{Nuclide.DecayModeCodes[ix]} {Nuclide.DecayModeSymbols[ix],-5}{Nuclide.DecayModeNames[lang.Substring(0,2)][ix]}");
 
             Console.WriteLine ();
-            Console.WriteLine ("; Z,symbol,A,occurrenceCode,stabilityIndex,decayModeCode,productZ,productSymbol,productA");
+            Console.WriteLine ("; z,symbol,z,occurrenceCode,stabilityIndex,decayModeCode,productZ,productSymbol,productA");
             foreach (var nuc in Nuclide.Table)
                 foreach (var iso in nuc.Isotopes)
                 {
@@ -39,14 +39,13 @@ namespace AppMain
                         foreach (var decayIndex in iso.GetDecayIndexes())
                         {
                             var productZ = iso.Transmute (decayIndex, out int productA);
-                            Console.Write (part1);
-                            Console.WriteLine ($" {orgChar}{iso.StabilityIndex}{Nuclide.DecayModeCodes[decayIndex]} {productZ,3} {Nuclide.Table[productZ].Symbol,-3}{productA,3}");
+                            Console.WriteLine ($"{part1} {orgChar}{iso.StabilityIndex}{Nuclide.DecayModeCodes[decayIndex]} {productZ,3} {Nuclide.Table[productZ].Symbol,-3}{productA,3}");
                         }
                     }
                 }
 
             Console.WriteLine ();
-            Console.WriteLine ("; Z,symbol,A,abundance,occurrenceCode,decayModeCodes,halflife");
+            Console.WriteLine ("; z,symbol,a,abundance,occurrenceCode,decayModeCodes,halflife");
             foreach (var nuc in Nuclide.Table)
             {
                 double total = 0.0;
@@ -61,7 +60,7 @@ namespace AppMain
             }
 
             Console.WriteLine ();
-            Console.WriteLine ("; language,totalDiffs");
+            Console.WriteLine ("; languageCode,totalDiffs");
             var langHits = new Dictionary<string,int>();
             foreach (var nuc in Nuclide.Table)
                 foreach (var kv in nuc.NameMap)

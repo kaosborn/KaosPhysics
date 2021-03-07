@@ -13,7 +13,7 @@
     <RepositoryType>Git</RepositoryType>
     <PackageTags>chemistry elements nuclides isotopes atomic periodic table</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageProjectUrl>https://github.com/kaosborn/KaosPhysics</PackageProjectUrl>
   </PropertyGroup>
 

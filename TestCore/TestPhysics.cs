@@ -9,9 +9,6 @@ namespace TestPhysics
     [TestClass]
     public class Test_Nuclide
     {
-        private static string[] langWhiteList = new string[]
-        { "de", "en", "en-GB", "en-US", "es", "fr", "it", "nl", "pl", "pt", "ru" };
-
         private static string[] expectedASCII = new string[]
         {
             "H . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . He",
@@ -22,6 +19,9 @@ namespace TestPhysics
             "CsBaLaCePrNdPmSmEuGdTbDyHoErTmYbLuHfTaW ReOsIrPtAuHgTlPbBiPoAtRn",
             "FrRaAcThPaU NpPuAmCmBkCfEsFmMdNoLrRfDbSgBhHsMtDsRgCnNhFlMcLvTsOg"
         };
+
+        private static string[] langWhiteList = new string[]
+        { "de", "en", "en-GB", "en-US", "es", "fr", "it", "nl", "pl", "pt", "ru" };
 
         [TestMethod]
         public void TestNuclide_GetLongTable()
@@ -290,15 +290,6 @@ namespace TestPhysics
             Assert.AreEqual (300, iso2.A);
             Assert.AreEqual (Decay.Alpha, iso2.DecayMode);
             Assert.AreEqual (5, iso2.StabilityIndex);
-
-            int product2Z = iso2.Transmute (Decay.Alpha, out int product2A);
-            Assert.AreEqual (116, product2Z);
-            Assert.AreEqual (296, product2A);
-
-            var iso3 = new Isotope (1, 4, null, 0.001, Decay.NEmit);
-            int product3Z = iso3.Transmute (Decay.NEmit, out int product3A);
-            Assert.AreEqual (1, product3Z);
-            Assert.AreEqual (3, product3A);
         }
 
         [TestMethod]
@@ -382,6 +373,58 @@ namespace TestPhysics
             foreach (int decayIndex in Nuclide.Table[19][40].GetDecayIndexes())
                 ++actualK40;
             Assert.AreEqual (3, actualK40);
+        }
+
+        [TestMethod]
+        public void TestIsotope_Transmute()
+        {
+            int z1 = 1, a1 = 4;
+            var iso1 = new Isotope (z1, a1, null, 0.001, Decay.NEmit);
+            int z1p = iso1.Transmute (Decay.NEmit, out int a1p);
+            Assert.AreEqual (a1 - 1, a1p);
+            Assert.AreEqual (z1, z1p);
+
+            int z2 = 118, a2 = 300;
+            var iso2 = new Isotope (z: z2, a: a2, abundance: null, halflife: 0.02, decayMode: Decay.Alpha);
+            int z2p = iso2.Transmute (Decay.Alpha, out int a2p);
+            Assert.AreEqual (a2 - 4, a2p);
+            Assert.AreEqual (z2 - 2, z2p);
+
+            int z3 = 3, a3 = 8;
+            var iso3 = new Isotope (z3, a3, null, 0.03, Decay.BetaMinus);
+            int z3p = iso3.Transmute (Decay.BetaMinus, out int a3p);
+            Assert.AreEqual (a3, a3p);
+            Assert.AreEqual (z3 + 1, z3p);
+
+            int z4 = 4, a4 = 11;
+            var iso4 = new Isotope (z4, a4, null, 0.04, Decay.BetaPlus);
+            int z4p = iso4.Transmute (Decay.BetaPlus, out int a4p);
+            Assert.AreEqual (a4, a4p);
+            Assert.AreEqual (z4 - 1, z4p);
+
+            int z5 = 6, a5 = 15;
+            var iso5 = new Isotope (z5, a5, null, 0.05, Decay.Beta2);
+            int z5p = iso5.Transmute (Decay.Beta2, out int a5p);
+            Assert.AreEqual (a5, a5p);
+            Assert.AreEqual (z5 + 2, z5p);
+
+            int z6 = 6, a6 = 15;
+            var iso6 = new Isotope (z6, a6, null, 0.06, Decay.ECap1);
+            int z6p = iso6.Transmute (Decay.ECap1, out int a6p);
+            Assert.AreEqual (a6, a6p);
+            Assert.AreEqual (z6 - 1, z6p);
+
+            int z7 = 7, a7 = 17;
+            var iso7 = new Isotope (z7, a7, null, 0.07, Decay.ECap2);
+            int z7p = iso7.Transmute (Decay.ECap2, out int a7p);
+            Assert.AreEqual (a7, a7p);
+            Assert.AreEqual (z7 - 2, z7p);
+
+            int z8 = 8, a8 = 18;
+            var iso8 = new Isotope (z8, a8, null, 0.08, Decay.Gamma);
+            int z8p = iso8.Transmute (Decay.Gamma, out int a8p);
+            Assert.AreEqual (a8, a8p);
+            Assert.AreEqual (z8, z8p);
         }
     }
 }

@@ -40,7 +40,7 @@ namespace AppMain
             Console.WriteLine (',');
             Console.WriteLine ();
 
-            Console.Write (toJsonSB2 ("IsotopesHeadings", Nuclide.IsotopesHeadings).ToString());
+            Console.Write (toJsonSB2 ("isotopesHeadings", Nuclide.IsotopesHeadings).ToString());
             Console.WriteLine (',');
             Console.WriteLine ();
 
