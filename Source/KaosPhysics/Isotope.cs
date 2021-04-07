@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -32,7 +33,7 @@ namespace Kaos.Physics
     /// Use the <see cref="GetDecayIndexes"/> method to iterate thru all the possible decay modes of the isotope.
     /// </para>
     /// <para>
-    /// Use the <see cref="ToFixedWidthString"/> method to get a string representation of the nuclide
+    /// Use the <see cref="ToFixedWidthString(CultureInfo)"/> method to get a string representation of the nuclide
     /// with narrow, fixed-width columns. Supply a language code for localized nuclide names.
     /// </para>
     /// </remarks>
@@ -47,7 +48,6 @@ namespace Kaos.Physics
             Z = z;
             A = a;
             Abundance = abundance;
-            Halflife = null;
             DecayMode = Decay.None;
             StabilityIndex = 0;
         }
@@ -56,20 +56,22 @@ namespace Kaos.Physics
         /// <param name="z">Proton count.</param>
         /// <param name="a">Nucleon count.</param>
         /// <param name="abundance">Percentage of the isotope to all the element's isotopes or <b>null</b> for synthetics.</param>
-        /// <param name="halflife">Time to decay by half.</param>
         /// <param name="decayMode">Ored bitflags of possible isotope mutations.</param>
-        public Isotope (int z, int a, double? abundance, double halflife, Decay decayMode)
+        /// <param name="halflife">Time to decay by half scaler.</param>
+        /// <param name="timeUnit">Time to decay by half scale.</param>
+        public Isotope (int z, int a, double? abundance, Decay decayMode, double halflife, char timeUnit)
         {
             Z = z;
             A = a;
             Abundance = abundance;
-            Halflife = halflife;
             DecayMode = decayMode;
-            StabilityIndex =
-                Halflife >= 2000000.0 * Nuclide.SecondsPerYear ?  1 :
-                Halflife >= 800.0 * Nuclide.SecondsPerYear ? 2 :
-                Halflife >= 24.0 * 60.0 * 60.0 ? 3 :
-                Halflife >= 10.0 * 60.0 ? 4 : 5;
+            Halflife = halflife;
+            TimeUnit = timeUnit;
+            var hls = HalflifeSeconds;
+            StabilityIndex = hls >= 2000000.0 * Nuclide.SecondsPerYear ? 1
+                           : hls >= 800.0 * Nuclide.SecondsPerYear ? 2
+                           : hls >= 24.0 * 60.0 * 60.0 ? 3
+                           : hls >= 10.0 * 60.0 ? 4 : 5;
         }
 
         /// <summary>Atomic number (proton count) of this isotope.</summary>
@@ -88,15 +90,78 @@ namespace Kaos.Physics
         /// <summary>Ored bitflags of all possible transmutations.</summary>
         public Decay DecayMode { get; private set; }
 
+        /// <summary>Returns a string containing a character for each possible decay mode of the isotope.</summary>
+        /// <remarks>The returned value provides concise output in a human-readable form.</remarks>
+        public string DecayModeCodes
+        {
+            get
+            {
+                var result = string.Empty;
+                for (int ix = 0, mask = 1; ix <= Nuclide.DecayModeCount; ++ix)
+                {
+                    if ((((int) DecayMode) & mask) != 0)
+                        result += Nuclide.DecayModeCodes[ix];
+                    mask <<= 1;
+                }
+                return result;
+            }
+        }
+
+        /// <summary>Character code indicating scale of <see cref="Halflife"/>.</summary>
+        public char TimeUnit { get; private set; }
+
         /// <summary>Time to decay mass by 50% in seconds. Stable isotopes are indicated by <b>null</b>.</summary>
-        /// <remarks>Divide by the <see cref="Nuclide.SecondsPerYear"/> constant to convert to years.</remarks>
-        public double? Halflife { get; private set; }
+        /// <remarks>Combine with <see cref="TimeUnit"/> for time.</remarks>
+        public double Halflife { get; private set; }
+
+        /// <summary>Returns half-life time in seconds.</summary>
+        public double HalflifeSeconds
+         => TimeUnit == 'n' ? Halflife / 1000000000
+          : TimeUnit == 'i' ? Halflife / 1000000
+          : TimeUnit == 't' ? Halflife / 1000
+          : TimeUnit == 's' ? Halflife
+          : TimeUnit == 'm' ? Halflife * 60
+          : TimeUnit == 'h' ? Halflife * 3600
+          : TimeUnit == 'd' ? Halflife * (3600*24)
+          : TimeUnit == 'y' ? Halflife * Nuclide.SecondsPerYear
+          : double.NaN;
+
+        /// <summary>Returns text representation of half-life time for the default culture.</summary>
+        public string HalflifeText => GetHalflifeText (Nuclide.EnCulture);
+
+        /// <summary>Get text representation of half-life time for the supplied culture.</summary>
+        public string GetHalflifeText (CultureInfo culture)
+        {
+            if (DecayMode == Decay.None)
+                return string.Empty;
+
+            var suffix = "?";
+            if (Nuclide.TemperatureSuffix.TryGetValue (culture.TwoLetterISOLanguageName, out string[] vocab))
+                if (TimeUnit == 'n')
+                    suffix = vocab[0];
+                else if (TimeUnit == 'i')
+                    suffix = vocab[1];
+                else if (TimeUnit == 't')
+                    suffix = vocab[2];
+                else if (TimeUnit == 's')
+                    suffix = vocab[3];
+                else if (TimeUnit == 'm')
+                    suffix = vocab[4];
+                else if (TimeUnit == 'h')
+                    suffix = vocab[5];
+                else if (TimeUnit == 'd')
+                    suffix = vocab[6];
+                else if (TimeUnit == 'y')
+                    suffix = vocab[7];
+
+            return Halflife.ToString (culture) + ' ' + suffix;
+        }
 
         /// <summary>Returns <b>true</b> if the isotope is not synthetic, else <b>false</b>.</summary>
         public bool IsNatural => Abundance != null;
 
         /// <summary>Returns <b>false</b> if the isotope is radioactive, else <b>true</b>.</summary>
-        public bool IsStable => StabilityIndex == 0;
+        public bool IsStable => DecayMode == Decay.None;
 
         /// <summary>Returns the <see cref="Nuclide"/> of this isotope.</summary>
         /// <exception cref="ArgumentException">When <em>Z</em> is not a valid nucleon count.</exception>
@@ -129,23 +194,6 @@ namespace Kaos.Physics
         /// <summary>Returns character code of <see cref="Occurrence"/>.</summary>
         public char OccurrenceCode => Nuclide.OccurrenceCodes[(int) Occurrence];
 
-        /// <summary>Returns a string containing a character for each possible decay mode of the isotope.</summary>
-        /// <remarks>The returned value provides concise output in a human-readable form.</remarks>
-        public string DecayModeCodes
-        {
-            get
-            {
-                var result = string.Empty;
-                for (int ix = 0, mask = 1; ix <= Nuclide.DecayModeCount; ++ix)
-                {
-                    if ((((int) DecayMode) & mask) != 0)
-                        result += Nuclide.DecayModeCodes[ix];
-                    mask <<= 1;
-                }
-                return result;
-            }
-        }
-
         /// <summary>Returns scaler value (0-5) of radioactivity.</summary>
         /// <remarks>
         /// A value of 0 indicates a stable isotope and 5 the most radioactive.
@@ -169,7 +217,7 @@ namespace Kaos.Physics
         {
             if (Abundance == null)
                 return Origin.Synthetic;
-            if (Halflife == null || Halflife > Nuclide.PrimordialCutoff)
+            if (DecayMode == Decay.None || HalflifeSeconds > Nuclide.PrimordialCutoff)
                 return Origin.Primordial;
 
             if (Z > 0)
@@ -209,16 +257,21 @@ namespace Kaos.Physics
             return Origin.Cosmogenic;
         }
 
-        /// <summary>Provide isotope contents in fixed-width form.</summary>
+        /// <summary>Provide isotope contents in fixed-width form for the default culture.</summary>
         /// <returns>A string holding fixed-width columns.</returns>
-        public string ToFixedWidthString()
+        public string ToFixedWidthString() => ToFixedWidthString (Nuclide.EnCulture);
+
+        /// <summary>Provide isotope contents in fixed-width form for the supplied culture.</summary>
+        /// <param name="culture">Culture that determines numeric formatting.</param>
+        /// <returns>A string holding fixed-width columns.</returns>
+        public string ToFixedWidthString (CultureInfo culture)
         {
             var sb = new StringBuilder();
             var ts = A.ToString();
             sb.Append (' ', 3 - ts.Length);
             sb.Append (ts);
             sb.Append (' ');
-            ts = Abundance == null ? string.Empty : Abundance.Value.ToString ("F4");
+            ts = Abundance == null ? string.Empty : Abundance.Value.ToString ("F4", culture);
             sb.Append (' ', 8 - ts.Length);
             sb.Append (ts);
             sb.Append (' ');
@@ -227,9 +280,7 @@ namespace Kaos.Physics
             ts = DecayModeCodes;
             sb.Append (ts);
             sb.Append (' ', 5 - ts.Length);
-            ts = Halflife.ToString();
-            sb.Append (ts);
-            //sb.Append (' ', 16 - ts.Length);
+            sb.Append (GetHalflifeText (culture));
             return sb.ToString();
         }
 
@@ -252,14 +303,15 @@ namespace Kaos.Physics
             sb.Append (IsNatural ? Abundance.ToString() : "null");
             sb.Append ($",{quote}occurrenceIndex{quote}:");
             sb.Append (OccurrenceIndex);
-            if (DecayMode != 0 || Halflife != null)
+            if (DecayMode != 0)
             {
                 sb.Append ($",{quote}stabilityIndex{quote}:");
                 sb.Append (StabilityIndex);
                 sb.Append ($",{quote}decayFlags{quote}:");
                 sb.Append ((int) DecayMode);
                 sb.Append ($",{quote}halflife{quote}:");
-                sb.Append (Halflife.Value);
+                sb.Append (Halflife);
+                sb.Append ($",{quote}timeUnit{quote}:\"{TimeUnit}\"");
             }
             sb.Append ('}');
             return sb.ToString();

@@ -1,6 +1,7 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using Kaos.Physics;
 
@@ -96,7 +97,7 @@ namespace TestPhysics
                 Assert.IsTrue (nuc.Naming.Length > 0, "Z="+nuc.Z);
                 Assert.IsTrue (nuc.Known == 0 || nuc.Credit.Length > 0, "Z="+nuc.Z);
                 Assert.IsTrue (nuc.ToString().Length > 0);
-                Assert.IsTrue (nuc.ToFixedWidthString("en").Length > 0);
+                Assert.IsTrue (nuc.ToFixedWidthString().Length > 0);
                 Assert.IsTrue (nuc.ToJsonString("").Length > 0);
             }
         }
@@ -229,8 +230,8 @@ namespace TestPhysics
                     int maxA = 0;
                     foreach (Isotope iso in nuc.Isotopes)
                     {
-                        if (maxHL == null || maxHL < iso.Halflife)
-                        { maxHL = iso.Halflife; maxA = iso.A; }
+                        if (maxHL == null || maxHL < iso.HalflifeSeconds)
+                        { maxHL = iso.HalflifeSeconds; maxA = iso.A; }
                     }
                     Assert.AreEqual (nuc.Weight, maxA, "Z="+nuc.Z);
                 }
@@ -270,6 +271,7 @@ namespace TestPhysics
             Assert.AreEqual (Nuclide.Table.Count() - 1, Nuclide.GetElements().Count());
             Assert.IsTrue (Nuclide.GetLongTable().Count() >= 7);
             Assert.AreEqual ("Kalium", Nuclide.Table[19].GetName("de"));
+            Assert.AreEqual ("Yodo", Nuclide.Table[53].GetName (new CultureInfo ("es")));
         }
     }
 
@@ -282,11 +284,11 @@ namespace TestPhysics
             var iso1 = new Isotope (2, 5, 0.0);
             Assert.AreEqual (2, iso1.Z);
             Assert.AreEqual (5, iso1.A);
-            Assert.AreEqual (null, iso1.Halflife);
             Assert.AreEqual (Decay.None, iso1.DecayMode);
             Assert.AreEqual (0, iso1.StabilityIndex);
+            Assert.IsTrue (iso1.IsStable);
 
-            var iso2 = new Isotope (z: 118, a: 300, abundance: null, halflife: 0.01, decayMode: Decay.Alpha);
+            var iso2 = new Isotope (z: 118, a: 300, abundance: null, decayMode: Decay.Alpha, halflife: 0.01, timeUnit: 's');
             Assert.AreEqual (300, iso2.A);
             Assert.AreEqual (Decay.Alpha, iso2.DecayMode);
             Assert.AreEqual (5, iso2.StabilityIndex);
@@ -333,11 +335,12 @@ namespace TestPhysics
                     Assert.AreEqual (iso.IsStable, iso.DecayModeCodes.Length == 0);
                     Assert.AreEqual (iso.IsStable, iso.DecayMode == Decay.None);
                     Assert.AreEqual (iso.IsStable, iso.StabilityIndex == 0);
-                    Assert.AreEqual (iso.IsStable, iso.Halflife == null);
-                    Assert.IsTrue (iso.Halflife == null || iso.Halflife > 0.0);
+                    Assert.IsTrue (iso.IsStable || iso.Halflife > 0.0);
                     Assert.IsTrue (iso.ToString().Length > 0);
                     Assert.IsTrue (iso.ToFixedWidthString().Length > 0);
+                    Assert.IsTrue (iso.ToFixedWidthString (new CultureInfo ("it")).Length > 0);
                     Assert.IsTrue (iso.ToJsonString("").Length > 0);
+                    Assert.IsTrue (iso.IsStable || "ydhmstin".Contains (iso.TimeUnit));
                 }
             }
         }
@@ -376,52 +379,77 @@ namespace TestPhysics
         }
 
         [TestMethod]
+        public void TestNuclide_HalflifeString()
+        {
+            var h3 = Nuclide.Table[1][3];
+            var be7 = Nuclide.Table[4][7];
+            var c11 = Nuclide.Table[6][11];
+            var u235 = Nuclide.Table[92][235];
+            var na24 = Nuclide.Table[11][24];
+            var ar41 = Nuclide.Table[18][41];
+
+            Assert.AreEqual ("12.32 y", h3.HalflifeText);
+            Assert.AreEqual ("12.32 y", h3.GetHalflifeText (new CultureInfo ("en-US")));
+            Assert.AreEqual ("704000000 y", u235.GetHalflifeText (new CultureInfo ("en-US")));
+
+            Assert.AreEqual ("164.3 ns", Nuclide.Table[84][214].HalflifeText);
+            Assert.AreEqual ("32.3 ms", Nuclide.Table[85][217].HalflifeText);
+            Assert.AreEqual ("700 μs", Nuclide.Table[118][294].HalflifeText);
+
+            Assert.AreEqual ("109,34 ans", ar41.GetHalflifeText (new CultureInfo ("fr")));
+            Assert.AreEqual ("20 min", c11.GetHalflifeText (new CultureInfo ("es")));
+            Assert.AreEqual ("14,96 ore", na24.GetHalflifeText (new CultureInfo ("it")));
+            Assert.AreEqual ("53,12 j", be7.GetHalflifeText (new CultureInfo ("fr")));
+            Assert.AreEqual ("12,32 a", h3.GetHalflifeText (new CultureInfo ("de-DE")));
+        }
+
+        [TestMethod]
         public void TestIsotope_Transmute()
         {
             int z1 = 1, a1 = 4;
-            var iso1 = new Isotope (z1, a1, null, 0.001, Decay.NEmit);
+            var iso1 = new Isotope (z1, a1, null, Decay.NEmit, 0.001, 's');
             int z1p = iso1.Transmute (Decay.NEmit, out int a1p);
             Assert.AreEqual (a1 - 1, a1p);
             Assert.AreEqual (z1, z1p);
 
             int z2 = 118, a2 = 300;
-            var iso2 = new Isotope (z: z2, a: a2, abundance: null, halflife: 0.02, decayMode: Decay.Alpha);
+            var iso2 = new Isotope (z: z2, a: a2, abundance: null, decayMode: Decay.Alpha, halflife: 0.02, timeUnit: 's');
             int z2p = iso2.Transmute (Decay.Alpha, out int a2p);
             Assert.AreEqual (a2 - 4, a2p);
             Assert.AreEqual (z2 - 2, z2p);
 
             int z3 = 3, a3 = 8;
-            var iso3 = new Isotope (z3, a3, null, 0.03, Decay.BetaMinus);
+            var iso3 = new Isotope (z3, a3, null, Decay.BetaMinus, 0.03, 's');
             int z3p = iso3.Transmute (Decay.BetaMinus, out int a3p);
             Assert.AreEqual (a3, a3p);
             Assert.AreEqual (z3 + 1, z3p);
 
             int z4 = 4, a4 = 11;
-            var iso4 = new Isotope (z4, a4, null, 0.04, Decay.BetaPlus);
+            var iso4 = new Isotope (z4, a4, null, Decay.BetaPlus, 0.04, 's');
             int z4p = iso4.Transmute (Decay.BetaPlus, out int a4p);
             Assert.AreEqual (a4, a4p);
             Assert.AreEqual (z4 - 1, z4p);
 
             int z5 = 6, a5 = 15;
-            var iso5 = new Isotope (z5, a5, null, 0.05, Decay.Beta2);
+            var iso5 = new Isotope (z5, a5, null, Decay.Beta2, 0.05, 's');
             int z5p = iso5.Transmute (Decay.Beta2, out int a5p);
             Assert.AreEqual (a5, a5p);
             Assert.AreEqual (z5 + 2, z5p);
 
             int z6 = 6, a6 = 15;
-            var iso6 = new Isotope (z6, a6, null, 0.06, Decay.ECap1);
+            var iso6 = new Isotope (z6, a6, null, Decay.ECap1, 0.06, 's');
             int z6p = iso6.Transmute (Decay.ECap1, out int a6p);
             Assert.AreEqual (a6, a6p);
             Assert.AreEqual (z6 - 1, z6p);
 
             int z7 = 7, a7 = 17;
-            var iso7 = new Isotope (z7, a7, null, 0.07, Decay.ECap2);
+            var iso7 = new Isotope (z7, a7, null, Decay.ECap2, 0.07, 's');
             int z7p = iso7.Transmute (Decay.ECap2, out int a7p);
             Assert.AreEqual (a7, a7p);
             Assert.AreEqual (z7 - 2, z7p);
 
             int z8 = 8, a8 = 18;
-            var iso8 = new Isotope (z8, a8, null, 0.08, Decay.Gamma);
+            var iso8 = new Isotope (z8, a8, null, Decay.Gamma, 0.08, 's');
             int z8p = iso8.Transmute (Decay.Gamma, out int a8p);
             Assert.AreEqual (a8, a8p);
             Assert.AreEqual (z8, z8p);

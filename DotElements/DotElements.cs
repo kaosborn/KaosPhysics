@@ -6,6 +6,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using Kaos.Physics;
 
 namespace AppMain
@@ -14,16 +15,16 @@ namespace AppMain
     {
         static void Main (string[] args)
         {
-            string lang = args.Length == 0 || ! Nuclide.MaxNameLengths.ContainsKey (args[0]) ? "en-US" : args[0];
+            var culture = new CultureInfo (args.Length == 0 ? "en" : args[0]);
 
             Console.WriteLine ("; z,symbol,name,period,group,category,discoveryYear,discoveryIndex,stableCount,stabilityIndex,block,occurrenceCode,lifeCode,stateCode,melt,boil,weight");
             foreach (var nuc in Nuclide.Table)
-                Console.WriteLine (nuc.ToFixedWidthString (lang));
+                Console.WriteLine (nuc.ToFixedWidthString (culture));
 
             Console.WriteLine ();
             Console.WriteLine ("; decayModeCode,decayModeSymbol,decayModeName");
             for (var ix = 0; ix < Nuclide.DecayModeSymbols.Count; ++ix)
-                Console.WriteLine ($"{Nuclide.DecayModeCodes[ix]} {Nuclide.DecayModeSymbols[ix],-5}{Nuclide.DecayModeNames[lang.Substring(0,2)][ix]}");
+                Console.WriteLine ($"{Nuclide.DecayModeCodes[ix]} {Nuclide.DecayModeSymbols[ix],-5}{Nuclide.DecayModeNames[culture.TwoLetterISOLanguageName][ix]}");
 
             Console.WriteLine ();
             Console.WriteLine ("; z,symbol,z,occurrenceCode,stabilityIndex,decayModeCode,productZ,productSymbol,productA");
@@ -51,7 +52,7 @@ namespace AppMain
                 double total = 0.0;
                 foreach (var iso in nuc.Isotopes)
                 {
-                    Console.WriteLine ($"{nuc.Z,3} {nuc.Symbol,-3}{iso.ToFixedWidthString()}");
+                    Console.WriteLine ($"{nuc.Z,3} {nuc.Symbol,-3}{iso.ToFixedWidthString(culture)}");
                     if (iso.IsNatural)
                         total += iso.Abundance.Value;
                 }

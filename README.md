@@ -107,8 +107,8 @@ Here is an excerpt of the JSON emitted by `DotGenJson.exe`:
 
 ```json
 "nuclides": [
-  { "z":  0, "symbol": "n",  "period": 0, "group": 0, "categoryIndex": 7, "block": " ", "occurrenceIndex": 1, "lifeIndex": 0, "discoveryYear": 1932, "discoveryIndex": 4, "stateIndex": 0, "melt":     null, "boil":     null, "weight":   1.000, "stableCount": 0, "stabilityIndex": 4, "isotopes": [{"z":0,"a":1,"abundance":0,"occurrenceIndex":1,"stabilityIndex":4,"decayFlags":4,"halflife":610.1}] },
-  { "z":  1, "symbol": "H",  "period": 1, "group": 1, "categoryIndex": 7, "block": "s", "occurrenceIndex": 3, "lifeIndex": 1, "discoveryYear": 1766, "discoveryIndex": 1, "stateIndex": 3, "melt":   13.990, "boil":   20.271, "weight":   1.008, "stableCount": 2, "stabilityIndex": 0, "isotopes": [{"z":1,"a":1,"abundance":99.98,"occurrenceIndex":3}, {"z":1,"a":2,"abundance":0.02,"occurrenceIndex":3}, {"z":1,"a":3,"abundance":0,"occurrenceIndex":1,"stabilityIndex":3,"decayFlags":4,"halflife":388781648.64}] },
+  { "z":  0, "symbol": "n",  "period": 0, "group": 0, "categoryIndex": 7, "block": " ", "occurrenceIndex": 1, "lifeIndex": 0, "discoveryYear": 1932, "discoveryIndex": 4, "stateIndex": 0, "melt":     null, "boil":     null, "weight":   1.000, "stableCount": 0, "stabilityIndex": 4, "isotopes": [{"z":0,"a":1,"abundance":0,"occurrenceIndex":1,"stabilityIndex":4,"decayFlags":4,"halflife":610.1,"timeUnit":"s"}] },
+  { "z":  1, "symbol": "H",  "period": 1, "group": 1, "categoryIndex": 7, "block": "s", "occurrenceIndex": 3, "lifeIndex": 1, "discoveryYear": 1766, "discoveryIndex": 1, "stateIndex": 3, "melt":   13.990, "boil":   20.271, "weight":   1.008, "stableCount": 2, "stabilityIndex": 0, "isotopes": [{"z":1,"a":1,"abundance":99.985,"occurrenceIndex":3}, {"z":1,"a":2,"abundance":0.015,"occurrenceIndex":3}, {"z":1,"a":3,"abundance":0,"occurrenceIndex":1,"stabilityIndex":3,"decayFlags":4,"halflife":12.32,"timeUnit":"y"}] },
   { "z":  2, "symbol": "He", "period": 1, "group":18, "categoryIndex": 9, "block": "s", "occurrenceIndex": 3, "lifeIndex": 0, "discoveryYear": 1868, "discoveryIndex": 2, "stateIndex": 3, "melt":    0.950, "boil":    4.222, "weight":   4.003, "stableCount": 2, "stabilityIndex": 0, "isotopes": [{"z":2,"a":3,"abundance":0.0002,"occurrenceIndex":3}, {"z":2,"a":4,"abundance":99.9998,"occurrenceIndex":3}] },
   { "z":  3, "symbol": "Li", "period": 2, "group": 1, "categoryIndex": 0, "block": "s", "occurrenceIndex": 3, "lifeIndex": 2, "discoveryYear": 1817, "discoveryIndex": 2, "stateIndex": 1, "melt":  453.650, "boil": 1603.000, "weight":   6.940, "stableCount": 2, "stabilityIndex": 0, "isotopes": [{"z":3,"a":6,"abundance":7.59,"occurrenceIndex":3}, {"z":3,"a":7,"abundance":92.41,"occurrenceIndex":3}] }
 ]
@@ -149,10 +149,11 @@ The `isotopes` arrays vary in length depending on isotope radioactivity:
   * Neutron count (*A*)
   * Natural abundance percentage
   * Natural occurrence index
-* Radioactive isotopes include 3 more values
+* Radioactive isotopes include 4 more values
   * Stability index
   * Decay mode bitflags
   * Half-life
+  * Half-life time unit
 
 See tritium (*Z*=1, *A*=3) for an example of a radioactive isotope.
 
@@ -172,7 +173,7 @@ public static Nuclide Hydrogen { get; } = new Nuclide
     life: Nutrition.BulkEssential,
     known: 1766, credit: "Henry Cavindish",
     naming: "From Greek, meaning water-former",
-    isotopes: new Isotope[] { new Isotope (1, 1, 99.985), new Isotope (1, 2, 0.015), new Isotope (1, 3, 0.0, 12.32*31556952.0, Decay.BetaMinus) },
+    isotopes: new Isotope[] { new Isotope (1, 1, 99.985), new Isotope (1, 2, 0.015), new Isotope (1, 3, 0.0, Decay.BetaMinus, 12.32, 'y') },
     nameMap: new Dictionary<string,string> { { "de","Wasserstoff" }, { "es","Hidrógeno" }, { "fr","Hydrogène" }, { "it","Hydrogène" }, { "ru","Нейтрон" } }
 );
 ```
@@ -185,10 +186,9 @@ The element constructed above may be accessed as a singleton
 but will usually be accessed from the nuclides array (also a singleton).
 Actual property names of the object are camel-cased versions of the argument names seen above.
 
-The `name` parameter is the element name for the 'en' language.
-Nuclide name translations are provided by the `nameMap` dictionary constructor parameter.
-If no entry exists for a language, then it will default to the value for the 'en' language.
-At runtime, use the `GetName(string)` method to get the element's name for the supplied language.
+The `name` parameter supplies the element name in the default language of world-English ('en').
+Element name translations are supplied by the `nameMap` constructor parameter.
+The `GetName(string)` method may then be used to get the element's language-specific name.
 
 ```cs
 Console.WriteLine ("H name in Spain: " + Nuclide.Table[1].GetName("es"));
