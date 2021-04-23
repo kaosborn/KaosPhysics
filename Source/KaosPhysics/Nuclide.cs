@@ -2201,21 +2201,21 @@ namespace Kaos.Physics
         /// </remarks>
         public string GetName (string lang)
         {
-            lang = lang.ToUpper ();
+            lang = lang.ToUpper();
             foreach (var pair in NameMap)
-                if (pair.Key.ToUpper () == lang)
+                if (pair.Key.ToUpper() == lang)
                     return pair.Value;
             return Name;
         }
 
         /// <summary>Get the element name in the supplied culture.</summary>
-        /// <param name="culture">A culture with a 2-character language code.</param>
+        /// <param name="culture">A culture with a 2- or 5-character language code.</param>
         /// <returns>Language-specific element name if available, else returns <see cref="Name"/>.</returns>
         /// <remarks>
         /// Use the <see cref="Name"/> property to get the element name for the default language.
         /// </remarks>
         public string GetName (CultureInfo culture)
-         => GetName (culture.TwoLetterISOLanguageName);
+         => GetName (culture.Name);
 
         /// <summary>Get the nuclide's state of matter at the supplied temperature.</summary>
         /// <param name="kelvins">Temperature in K.</param>

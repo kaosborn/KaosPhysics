@@ -272,6 +272,10 @@ namespace TestPhysics
             Assert.IsTrue (Nuclide.GetLongTable().Count() >= 7);
             Assert.AreEqual ("Kalium", Nuclide.Table[19].GetName("de"));
             Assert.AreEqual ("Yodo", Nuclide.Table[53].GetName (new CultureInfo ("es")));
+            Assert.AreEqual ("Sulfur", Nuclide.Table[16].GetName (new CultureInfo ("en")));
+            Assert.AreEqual ("Sulphur", Nuclide.Table[16].GetName (new CultureInfo ("en-GB")));
+            Assert.AreEqual ("Caesium", Nuclide.Table[55].GetName (new CultureInfo ("en")));
+            Assert.AreEqual ("Cesium", Nuclide.Table[55].GetName (new CultureInfo ("en-US")));
         }
     }
 

@@ -3,8 +3,8 @@
 
 # KaosPhysics
 
-The KaosPhysics project started with the `elements.html` page
- - an interactive and internationalized Periodic Table of the Elements.
+The KaosPhysics project started with the `elements.html` page - an
+interactive and internationalized periodic table of the elements.
 It became necessary to model the required data in a strongly-typed environment so C# was chosen.
 The .NET codebase generates JSON for the nuclides table and HTML for the tables themselves.
 
@@ -15,14 +15,14 @@ This allows using an element's atomic number (proton count) as the array index.
 
 #### Pages folder
 
-The `elements.html` file is an HTML/RSS/JavaScript page that displays the Periodic Table of the Elements.
+The `elements.html` file is an HTML/RSS/JavaScript page that displays the periodic table of the elements.
 Stable versions are periodically posted here:
 
 https://kaosborn.github.io/elements.html
 
 The **Elements** web page:
 
-* Displays the Periodic Table of the Elements in either standard, 32-column, or left-step format.
+* Displays the periodic table of the elements in either standard, 32-column, or left-step format.
 * Provides a plethora of switchable themes.
 * Provides full support for multiple languages, including English variants.
 * Uses responsive CSS to provide adaptable output without JavaScript.
@@ -31,17 +31,18 @@ The **Elements** web page:
 
 Work is needed in these areas:
 
-* Improve menus beyond current proof-of-concept state.
+* Add categories.
+* Improve user interface.
 * Improve current translations, add more languages.
 
 #### DotGenJson folder
 
 The `DotGenJson` folder contains a .NET Core project that builds `DotGenJson.exe`
-for generating machine readable data of the KaosPhysics model.
+for generating machine readable data sourced from the KaosPhysics model.
 This program:
 
 * Provides detailed nuclide and isotope information.
-* Provides translations of terms to de, en, en-GB, en-US, es, it, ru:
+* Provides translations of terms to de, en, en-GB, en-US, es, fr, it, ru:
   * Element names
   * Decay mode names
   * Category names
@@ -68,13 +69,13 @@ https://kaosborn.github.io/data/kaosNuclides.json
 #### DotElements folder
 
 The `DotElements` folder contains a .NET Core project that builds `DotElements.exe`
-for generating concise, human readable data of the KaosPhysics model.
+for generating concise, human readable data source from the KaosPhysics model.
 This program produces a narrow, fixed-width listing of the elements
 followed by fixed-width listings of their isotopes.
 
 Usage: `DotElements.exe [languageCode]`
 
-Provide a language argument (2- or 5-characters) for translations of chemical terms.
+Provide a language argument (2 or 5 characters) for translations of chemical terms.
 For output of the default world-English, see here:
 
 https://kaosborn.github.io/data/kaosNuclides-en.txt

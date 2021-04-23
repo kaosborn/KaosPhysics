@@ -61,7 +61,6 @@
       border:1px solid #008;
     }
     .MainCap { font-size:xx-large; }
-    .Menu { display:inline-block; }
     .Nm { display:none; }
     .Sb { display:block; text-align:center; font-size:large; font-weight:bold; }
     .SpinBtn { margin-top:8px; width:20px; height:20px; border-width:5px 5px 0px 0px; border-color:#00d; border-style:solid solid none none; }
@@ -73,6 +72,67 @@
     .YAxis1 { display:none; text-align:center; font-weight:bold; }
     .YPadSmall { display:none; }
     .YPadBig { width:61px; display:inline-block; }
+    .EdgeMenu {
+      height:100%; width:0;
+      z-index:1;
+      position:fixed; top:1px; left:0px;
+      background-color:#111;
+      opacity:0.9;
+      overflow-x:hidden;
+      padding-top:24px;
+      transition:0.5s;
+    }
+    .CloseBtn,.MenuLabel,.NumberBtn,.RadioBtn,.RadioTop {
+      padding:0;
+      border:none;
+      color:#888;
+      background:none;
+      cursor:pointer;
+      font-size:22px;
+      text-align:left;
+    }
+    .CloseBtn:hover,.NumberBtn:hover,.RadioBtn:hover,.RadioTop:hover {
+      color:#eee;
+      transition:0.5s;
+    }
+    .OpenBtn:hover {
+      background:#0002;
+      transition:0.25s;
+    }
+    .OpenBtn {
+      font-size:24px; cursor:pointer; z-index:1; position:fixed; top:0; left:0;
+    }
+    .CloseBtn {
+      position:absolute;
+      top:0; right:10px;
+      font-size:36px; color:#aaa;
+    }
+    .MenuLine {
+      display:block;
+      width:100%;
+      padding:8px 6px 6px 24px;
+    }
+    .NumberBtn {
+      display:inline;
+      width:6ch;
+      text-align:right;
+      -webkit-appearance:none; -moz-appearance:textfield;      
+    }
+    .Direction {
+      float:right; padding-right:8px;
+    }
+    .DropMenu {
+      display:none;
+      background-color:#222;
+      padding-left:8px;
+    }
+    .RadioTop {
+      transition: 0.25s;
+    }
+    .SelectedBtn,.SelectedBtn>* {
+      color:#eee;
+      background-color:#282;
+    }
     .LanRan,.ActRan { font-size:small; text-align:center; }
     .AlkLeg,.AlkCat { background-color:#ff9d9d; }
     .AEaLeg,.AEaCat { background-color:#ffdead; }
@@ -131,6 +191,7 @@
   </style>
 </head>
 <body>
+<div class="OpenBtn">&#x2630;</div>
 <div id="t32-id">
   <table id="t32stan-id" class="Toe">
     <caption class="MainCap TextXL">
@@ -155,7 +216,7 @@
     <tbody>
       <tr>
         <td class="YAxis1"><span class="TextXL"><span>Period&nbsp;&darr;</span><span style="display:none" lang="de">Periode&nbsp;&darr;</span><span style="display:none" lang="es">Periodo&nbsp;&darr;</span><span style="display:none" lang="fr">Période&nbsp;&darr;</span><span style="display:none" lang="it">Periodo&nbsp;&darr;</span><span style="display:none" lang="ru">Период&nbsp;&darr;</span></span><br>1</td>
-        <td onclick="elClick()">
+        <td>
           <div class="NMeCat">
             <div class="Nm">Hydrogen</div>
             <a class="Sb">H</a>
@@ -163,145 +224,145 @@
           </div>
         </td>
         <td colspan="30"></td>
-        <td onclick="elClick()"><div class="NobCat"><div class="Nm">Helium</div><a><div class="Sb">He</div></a><div class="An">2</div></div></td>
+        <td><div class="NobCat"><div class="Nm">Helium</div><a><div class="Sb">He</div></a><div class="An">2</div></div></td>
       </tr>
       <tr>
         <td class="YAxis1">2</td>
-        <td onclick="elClick()"><div class="AlkCat"><div class="Nm">Lithium</div><a><div class="Sb">Li</div></a><div class="An">3</div></div></td>
-        <td onclick="elClick()"><div class="AEaCat"><div class="Nm">Beryllium</div><a><div class="Sb">Be</div></a><div class="An">4</div></div></td>
+        <td><div class="AlkCat"><div class="Nm">Lithium</div><a><div class="Sb">Li</div></a><div class="An">3</div></div></td>
+        <td><div class="AEaCat"><div class="Nm">Beryllium</div><a><div class="Sb">Be</div></a><div class="An">4</div></div></td>
         <td colspan="24"></td>
-        <td onclick="elClick()"><div class="MetCat"><div class="Nm">Boron</div><a><div class="Sb">B</div></a><div class="An">5</div></div></td>
-        <td onclick="elClick()"><div class="NMeCat"><div class="Nm">Carbon</div><a><div class="Sb">C</div></a><div class="An">6</div></div></td>
-        <td onclick="elClick()"><div class="NMeCat"><div class="Nm">Nitrogen</div><a><div class="Sb">N</div></a><div class="An">7</div></div></td>
-        <td onclick="elClick()"><div class="NMeCat"><div class="Nm">Oxygen</div><a><div class="Sb">O</div></a><div class="An">8</div></div></td>
-        <td onclick="elClick()"><div class="HalCat"><div class="Nm">Fluorine</div><a><div class="Sb">F</div></a><div class="An">9</div></div></td>
-        <td onclick="elClick()"><div class="NobCat"><div class="Nm">Neon</div><a><div class="Sb">Ne</div></a><div class="An">10</div></div></td>
+        <td><div class="MetCat"><div class="Nm">Boron</div><a><div class="Sb">B</div></a><div class="An">5</div></div></td>
+        <td><div class="NMeCat"><div class="Nm">Carbon</div><a><div class="Sb">C</div></a><div class="An">6</div></div></td>
+        <td><div class="NMeCat"><div class="Nm">Nitrogen</div><a><div class="Sb">N</div></a><div class="An">7</div></div></td>
+        <td><div class="NMeCat"><div class="Nm">Oxygen</div><a><div class="Sb">O</div></a><div class="An">8</div></div></td>
+        <td><div class="HalCat"><div class="Nm">Fluorine</div><a><div class="Sb">F</div></a><div class="An">9</div></div></td>
+        <td><div class="NobCat"><div class="Nm">Neon</div><a><div class="Sb">Ne</div></a><div class="An">10</div></div></td>
       </tr>
       <tr>
         <td class="YAxis1">3</td>
-        <td onclick="elClick()"><div class="AlkCat"><div class="Nm">Sodium</div><a><div class="Sb">Na</div></a><div class="An">11</div></div></td>
-        <td onclick="elClick()"><div class="AEaCat"><div class="Nm">Magnesium</div><a><div class="Sb">Mg</div></a><div class="An">12</div></div></td>
+        <td><div class="AlkCat"><div class="Nm">Sodium</div><a><div class="Sb">Na</div></a><div class="An">11</div></div></td>
+        <td><div class="AEaCat"><div class="Nm">Magnesium</div><a><div class="Sb">Mg</div></a><div class="An">12</div></div></td>
         <td colspan="24"></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Aluminium</div><a><div class="Sb">Al</div></a><div class="An">13</div></div></td>
-        <td onclick="elClick()"><div class="MetCat"><div class="Nm">Silicon</div><a><div class="Sb">Si</div></a><div class="An">14</div></div></td>
-        <td onclick="elClick()"><div class="NMeCat"><div class="Nm">Phosphorus</div><a><div class="Sb">P</div></a><div class="An">15</div></div></td>
-        <td onclick="elClick()"><div class="NMeCat"><div class="Nm">Sulfur</div><a><div class="Sb">S</div></a><div class="An">16</div></div></td>
-        <td onclick="elClick()"><div class="HalCat"><div class="Nm">Chlorine</div><a><div class="Sb">Cl</div></a><div class="An">17</div></div></td>
-        <td onclick="elClick()"><div class="NobCat"><div class="Nm">Argon</div><a><div class="Sb">Ar</div></a><div class="An">18</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Aluminium</div><a><div class="Sb">Al</div></a><div class="An">13</div></div></td>
+        <td><div class="MetCat"><div class="Nm">Silicon</div><a><div class="Sb">Si</div></a><div class="An">14</div></div></td>
+        <td><div class="NMeCat"><div class="Nm">Phosphorus</div><a><div class="Sb">P</div></a><div class="An">15</div></div></td>
+        <td><div class="NMeCat"><div class="Nm">Sulfur</div><a><div class="Sb">S</div></a><div class="An">16</div></div></td>
+        <td><div class="HalCat"><div class="Nm">Chlorine</div><a><div class="Sb">Cl</div></a><div class="An">17</div></div></td>
+        <td><div class="NobCat"><div class="Nm">Argon</div><a><div class="Sb">Ar</div></a><div class="An">18</div></div></td>
       </tr>
       <tr>
         <td class="YAxis1">4</td>
-        <td onclick="elClick()"><div class="AlkCat"><div class="Nm">Potassium</div><a><div class="Sb">K</div></a><div class="An">19</div></div></td>
-        <td onclick="elClick()"><div class="AEaCat"><div class="Nm">Calcium</div><a><div class="Sb">Ca</div></a><div class="An">20</div></div></td>
+        <td><div class="AlkCat"><div class="Nm">Potassium</div><a><div class="Sb">K</div></a><div class="An">19</div></div></td>
+        <td><div class="AEaCat"><div class="Nm">Calcium</div><a><div class="Sb">Ca</div></a><div class="An">20</div></div></td>
         <td colspan="14"></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Scandium</div><a><div class="Sb">Sc</div></a><div class="An">21</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Titanium</div><a><div class="Sb">Ti</div></a><div class="An">22</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Vanadium</div><a><div class="Sb">V</div></a><div class="An">23</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Chromium</div><a><div class="Sb">Cr</div></a><div class="An">24</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Manganese</div><a><div class="Sb">Mn</div></a><div class="An">25</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Iron</div><a><div class="Sb">Fe</div></a><div class="An">26</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Cobalt</div><a><div class="Sb">Co</div></a><div class="An">27</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Nickel</div><a><div class="Sb">Ni</div></a><div class="An">28</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Copper</div><a><div class="Sb">Cu</div></a><div class="An">29</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Zinc</div><a><div class="Sb">Zn</div></a><div class="An">30</div></div></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Gallium</div><a><div class="Sb">Ga</div></a><div class="An">31</div></div></td>
-        <td onclick="elClick()"><div class="MetCat"><div class="Nm">Germanium</div><a><div class="Sb">Ge</div></a><div class="An">32</div></div></td>
-        <td onclick="elClick()"><div class="MetCat"><div class="Nm">Arsenic</div><a><div class="Sb">As</div></a><div class="An">33</div></div></td>
-        <td onclick="elClick()"><div class="NMeCat"><div class="Nm">Selenium</div><a><div class="Sb">Se</div></a><div class="An">34</div></div></td>
-        <td onclick="elClick()"><div class="HalCat"><div class="Nm">Bromine</div><a><div class="Sb">Br</div></a><div class="An">35</div></div></td>
-        <td onclick="elClick()"><div class="NobCat"><div class="Nm">Krypton</div><a><div class="Sb">Kr</div></a><div class="An">36</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Scandium</div><a><div class="Sb">Sc</div></a><div class="An">21</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Titanium</div><a><div class="Sb">Ti</div></a><div class="An">22</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Vanadium</div><a><div class="Sb">V</div></a><div class="An">23</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Chromium</div><a><div class="Sb">Cr</div></a><div class="An">24</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Manganese</div><a><div class="Sb">Mn</div></a><div class="An">25</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Iron</div><a><div class="Sb">Fe</div></a><div class="An">26</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Cobalt</div><a><div class="Sb">Co</div></a><div class="An">27</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Nickel</div><a><div class="Sb">Ni</div></a><div class="An">28</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Copper</div><a><div class="Sb">Cu</div></a><div class="An">29</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Zinc</div><a><div class="Sb">Zn</div></a><div class="An">30</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Gallium</div><a><div class="Sb">Ga</div></a><div class="An">31</div></div></td>
+        <td><div class="MetCat"><div class="Nm">Germanium</div><a><div class="Sb">Ge</div></a><div class="An">32</div></div></td>
+        <td><div class="MetCat"><div class="Nm">Arsenic</div><a><div class="Sb">As</div></a><div class="An">33</div></div></td>
+        <td><div class="NMeCat"><div class="Nm">Selenium</div><a><div class="Sb">Se</div></a><div class="An">34</div></div></td>
+        <td><div class="HalCat"><div class="Nm">Bromine</div><a><div class="Sb">Br</div></a><div class="An">35</div></div></td>
+        <td><div class="NobCat"><div class="Nm">Krypton</div><a><div class="Sb">Kr</div></a><div class="An">36</div></div></td>
       </tr>
       <tr>
         <td class="YAxis1">5</td>
-        <td onclick="elClick()"><div class="AlkCat"><div class="Nm">Rubidium</div><a><div class="Sb">Rb</div></a><div class="An">37</div></div></td>
-        <td onclick="elClick()"><div class="AEaCat"><div class="Nm">Strontium</div><a><div class="Sb">Sr</div></a><div class="An">38</div></div></td>
+        <td><div class="AlkCat"><div class="Nm">Rubidium</div><a><div class="Sb">Rb</div></a><div class="An">37</div></div></td>
+        <td><div class="AEaCat"><div class="Nm">Strontium</div><a><div class="Sb">Sr</div></a><div class="An">38</div></div></td>
         <td colspan="14"></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Yttrium</div><a><div class="Sb">Y</div></a><div class="An">39</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Zirconium</div><a><div class="Sb">Zr</div></a><div class="An">40</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Niobium</div><a><div class="Sb">Nb</div></a><div class="An">41</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Molybdenum</div><a><div class="Sb">Mo</div></a><div class="An">42</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Technetium</div><a><div class="Sb">Tc</div></a><div class="An">43</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Ruthenium</div><a><div class="Sb">Ru</div></a><div class="An">44</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Rhodium</div><a><div class="Sb">Rh</div></a><div class="An">45</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Palladium</div><a><div class="Sb">Pd</div></a><div class="An">46</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Silver</div><a><div class="Sb">Ag</div></a><div class="An">47</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Cadmium</div><a><div class="Sb">Cd</div></a><div class="An">48</div></div></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Indium</div><a><div class="Sb">In</div></a><div class="An">49</div></div></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Tin</div><a><div class="Sb">Sn</div></a><div class="An">50</div></div></td>
-        <td onclick="elClick()"><div class="MetCat"><div class="Nm">Antimony</div><a><div class="Sb">Sb</div></a><div class="An">51</div></div></td>
-        <td onclick="elClick()"><div class="MetCat"><div class="Nm">Tellurium</div><a><div class="Sb">Te</div></a><div class="An">52</div></div></td>
-        <td onclick="elClick()"><div class="HalCat"><div class="Nm">Iodine</div><a><div class="Sb">I</div></a><div class="An">53</div></div></td>
-        <td onclick="elClick()"><div class="NobCat"><div class="Nm">Xenon</div><a><div class="Sb">Xe</div></a><div class="An">54</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Yttrium</div><a><div class="Sb">Y</div></a><div class="An">39</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Zirconium</div><a><div class="Sb">Zr</div></a><div class="An">40</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Niobium</div><a><div class="Sb">Nb</div></a><div class="An">41</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Molybdenum</div><a><div class="Sb">Mo</div></a><div class="An">42</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Technetium</div><a><div class="Sb">Tc</div></a><div class="An">43</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Ruthenium</div><a><div class="Sb">Ru</div></a><div class="An">44</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Rhodium</div><a><div class="Sb">Rh</div></a><div class="An">45</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Palladium</div><a><div class="Sb">Pd</div></a><div class="An">46</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Silver</div><a><div class="Sb">Ag</div></a><div class="An">47</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Cadmium</div><a><div class="Sb">Cd</div></a><div class="An">48</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Indium</div><a><div class="Sb">In</div></a><div class="An">49</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Tin</div><a><div class="Sb">Sn</div></a><div class="An">50</div></div></td>
+        <td><div class="MetCat"><div class="Nm">Antimony</div><a><div class="Sb">Sb</div></a><div class="An">51</div></div></td>
+        <td><div class="MetCat"><div class="Nm">Tellurium</div><a><div class="Sb">Te</div></a><div class="An">52</div></div></td>
+        <td><div class="HalCat"><div class="Nm">Iodine</div><a><div class="Sb">I</div></a><div class="An">53</div></div></td>
+        <td><div class="NobCat"><div class="Nm">Xenon</div><a><div class="Sb">Xe</div></a><div class="An">54</div></div></td>
       </tr>
       <tr>
         <td class="YAxis1">6</td>
-        <td onclick="elClick()"><div class="AlkCat"><div class="Nm">Caesium</div><a><div class="Sb">Cs</div></a><div class="An">55</div></div></td>
-        <td onclick="elClick()"><div class="AEaCat"><div class="Nm">Barium</div><a><div class="Sb">Ba</div></a><div class="An">56</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Lanthanum</div><a><div class="Sb">La</div></a><div class="An">57</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Cerium</div><a><div class="Sb">Ce</div></a><div class="An">58</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Praseodymium</div><a><div class="Sb">Pr</div></a><div class="An">59</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Neodymium</div><a><div class="Sb">Nd</div></a><div class="An">60</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Promethium</div><a><div class="Sb">Pm</div></a><div class="An">61</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Samarium</div><a><div class="Sb">Sm</div></a><div class="An">62</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Europium</div><a><div class="Sb">Eu</div></a><div class="An">63</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Gadolinium</div><a><div class="Sb">Gd</div></a><div class="An">64</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Terbium</div><a><div class="Sb">Tb</div></a><div class="An">65</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Dysprosium</div><a><div class="Sb">Dy</div></a><div class="An">66</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Holmium</div><a><div class="Sb">Ho</div></a><div class="An">67</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Erbium</div><a><div class="Sb">Er</div></a><div class="An">68</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Thulium</div><a><div class="Sb">Tm</div></a><div class="An">69</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Ytterbium</div><a><div class="Sb">Yb</div></a><div class="An">70</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Lutetium</div><a><div class="Sb">Lu</div></a><div class="An">71</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Hafnium</div><a><div class="Sb">Hf</div></a><div class="An">72</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Tantalum</div><a><div class="Sb">Ta</div></a><div class="An">73</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Tungsten</div><a><div class="Sb">W</div></a><div class="An">74</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Rhenium</div><a><div class="Sb">Re</div></a><div class="An">75</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Osmium</div><a><div class="Sb">Os</div></a><div class="An">76</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Iridium</div><a><div class="Sb">Ir</div></a><div class="An">77</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Platinum</div><a><div class="Sb">Pt</div></a><div class="An">78</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Gold</div><a><div class="Sb">Au</div></a><div class="An">79</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Mercury</div><a><div class="Sb">Hg</div></a><div class="An">80</div></div></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Thallium</div><a><div class="Sb">Tl</div></a><div class="An">81</div></div></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Lead</div><a><div class="Sb">Pb</div></a><div class="An">82</div></div></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Bismuth</div><a><div class="Sb">Bi</div></a><div class="An">83</div></div></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Polonium</div><a><div class="Sb">Po</div></a><div class="An">84</div></div></td>
-        <td onclick="elClick()"><div class="HalCat"><div class="Nm">Astatine</div><a><div class="Sb">At</div></a><div class="An">85</div></div></td>
-        <td onclick="elClick()"><div class="NobCat"><div class="Nm">Radon</div><a><div class="Sb">Rn</div></a><div class="An">86</div></div></td>
+        <td><div class="AlkCat"><div class="Nm">Caesium</div><a><div class="Sb">Cs</div></a><div class="An">55</div></div></td>
+        <td><div class="AEaCat"><div class="Nm">Barium</div><a><div class="Sb">Ba</div></a><div class="An">56</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Lanthanum</div><a><div class="Sb">La</div></a><div class="An">57</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Cerium</div><a><div class="Sb">Ce</div></a><div class="An">58</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Praseodymium</div><a><div class="Sb">Pr</div></a><div class="An">59</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Neodymium</div><a><div class="Sb">Nd</div></a><div class="An">60</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Promethium</div><a><div class="Sb">Pm</div></a><div class="An">61</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Samarium</div><a><div class="Sb">Sm</div></a><div class="An">62</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Europium</div><a><div class="Sb">Eu</div></a><div class="An">63</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Gadolinium</div><a><div class="Sb">Gd</div></a><div class="An">64</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Terbium</div><a><div class="Sb">Tb</div></a><div class="An">65</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Dysprosium</div><a><div class="Sb">Dy</div></a><div class="An">66</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Holmium</div><a><div class="Sb">Ho</div></a><div class="An">67</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Erbium</div><a><div class="Sb">Er</div></a><div class="An">68</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Thulium</div><a><div class="Sb">Tm</div></a><div class="An">69</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Ytterbium</div><a><div class="Sb">Yb</div></a><div class="An">70</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Lutetium</div><a><div class="Sb">Lu</div></a><div class="An">71</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Hafnium</div><a><div class="Sb">Hf</div></a><div class="An">72</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Tantalum</div><a><div class="Sb">Ta</div></a><div class="An">73</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Tungsten</div><a><div class="Sb">W</div></a><div class="An">74</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Rhenium</div><a><div class="Sb">Re</div></a><div class="An">75</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Osmium</div><a><div class="Sb">Os</div></a><div class="An">76</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Iridium</div><a><div class="Sb">Ir</div></a><div class="An">77</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Platinum</div><a><div class="Sb">Pt</div></a><div class="An">78</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Gold</div><a><div class="Sb">Au</div></a><div class="An">79</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Mercury</div><a><div class="Sb">Hg</div></a><div class="An">80</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Thallium</div><a><div class="Sb">Tl</div></a><div class="An">81</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Lead</div><a><div class="Sb">Pb</div></a><div class="An">82</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Bismuth</div><a><div class="Sb">Bi</div></a><div class="An">83</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Polonium</div><a><div class="Sb">Po</div></a><div class="An">84</div></div></td>
+        <td><div class="HalCat"><div class="Nm">Astatine</div><a><div class="Sb">At</div></a><div class="An">85</div></div></td>
+        <td><div class="NobCat"><div class="Nm">Radon</div><a><div class="Sb">Rn</div></a><div class="An">86</div></div></td>
       </tr>
       <tr>
         <td class="YAxis1">7</td>
-        <td onclick="elClick()"><div class="AlkCat"><div class="Nm">Francium</div><a><div class="Sb">Fr</div></a><div class="An">87</div></div></td>
-        <td onclick="elClick()"><div class="AEaCat"><div class="Nm">Radium</div><a><div class="Sb">Ra</div></a><div class="An">88</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Actinium</div><a><div class="Sb">Ac</div></a><div class="An">89</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Thorium</div><a><div class="Sb">Th</div></a><div class="An">90</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Protactinium</div><a><div class="Sb">Pa</div></a><div class="An">91</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Uranium</div><a><div class="Sb">U</div></a><div class="An">92</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Neptunium</div><a><div class="Sb">Np</div></a><div class="An">93</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Plutonium</div><a><div class="Sb">Pu</div></a><div class="An">94</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Americium</div><a><div class="Sb">Am</div></a><div class="An">95</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Curium</div><a><div class="Sb">Cm</div></a><div class="An">96</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Berkelium</div><a><div class="Sb">Bk</div></a><div class="An">97</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Californium</div><a><div class="Sb">Cf</div></a><div class="An">98</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Einsteinium</div><a><div class="Sb">Es</div></a><div class="An">99</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Fermium</div><a><div class="Sb">Fm</div></a><div class="An">100</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Mendelevium</div><a><div class="Sb">Md</div></a><div class="An">101</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Nobelium</div><a><div class="Sb">No</div></a><div class="An">102</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Lawrencium</div><a><div class="Sb">Lr</div></a><div class="An">103</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Rutherfordium</div><a><div class="Sb">Rf</div></a><div class="An">104</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Dubnium</div><a><div class="Sb">Db</div></a><div class="An">105</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Seaborgium</div><a><div class="Sb">Sg</div></a><div class="An">106</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Bohrium</div><a><div class="Sb">Bh</div></a><div class="An">107</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Hassium</div><a><div class="Sb">Hs</div></a><div class="An">108</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Meitnerium</div><a><div class="Sb">Mt</div></a><div class="An">109</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Darmstadtium</div><a><div class="Sb">Ds</div></a><div class="An">110</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Roentgenium</div><a><div class="Sb">Rg</div></a><div class="An">111</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Copernicium</div><a><div class="Sb">Cn</div></a><div class="An">112</div></div></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Nihonium</div><a><div class="Sb">Nh</div></a><div class="An">113</div></div></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Flerovium</div><a><div class="Sb">Fl</div></a><div class="An">114</div></div></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Moscovium</div><a><div class="Sb">Mc</div></a><div class="An">115</div></div></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Livermorium</div><a><div class="Sb">Lv</div></a><div class="An">116</div></div></td>
-        <td onclick="elClick()"><div class="HalCat"><div class="Nm">Tennessine</div><a><div class="Sb">Ts</div></a><div class="An">117</div></div></td>
-        <td onclick="elClick()"><div class="NobCat"><div class="Nm">Oganesson</div><a><div class="Sb">Og</div></a><div class="An">118</div></div></td>
+        <td><div class="AlkCat"><div class="Nm">Francium</div><a><div class="Sb">Fr</div></a><div class="An">87</div></div></td>
+        <td><div class="AEaCat"><div class="Nm">Radium</div><a><div class="Sb">Ra</div></a><div class="An">88</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Actinium</div><a><div class="Sb">Ac</div></a><div class="An">89</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Thorium</div><a><div class="Sb">Th</div></a><div class="An">90</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Protactinium</div><a><div class="Sb">Pa</div></a><div class="An">91</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Uranium</div><a><div class="Sb">U</div></a><div class="An">92</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Neptunium</div><a><div class="Sb">Np</div></a><div class="An">93</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Plutonium</div><a><div class="Sb">Pu</div></a><div class="An">94</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Americium</div><a><div class="Sb">Am</div></a><div class="An">95</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Curium</div><a><div class="Sb">Cm</div></a><div class="An">96</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Berkelium</div><a><div class="Sb">Bk</div></a><div class="An">97</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Californium</div><a><div class="Sb">Cf</div></a><div class="An">98</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Einsteinium</div><a><div class="Sb">Es</div></a><div class="An">99</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Fermium</div><a><div class="Sb">Fm</div></a><div class="An">100</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Mendelevium</div><a><div class="Sb">Md</div></a><div class="An">101</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Nobelium</div><a><div class="Sb">No</div></a><div class="An">102</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Lawrencium</div><a><div class="Sb">Lr</div></a><div class="An">103</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Rutherfordium</div><a><div class="Sb">Rf</div></a><div class="An">104</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Dubnium</div><a><div class="Sb">Db</div></a><div class="An">105</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Seaborgium</div><a><div class="Sb">Sg</div></a><div class="An">106</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Bohrium</div><a><div class="Sb">Bh</div></a><div class="An">107</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Hassium</div><a><div class="Sb">Hs</div></a><div class="An">108</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Meitnerium</div><a><div class="Sb">Mt</div></a><div class="An">109</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Darmstadtium</div><a><div class="Sb">Ds</div></a><div class="An">110</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Roentgenium</div><a><div class="Sb">Rg</div></a><div class="An">111</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Copernicium</div><a><div class="Sb">Cn</div></a><div class="An">112</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Nihonium</div><a><div class="Sb">Nh</div></a><div class="An">113</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Flerovium</div><a><div class="Sb">Fl</div></a><div class="An">114</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Moscovium</div><a><div class="Sb">Mc</div></a><div class="An">115</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Livermorium</div><a><div class="Sb">Lv</div></a><div class="An">116</div></div></td>
+        <td><div class="HalCat"><div class="Nm">Tennessine</div><a><div class="Sb">Ts</div></a><div class="An">117</div></div></td>
+        <td><div class="NobCat"><div class="Nm">Oganesson</div><a><div class="Sb">Og</div></a><div class="An">118</div></div></td>
       </tr>
     </tbody>
   </table>
@@ -328,43 +389,43 @@
         <td colspan="3"></td>
         <td class="Box0"><div class="BsBox" style="margin-right:1px">1s</div></td>
         <td colspan="30"></td>
-        <td onclick="elClick()"><div class="NMeCat"><div class="Nm">Hydrogen</div><a class="Sb">H</a><div class="An">1</div></div></td>
-        <td onclick="elClick()"><div class="NobCat"><div class="Nm">Helium</div><a><div class="Sb">He</div></a><div class="An">2</div></div></td>
+        <td><div class="NMeCat"><div class="Nm">Hydrogen</div><a class="Sb">H</a><div class="An">1</div></div></td>
+        <td><div class="NobCat"><div class="Nm">Helium</div><a><div class="Sb">He</div></a><div class="An">2</div></div></td>
       </tr>
       <tr>
         <td colspan="3"></td>
         <td class="Box0"><div class="BsBox">2s</div></td>
         <td colspan="30"></td>
-        <td onclick="elClick()"><div class="AlkCat"><div class="Nm">Lithium</div><a><div class="Sb">Li</div></a><div class="An">3</div></div></td>
-        <td onclick="elClick()"><div class="AEaCat"><div class="Nm">Beryllium</div><a><div class="Sb">Be</div></a><div class="An">4</div></div></td>
+        <td><div class="AlkCat"><div class="Nm">Lithium</div><a><div class="Sb">Li</div></a><div class="An">3</div></div></td>
+        <td><div class="AEaCat"><div class="Nm">Beryllium</div><a><div class="Sb">Be</div></a><div class="An">4</div></div></td>
       </tr>
       <tr>
         <td colspan="2"></td>
         <td class="Box0"><div class="BpBox">2p</div></td>
         <td class="Box0"><div class="BsBox">3s</div></td>
         <td colspan="24"></td>
-        <td onclick="elClick()"><div class="MetCat"><div class="Nm">Boron</div><a><div class="Sb">B</div></a><div class="An">5</div></div></td>
-        <td onclick="elClick()"><div class="NMeCat"><div class="Nm">Carbon</div><a><div class="Sb">C</div></a><div class="An">6</div></div></td>
-        <td onclick="elClick()"><div class="NMeCat"><div class="Nm">Nitrogen</div><a><div class="Sb">N</div></a><div class="An">7</div></div></td>
-        <td onclick="elClick()"><div class="NMeCat"><div class="Nm">Oxygen</div><a><div class="Sb">O</div></a><div class="An">8</div></div></td>
-        <td onclick="elClick()"><div class="HalCat"><div class="Nm">Fluorine</div><a><div class="Sb">F</div></a><div class="An">9</div></div></td>
-        <td onclick="elClick()"><div class="NobCat"><div class="Nm">Neon</div><a><div class="Sb">Ne</div></a><div class="An">10</div></div></td>
-        <td onclick="elClick()"><div class="AlkCat"><div class="Nm">Sodium</div><a><div class="Sb">Na</div></a><div class="An">11</div></div></td>
-        <td onclick="elClick()"><div class="AEaCat"><div class="Nm">Magnesium</div><a><div class="Sb">Mg</div></a><div class="An">12</div></div></td>
+        <td><div class="MetCat"><div class="Nm">Boron</div><a><div class="Sb">B</div></a><div class="An">5</div></div></td>
+        <td><div class="NMeCat"><div class="Nm">Carbon</div><a><div class="Sb">C</div></a><div class="An">6</div></div></td>
+        <td><div class="NMeCat"><div class="Nm">Nitrogen</div><a><div class="Sb">N</div></a><div class="An">7</div></div></td>
+        <td><div class="NMeCat"><div class="Nm">Oxygen</div><a><div class="Sb">O</div></a><div class="An">8</div></div></td>
+        <td><div class="HalCat"><div class="Nm">Fluorine</div><a><div class="Sb">F</div></a><div class="An">9</div></div></td>
+        <td><div class="NobCat"><div class="Nm">Neon</div><a><div class="Sb">Ne</div></a><div class="An">10</div></div></td>
+        <td><div class="AlkCat"><div class="Nm">Sodium</div><a><div class="Sb">Na</div></a><div class="An">11</div></div></td>
+        <td><div class="AEaCat"><div class="Nm">Magnesium</div><a><div class="Sb">Mg</div></a><div class="An">12</div></div></td>
       </tr>
       <tr>
         <td colspan="2"></td>
         <td class="Box0"><div class="BpBox">3p</div></td>
         <td class="Box0"><div class="BsBox">4s</div></td>
         <td colspan="24"></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Aluminium</div><a><div class="Sb">Al</div></a><div class="An">13</div></div></td>
-        <td onclick="elClick()"><div class="MetCat"><div class="Nm">Silicon</div><a><div class="Sb">Si</div></a><div class="An">14</div></div></td>
-        <td onclick="elClick()"><div class="NMeCat"><div class="Nm">Phosphorus</div><a><div class="Sb">P</div></a><div class="An">15</div></div></td>
-        <td onclick="elClick()"><div class="NMeCat"><div class="Nm">Sulfur</div><a><div class="Sb">S</div></a><div class="An">16</div></div></td>
-        <td onclick="elClick()"><div class="HalCat"><div class="Nm">Chlorine</div><a><div class="Sb">Cl</div></a><div class="An">17</div></div></td>
-        <td onclick="elClick()"><div class="NobCat"><div class="Nm">Argon</div><a><div class="Sb">Ar</div></a><div class="An">18</div></div></td>
-        <td onclick="elClick()"><div class="AlkCat"><div class="Nm">Potassium</div><a><div class="Sb">K</div></a><div class="An">19</div></div></td>
-        <td onclick="elClick()"><div class="AEaCat"><div class="Nm">Calcium</div><a><div class="Sb">Ca</div></a><div class="An">20</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Aluminium</div><a><div class="Sb">Al</div></a><div class="An">13</div></div></td>
+        <td><div class="MetCat"><div class="Nm">Silicon</div><a><div class="Sb">Si</div></a><div class="An">14</div></div></td>
+        <td><div class="NMeCat"><div class="Nm">Phosphorus</div><a><div class="Sb">P</div></a><div class="An">15</div></div></td>
+        <td><div class="NMeCat"><div class="Nm">Sulfur</div><a><div class="Sb">S</div></a><div class="An">16</div></div></td>
+        <td><div class="HalCat"><div class="Nm">Chlorine</div><a><div class="Sb">Cl</div></a><div class="An">17</div></div></td>
+        <td><div class="NobCat"><div class="Nm">Argon</div><a><div class="Sb">Ar</div></a><div class="An">18</div></div></td>
+        <td><div class="AlkCat"><div class="Nm">Potassium</div><a><div class="Sb">K</div></a><div class="An">19</div></div></td>
+        <td><div class="AEaCat"><div class="Nm">Calcium</div><a><div class="Sb">Ca</div></a><div class="An">20</div></div></td>
       </tr>
       <tr>
         <td></td>
@@ -372,24 +433,24 @@
         <td class="Box0"><div class="BpBox">4p</div></td>
         <td class="Box0"><div class="BsBox">5s</div></td>
         <td colspan="14"></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Scandium</div><a><div class="Sb">Sc</div></a><div class="An">21</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Titanium</div><a><div class="Sb">Ti</div></a><div class="An">22</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Vanadium</div><a><div class="Sb">V</div></a><div class="An">23</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Chromium</div><a><div class="Sb">Cr</div></a><div class="An">24</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Manganese</div><a><div class="Sb">Mn</div></a><div class="An">25</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Iron</div><a><div class="Sb">Fe</div></a><div class="An">26</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Cobalt</div><a><div class="Sb">Co</div></a><div class="An">27</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Nickel</div><a><div class="Sb">Ni</div></a><div class="An">28</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Copper</div><a><div class="Sb">Cu</div></a><div class="An">29</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Zinc</div><a><div class="Sb">Zn</div></a><div class="An">30</div></div></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Gallium</div><a><div class="Sb">Ga</div></a><div class="An">31</div></div></td>
-        <td onclick="elClick()"><div class="MetCat"><div class="Nm">Germanium</div><a><div class="Sb">Ge</div></a><div class="An">32</div></div></td>
-        <td onclick="elClick()"><div class="MetCat"><div class="Nm">Arsenic</div><a><div class="Sb">As</div></a><div class="An">33</div></div></td>
-        <td onclick="elClick()"><div class="NMeCat"><div class="Nm">Selenium</div><a><div class="Sb">Se</div></a><div class="An">34</div></div></td>
-        <td onclick="elClick()"><div class="HalCat"><div class="Nm">Bromine</div><a><div class="Sb">Br</div></a><div class="An">35</div></div></td>
-        <td onclick="elClick()"><div class="NobCat"><div class="Nm">Krypton</div><a><div class="Sb">Kr</div></a><div class="An">36</div></div></td>
-        <td onclick="elClick()"><div class="AlkCat"><div class="Nm">Rubidium</div><a><div class="Sb">Rb</div></a><div class="An">37</div></div></td>
-        <td onclick="elClick()"><div class="AEaCat"><div class="Nm">Strontium</div><a><div class="Sb">Sr</div></a><div class="An">38</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Scandium</div><a><div class="Sb">Sc</div></a><div class="An">21</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Titanium</div><a><div class="Sb">Ti</div></a><div class="An">22</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Vanadium</div><a><div class="Sb">V</div></a><div class="An">23</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Chromium</div><a><div class="Sb">Cr</div></a><div class="An">24</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Manganese</div><a><div class="Sb">Mn</div></a><div class="An">25</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Iron</div><a><div class="Sb">Fe</div></a><div class="An">26</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Cobalt</div><a><div class="Sb">Co</div></a><div class="An">27</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Nickel</div><a><div class="Sb">Ni</div></a><div class="An">28</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Copper</div><a><div class="Sb">Cu</div></a><div class="An">29</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Zinc</div><a><div class="Sb">Zn</div></a><div class="An">30</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Gallium</div><a><div class="Sb">Ga</div></a><div class="An">31</div></div></td>
+        <td><div class="MetCat"><div class="Nm">Germanium</div><a><div class="Sb">Ge</div></a><div class="An">32</div></div></td>
+        <td><div class="MetCat"><div class="Nm">Arsenic</div><a><div class="Sb">As</div></a><div class="An">33</div></div></td>
+        <td><div class="NMeCat"><div class="Nm">Selenium</div><a><div class="Sb">Se</div></a><div class="An">34</div></div></td>
+        <td><div class="HalCat"><div class="Nm">Bromine</div><a><div class="Sb">Br</div></a><div class="An">35</div></div></td>
+        <td><div class="NobCat"><div class="Nm">Krypton</div><a><div class="Sb">Kr</div></a><div class="An">36</div></div></td>
+        <td><div class="AlkCat"><div class="Nm">Rubidium</div><a><div class="Sb">Rb</div></a><div class="An">37</div></div></td>
+        <td><div class="AEaCat"><div class="Nm">Strontium</div><a><div class="Sb">Sr</div></a><div class="An">38</div></div></td>
       </tr>
       <tr>
         <td></td>
@@ -397,62 +458,62 @@
         <td class="Box0"><div class="BpBox">5p</div></td>
         <td class="Box0"><div class="BsBox">6s</div></td>
         <td colspan="14"></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Yttrium</div><a><div class="Sb">Y</div></a><div class="An">39</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Zirconium</div><a><div class="Sb">Zr</div></a><div class="An">40</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Niobium</div><a><div class="Sb">Nb</div></a><div class="An">41</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Molybdenum</div><a><div class="Sb">Mo</div></a><div class="An">42</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Technetium</div><a><div class="Sb">Tc</div></a><div class="An">43</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Ruthenium</div><a><div class="Sb">Ru</div></a><div class="An">44</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Rhodium</div><a><div class="Sb">Rh</div></a><div class="An">45</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Palladium</div><a><div class="Sb">Pd</div></a><div class="An">46</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Silver</div><a><div class="Sb">Ag</div></a><div class="An">47</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Cadmium</div><a><div class="Sb">Cd</div></a><div class="An">48</div></div></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Indium</div><a><div class="Sb">In</div></a><div class="An">49</div></div></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Tin</div><a><div class="Sb">Sn</div></a><div class="An">50</div></div></td>
-        <td onclick="elClick()"><div class="MetCat"><div class="Nm">Antimony</div><a><div class="Sb">Sb</div></a><div class="An">51</div></div></td>
-        <td onclick="elClick()"><div class="MetCat"><div class="Nm">Tellurium</div><a><div class="Sb">Te</div></a><div class="An">52</div></div></td>
-        <td onclick="elClick()"><div class="HalCat"><div class="Nm">Iodine</div><a><div class="Sb">I</div></a><div class="An">53</div></div></td>
-        <td onclick="elClick()"><div class="NobCat"><div class="Nm">Xenon</div><a><div class="Sb">Xe</div></a><div class="An">54</div></div></td>
-        <td onclick="elClick()"><div class="AlkCat"><div class="Nm">Caesium</div><a><div class="Sb">Cs</div></a><div class="An">55</div></div></td>
-        <td onclick="elClick()"><div class="AEaCat"><div class="Nm">Barium</div><a><div class="Sb">Ba</div></a><div class="An">56</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Yttrium</div><a><div class="Sb">Y</div></a><div class="An">39</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Zirconium</div><a><div class="Sb">Zr</div></a><div class="An">40</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Niobium</div><a><div class="Sb">Nb</div></a><div class="An">41</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Molybdenum</div><a><div class="Sb">Mo</div></a><div class="An">42</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Technetium</div><a><div class="Sb">Tc</div></a><div class="An">43</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Ruthenium</div><a><div class="Sb">Ru</div></a><div class="An">44</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Rhodium</div><a><div class="Sb">Rh</div></a><div class="An">45</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Palladium</div><a><div class="Sb">Pd</div></a><div class="An">46</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Silver</div><a><div class="Sb">Ag</div></a><div class="An">47</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Cadmium</div><a><div class="Sb">Cd</div></a><div class="An">48</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Indium</div><a><div class="Sb">In</div></a><div class="An">49</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Tin</div><a><div class="Sb">Sn</div></a><div class="An">50</div></div></td>
+        <td><div class="MetCat"><div class="Nm">Antimony</div><a><div class="Sb">Sb</div></a><div class="An">51</div></div></td>
+        <td><div class="MetCat"><div class="Nm">Tellurium</div><a><div class="Sb">Te</div></a><div class="An">52</div></div></td>
+        <td><div class="HalCat"><div class="Nm">Iodine</div><a><div class="Sb">I</div></a><div class="An">53</div></div></td>
+        <td><div class="NobCat"><div class="Nm">Xenon</div><a><div class="Sb">Xe</div></a><div class="An">54</div></div></td>
+        <td><div class="AlkCat"><div class="Nm">Caesium</div><a><div class="Sb">Cs</div></a><div class="An">55</div></div></td>
+        <td><div class="AEaCat"><div class="Nm">Barium</div><a><div class="Sb">Ba</div></a><div class="An">56</div></div></td>
       </tr>
       <tr>
         <td class="Box0"><div class="BfBox" style="margin-left:1px">4f</div></td>
         <td class="Box0"><div class="BdBox">5d</div></td>
         <td class="Box0"><div class="BpBox">6p</div></td>
         <td class="Box0"><div class="BsBox">7s</div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Lanthanum</div><a><div class="Sb">La</div></a><div class="An">57</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Cerium</div><a><div class="Sb">Ce</div></a><div class="An">58</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Praseodymium</div><a><div class="Sb">Pr</div></a><div class="An">59</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Neodymium</div><a><div class="Sb">Nd</div></a><div class="An">60</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Promethium</div><a><div class="Sb">Pm</div></a><div class="An">61</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Samarium</div><a><div class="Sb">Sm</div></a><div class="An">62</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Europium</div><a><div class="Sb">Eu</div></a><div class="An">63</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Gadolinium</div><a><div class="Sb">Gd</div></a><div class="An">64</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Terbium</div><a><div class="Sb">Tb</div></a><div class="An">65</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Dysprosium</div><a><div class="Sb">Dy</div></a><div class="An">66</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Holmium</div><a><div class="Sb">Ho</div></a><div class="An">67</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Erbium</div><a><div class="Sb">Er</div></a><div class="An">68</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Thulium</div><a><div class="Sb">Tm</div></a><div class="An">69</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Ytterbium</div><a><div class="Sb">Yb</div></a><div class="An">70</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Lutetium</div><a><div class="Sb">Lu</div></a><div class="An">71</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Hafnium</div><a><div class="Sb">Hf</div></a><div class="An">72</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Tantalum</div><a><div class="Sb">Ta</div></a><div class="An">73</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Tungsten</div><a><div class="Sb">W</div></a><div class="An">74</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Rhenium</div><a><div class="Sb">Re</div></a><div class="An">75</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Osmium</div><a><div class="Sb">Os</div></a><div class="An">76</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Iridium</div><a><div class="Sb">Ir</div></a><div class="An">77</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Platinum</div><a><div class="Sb">Pt</div></a><div class="An">78</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Gold</div><a><div class="Sb">Au</div></a><div class="An">79</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Mercury</div><a><div class="Sb">Hg</div></a><div class="An">80</div></div></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Thallium</div><a><div class="Sb">Tl</div></a><div class="An">81</div></div></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Lead</div><a><div class="Sb">Pb</div></a><div class="An">82</div></div></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Bismuth</div><a><div class="Sb">Bi</div></a><div class="An">83</div></div></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Polonium</div><a><div class="Sb">Po</div></a><div class="An">84</div></div></td>
-        <td onclick="elClick()"><div class="HalCat"><div class="Nm">Astatine</div><a><div class="Sb">At</div></a><div class="An">85</div></div></td>
-        <td onclick="elClick()"><div class="NobCat"><div class="Nm">Radon</div><a><div class="Sb">Rn</div></a><div class="An">86</div></div></td>
-        <td onclick="elClick()"><div class="AlkCat"><div class="Nm">Francium</div><a><div class="Sb">Fr</div></a><div class="An">87</div></div></td>
-        <td onclick="elClick()"><div class="AEaCat"><div class="Nm">Radium</div><a><div class="Sb">Ra</div></a><div class="An">88</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Lanthanum</div><a><div class="Sb">La</div></a><div class="An">57</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Cerium</div><a><div class="Sb">Ce</div></a><div class="An">58</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Praseodymium</div><a><div class="Sb">Pr</div></a><div class="An">59</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Neodymium</div><a><div class="Sb">Nd</div></a><div class="An">60</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Promethium</div><a><div class="Sb">Pm</div></a><div class="An">61</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Samarium</div><a><div class="Sb">Sm</div></a><div class="An">62</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Europium</div><a><div class="Sb">Eu</div></a><div class="An">63</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Gadolinium</div><a><div class="Sb">Gd</div></a><div class="An">64</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Terbium</div><a><div class="Sb">Tb</div></a><div class="An">65</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Dysprosium</div><a><div class="Sb">Dy</div></a><div class="An">66</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Holmium</div><a><div class="Sb">Ho</div></a><div class="An">67</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Erbium</div><a><div class="Sb">Er</div></a><div class="An">68</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Thulium</div><a><div class="Sb">Tm</div></a><div class="An">69</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Ytterbium</div><a><div class="Sb">Yb</div></a><div class="An">70</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Lutetium</div><a><div class="Sb">Lu</div></a><div class="An">71</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Hafnium</div><a><div class="Sb">Hf</div></a><div class="An">72</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Tantalum</div><a><div class="Sb">Ta</div></a><div class="An">73</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Tungsten</div><a><div class="Sb">W</div></a><div class="An">74</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Rhenium</div><a><div class="Sb">Re</div></a><div class="An">75</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Osmium</div><a><div class="Sb">Os</div></a><div class="An">76</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Iridium</div><a><div class="Sb">Ir</div></a><div class="An">77</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Platinum</div><a><div class="Sb">Pt</div></a><div class="An">78</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Gold</div><a><div class="Sb">Au</div></a><div class="An">79</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Mercury</div><a><div class="Sb">Hg</div></a><div class="An">80</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Thallium</div><a><div class="Sb">Tl</div></a><div class="An">81</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Lead</div><a><div class="Sb">Pb</div></a><div class="An">82</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Bismuth</div><a><div class="Sb">Bi</div></a><div class="An">83</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Polonium</div><a><div class="Sb">Po</div></a><div class="An">84</div></div></td>
+        <td><div class="HalCat"><div class="Nm">Astatine</div><a><div class="Sb">At</div></a><div class="An">85</div></div></td>
+        <td><div class="NobCat"><div class="Nm">Radon</div><a><div class="Sb">Rn</div></a><div class="An">86</div></div></td>
+        <td><div class="AlkCat"><div class="Nm">Francium</div><a><div class="Sb">Fr</div></a><div class="An">87</div></div></td>
+        <td><div class="AEaCat"><div class="Nm">Radium</div><a><div class="Sb">Ra</div></a><div class="An">88</div></div></td>
 
       </tr>
       <tr>
@@ -460,36 +521,36 @@
         <td class="Box0"><div class="BdBox">6d</div></td>
         <td class="Box0"><div class="BpBox">7p</div></td>
         <td class="Box0"><div class="BsBox">8s</div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Actinium</div><a><div class="Sb">Ac</div></a><div class="An">89</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Thorium</div><a><div class="Sb">Th</div></a><div class="An">90</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Protactinium</div><a><div class="Sb">Pa</div></a><div class="An">91</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Uranium</div><a><div class="Sb">U</div></a><div class="An">92</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Neptunium</div><a><div class="Sb">Np</div></a><div class="An">93</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Plutonium</div><a><div class="Sb">Pu</div></a><div class="An">94</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Americium</div><a><div class="Sb">Am</div></a><div class="An">95</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Curium</div><a><div class="Sb">Cm</div></a><div class="An">96</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Berkelium</div><a><div class="Sb">Bk</div></a><div class="An">97</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Californium</div><a><div class="Sb">Cf</div></a><div class="An">98</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Einsteinium</div><a><div class="Sb">Es</div></a><div class="An">99</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Fermium</div><a><div class="Sb">Fm</div></a><div class="An">100</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Mendelevium</div><a><div class="Sb">Md</div></a><div class="An">101</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Nobelium</div><a><div class="Sb">No</div></a><div class="An">102</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Lawrencium</div><a><div class="Sb">Lr</div></a><div class="An">103</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Rutherfordium</div><a><div class="Sb">Rf</div></a><div class="An">104</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Dubnium</div><a><div class="Sb">Db</div></a><div class="An">105</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Seaborgium</div><a><div class="Sb">Sg</div></a><div class="An">106</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Bohrium</div><a><div class="Sb">Bh</div></a><div class="An">107</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Hassium</div><a><div class="Sb">Hs</div></a><div class="An">108</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Meitnerium</div><a><div class="Sb">Mt</div></a><div class="An">109</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Darmstadtium</div><a><div class="Sb">Ds</div></a><div class="An">110</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Roentgenium</div><a><div class="Sb">Rg</div></a><div class="An">111</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Copernicium</div><a><div class="Sb">Cn</div></a><div class="An">112</div></div></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Nihonium</div><a><div class="Sb">Nh</div></a><div class="An">113</div></div></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Flerovium</div><a><div class="Sb">Fl</div></a><div class="An">114</div></div></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Moscovium</div><a><div class="Sb">Mc</div></a><div class="An">115</div></div></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Livermorium</div><a><div class="Sb">Lv</div></a><div class="An">116</div></div></td>
-        <td onclick="elClick()"><div class="HalCat"><div class="Nm">Tennessine</div><a><div class="Sb">Ts</div></a><div class="An">117</div></div></td>
-        <td onclick="elClick()"><div class="NobCat"><div class="Nm">Oganesson</div><a><div class="Sb">Og</div></a><div class="An">118</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Actinium</div><a><div class="Sb">Ac</div></a><div class="An">89</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Thorium</div><a><div class="Sb">Th</div></a><div class="An">90</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Protactinium</div><a><div class="Sb">Pa</div></a><div class="An">91</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Uranium</div><a><div class="Sb">U</div></a><div class="An">92</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Neptunium</div><a><div class="Sb">Np</div></a><div class="An">93</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Plutonium</div><a><div class="Sb">Pu</div></a><div class="An">94</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Americium</div><a><div class="Sb">Am</div></a><div class="An">95</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Curium</div><a><div class="Sb">Cm</div></a><div class="An">96</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Berkelium</div><a><div class="Sb">Bk</div></a><div class="An">97</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Californium</div><a><div class="Sb">Cf</div></a><div class="An">98</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Einsteinium</div><a><div class="Sb">Es</div></a><div class="An">99</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Fermium</div><a><div class="Sb">Fm</div></a><div class="An">100</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Mendelevium</div><a><div class="Sb">Md</div></a><div class="An">101</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Nobelium</div><a><div class="Sb">No</div></a><div class="An">102</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Lawrencium</div><a><div class="Sb">Lr</div></a><div class="An">103</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Rutherfordium</div><a><div class="Sb">Rf</div></a><div class="An">104</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Dubnium</div><a><div class="Sb">Db</div></a><div class="An">105</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Seaborgium</div><a><div class="Sb">Sg</div></a><div class="An">106</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Bohrium</div><a><div class="Sb">Bh</div></a><div class="An">107</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Hassium</div><a><div class="Sb">Hs</div></a><div class="An">108</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Meitnerium</div><a><div class="Sb">Mt</div></a><div class="An">109</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Darmstadtium</div><a><div class="Sb">Ds</div></a><div class="An">110</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Roentgenium</div><a><div class="Sb">Rg</div></a><div class="An">111</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Copernicium</div><a><div class="Sb">Cn</div></a><div class="An">112</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Nihonium</div><a><div class="Sb">Nh</div></a><div class="An">113</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Flerovium</div><a><div class="Sb">Fl</div></a><div class="An">114</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Moscovium</div><a><div class="Sb">Mc</div></a><div class="An">115</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Livermorium</div><a><div class="Sb">Lv</div></a><div class="An">116</div></div></td>
+        <td><div class="HalCat"><div class="Nm">Tennessine</div><a><div class="Sb">Ts</div></a><div class="An">117</div></div></td>
+        <td><div class="NobCat"><div class="Nm">Oganesson</div><a><div class="Sb">Og</div></a><div class="An">118</div></div></td>
         <td><div class="AlkCat" title="?"><div class="Nm"></div><a><div class="Sb"></div></a><div class="An">119</div></div></td>
         <td><div class="AEaCat" title="?"><div class="Nm"></div><a><div class="Sb"></div></a><div class="An">120</div></div></td>
       </tr>
@@ -520,7 +581,7 @@
     <tbody>
       <tr>
         <td class="YAxis1"><span class="TextXL"><span>Period&nbsp;&darr;</span><span style="display:none" lang="de">Periode&nbsp;&darr;</span><span style="display:none" lang="es">Periodo&nbsp;&darr;</span><span style="display:none" lang="fr">Période&nbsp;&darr;</span><span style="display:none" lang="it">Periodo&nbsp;&darr;</span><span style="display:none" lang="ru">Период&nbsp;&darr;</span></span><br>1</td>
-        <td onclick="elClick()">
+        <td>
           <div class="NMeCat">
             <div class="Nm">Hydrogen</div>
             <a class="Sb">H</a>
@@ -528,156 +589,156 @@
           </div>
         </td>
         <td colspan="17"></td>
-        <td onclick="elClick()"><div class="NobCat"><div class="Nm">Helium</div><a><div class="Sb">He</div></a><div class="An">2</div></div></td>
+        <td><div class="NobCat"><div class="Nm">Helium</div><a><div class="Sb">He</div></a><div class="An">2</div></div></td>
       </tr>
       <tr>
         <td class="YAxis1">2</td>
-        <td onclick="elClick()"><div class="AlkCat"><div class="Nm">Lithium</div><a><div class="Sb">Li</div></a><div class="An">3</div></div></td>
-        <td onclick="elClick()"><div class="AEaCat"><div class="Nm">Beryllium</div><a><div class="Sb">Be</div></a><div class="An">4</div></div></td>
+        <td><div class="AlkCat"><div class="Nm">Lithium</div><a><div class="Sb">Li</div></a><div class="An">3</div></div></td>
+        <td><div class="AEaCat"><div class="Nm">Beryllium</div><a><div class="Sb">Be</div></a><div class="An">4</div></div></td>
         <td colspan="11"></td>
-        <td onclick="elClick()"><div class="MetCat"><div class="Nm">Boron</div><a><div class="Sb">B</div></a><div class="An">5</div></div></td>
-        <td onclick="elClick()"><div class="NMeCat"><div class="Nm">Carbon</div><a><div class="Sb">C</div></a><div class="An">6</div></div></td>
-        <td onclick="elClick()"><div class="NMeCat"><div class="Nm">Nitrogen</div><a><div class="Sb">N</div></a><div class="An">7</div></div></td>
-        <td onclick="elClick()"><div class="NMeCat"><div class="Nm">Oxygen</div><a><div class="Sb">O</div></a><div class="An">8</div></div></td>
-        <td onclick="elClick()"><div class="HalCat"><div class="Nm">Fluorine</div><a><div class="Sb">F</div></a><div class="An">9</div></div></td>
-        <td onclick="elClick()"><div class="NobCat"><div class="Nm">Neon</div><a><div class="Sb">Ne</div></a><div class="An">10</div></div></td>
+        <td><div class="MetCat"><div class="Nm">Boron</div><a><div class="Sb">B</div></a><div class="An">5</div></div></td>
+        <td><div class="NMeCat"><div class="Nm">Carbon</div><a><div class="Sb">C</div></a><div class="An">6</div></div></td>
+        <td><div class="NMeCat"><div class="Nm">Nitrogen</div><a><div class="Sb">N</div></a><div class="An">7</div></div></td>
+        <td><div class="NMeCat"><div class="Nm">Oxygen</div><a><div class="Sb">O</div></a><div class="An">8</div></div></td>
+        <td><div class="HalCat"><div class="Nm">Fluorine</div><a><div class="Sb">F</div></a><div class="An">9</div></div></td>
+        <td><div class="NobCat"><div class="Nm">Neon</div><a><div class="Sb">Ne</div></a><div class="An">10</div></div></td>
       </tr>
       <tr>
         <td class="YAxis1">3</td>
-        <td onclick="elClick()"><div class="AlkCat"><div class="Nm">Sodium</div><a><div class="Sb">Na</div></a><div class="An">11</div></div></td>
-        <td onclick="elClick()"><div class="AEaCat"><div class="Nm">Magnesium</div><a><div class="Sb">Mg</div></a><div class="An">12</div></div></td>
+        <td><div class="AlkCat"><div class="Nm">Sodium</div><a><div class="Sb">Na</div></a><div class="An">11</div></div></td>
+        <td><div class="AEaCat"><div class="Nm">Magnesium</div><a><div class="Sb">Mg</div></a><div class="An">12</div></div></td>
         <td colspan="11"></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Aluminium</div><a><div class="Sb">Al</div></a><div class="An">13</div></div></td>
-        <td onclick="elClick()"><div class="MetCat"><div class="Nm">Silicon</div><a><div class="Sb">Si</div></a><div class="An">14</div></div></td>
-        <td onclick="elClick()"><div class="NMeCat"><div class="Nm">Phosphorus</div><a><div class="Sb">P</div></a><div class="An">15</div></div></td>
-        <td onclick="elClick()"><div class="NMeCat"><div class="Nm">Sulfur</div><a><div class="Sb">S</div></a><div class="An">16</div></div></td>
-        <td onclick="elClick()"><div class="HalCat"><div class="Nm">Chlorine</div><a><div class="Sb">Cl</div></a><div class="An">17</div></div></td>
-        <td onclick="elClick()"><div class="NobCat"><div class="Nm">Argon</div><a><div class="Sb">Ar</div></a><div class="An">18</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Aluminium</div><a><div class="Sb">Al</div></a><div class="An">13</div></div></td>
+        <td><div class="MetCat"><div class="Nm">Silicon</div><a><div class="Sb">Si</div></a><div class="An">14</div></div></td>
+        <td><div class="NMeCat"><div class="Nm">Phosphorus</div><a><div class="Sb">P</div></a><div class="An">15</div></div></td>
+        <td><div class="NMeCat"><div class="Nm">Sulfur</div><a><div class="Sb">S</div></a><div class="An">16</div></div></td>
+        <td><div class="HalCat"><div class="Nm">Chlorine</div><a><div class="Sb">Cl</div></a><div class="An">17</div></div></td>
+        <td><div class="NobCat"><div class="Nm">Argon</div><a><div class="Sb">Ar</div></a><div class="An">18</div></div></td>
       </tr>
       <tr>
         <td class="YAxis1">4</td>
-        <td onclick="elClick()"><div class="AlkCat"><div class="Nm">Potassium</div><a><div class="Sb">K</div></a><div class="An">19</div></div></td>
-        <td onclick="elClick()"><div class="AEaCat"><div class="Nm">Calcium</div><a><div class="Sb">Ca</div></a><div class="An">20</div></div></td>
+        <td><div class="AlkCat"><div class="Nm">Potassium</div><a><div class="Sb">K</div></a><div class="An">19</div></div></td>
+        <td><div class="AEaCat"><div class="Nm">Calcium</div><a><div class="Sb">Ca</div></a><div class="An">20</div></div></td>
         <td></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Scandium</div><a><div class="Sb">Sc</div></a><div class="An">21</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Titanium</div><a><div class="Sb">Ti</div></a><div class="An">22</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Vanadium</div><a><div class="Sb">V</div></a><div class="An">23</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Chromium</div><a><div class="Sb">Cr</div></a><div class="An">24</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Manganese</div><a><div class="Sb">Mn</div></a><div class="An">25</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Iron</div><a><div class="Sb">Fe</div></a><div class="An">26</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Cobalt</div><a><div class="Sb">Co</div></a><div class="An">27</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Nickel</div><a><div class="Sb">Ni</div></a><div class="An">28</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Copper</div><a><div class="Sb">Cu</div></a><div class="An">29</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Zinc</div><a><div class="Sb">Zn</div></a><div class="An">30</div></div></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Gallium</div><a><div class="Sb">Ga</div></a><div class="An">31</div></div></td>
-        <td onclick="elClick()"><div class="MetCat"><div class="Nm">Germanium</div><a><div class="Sb">Ge</div></a><div class="An">32</div></div></td>
-        <td onclick="elClick()"><div class="MetCat"><div class="Nm">Arsenic</div><a><div class="Sb">As</div></a><div class="An">33</div></div></td>
-        <td onclick="elClick()"><div class="NMeCat"><div class="Nm">Selenium</div><a><div class="Sb">Se</div></a><div class="An">34</div></div></td>
-        <td onclick="elClick()"><div class="HalCat"><div class="Nm">Bromine</div><a><div class="Sb">Br</div></a><div class="An">35</div></div></td>
-        <td onclick="elClick()"><div class="NobCat"><div class="Nm">Krypton</div><a><div class="Sb">Kr</div></a><div class="An">36</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Scandium</div><a><div class="Sb">Sc</div></a><div class="An">21</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Titanium</div><a><div class="Sb">Ti</div></a><div class="An">22</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Vanadium</div><a><div class="Sb">V</div></a><div class="An">23</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Chromium</div><a><div class="Sb">Cr</div></a><div class="An">24</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Manganese</div><a><div class="Sb">Mn</div></a><div class="An">25</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Iron</div><a><div class="Sb">Fe</div></a><div class="An">26</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Cobalt</div><a><div class="Sb">Co</div></a><div class="An">27</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Nickel</div><a><div class="Sb">Ni</div></a><div class="An">28</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Copper</div><a><div class="Sb">Cu</div></a><div class="An">29</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Zinc</div><a><div class="Sb">Zn</div></a><div class="An">30</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Gallium</div><a><div class="Sb">Ga</div></a><div class="An">31</div></div></td>
+        <td><div class="MetCat"><div class="Nm">Germanium</div><a><div class="Sb">Ge</div></a><div class="An">32</div></div></td>
+        <td><div class="MetCat"><div class="Nm">Arsenic</div><a><div class="Sb">As</div></a><div class="An">33</div></div></td>
+        <td><div class="NMeCat"><div class="Nm">Selenium</div><a><div class="Sb">Se</div></a><div class="An">34</div></div></td>
+        <td><div class="HalCat"><div class="Nm">Bromine</div><a><div class="Sb">Br</div></a><div class="An">35</div></div></td>
+        <td><div class="NobCat"><div class="Nm">Krypton</div><a><div class="Sb">Kr</div></a><div class="An">36</div></div></td>
       </tr>
       <tr>
         <td class="YAxis1">5</td>
-        <td onclick="elClick()"><div class="AlkCat"><div class="Nm">Rubidium</div><a><div class="Sb">Rb</div></a><div class="An">37</div></div></td>
-        <td onclick="elClick()"><div class="AEaCat"><div class="Nm">Strontium</div><a><div class="Sb">Sr</div></a><div class="An">38</div></div></td>
+        <td><div class="AlkCat"><div class="Nm">Rubidium</div><a><div class="Sb">Rb</div></a><div class="An">37</div></div></td>
+        <td><div class="AEaCat"><div class="Nm">Strontium</div><a><div class="Sb">Sr</div></a><div class="An">38</div></div></td>
         <td></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Yttrium</div><a><div class="Sb">Y</div></a><div class="An">39</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Zirconium</div><a><div class="Sb">Zr</div></a><div class="An">40</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Niobium</div><a><div class="Sb">Nb</div></a><div class="An">41</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Molybdenum</div><a><div class="Sb">Mo</div></a><div class="An">42</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Technetium</div><a><div class="Sb">Tc</div></a><div class="An">43</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Ruthenium</div><a><div class="Sb">Ru</div></a><div class="An">44</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Rhodium</div><a><div class="Sb">Rh</div></a><div class="An">45</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Palladium</div><a><div class="Sb">Pd</div></a><div class="An">46</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Silver</div><a><div class="Sb">Ag</div></a><div class="An">47</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Cadmium</div><a><div class="Sb">Cd</div></a><div class="An">48</div></div></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Indium</div><a><div class="Sb">In</div></a><div class="An">49</div></div></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Tin</div><a><div class="Sb">Sn</div></a><div class="An">50</div></div></td>
-        <td onclick="elClick()"><div class="MetCat"><div class="Nm">Antimony</div><a><div class="Sb">Sb</div></a><div class="An">51</div></div></td>
-        <td onclick="elClick()"><div class="MetCat"><div class="Nm">Tellurium</div><a><div class="Sb">Te</div></a><div class="An">52</div></div></td>
-        <td onclick="elClick()"><div class="HalCat"><div class="Nm">Iodine</div><a><div class="Sb">I</div></a><div class="An">53</div></div></td>
-        <td onclick="elClick()"><div class="NobCat"><div class="Nm">Xenon</div><a><div class="Sb">Xe</div></a><div class="An">54</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Yttrium</div><a><div class="Sb">Y</div></a><div class="An">39</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Zirconium</div><a><div class="Sb">Zr</div></a><div class="An">40</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Niobium</div><a><div class="Sb">Nb</div></a><div class="An">41</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Molybdenum</div><a><div class="Sb">Mo</div></a><div class="An">42</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Technetium</div><a><div class="Sb">Tc</div></a><div class="An">43</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Ruthenium</div><a><div class="Sb">Ru</div></a><div class="An">44</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Rhodium</div><a><div class="Sb">Rh</div></a><div class="An">45</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Palladium</div><a><div class="Sb">Pd</div></a><div class="An">46</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Silver</div><a><div class="Sb">Ag</div></a><div class="An">47</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Cadmium</div><a><div class="Sb">Cd</div></a><div class="An">48</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Indium</div><a><div class="Sb">In</div></a><div class="An">49</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Tin</div><a><div class="Sb">Sn</div></a><div class="An">50</div></div></td>
+        <td><div class="MetCat"><div class="Nm">Antimony</div><a><div class="Sb">Sb</div></a><div class="An">51</div></div></td>
+        <td><div class="MetCat"><div class="Nm">Tellurium</div><a><div class="Sb">Te</div></a><div class="An">52</div></div></td>
+        <td><div class="HalCat"><div class="Nm">Iodine</div><a><div class="Sb">I</div></a><div class="An">53</div></div></td>
+        <td><div class="NobCat"><div class="Nm">Xenon</div><a><div class="Sb">Xe</div></a><div class="An">54</div></div></td>
       </tr>
       <tr>
         <td class="YAxis1">6</td>
-        <td onclick="elClick()"><div class="AlkCat"><div class="Nm">Caesium</div><a><div class="Sb">Cs</div></a><div class="An">55</div></div></td>
-        <td onclick="elClick()"><div class="AEaCat"><div class="Nm">Barium</div><a><div class="Sb">Ba</div></a><div class="An">56</div></div></td>
+        <td><div class="AlkCat"><div class="Nm">Caesium</div><a><div class="Sb">Cs</div></a><div class="An">55</div></div></td>
+        <td><div class="AEaCat"><div class="Nm">Barium</div><a><div class="Sb">Ba</div></a><div class="An">56</div></div></td>
         <td><div id="t18-lr-id" class="LanRan">57-<br>70</div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Lutetium</div><a><div class="Sb">Lu</div></a><div class="An">71</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Hafnium</div><a><div class="Sb">Hf</div></a><div class="An">72</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Tantalum</div><a><div class="Sb">Ta</div></a><div class="An">73</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Tungsten</div><a><div class="Sb">W</div></a><div class="An">74</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Rhenium</div><a><div class="Sb">Re</div></a><div class="An">75</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Osmium</div><a><div class="Sb">Os</div></a><div class="An">76</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Iridium</div><a><div class="Sb">Ir</div></a><div class="An">77</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Platinum</div><a><div class="Sb">Pt</div></a><div class="An">78</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Gold</div><a><div class="Sb">Au</div></a><div class="An">79</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Mercury</div><a><div class="Sb">Hg</div></a><div class="An">80</div></div></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Thallium</div><a><div class="Sb">Tl</div></a><div class="An">81</div></div></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Lead</div><a><div class="Sb">Pb</div></a><div class="An">82</div></div></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Bismuth</div><a><div class="Sb">Bi</div></a><div class="An">83</div></div></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Polonium</div><a><div class="Sb">Po</div></a><div class="An">84</div></div></td>
-        <td onclick="elClick()"><div class="HalCat"><div class="Nm">Astatine</div><a><div class="Sb">At</div></a><div class="An">85</div></div></td>
-        <td onclick="elClick()"><div class="NobCat"><div class="Nm">Radon</div><a><div class="Sb">Rn</div></a><div class="An">86</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Lutetium</div><a><div class="Sb">Lu</div></a><div class="An">71</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Hafnium</div><a><div class="Sb">Hf</div></a><div class="An">72</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Tantalum</div><a><div class="Sb">Ta</div></a><div class="An">73</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Tungsten</div><a><div class="Sb">W</div></a><div class="An">74</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Rhenium</div><a><div class="Sb">Re</div></a><div class="An">75</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Osmium</div><a><div class="Sb">Os</div></a><div class="An">76</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Iridium</div><a><div class="Sb">Ir</div></a><div class="An">77</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Platinum</div><a><div class="Sb">Pt</div></a><div class="An">78</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Gold</div><a><div class="Sb">Au</div></a><div class="An">79</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Mercury</div><a><div class="Sb">Hg</div></a><div class="An">80</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Thallium</div><a><div class="Sb">Tl</div></a><div class="An">81</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Lead</div><a><div class="Sb">Pb</div></a><div class="An">82</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Bismuth</div><a><div class="Sb">Bi</div></a><div class="An">83</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Polonium</div><a><div class="Sb">Po</div></a><div class="An">84</div></div></td>
+        <td><div class="HalCat"><div class="Nm">Astatine</div><a><div class="Sb">At</div></a><div class="An">85</div></div></td>
+        <td><div class="NobCat"><div class="Nm">Radon</div><a><div class="Sb">Rn</div></a><div class="An">86</div></div></td>
       </tr>
       <tr>
         <td class="YAxis1">7</td>
-        <td onclick="elClick()"><div class="AlkCat"><div class="Nm">Francium</div><a><div class="Sb">Fr</div></a><div class="An">87</div></div></td>
-        <td onclick="elClick()"><div class="AEaCat"><div class="Nm">Radium</div><a><div class="Sb">Ra</div></a><div class="An">88</div></div></td>
+        <td><div class="AlkCat"><div class="Nm">Francium</div><a><div class="Sb">Fr</div></a><div class="An">87</div></div></td>
+        <td><div class="AEaCat"><div class="Nm">Radium</div><a><div class="Sb">Ra</div></a><div class="An">88</div></div></td>
         <td><div id="t18-ar-id" class="ActRan">89-<br>102</div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Lawrencium</div><a><div class="Sb">Lr</div></a><div class="An">103</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Rutherfordium</div><a><div class="Sb">Rf</div></a><div class="An">104</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Dubnium</div><a><div class="Sb">Db</div></a><div class="An">105</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Seaborgium</div><a><div class="Sb">Sg</div></a><div class="An">106</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Bohrium</div><a><div class="Sb">Bh</div></a><div class="An">107</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Hassium</div><a><div class="Sb">Hs</div></a><div class="An">108</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Meitnerium</div><a><div class="Sb">Mt</div></a><div class="An">109</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Darmstadtium</div><a><div class="Sb">Ds</div></a><div class="An">110</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Roentgenium</div><a><div class="Sb">Rg</div></a><div class="An">111</div></div></td>
-        <td onclick="elClick()"><div class="TMeCat"><div class="Nm">Copernicium</div><a><div class="Sb">Cn</div></a><div class="An">112</div></div></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Nihonium</div><a><div class="Sb">Nh</div></a><div class="An">113</div></div></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Flerovium</div><a><div class="Sb">Fl</div></a><div class="An">114</div></div></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Moscovium</div><a><div class="Sb">Mc</div></a><div class="An">115</div></div></td>
-        <td onclick="elClick()"><div class="PtMCat"><div class="Nm">Livermorium</div><a><div class="Sb">Lv</div></a><div class="An">116</div></div></td>
-        <td onclick="elClick()"><div class="HalCat"><div class="Nm">Tennessine</div><a><div class="Sb">Ts</div></a><div class="An">117</div></div></td>
-        <td onclick="elClick()"><div class="NobCat"><div class="Nm">Oganesson</div><a><div class="Sb">Og</div></a><div class="An">118</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Lawrencium</div><a><div class="Sb">Lr</div></a><div class="An">103</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Rutherfordium</div><a><div class="Sb">Rf</div></a><div class="An">104</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Dubnium</div><a><div class="Sb">Db</div></a><div class="An">105</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Seaborgium</div><a><div class="Sb">Sg</div></a><div class="An">106</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Bohrium</div><a><div class="Sb">Bh</div></a><div class="An">107</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Hassium</div><a><div class="Sb">Hs</div></a><div class="An">108</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Meitnerium</div><a><div class="Sb">Mt</div></a><div class="An">109</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Darmstadtium</div><a><div class="Sb">Ds</div></a><div class="An">110</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Roentgenium</div><a><div class="Sb">Rg</div></a><div class="An">111</div></div></td>
+        <td><div class="TMeCat"><div class="Nm">Copernicium</div><a><div class="Sb">Cn</div></a><div class="An">112</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Nihonium</div><a><div class="Sb">Nh</div></a><div class="An">113</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Flerovium</div><a><div class="Sb">Fl</div></a><div class="An">114</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Moscovium</div><a><div class="Sb">Mc</div></a><div class="An">115</div></div></td>
+        <td><div class="PtMCat"><div class="Nm">Livermorium</div><a><div class="Sb">Lv</div></a><div class="An">116</div></div></td>
+        <td><div class="HalCat"><div class="Nm">Tennessine</div><a><div class="Sb">Ts</div></a><div class="An">117</div></div></td>
+        <td><div class="NobCat"><div class="Nm">Oganesson</div><a><div class="Sb">Og</div></a><div class="An">118</div></div></td>
       </tr>
       <tr style="height:1em"></tr>
       <tr>
         <td class="YAxis1"></td>
         <td colspan="2"></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Lanthanum</div><a><div class="Sb">La</div></a><div class="An">57</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Cerium</div><a><div class="Sb">Ce</div></a><div class="An">58</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Praseodymium</div><a><div class="Sb">Pr</div></a><div class="An">59</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Neodymium</div><a><div class="Sb">Nd</div></a><div class="An">60</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Promethium</div><a><div class="Sb">Pm</div></a><div class="An">61</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Samarium</div><a><div class="Sb">Sm</div></a><div class="An">62</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Europium</div><a><div class="Sb">Eu</div></a><div class="An">63</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Gadolinium</div><a><div class="Sb">Gd</div></a><div class="An">64</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Terbium</div><a><div class="Sb">Tb</div></a><div class="An">65</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Dysprosium</div><a><div class="Sb">Dy</div></a><div class="An">66</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Holmium</div><a><div class="Sb">Ho</div></a><div class="An">67</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Erbium</div><a><div class="Sb">Er</div></a><div class="An">68</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Thulium</div><a><div class="Sb">Tm</div></a><div class="An">69</div></div></td>
-        <td onclick="elClick()"><div class="LanCat"><div class="Nm">Ytterbium</div><a><div class="Sb">Yb</div></a><div class="An">70</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Lanthanum</div><a><div class="Sb">La</div></a><div class="An">57</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Cerium</div><a><div class="Sb">Ce</div></a><div class="An">58</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Praseodymium</div><a><div class="Sb">Pr</div></a><div class="An">59</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Neodymium</div><a><div class="Sb">Nd</div></a><div class="An">60</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Promethium</div><a><div class="Sb">Pm</div></a><div class="An">61</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Samarium</div><a><div class="Sb">Sm</div></a><div class="An">62</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Europium</div><a><div class="Sb">Eu</div></a><div class="An">63</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Gadolinium</div><a><div class="Sb">Gd</div></a><div class="An">64</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Terbium</div><a><div class="Sb">Tb</div></a><div class="An">65</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Dysprosium</div><a><div class="Sb">Dy</div></a><div class="An">66</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Holmium</div><a><div class="Sb">Ho</div></a><div class="An">67</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Erbium</div><a><div class="Sb">Er</div></a><div class="An">68</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Thulium</div><a><div class="Sb">Tm</div></a><div class="An">69</div></div></td>
+        <td><div class="LanCat"><div class="Nm">Ytterbium</div><a><div class="Sb">Yb</div></a><div class="An">70</div></div></td>
       </tr>
       <tr>
         <td class="YAxis1"></td>
         <td colspan="2"></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Actinium</div><a><div class="Sb">Ac</div></a><div class="An">89</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Thorium</div><a><div class="Sb">Th</div></a><div class="An">90</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Protactinium</div><a><div class="Sb">Pa</div></a><div class="An">91</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Uranium</div><a><div class="Sb">U</div></a><div class="An">92</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Neptunium</div><a><div class="Sb">Np</div></a><div class="An">93</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Plutonium</div><a><div class="Sb">Pu</div></a><div class="An">94</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Americium</div><a><div class="Sb">Am</div></a><div class="An">95</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Curium</div><a><div class="Sb">Cm</div></a><div class="An">96</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Berkelium</div><a><div class="Sb">Bk</div></a><div class="An">97</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Californium</div><a><div class="Sb">Cf</div></a><div class="An">98</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Einsteinium</div><a><div class="Sb">Es</div></a><div class="An">99</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Fermium</div><a><div class="Sb">Fm</div></a><div class="An">100</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Mendelevium</div><a><div class="Sb">Md</div></a><div class="An">101</div></div></td>
-        <td onclick="elClick()"><div class="ActCat"><div class="Nm">Nobelium</div><a><div class="Sb">No</div></a><div class="An">102</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Actinium</div><a><div class="Sb">Ac</div></a><div class="An">89</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Thorium</div><a><div class="Sb">Th</div></a><div class="An">90</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Protactinium</div><a><div class="Sb">Pa</div></a><div class="An">91</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Uranium</div><a><div class="Sb">U</div></a><div class="An">92</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Neptunium</div><a><div class="Sb">Np</div></a><div class="An">93</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Plutonium</div><a><div class="Sb">Pu</div></a><div class="An">94</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Americium</div><a><div class="Sb">Am</div></a><div class="An">95</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Curium</div><a><div class="Sb">Cm</div></a><div class="An">96</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Berkelium</div><a><div class="Sb">Bk</div></a><div class="An">97</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Californium</div><a><div class="Sb">Cf</div></a><div class="An">98</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Einsteinium</div><a><div class="Sb">Es</div></a><div class="An">99</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Fermium</div><a><div class="Sb">Fm</div></a><div class="An">100</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Mendelevium</div><a><div class="Sb">Md</div></a><div class="An">101</div></div></td>
+        <td><div class="ActCat"><div class="Nm">Nobelium</div><a><div class="Sb">No</div></a><div class="An">102</div></div></td>
       </tr>
     </tbody>
   </table>
@@ -929,12 +990,12 @@
     <div style="margin:2ch 2ch 0ch 0px;">
       <table style="width:130px; text-align:center;">
         <tr>
-          <td class="SpinBtn" onclick="ltClick()" style="float:left; transform:rotate(-135deg);"></td>
+          <td id="lt-spin-id" class="SpinBtn" style="float:left; transform:rotate(-135deg);"></td>
           <td style="white-space:nowrap;">
             <span id="dets-bigZ-id" style="font-size:x-large;">Z</span>
             <span id="dets-bigSymbol-id" style="font-size:xx-large; font-weight:bolder;">E</span>
           </td>
-          <td class="SpinBtn" onclick="rtClick()" style="float:right; transform:rotate(45deg);">
+          <td id="rt-spin-id" class="SpinBtn" style="float:right; transform:rotate(45deg);">
           </td>
         </tr>
       </table>
@@ -970,102 +1031,96 @@
       <span id="dets-isos-id" class="Dets">I</span>
       <br>
       <span class="Dets">Wiki: </span>
-      <a id="dets-wiki-id" class="Dets" href="#">#</a>
-      <br>
-      <span class="Dets">RSC: </span>
-      <a id="dets-rsoc-id" class="Dets" href="#">#</a>
+      <a id="dets-wiki-id" class="Dets" href="#">A</a>
+      <span id="dets-en-id">
+        <br>
+        <span class="Dets">RSC: </span>
+        <a id="dets-rsoc-id" class="Dets" href="#">A</a>
+      </span>
     </div>
   </div>
 </div>
-<br>
-<div id="theme-id" class="Menu">
-  <fieldset>
-    <legend class="TextXL"><span>Theme</span><span style="display:none" lang="de">Thema</span><span style="display:none" lang="es">Tema</span><span style="display:none" lang="fr">Thème</span><span style="display:none" lang="it">Teme</span><span style="display:none" lang="ru">Тема</span></legend>
-    <input type="radio" id="theme-cats-id" name="themeBox" onclick="catsTheme()" checked>
-    <label class="TextXL" for="theme-cats-id"><span>Categories</span><span style="display:none" lang="de">Elementkategorien</span><span style="display:none" lang="es">Categorías</span><span style="display:none" lang="fr">Familles</span><span style="display:none" lang="it">Categorie</span><span style="display:none" lang="ru">Категории</span></label>
-    <input type="radio" id="theme-blok-id" name="themeBox" onclick="blokTheme()">
-    <label class="TextXL" for="theme-blok-id"><span>Blocks</span><span style="display:none" lang="de">Blöcke</span><span style="display:none" lang="es">Bloques</span><span style="display:none" lang="fr">Blocs</span><span style="display:none" lang="it">Blocchi</span><span style="display:none" lang="ru">блоки</span></label>
-    <input type="radio" id="theme-hist-id" name="themeBox" onclick="histTheme()">
-    <label class="TextXL" for="theme-hist-id"><span>History</span><span style="display:none" lang="de">Geschichte</span><span style="display:none" lang="es">Historia</span><span style="display:none" lang="fr">Historique</span><span style="display:none" lang="it">Storia</span><span style="display:none" lang="ru">История</span></label>
-    <input type="radio" id="theme-diff-id" name="themeBox" onclick="diffTheme()">
-    <label class="TextXL" for="theme-diff-id"><span>Differences</span><span style="display:none" lang="de">Unterschiede</span><span style="display:none" lang="es">Diferencias</span><span style="display:none" lang="fr">Différences</span><span style="display:none" lang="it">Differenze</span><span style="display:none" lang="ru">Отличия</span></label>
-    <input type="radio" id="theme-life-id" name="themeBox" onclick="lifeTheme()">
-    <label class="TextXL" for="theme-life-id"><span>Biology</span><span style="display:none" lang="de">Biologie</span><span style="display:none" lang="es">Biología</span><span style="display:none" lang="fr">La biologie</span><span style="display:none" lang="it">Biologia</span><span style="display:none" lang="ru">Биология</span></label>
-    <input type="radio" id="theme-occr-id" name="themeBox" onclick="occrTheme()">
-    <label class="TextXL" for="theme-occr-id"><span>Occurrence</span><span style="display:none" lang="de">Vorkommen</span><span style="display:none" lang="es">Aparición</span><span style="display:none" lang="fr">Désintégration</span><span style="display:none" lang="it">Presenza</span><span style="display:none" lang="ru">Появление</span></label>
-    <input type="radio" id="theme-stab-id" name="themeBox" onclick="stabTheme()">
-    <label class="TextXL" for="theme-stab-id"><span>Stability</span><span style="display:none" lang="de">Stabilität</span><span style="display:none" lang="es">Estabilidad</span><span style="display:none" lang="fr">La stabilité</span><span style="display:none" lang="it">Stabilità</span><span style="display:none" lang="ru">Стабильность</span></label>
-    <input type="radio" id="theme-stat-id" name="themeBox" onclick="statTheme()">
-    <label class="TextXL" for="theme-stat-id"><span>States</span><span style="display:none" lang="de">Aggregatzustände</span><span style="display:none" lang="es">Estados</span><span style="display:none" lang="fr">États</span><span style="display:none" lang="it">Stati</span><span style="display:none" lang="ru">Состояния</span></label>
-    <input type="radio" id="theme-mono-id" name="themeBox" onclick="monoTheme()">
-    <label class="TextXL" for="theme-mono-id"><span>Monochrome</span><span style="display:none" lang="de">Einfarbig</span><span style="display:none" lang="es">Monocromo</span><span style="display:none" lang="it">Monocromo</span><span style="display:none" lang="ru">Монохромный</span></label>
-  </fieldset>
-</div>
-<div id="lang-id" class="Menu">
-  <fieldset id="lang-set-id">
-    <legend class="TextXL"><span>Language</span><span style="display:none" lang="de">Sprache</span><span style="display:none" lang="es">Idioma</span><span style="display:none" lang="fr">Langue</span><span style="display:none" lang="it">Linguaggio</span><span style="display:none" lang="ru">язык</span></legend>
-    <input type="radio" id="de-id" name="langBox" onclick="setLang('de')">
-    <label for="de-id" title="German">Deutsch</label>
-    <input type="radio" id="en-us-id" name="langBox" onclick="setLang('en-US')">
-    <label for="en-us-id">English-US</label>
-    <input type="radio" id="en-gb-id" name="langBox" onclick="setLang('en-GB')">
-    <label for="en-gb-id">English-GB</label>
-    <input type="radio" id="en-id" name="langBox" onclick="setLang('en')" checked>
-    <label for="en-id">English-World</label>
-    <input type="radio" id="es-id" name="langBox" onclick="setLang('es')">
-    <label for="es-id" title="Spanish">Español</label>
-    <input type="radio" id="fr-id" name="langBox" onclick="setLang('fr')">
-    <label for="fr-id" title="French">Français</label>
-    <input type="radio" id="it-id" name="langBox" onclick="setLang('it')">
-    <label for="it-id" title="Italian">Italiano</label>
-    <input type="radio" id="ru-id" name="langBox" onclick="setLang('ru')">
-    <label for="ru-id" title="Russian">Русский</label>
-  </fieldset>
-</div>
-<div id="wide-menu-id" class="Menu">
-  <fieldset>
-    <legend class="TextXL"><span>32 columns</span><span style="display:none" lang="de">32 Spalte</span><span style="display:none" lang="es">32 columnas</span><span style="display:none" lang="fr">32 colonnes</span><span style="display:none" lang="it">32 colonne</span><span style="display:none" lang="ru">32 столбец</span></legend>
-    <input type="checkbox" id="never32-id" onclick="never32Click()">
-    <label class="TextXL" for="never32-id"><span>Never</span><span style="display:none" lang="de">Noch nie</span><span style="display:none" lang="es">Nunca</span><span style="display:none" lang="fr">Jamais</span><span style="display:none" lang="it">Mai</span><span style="display:none" lang="ru">Никогда</span></label>
-    <input type="checkbox" id="always32-id" onclick="always32Click()">
-    <label class="TextXL" for="always32-id"><span>Always</span><span style="display:none" lang="de">Immer</span><span style="display:none" lang="es">Siempre</span><span style="display:none" lang="fr">Toujours</span><span style="display:none" lang="it">Sempre</span><span style="display:none" lang="ru">Всегда</span></label>
-    <input type="checkbox" id="isLstep-id" onclick="LstepTableClick()">
-    <label class="TextXL" for="isLstep-id"><span>Left-step form</span><span style="display:none" lang="de">Linksstufen-Anordnung</span><span style="display:none" lang="es">Paso izquierdo</span><span style="display:none" lang="fr">Étape gauche</span><span style="display:none" lang="it">Passo sinistro</span><span style="display:none" lang="ru">Левый шаг</span></label>
-  </fieldset>
-</div>
-<div id="link-menu-id" class="Menu">
-  <fieldset>
-    <legend class="TextXL"><span>Links</span><span style="display:none" lang="es">Enlaces</span><span style="display:none" lang="fr">Liens</span><span style="display:none" lang="it">Collegamento</span><span style="display:none" lang="ru">ссылки</span></legend>
-    <input type="checkbox" id="isLinks-id" onclick="toggleLinksClick()">
-    <label class="TextXL" for="isLinks-id"><span>Enable</span><span style="display:none" lang="de">Aktivieren</span><span style="display:none" lang="es">Habilitar</span><span style="display:none" lang="fr">Activer</span><span style="display:none" lang="it">Abilitare</span><span style="display:none" lang="ru">включить</span></label>
-  </fieldset>
-</div>
-<div id="stat-menu-id" style="display:none">
-  <fieldset>
-    <legend class="TextXL"><span>State theme</span><span style="display:none" lang="de">Aggregatzustandthema</span><span style="display:none" lang="es">Tema del estado</span><span style="display:none" lang="fr">Thème de l'état</span><span style="display:none" lang="it">Tema di stato</span><span style="display:none" lang="ru">Состояние тема</span></legend>
-    <input type="number" id="temp-id" min="-273.15" max="9999.99" step="0.01" maxlength="7" size="7" value="0">
-    <label class="TextXL" for="temp-id"><span>°C</span><span style="display:none" lang="de">Grad Celsius</span><span style="display:none" lang="es">Grados Celsius</span><span style="display:none" lang="fr">Degré Celsius</span><span style="display:none" lang="it">Gradi centigradi</span><span style="display:none" lang="ru">Градусов Цельсия</span></label>
-    <button id="stat-ok-id" type="button" onclick="statOkClick()">OK</button>
-  </fieldset>
-</div>
-<div id="dets-menu-id" style="display:none">
-  <fieldset>
-    <legend class="TextXL"><span>Details</span><span style="display:none" lang="de">Einzelheiten</span><span style="display:none" lang="es">Detalles</span><span style="display:none" lang="fr">Des détails</span><span style="display:none" lang="it">Dettagli</span><span style="display:none" lang="ru">Podrobnosti</span></legend>
-    <input type="checkbox" id="noSyns-id" onclick="noSynsClick()">
-    <label class="TextXL" for="noSyns-id"><span>No synthetics</span><span style="display:none" lang="de">Keine Kunststoffe</span><span style="display:none" lang="es">Sin sintéticos</span><span style="display:none" lang="fr">Pas de synthétiques </span><span style="display:none" lang="it">Nessun sintetico</span><span style="display:none" lang="ru">Без синтетики</span></label>
-  </fieldset>
-</div>
-<div id="hide-menu-id" class="Menu">
-  <fieldset>
-    <legend class="TextXL"><span>Menus</span><span style="display:none" lang="de">Menüs</span><span style="display:none" lang="es">Menús</span><span style="display:none" lang="fr">Les menus</span><span style="display:none" lang="it">Menu</span><span style="display:none" lang="ru">Меню</span></legend>
-    <input type="checkbox" id="isHide-id" onclick="hideMenusClick()">
-    <label class="TextXL" for="isHide-id"><span>Hide</span><span style="display:none" lang="de">Ausblenden</span><span style="display:none" lang="es">Esconder</span><span style="display:none" lang="fr">Cacher</span><span style="display:none" lang="it">Nascondere</span><span style="display:none" lang="ru">Спрятать</span></label>
-  </fieldset>
+<div id="edge-menu-id" class="EdgeMenu">
+  <button class="CloseBtn">&times;</button>
+  <p></p>
+  <button id="lang-top-id" class="MenuLine RadioTop">
+    <span class="TextXL"><span>Language</span><span style="display:none" lang="de">Sprache</span><span style="display:none" lang="es">Idioma</span><span style="display:none" lang="fr">Langue</span><span style="display:none" lang="it">Linguaggio</span><span style="display:none" lang="ru">язык</span>: </span>
+    <span class="SelectedValue">S</span>
+    <span class="Direction">&#x25B2;</span>
+  </button>
+  <div id="lang-menu-id" class="MenuLine DropMenu">
+    <button id="de-lang-id" class="MenuLine RadioBtn TextXL" title="German">Deutsch</button>
+    <button id="en-gb-lang-id" class="MenuLine RadioBtn TextXL">English-GB</button>
+    <button id="en-us-lang-id" class="MenuLine RadioBtn TextXL">English-US</button>
+    <button id="en-lang-id" class="MenuLine RadioBtn TextXL">English-World</button>
+    <button id="es-lang-id" class="MenuLine RadioBtn TextXL" title="Spanish">Español</button>
+    <button id="fr-lang-id" class="MenuLine RadioBtn TextXL" title="French">Français</button>
+    <button id="it-lang-id" class="MenuLine RadioBtn TextXL" title="Italian">Italiano</button>
+    <button id="ru-lang-id" class="MenuLine RadioBtn TextXL" title="Russian">Русский</button>
+  </div>
+  <button id="theme-top-id" class="MenuLine RadioTop">
+    <span class="TextXL"><span>Theme</span><span style="display:none" lang="de">Thema</span><span style="display:none" lang="es">Tema</span><span style="display:none" lang="fr">Thème</span><span style="display:none" lang="it">Teme</span><span style="display:none" lang="ru">Тема</span>: </span>
+    <span class="SelectedValue">S</span>
+    <span class="Direction">&#x25B2;</span>
+  </button>
+  <div id="theme-menu-id" class="MenuLine DropMenu">
+    <button id="cats-theme-id" class="MenuLine RadioBtn TextXL"><span>Categories</span><span style="display:none" lang="de">Elementkategorien</span><span style="display:none" lang="es">Categorías</span><span style="display:none" lang="fr">Familles</span><span style="display:none" lang="it">Categorie</span><span style="display:none" lang="ru">Категории</span></button>
+    <button id="blok-theme-id" class="MenuLine RadioBtn TextXL"><span>Blocks</span><span style="display:none" lang="de">Blöcke</span><span style="display:none" lang="es">Bloques</span><span style="display:none" lang="fr">Blocs</span><span style="display:none" lang="it">Blocchi</span><span style="display:none" lang="ru">блоки</span></button>
+    <button id="hist-theme-id" class="MenuLine RadioBtn TextXL"><span>History</span><span style="display:none" lang="de">Geschichte</span><span style="display:none" lang="es">Historia</span><span style="display:none" lang="fr">Historique</span><span style="display:none" lang="it">Storia</span><span style="display:none" lang="ru">История</span></button>
+    <button id="diff-theme-id" class="MenuLine RadioBtn TextXL"><span>Differences</span><span style="display:none" lang="de">Unterschiede</span><span style="display:none" lang="es">Diferencias</span><span style="display:none" lang="fr">Différences</span><span style="display:none" lang="it">Differenze</span><span style="display:none" lang="ru">Отличия</span></button>
+    <button id="life-theme-id" class="MenuLine RadioBtn TextXL"><span>Biology</span><span style="display:none" lang="de">Biologie</span><span style="display:none" lang="es">Biología</span><span style="display:none" lang="fr">La biologie</span><span style="display:none" lang="it">Biologia</span><span style="display:none" lang="ru">Биология</span></button>
+    <button id="occr-theme-id" class="MenuLine RadioBtn TextXL"><span>Occurrence</span><span style="display:none" lang="de">Vorkommen</span><span style="display:none" lang="es">Aparición</span><span style="display:none" lang="fr">Désintégration</span><span style="display:none" lang="it">Presenza</span><span style="display:none" lang="ru">Появление</span></button>
+    <button id="stab-theme-id" class="MenuLine RadioBtn TextXL"><span>Stability</span><span style="display:none" lang="de">Stabilität</span><span style="display:none" lang="es">Estabilidad</span><span style="display:none" lang="fr">La stabilité</span><span style="display:none" lang="it">Stabilità</span><span style="display:none" lang="ru">Стабильность</span></button>
+    <div id="stat-theme-id" class="MenuLine">
+      <button class="RadioBtn TextXL" style="display:inline;"><span>States</span><span style="display:none" lang="de">Aggregatzustände</span><span style="display:none" lang="es">Estados</span><span style="display:none" lang="fr">États</span><span style="display:none" lang="it">Stati</span><span style="display:none" lang="ru">Состояния</span></button>
+      <div id="stat-menu-id" style="display:none;">
+        <input type="number" id="temp-id" class="NumberBtn" style="padding-left:4px;" min="-273.15" max="9999.99" step="0.01" maxlength="7" size="7" value="0">
+        <span class="MenuLabel" style="padding-left:4px;">°C</span>
+      </div>
+    </div>
+    <button id="mono-theme-id" class="MenuLine RadioBtn TextXL"><span>Monochrome</span><span style="display:none" lang="de">Einfarbig</span><span style="display:none" lang="es">Monocromo</span><span style="display:none" lang="it">Monocromo</span><span style="display:none" lang="ru">Монохромный</span></button>
+  </div>
+  <button id="cols32-top-id" class="MenuLine RadioTop">
+    <span class="TextXL"><span>32 columns</span><span style="display:none" lang="de">32 Spalte</span><span style="display:none" lang="es">32 columnas</span><span style="display:none" lang="fr">32 colonnes</span><span style="display:none" lang="it">32 colonne</span><span style="display:none" lang="ru">32 столбец</span>: </span>
+    <span class="SelectedValue">K</span>
+    <span class="Direction">&#x25B2;</span>
+  </button>
+  <div id="cols32-menu-id" class="MenuLine DropMenu">
+    <button id="always-cols32-id" class="MenuLine RadioBtn TextXL"><span>Always</span><span style="display:none" lang="de">Immer</span><span style="display:none" lang="es">Siempre</span><span style="display:none" lang="fr">Toujours</span><span style="display:none" lang="it">Sempre</span><span style="display:none" lang="ru">Всегда</span></button>
+    <button id="auto-cols32-id" class="MenuLine RadioBtn TextXL"><span>Auto</span><span style="display:none" lang="ru">Авто</span></button>
+    <button id="never-cols32-id" class="MenuLine RadioBtn TextXL"><span>Never</span><span style="display:none" lang="de">Noch nie</span><span style="display:none" lang="es">Nunca</span><span style="display:none" lang="fr">Jamais</span><span style="display:none" lang="it">Mai</span><span style="display:none" lang="ru">Никогда</span></button>
+  </div>
+  <button id="table-top-id" class="MenuLine RadioTop">
+    <span class="TextXL"><span>Table</span><span style="display:none" lang="de">Tabelle</span><span style="display:none" lang="es">Tabla</span><span style="display:none" lang="fr">Tableau</span><span style="display:none" lang="it">Tavola</span><span style="display:none" lang="ru">Таблица</span>: </span>
+    <span class="SelectedValue">K</span>
+    <span class="Direction">&#x25B2;</span>
+  </button>
+  <div id="table-menu-id" class="MenuLine DropMenu">
+    <button id="auto-table-id" class="MenuLine RadioBtn TextXL"><span>Auto</span><span style="display:none" lang="ru">Авто</span></button>
+    <button id="lstep-table-id" class="MenuLine RadioBtn TextXL"><span>Prefer left-step</span><span style="display:none" lang="de">Bevorzugen linksstufen</span><span style="display:none" lang="es">Preferir paso izquierdo</span><span style="display:none" lang="fr">Préférer étape gauche</span><span style="display:none" lang="it">Preferire passo sinistro</span><span style="display:none" lang="ru">Предпочитать левый шаг</span></button>
+  </div>
+  <button id="link-top-id" class="MenuLine RadioTop">
+    <span class="TextXL"><span>Links</span><span style="display:none" lang="es">Enlaces</span><span style="display:none" lang="fr">Liens</span><span style="display:none" lang="it">Collegamento</span><span style="display:none" lang="ru">ссылки</span>: </span>
+    <span class="SelectedValue">K</span>
+    <span class="Direction">&#x25B2;</span>
+  </button>
+  <div id="link-menu-id" class="MenuLine DropMenu">
+    <button id="off-link-id" class="MenuLine RadioBtn TextXL"><span>Off</span><span style="display:none" lang="de">Aus</span><span style="display:none" lang="es">Apagar</span><span style="display:none" lang="fr">Éteindre</span><span style="display:none" lang="it">Spegnere</span><span style="display:none" lang="ru">Выключить</span></button>
+    <button class="MenuLine RadioBtn TextXL"><span>On</span><span style="display:none" lang="de">Auf</span><span style="display:none" lang="es">Encender</span><span style="display:none" lang="fr">Allumer</span><span style="display:none" lang="it">Sopra</span><span style="display:none" lang="ru">Включить</span></button>
+  </div>
+  <button id="syns-top-id" class="MenuLine RadioTop">
+    <span class="TextXL"><span>Synthetics</span><span style="display:none" lang="de">Kunststoffe</span><span style="display:none" lang="es">Sin sintéticos</span><span style="display:none" lang="fr">Pas de synthétiques</span><span style="display:none" lang="it">Nessun sintetico</span><span style="display:none" lang="ru">Без синтетики</span>: </span>
+    <span class="SelectedValue">K</span>
+    <span class="Direction">&#x25B2;</span>
+  </button>
+  <div id="syns-menu-id" class="MenuLine DropMenu">
+    <button class="MenuLine RadioBtn TextXL"><span>Off</span><span style="display:none" lang="de">Aus</span><span style="display:none" lang="es">Apagar</span><span style="display:none" lang="fr">Éteindre</span><span style="display:none" lang="it">Spegnere</span><span style="display:none" lang="ru">Выключить</span></button>
+    <button class="MenuLine RadioBtn TextXL"><span>On</span><span style="display:none" lang="de">Auf</span><span style="display:none" lang="es">Encender</span><span style="display:none" lang="fr">Allumer</span><span style="display:none" lang="it">Sopra</span><span style="display:none" lang="ru">Включить</span></button>
+  </div>
 </div>
 <script>
 "use strict";
-const mx = document.querySelectorAll(".Menu");
-const nx = document.getElementsByClassName("Nm");
+const named = document.getElementsByClassName("Nm");
 var categoryNames = {
   "de": ["Alkalimetall", "Erdalkalimetall", "Lanthanoid", "Actinoid", "Übergangsmetall", "Metall", "Halbmetall", "Nichtmetall", "Halogen", "Edelgas" ],
   "en": ["Alkali metal", "Alkaline earth metal", "Lanthanoid", "Actinoid", "Transition metal", "Post-transition metal", "Metalloid", "Other nonmetal", "Halogen", "Noble gas" ],
@@ -1214,30 +1269,12 @@ var nuclides = [
   { z:117, symbol: "Ts", period: 7, group:17, categoryIndex: 8, block: "p", occurrenceIndex: 0, lifeIndex: 0, discoveryYear: 2009, discoveryIndex: 6, stateIndex: 1, melt:  623.000, boil:  883.000, weight: 294.000, stableCount: 0, stabilityIndex: 5, isotopes: [{z:117,a:293,abundance:null,occurrenceIndex:0,stabilityIndex:5,decayFlags:1,halflife:22,timeUnit:"t"}, {z:117,a:294,abundance:null,occurrenceIndex:0,stabilityIndex:5,decayFlags:1,halflife:51,timeUnit:"t"}] },
   { z:118, symbol: "Og", period: 7, group:18, categoryIndex: 9, block: "p", occurrenceIndex: 0, lifeIndex: 0, discoveryYear: 2002, discoveryIndex: 6, stateIndex: 1, melt:  325.000, boil:  350.000, weight: 294.000, stableCount: 0, stabilityIndex: 5, isotopes: [{z:118,a:294,abundance:null,occurrenceIndex:0,stabilityIndex:5,decayFlags:1025,halflife:700,timeUnit:"i"}] }
 ];
-function refreshMenus(enabled) {
-  var sd = enabled ? "inline-block" : "none";
-  for (var i = 0; i < mx.length; i++)
-    mx[i].style.display = sd;
-  if (curTheme=="stat-leg-id")
-    document.getElementById("stat-menu-id").style.display = sd;
-  document.getElementById("dets-menu-id").style.display = detsZ==null ? "none" : sd;
-  document.getElementById("isHide-id").checked = !enabled;
-}
-function appClick(e) {
-  if (document.getElementById("isHide-id").checked)
-    refreshMenus(true);
-  return true;
-}
-document.body.addEventListener("click",appClick,true);
-function hideMenusClick() {
-  refreshMenus(false);
-}
 function wikify() {
   var prefix = getComputedStyle(document.documentElement,null).getPropertyValue("--lang").toLowerCase();
   if (prefix.length>2)
     prefix = prefix.substr(0,2);
-  for (var i = 0; i < nx.length; i++)
-    nx[i].parentElement.children[1].href = "https://"+prefix+".wikipedia.org/wiki/"+nx[i].parentElement.children[1].title;
+  for (var i = 0; i < named.length; i++)
+    named[i].parentElement.children[1].href = "https://"+prefix+".wikipedia.org/wiki/"+named[i].parentElement.children[1].title;
 }
 function toTemperatureString(kelvins) {
   if (kelvins) {
@@ -1294,22 +1331,21 @@ function getHalflifeText(iso,lg) {
 var detsZ = 0;
 var detsCell = null;
 function setDets(z) {
-  if (typeof(z)=="undefined")
+  if (typeof(z)!="number")
     z = detsZ;
   if (detsZ!=null) {
-    for (var i=0; i < nx.length; i++)
-      if (nx[i].parentElement.children[2].innerHTML==detsZ)
-        nx[i].parentElement.children[2].style.backgroundColor = "";
+    for (var i=0; i < named.length; i++)
+      if (named[i].parentElement.children[2].innerHTML==detsZ)
+        named[i].parentElement.children[2].style.backgroundColor = "";
   }
   detsZ = typeof(z)=="number" && z>0 && z<nuclides.length ? z : null;
   detsCell = null;
-  document.getElementById("dets-menu-id").style.display = detsZ==null ? "none" : "inline-block";
   document.getElementById("dets-id").style.display = detsZ==null ? "none" : "block";
   if (detsZ==null)
     return;
-  for (var i=0; i < nx.length; i++)
-    if (nx[i].parentElement.children[2].innerHTML==detsZ) {
-      detsCell = nx[i].parentElement;
+  for (var i=0; i < named.length; i++)
+    if (named[i].parentElement.children[2].innerHTML==detsZ) {
+      detsCell = named[i].parentElement;
       detsCell.children[2].style.backgroundColor = "#c55";
   }
   var lg = getComputedStyle(document.documentElement,null).getPropertyValue("--lang");
@@ -1331,12 +1367,13 @@ function setDets(z) {
   document.getElementById("dets-rsoc-id").href = "https://www.rsc.org/periodic-table/element/"+z;
   document.getElementById("dets-rsoc-id").innerHTML = "www.rsc.org/periodic-table/element/"+z;
   document.getElementById("dets-box-id").style.backgroundColor = window.getComputedStyle(detsCell,"").getPropertyValue("background-color");
-  document.getElementById("dets-box-id").style.display = document.getElementById("theme-mono-id").checked ? "none" : "inline-block";
+  document.getElementById("dets-box-id").style.display = isTheme("mono") ? "none" : "inline-block";
+  document.getElementById("dets-en-id").style.display = g2=="en" ? "" : "none";
   var r2="", ir=2;
   for (var ix = 0; ix < nu.isotopes.length; ix++) {
     var r4="", dc=0;
     var iso=nu.isotopes[ix];
-    if (iso.abundance==null && document.getElementById("noSyns-id").checked)
+    if (iso.abundance==null && noSynthetics())
       continue;
     if (iso["halflife"]) {
       var df = parseInt(iso.decayFlags), mask=1, dx=0, r4="";
@@ -1406,27 +1443,11 @@ function setDets(z) {
   for (var i = 0; i < toXL.length; i++)
     xlate(toXL[i],g2);
 }
-function elClick() {
-  var cell = event.srcElement;
-  while (cell.localName != "td")
-    cell = cell.parentElement;
-  setDets(parseInt(cell.children[0].children[2].innerHTML));
-  if (document.getElementById("isHide-id").checked)
-    refreshMenus(true);
-}
-function ltClick() {
-  if (detsZ!=null)
-    setDets(detsZ-1);
-}
-function rtClick() {
-  if (detsZ!=null)
-    setDets(detsZ+1);
-}
 var curTheme="", prevTheme="";
 function setTheme(themeId,ranBg) {
   prevTheme = curTheme;
   curTheme = themeId;
-  document.getElementById("stat-menu-id").style.display = curTheme=="stat-leg-id" ? "inline-block" : "none";
+  document.getElementById("stat-menu-id").style.display = curTheme=="stat-leg-id" ? "inline" : "none";
   if (curTheme=="theme-mono-id")
     document.getElementById("dets-box-id").style.display = "none";
   if (typeof(ranBg)!="undefined") {
@@ -1436,19 +1457,19 @@ function setTheme(themeId,ranBg) {
   else {
     var rl=0, gl=0, bl=0, kl=0;
     var ra=0, ga=0, ba=0, ka=0;
-    for (var i = 0; i < nx.length; i++) {
-      var z = parseInt(nx[i].parentElement.children[2].innerText);
+    for (var i = 0; i < named.length; i++) {
+      var z = parseInt(named[i].parentElement.children[2].innerText);
       if (z>56 && z<72) {
-        var c = nx[i].parentElement.style.backgroundColor;
+        var c = named[i].parentElement.style.backgroundColor;
         var ca = c.substring(4,c.length-1).replace(/ /g, "").split(",");
         rl += parseInt(ca[0]); gl += parseInt(ca[1]); bl += parseInt(ca[2]);
-        ++kl;
+        kl++;
       }
       else if (z>88 && z<104) {
-        var c = nx[i].parentElement.style.backgroundColor;
+        var c = named[i].parentElement.style.backgroundColor;
         var ca = c.substring(4,c.length-1).replace(/ /g, "").split(",");
         ra += parseInt(ca[0]); ga += parseInt(ca[1]); ba += parseInt(ca[2]);
-        ++ka;
+        ka++;
       }
     }
     document.getElementById("t18-lr-id").style.backgroundColor = "rgb("+Math.floor(rl/kl)+","+Math.floor(gl/kl)+","+Math.floor(bl/kl)+")";
@@ -1457,7 +1478,7 @@ function setTheme(themeId,ranBg) {
   var tx = document.getElementsByClassName("ThemeLeg");
   for (var i = 0; i < tx.length; i++)
     document.getElementById(tx[i].id).style.display = themeId==tx[i].id ? "inline-block" : "none";
-  if (document.getElementById("isLinks-id").checked)
+  if (isLinks())
     wikify();
   var alfa = curTheme!="blok-leg-id" ? "00" : "";
   document.documentElement.style.setProperty("--c-bl-d", getComputedStyle(document.documentElement,null).getPropertyValue("--c-bl-d").substr(0,7)+alfa);
@@ -1468,8 +1489,8 @@ function setTheme(themeId,ranBg) {
     document.getElementById("dets-box-id").style.backgroundColor = window.getComputedStyle(detsCell,"").getPropertyValue("background-color");
 }
 function blokTheme() {
-  for (var i = 0; i < nx.length; i++) {
-    var p = nx[i].parentElement;
+  for (var i = 0; i < named.length; i++) {
+    var p = named[i].parentElement;
     var z = parseInt(p.children[2].innerText);
     var v = z<nuclides.length ? "--c-bl-"+nuclides[z].block : "--c-bl-s";
     p.style.backgroundColor = getComputedStyle(document.documentElement,null).getPropertyValue(v).substr(0,7);
@@ -1477,25 +1498,25 @@ function blokTheme() {
   setTheme("blok-leg-id");
 }
 function catsTheme() {
-  for (var i = 0; i < nx.length; i++)
-    nx[i].parentElement.style.backgroundColor = "";
+  for (var i = 0; i < named.length; i++)
+    named[i].parentElement.style.backgroundColor = "";
   setTheme("cats-leg-id","");
 }
 function diffTheme() {
-  for (var i = 0; i < nx.length; i++) {
-    var p = nx[i].parentElement;
+  for (var i = 0; i < named.length; i++) {
+    var p = named[i].parentElement;
     var d = getComputedStyle(p,null).getPropertyValue("--df");
     var v = d ? "--c-df-"+d : "--c-neutral";
     p.style.backgroundColor = getComputedStyle(document.documentElement,null).getPropertyValue(v);
   }
   var lx = document.getElementsByClassName("PrevLangXL");
   for (var i = 0; i < lx.length; i++)
-    lx[i].innerHTML = getLangName(getComputedStyle(document.documentElement,null).getPropertyValue("--lang0")+"-id");
+    lx[i].innerHTML = getLangName(getComputedStyle(document.documentElement,null).getPropertyValue("--lang0"));
   setTheme("diff-leg-id");
 }
 function histTheme() {
-  for (var i = 0; i < nx.length; i++) {
-    var p = nx[i].parentElement;
+  for (var i = 0; i < named.length; i++) {
+    var p = named[i].parentElement;
     var z = parseInt(p.children[2].innerText);
     var v = z<nuclides.length ? "--c-dc-"+nuclides[z].discoveryIndex : "--c-neutral";
     p.style.backgroundColor = getComputedStyle(document.documentElement,null).getPropertyValue(v);
@@ -1503,8 +1524,8 @@ function histTheme() {
   setTheme("hist-leg-id");
 }
 function lifeTheme() {
-  for (var i = 0; i < nx.length; i++) {
-    var p = nx[i].parentElement;
+  for (var i = 0; i < named.length; i++) {
+    var p = named[i].parentElement;
     var z = parseInt(p.children[2].innerText);
     var v = "--c-lf-"+(z<nuclides.length ? nuclides[z].lifeIndex : 0);
     p.style.backgroundColor = getComputedStyle(document.documentElement,null).getPropertyValue(v);
@@ -1512,16 +1533,14 @@ function lifeTheme() {
   setTheme("life-leg-id");
 }
 function monoTheme() {
-  document.getElementById("isHide-id").checked = true;
   setDets(null);
-  refreshMenus(false);
-  for (var i = 0; i < nx.length; i++)
-    nx[i].parentElement.style.backgroundColor = "transparent";
+  for (var i = 0; i < named.length; i++)
+    named[i].parentElement.style.backgroundColor = "transparent";
   setTheme("theme-mono-id","transparent");
 }
 function occrTheme() {
-  for (var i = 0; i < nx.length; i++) {
-    var p = nx[i].parentElement;
+  for (var i = 0; i < named.length; i++) {
+    var p = named[i].parentElement;
     var z = parseInt(p.children[2].innerText);
     var c =  "--c-oc-"+(z<nuclides.length ? nuclides[z].occurrenceIndex : 0);
     p.style.backgroundColor = getComputedStyle(document.documentElement,null).getPropertyValue(c);
@@ -1529,8 +1548,8 @@ function occrTheme() {
   setTheme("occr-leg-id");
 }
 function stabTheme() {
-  for (var i = 0; i < nx.length; i++) {
-    var p = nx[i].parentElement;
+  for (var i = 0; i < named.length; i++) {
+    var p = named[i].parentElement;
     var z = parseInt(p.children[2].innerText);
     var v = "--c-sb-"+(z<nuclides.length ? nuclides[z].stabilityIndex : 5);
     p.style.backgroundColor = getComputedStyle(document.documentElement,null).getPropertyValue(v);
@@ -1549,8 +1568,8 @@ function getState(nuc,kelvins) {
 }
 var pageTemp=0;
 function statTheme() {
-  for (var i = 0; i < nx.length; i++) {
-    var p = nx[i].parentElement;
+  for (var i = 0; i < named.length; i++) {
+    var p = named[i].parentElement;
     var z = parseInt(p.children[2].innerText);
     pageTemp = parseFloat(document.getElementById("temp-id").value);
     if (!pageTemp) pageTemp = 0;
@@ -1562,25 +1581,12 @@ function statTheme() {
   for (var i = 0; i < tx.length; i++)
     tx[i].innerHTML = pageTemp.toLocaleString(g);
   setTheme("stat-leg-id");
-    document.getElementById("stat-menu-id").style.display = "inline-block";
-}
-function statOkClick()
-{
-  document.getElementById("theme-stat-id").checked = true;
-  statTheme();
-}
-function toggleLinksClick() {
-  if (document.getElementById("isLinks-id").checked)
-    wikify();
-  else
-    for (var i = 0; i < nx.length; i++)
-      nx[i].parentElement.children[1].removeAttribute("href");
 }
 function xlate(element,newLang) {
   if (element.children.length>1) {
     var j0 = -1;
     for (var j = 0; j < element.children.length; j++)
-      if (element.children[j].lang.toUpperCase()!=newLang.toUpperCase())
+      if (element.children[j].lang!=newLang)
         element.children[j].style.display = "none";
       else {
         element.children[j].style.display = "inline";
@@ -1591,10 +1597,10 @@ function xlate(element,newLang) {
   }
 }
 function getLangName(langId) {
-  var px = document.getElementById("lang-set-id").children;
-  for (var i = 0; i < px.length; i++)
-    if (px[i].htmlFor==langId)
-      return px[i].textContent;
+  var mc = document.getElementById("lang-menu-id").children;
+  for (var i = 0; i < mc.length; i++)
+    if (mc[i].id==langId+"-lang-id")
+      return mc[i].textContent;
 }
 var textXL=null;
 function getTextXL() {
@@ -1605,13 +1611,13 @@ function getTextXL() {
 function setLang(lang) {
   document.documentElement.style.setProperty("--lang0",getComputedStyle(document.documentElement,null).getPropertyValue("--lang"));
   document.documentElement.style.setProperty("--lang",lang);
-  var nn = nuclideNames[lang.toLowerCase()];
-  for (var i = 0; i < nx.length; i++) {
-    var p = nx[i].parentElement;
+  var nn = nuclideNames[lang];
+  for (var i = 0; i < named.length; i++) {
+    var p = named[i].parentElement;
     var z = parseInt(p.children[2].innerText);
     if (z<nuclides.length) {
       var tu = nn[z].toUpperCase();
-      var pu = nx[i].innerHTML.toUpperCase();
+      var pu = named[i].innerHTML.toUpperCase();
       var v = 0;
       if (tu!=pu)
         if (tu.length!=pu.length)
@@ -1622,34 +1628,39 @@ function setLang(lang) {
               if (v==0) v = 1;
               else if (v==1) { v = 2; break; }
       p.style.setProperty("--df",v);
-      nx[i].innerHTML = nn[z];
+      named[i].innerHTML = nn[z];
       p.children[1].title = nn[z];
     }
   }
-  if (document.getElementById("theme-diff-id").checked)
+  if (isTheme("diff"))
     diffTheme();
-  if (document.getElementById("theme-stat-id").checked) {
-    var tx = document.getElementsByClassName("TempXL");
-    for (var i = 0; i < tx.length; i++)
-      tx[i].innerHTML = pageTemp.toLocaleString(lang);
+  if (isTheme("stat")) {
+    var ec = document.getElementsByClassName("TempXL");
+    for (var i = 0; i < ec.length; i++)
+      ec[i].innerHTML = pageTemp.toLocaleString(lang);
   }
+  document.body.lang = lang;
+  document.getElementById("temp-id").value = pageTemp;
   var tx = getTextXL();
   for (var i = 0; i < tx.length; i++)
     xlate(tx[i],lang);
-  if (document.getElementById("isLinks-id").checked)
+  var ec = document.getElementsByClassName("SelectedValue");
+  for (var i = 0; i < ec.length; i++) {
+    var s = ec[i].parentElement.nextElementSibling.getElementsByClassName("SelectedBtn");
+    if (s.length>0 && !s[0].classList.contains("RadioBtn"))
+      s = s[0].getElementsByClassName("RadioBtn");
+    if (s.length>0)
+      ec[i].innerHTML = s[0].innerHTML;
+  }
+  if (isLinks())
     wikify();
   setDets();
 }
-function LstepTableClick() {
-  var isLstep = document.getElementById("isLstep-id").checked;
+function setLstepTable(isLstep) {
   document.getElementById("t32lstep-id").style.display = isLstep ? "" : "none";
-  document.getElementById("t32stan-id").style.display = isLstep ? "none" : "";
+  document.getElementById("t32stan-id" ).style.display = isLstep ? "none" : "";
 }
-function noSynsClick() {
-  setDets();
-}
-function never32Click() {
-  var n32 = document.getElementById("never32-id").checked;
+function cols32Never(n32) {
   document.documentElement.style.setProperty("--r0-t18",   "block");
   document.documentElement.style.setProperty("--r0-t32",   "none");
   document.documentElement.style.setProperty("--r2-width", "32px");
@@ -1664,11 +1675,8 @@ function never32Click() {
   document.documentElement.style.setProperty("--r6-width", n32 ? "54px" :"32px");
   document.documentElement.style.setProperty("--r6-height",n32 ? "50px" :"38px");
   document.documentElement.style.setProperty("--r6-yPad",  n32 ? "185px":"72px");
-  document.getElementById("always32-id").checked = false;
-  document.getElementById("isLstep-id").disabled = n32;
 }
-function always32Click() {
-  var y32 = document.getElementById("always32-id").checked;
+function cols32Always(y32) {
   document.documentElement.style.setProperty("--r0-t18",   y32 ? "none" :"block");
   document.documentElement.style.setProperty("--r0-t32",   y32 ? "block":"none");
   document.documentElement.style.setProperty("--r2-width", y32 ? "28px" :"32px");
@@ -1679,42 +1687,70 @@ function always32Click() {
   document.documentElement.style.setProperty("--r4-yPad",  y32 ? "72px" :"185px");
   document.documentElement.style.setProperty("--r6-t18",   "none");
   document.documentElement.style.setProperty("--r6-t32",   "block");
+  document.documentElement.style.setProperty("--r6-nm",    "none");
   document.documentElement.style.setProperty("--r6-width", "32px");
   document.documentElement.style.setProperty("--r6-height","38px");
-  document.documentElement.style.setProperty("--r6-nm",    "none");
   document.documentElement.style.setProperty("--r6-yPad",  "72px");
-  document.getElementById("never32-id").checked = false;
-  document.getElementById("isLstep-id").disabled = false;
 }
-function getUserLangCode(lang) {
-  var result = "";
-  var gx = navigator.languages;
-  var lx = document.getElementsByName("langBox");
-  for (var i = 0; i < gx.length; i++) {
-    var userLang = gx[i].toLowerCase();
-    for (var j = 0; j < lx.length; j++)
-      if (lx[j].id==userLang+"-id")
-        return userLang;
-      else if (result=="" && lx[j].id==userLang.substr(0,3)+"id")
-        result = lx[j].id.substr(0,2);
+function getUserLangCodeIx() {
+  var rx = null;
+  var nl = navigator.languages;
+  var mc = document.getElementById("lang-menu-id");
+  for (var i = 0; i < nl.length; i++) {
+    var lg = nl[i].toLowerCase();
+    for (var j = 0; j < mc.children.length; j++)
+      if (mc.children[j].id==lg+"-lang-id")
+        return j;
+      else if (rx==null && mc.children[j].id.toLowerCase()==lg.substr(0,2)+"-lang-id")
+        rx = j;
   }
-  return result;
+  return rx;
 }
-function getMatchingLangCode(lang) {
-  lang = lang.toLowerCase();
-  var lx = document.getElementsByName("langBox");
-  for (var i = 0; i < lx.length; i++)
-    if (lx[i].id==lang+"-id")
-      return lang;
-  return "";
+function noSynthetics() {
+  return document.getElementById("syns-top-id").nextElementSibling.children[0].classList.contains("SelectedBtn");
+}
+function isLinks() {
+  return !document.getElementById("link-menu-id").children[0].classList.contains("SelectedBtn");
+}
+function isTheme(tm) {
+  return document.getElementById(tm+"-theme-id").classList.contains("SelectedBtn");  
+}
+function getSelected(menu) {
+  for (var i = 0; i < menu.children.length; i++)
+    if (menu.children[i].classList.contains("SelectedBtn"))
+      return menu.children[i];
+  return null;
+}
+function setSelected(mc,id) {
+  for (var i = 0; i < mc.children.length; i++)
+    if (mc.children[i].id==id) {
+      if (!mc.children[i].classList.contains("SelectedBtn")) {
+        mc.children[i].classList.add("SelectedBtn");
+        mc.previousElementSibling.getElementsByClassName("SelectedValue")[0].innerHTML = mc.children[i].innerHTML;
+      }
+    }
+    else
+      mc.children[i].classList.remove("SelectedBtn");
+}
+function setSelectedIx(mc,ix) {
+  for (var i = 0; i < mc.children.length; i++)
+    if (i!=ix)
+      mc.children[i].classList.remove("SelectedBtn");
+  if (!mc.children[ix].classList.contains("SelectedBtn")) {
+    var mi = mc.children[ix];
+    mi.classList.add("SelectedBtn");
+    if (!mi.classList.contains("RadioBtn"))
+      mi = mi.children[0];
+    mc.previousElementSibling.getElementsByClassName("SelectedValue")[0].innerHTML = mi.innerHTML;
+  }
 }
 function getArg(argName) {
   var lx=window.location.search;
   if (!lx.startsWith("?"))
     return null;
   for (var p = 1; p < lx.length; p += k+1) {
-    var q = lx.indexOf("&",p+argName.length);
-    var s = lx.indexOf(";",p+argName.length);
+    var q = lx.indexOf("&",p);
+    var s = lx.indexOf(";",p);
     if (q<0 || s<q)
       q = s;
     var k = q<0 ? lx.length-p : q-p;
@@ -1723,59 +1759,167 @@ function getArg(argName) {
   }
   return null;
 }
-function getArgU(argName) {
+function getArgL(argName) {
   var a = getArg(argName);
-  return a == null ? "" : a.toUpperCase();
+  return a == null ? "" : a.toLowerCase();
 }
 //
-document.getElementById("theme-cats-id").checked = true;
 document.getElementById("temp-id").value = "0";
-document.getElementById("isLinks-id").checked = false;
-document.getElementById("isHide-id").checked = false;
-var arg = getArg("lang"), langCode="";
-if (arg!=null)
-  langCode = getMatchingLangCode(arg);
-if (langCode=="")
-  langCode = getUserLangCode();
-if (langCode!="")
-  setLang(langCode);
-else
-  langCode = getComputedStyle(document.documentElement,null).getPropertyValue("--lang");
-var nn = nuclideNames[langCode];
-for (var i = 0; i < nx.length; i++) {
-  var p = nx[i].parentElement;
-  var z = parseInt(p.children[2].innerText);
-  p.children[1].title = z<nuclides.length ? nn[z] : "?";
+var ec = document.getElementsByClassName("OpenBtn");
+for (var i = 0; i < ec.length; i++)
+  ec[i].addEventListener("click",openMenuClick);
+function openMenuClick() {
+  document.getElementById("edge-menu-id").style.width = "380px";
 }
-document.getElementById(langCode+"-id").checked = true;
-var arg = getArg("theme");
-if (arg!=null) {
-  var bx = document.getElementsByName("themeBox");
-  for (var i = 0; i < bx.length; i++)
-    if (bx[i].id=="theme-"+arg+"-id") {
-      bx[i].checked = true;
-      eval(arg+"Theme").call();
-      break;
+ec = document.getElementsByClassName("CloseBtn");
+for (var i = 0; i < ec.length; i++)
+  ec[i].addEventListener("click",closeMenuClick);
+function closeMenuClick() {
+  if (this.classList.contains("CloseBtn"))
+    document.getElementById("edge-menu-id").style.width = "0";
+}
+var ec = document.getElementsByClassName("RadioTop");
+for (var i = 0; i < ec.length; i++) {
+  ec[i].addEventListener("click",dropClick);
+  var s = getSelected(ec[i].nextElementSibling);
+  if (s!=null)
+    ec[i].getElementsByClassName("SelectedValue")[0].innerHTML = s.innerHTML;
+}
+function dropClick() {
+  var mc = this.nextElementSibling;
+  var dir = this.getElementsByClassName("Direction");
+  mc.style.display = mc.style.display=="block" ? "none" : "block";
+  dir[0].innerHTML = mc.style.display=="block" ? "&#x25BC;" : "&#x25B2;";
+}
+ec = document.getElementsByClassName("RadioBtn");
+for (var i = 0; i < ec.length; i++)
+  ec[i].addEventListener("click", radioItemClick);
+function radioItemClick(e) {
+  var mi = this;
+  var mc = mi.parentElement;
+  if (!mc.classList.contains("DropMenu")) {
+    mi = mc;
+    mc = mc.parentElement;
+  }
+  mc.previousElementSibling.getElementsByClassName("SelectedValue")[0].innerHTML = this.innerHTML;
+  for (var ix = 0; ix < mc.children.length; ix++)
+    mc.children[ix].classList.remove("SelectedBtn");
+  mi.classList.add("SelectedBtn");
+}
+document.getElementById("lt-spin-id").addEventListener("click",ltClick);
+function ltClick() {
+  if (detsZ!=null)
+    setDets(detsZ-1);
+}
+document.getElementById("rt-spin-id").addEventListener("click",rtClick);
+function rtClick() {
+  if (detsZ!=null)
+    setDets(detsZ+1);
+}
+//
+var mc = document.getElementById("link-menu-id");
+setSelectedIx(mc,getArgL("links").startsWith("y") ? 1 : 0);
+for (var i = 0; i < mc.children.length; i++)
+  mc.children[i].addEventListener("click",toggleLinksClick);
+function toggleLinksClick(e) {
+  if (e.srcElement.id!="off-link-id")
+    wikify();
+  else
+    for (var i = 0; i < named.length; i++)
+      named[i].parentElement.children[1].removeAttribute("href");
+}
+var mc = document.getElementById("lang-menu-id");
+var ix = null;
+var argL = getArgL("lang");
+if (argL!="")
+  for (var i = 0; i < mc.children.length; i++)
+    if (mc.children[i].id==argL+"-lang-id") {
+      ix = i; break;
+    }
+if (ix==null) {
+  ix = getUserLangCodeIx();
+  argL = mc.children[ix].id.substr(0,mc.children[ix].id.length-8);
+}
+if (ix!=null)
+  setLang(argL);
+else {
+  argL = getComputedStyle(document.documentElement,null).getPropertyValue("--lang");
+  for (var i = 0; i < mc.children.length; i++)
+    if (mc.children[i].id==argL+"-lang-id") {
+      ix = i; break;
     }
 }
-document.getElementById("always32-id").checked = false;
-document.getElementById("never32-id").checked = false;
-arg = getArgU("long");
-if (arg=="NEVER") {
-  document.getElementById("never32-id").checked = true;
-  never32Click();
+setSelectedIx(mc,ix);
+for (var i = 0; i < mc.children.length; i++)
+  mc.children[i].addEventListener("click",langClick);
+function langClick(e) {
+  setLang(this.id.substr(0,this.id.length-8));
 }
-else if (arg=="ALWAYS") {
-  document.getElementById("always32-id").checked = true;
-  always32Click();
+var nn = nuclideNames[argL];
+for (var i = 0; i < named.length; i++) {
+  var p = named[i].parentElement;
+  var z = parseInt(p.children[2].innerText);
+  if (z<nuclides.length) {
+    p.children[1].title = nn[z];
+    p.addEventListener("click",elClick);
+  }
 }
-document.getElementById("isLstep-id").checked = false;
-if (getArgU("form")=="LSTEP") {
-  document.getElementById("isLstep-id").checked = true;
-  LstepTableClick();
+function elClick() {
+  var cell = event.srcElement;
+  while (cell.localName!="td")
+    cell = cell.parentElement;
+  setDets(parseInt(cell.children[0].children[2].innerHTML));
 }
-document.getElementById("noSyns-id").checked = getArgU("nosyns").startsWith("Y");
-arg = getArg("z");
+mc = document.getElementById("theme-menu-id");
+argL = getArgL("theme");
+ix = null;
+for (var i = 0; i < mc.children.length; i++)
+  if (mc.children[i].id==argL+"-theme-id") {
+    ix = i; break;
+  }
+if (ix==null)
+  ix = 0;
+else
+  eval(argL+"Theme").call();
+setSelectedIx(mc,ix);
+for (var i = 0; i < mc.children.length; i++) {
+  var mi = mc.children[i];
+  if (!mi.id.endsWith("-theme-id"))
+    mi = mi.children[0];
+  var c = mi.id.substr(0,4);
+  mi.addEventListener("click",eval(c+"Theme"));
+}
+mc = document.getElementById("cols32-menu-id");
+var argL = getArgL("long");
+ix = argL=="always" ? 0 : argL=="never" ? 2 : 1;
+if (ix==0)
+  cols32Always(true);
+else if (ix==2)
+  cols32Never(true);
+setSelectedIx(mc,ix);
+for (var i = 0; i < mc.children.length; i++)
+  mc.children[i].addEventListener("click",cols32Click);
+function cols32Click(e) {
+  if (this.id=="always-cols32-id")
+    cols32Always(true);
+  else
+    cols32Never(this.id=="never-cols32-id");
+}
+mc = document.getElementById("table-menu-id");
+ix = getArgL("form")=="lstep" ? 1 : 0;
+if (ix==1)
+  setLstepTable(true);
+setSelectedIx(mc,ix);
+for (var i = 0; i < mc.children.length; i++)
+  mc.children[i].addEventListener("click",tableClick);
+function tableClick(e) {
+  setLstepTable(e.srcElement.id!="auto-table-id");
+}
+mc = document.getElementById("syns-menu-id");
+setSelectedIx(mc,getArgL("syns").startsWith("y") ? 1 : 0);
+for (var i = 0; i < mc.children.length; i++)
+  mc.children[i].addEventListener("click",setDets);
+var arg = getArg("z");
 if (arg!=null)
   setDets(parseInt(arg));
 </script>
