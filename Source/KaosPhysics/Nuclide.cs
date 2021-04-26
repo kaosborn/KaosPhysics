@@ -1908,6 +1908,18 @@ namespace Kaos.Physics
                 { "ru", new string[] { "Неизвестно", "Твердый", "жидкость", "Газ" } }
             });
 
+        /// <summary>Phrases for tap.</summary>
+        public static ReadOnlyDictionary<string,string> TapPhrases { get; } = new ReadOnlyDictionary<string,string>
+            (new Dictionary<string,string>()
+            {
+                { "de", "Tippen Sie für das Menü" },
+                { "en", "Tap for menu" },
+                { "es", "Toque para el menú" },
+                { "fr", "Appuyez pour accéder au menu" },
+                { "it", "Tocca per il menu" },
+                { "ru", "Нажмите для меню" }
+            });
+
         /// <summary>Temperature suffixes.</summary>
         public static ReadOnlyDictionary<string,string[]> TemperatureSuffix { get; } = new ReadOnlyDictionary<string,string[]>
             (new Dictionary<string,string[]>()

@@ -21,18 +21,18 @@ namespace AppMain
 
             Console.WriteLine ('{');
 
-            Console.Write (toJsonSB2 ("categoryGroupNames", Nuclide.CategoryGroupNames).ToString());
+            Console.Write (toJsonSB3 ("categoryGroupNames", Nuclide.CategoryGroupNames).ToString());
             Console.WriteLine (',');
             Console.WriteLine ();
 
-            Console.Write (toJsonSB2 ("categoryNames", Nuclide.CategoryNames).ToString());
+            Console.Write (toJsonSB3 ("categoryNames", Nuclide.CategoryNames).ToString());
             Console.WriteLine (',');
             Console.WriteLine ();
 
             Console.WriteLine ($"  {quote}decayModeCodes{quote}{binop} \"{Nuclide.DecayModeCodes}\",");
             Console.WriteLine ();
 
-            Console.Write (toJsonSB2 ("decayModeNames", Nuclide.DecayModeNames).ToString());
+            Console.Write (toJsonSB3 ("decayModeNames", Nuclide.DecayModeNames).ToString());
             Console.WriteLine (',');
             Console.WriteLine ();
 
@@ -40,7 +40,7 @@ namespace AppMain
             Console.WriteLine (',');
             Console.WriteLine ();
 
-            Console.Write (toJsonSB2 ("isotopesHeadings", Nuclide.IsotopesHeadings).ToString());
+            Console.Write (toJsonSB3 ("isotopesHeadings", Nuclide.IsotopesHeadings).ToString());
             Console.WriteLine (',');
             Console.WriteLine ();
 
@@ -48,29 +48,33 @@ namespace AppMain
             Console.WriteLine (',');
             Console.WriteLine ();
 
-            Console.Write (toJsonSB2 ("lifeDescriptions", Nuclide.LifeDescriptions).ToString());
+            Console.Write (toJsonSB3 ("lifeDescriptions", Nuclide.LifeDescriptions).ToString());
             Console.WriteLine (',');
             Console.WriteLine ();
 
             Console.WriteLine ($"  {quote}occurrenceCodes{quote}{binop} \"{Nuclide.OccurrenceCodes}\",");
             Console.WriteLine ();
 
-            Console.Write (toJsonSB2 ("occurrenceNames", Nuclide.OccurrenceNames).ToString());
+            Console.Write (toJsonSB3 ("occurrenceNames", Nuclide.OccurrenceNames).ToString());
             Console.WriteLine (',');
             Console.WriteLine ();
 
-            Console.Write (toJsonSB2 ("stabilityDescriptions", Nuclide.StabilityDescriptions).ToString());
+            Console.Write (toJsonSB3 ("stabilityDescriptions", Nuclide.StabilityDescriptions).ToString());
             Console.WriteLine (',');
             Console.WriteLine ();
 
             Console.WriteLine ($"  {quote}stateCodes{quote}{binop} \"{Nuclide.StateCodes}\",");
             Console.WriteLine ();
 
-            Console.Write (toJsonSB2 ("stateNames", Nuclide.StateNames).ToString());
+            Console.Write (toJsonSB3 ("stateNames", Nuclide.StateNames).ToString());
             Console.WriteLine (',');
             Console.WriteLine ();
 
-            Console.Write (toJsonSB2 ("themeNames", Nuclide.ThemeNames).ToString());
+            Console.Write (toJsonSB2 ("tapPhrases", Nuclide.TapPhrases).ToString());
+            Console.WriteLine (',');
+            Console.WriteLine ();
+
+            Console.Write (toJsonSB3 ("themeNames", Nuclide.ThemeNames).ToString());
             Console.WriteLine (',');
             Console.WriteLine ();
 
@@ -138,13 +142,39 @@ namespace AppMain
                         sb.Append (", ");
                     sb.Append ('\"');
                     sb.Append (values[ix]);
-                    sb.Append ('\"');
+                    sb.Append ("\",");
+                    sb.Append (Environment.NewLine);
                 }
                 sb.Append (" ]");
                 return sb;
             }
 
-            StringBuilder toJsonSB2 (string propertyName, ReadOnlyDictionary<string,string[]> map)
+            StringBuilder toJsonSB2 (string propertyName, ReadOnlyDictionary<string,string> map)
+            {
+                var sb = new StringBuilder();
+                sb.Append ("  ");
+                sb.Append (quote);
+                sb.Append (propertyName);
+                sb.Append (quote);
+                sb.Append (binop);
+                sb.Append (" {");
+                sb.Append (Environment.NewLine);
+                int ix = 0;
+                foreach (var kv in map)
+                {
+                    if (ix++ != 0) { sb.Append (','); sb.Append (Environment.NewLine); }
+                    sb.Append ("    \"");
+                    sb.Append (kv.Key);
+                    sb.Append ("\": \"");
+                    sb.Append (kv.Value);
+                    sb.Append ('\"');
+                }
+                sb.Append (Environment.NewLine);
+                sb.Append ("  }");
+                return sb;
+            }
+
+            StringBuilder toJsonSB3 (string propertyName, ReadOnlyDictionary<string,string[]> map)
             {
                 var sb = new StringBuilder();
                 sb.Append ("  ");

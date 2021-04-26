@@ -5,90 +5,97 @@
 
 The KaosPhysics project started with the `elements.html` page - an
 interactive and internationalized periodic table of the elements.
-It became necessary to model the required data in a strongly-typed environment so C# was chosen.
-The .NET codebase generates JSON for the nuclides table and HTML for the tables themselves.
+It became necessary to model the required data in a strongly typed environment so C# was chosen.
+This .NET codebase generates JSON for the nuclides table and HTML for the tables themselves.
 
-The term 'nuclides' is used for the elements table because it includes the neutron at index 0, followed by hydrogen, etc.
+The term *nuclides* is used for the elements structure because it includes the neutron at index 0, followed by hydrogen, etc.
 This allows using an element's atomic number (proton count) as the array index.
 
 ### Folder contents
 
 #### Pages folder
 
-The `elements.html` file is an HTML/RSS/JavaScript page that displays the periodic table of the elements.
-Stable versions are periodically posted here:
+The `elements.html` file is an HTML/CSS/JavaScript page that:
+
+* Displays the periodic table of the elements in standard form, 32-column (long) form, or left-step form.
+* Provides a plethora of switchable themes.
+* Provides an element browser with isotope details.
+* Provides full support for many languages, including 3 English variants.
+* Detects language on page load for best-fit initial setting.
+* Uses responsive CSS to provide adaptable output without JavaScript.
+* Is only a single file with no dependencies for ease of distribution and offline functionality.
+
+Here is a dark mode screenshot of the Stability theme in standard form with phosphorus selected:
+
+![Elements z=15](Images/elements-z015-stan-stab-en.png)
+
+Bring up the app menu to select language, theme, table form, and more
+by tapping the hamburger icon at top left.
+
+The latest version of **Elements** is posted here:
 
 https://kaosborn.github.io/elements.html
 
-The **Elements** web page:
+Work is ongoing in these areas:
 
-* Displays the periodic table of the elements in either standard, 32-column, or left-step format.
-* Provides a plethora of switchable themes.
-* Provides full support for multiple languages, including English variants.
-* Uses responsive CSS to provide adaptable output without JavaScript.
-* Detects user language on page load for best-fit initial setting.
-* Is Limited to a single file with no dependencies for ease of distribution and offline functionality.
-
-Work is needed in these areas:
-
-* Add categories.
-* Improve user interface.
-* Improve current translations, add more languages.
+* Adding categories.
+* Improving user interface.
+* Improving current translations, adding more languages (nl, pl, pt, ?).
 
 #### DotGenJson folder
 
-The `DotGenJson` folder contains a .NET Core project that builds `DotGenJson.exe`
-for generating machine readable data sourced from the KaosPhysics model.
-This program:
+The `DotGenJson` folder contains a .NET project that builds `DotGenJson.exe`
+for generating JSON data sourced from the KaosPhysics model.
+This JSON object:
 
 * Provides detailed nuclide and isotope information.
-* Provides translations of terms to de, en, en-GB, en-US, es, fr, it, ru:
+* Provides translations to de, en, en-GB, en-US, es, fr, it, ru:
   * Element names
   * Decay mode names
   * Category names
   * Names of states of matter
   * And more
 
-The **Elements** web page (above) uses data from this program's output to produce its content.
-For example,
-the following potassium isotopes table is built dynamically from data emitted by `DotGenJson.exe`.
-
-![Potassium-40 isotopes](Images/element-19-isotopes.png)
-
-See the original page here:
-
-https://kaosborn.github.io/elements.html?theme=stab;z=19
-
-Usage: `DotGenJson.exe [-js]`
-
-Use the `-js` switch to produce JavaScript rather than the default JSON.
-See complete output here:
+See the object here:
 
 https://kaosborn.github.io/data/kaosNuclides.json
 
+The **Elements** web page (above) uses this object to produce its content.
+For example,
+the following potassium isotopes table is built dynamically from data emitted by `DotGenJson.exe`:
+
+![Potassium isotopes](Images/element-19-isotopes.png?raw=true)
+
+(See the original page at [kaosborn.github.io/elements.html?theme=stab;z=19](https://kaosborn.github.io/elements.html?theme=stab;z=19))
+
+Usage: `DotGenJson.exe [-js]`
+
+* Use the `-js` switch to emit JavaScript rather than JSON.
+
 #### DotElements folder
 
-The `DotElements` folder contains a .NET Core project that builds `DotElements.exe`
-for generating concise, human readable data source from the KaosPhysics model.
+The `DotElements` folder contains a .NET project that builds `DotElements.exe`
+for generating concise, human readable data sourced from the KaosPhysics model.
 This program produces a narrow, fixed-width listing of the elements
 followed by fixed-width listings of their isotopes.
 
-Usage: `DotElements.exe [languageCode]`
-
-Provide a language argument (2 or 5 characters) for translations of chemical terms.
-For output of the default world-English, see here:
+For output of the default (world-English), see here:
 
 https://kaosborn.github.io/data/kaosNuclides-en.txt
 
-#### DotKaosPhysics
+Usage: `DotElements.exe [languageCode]`
 
-This folder contains a class library build of KaosPhysics in the form of a `.nuget` package.
+* Provide a language argument (2 or 5 characters) for translations of chemical terms.
+
+#### DotKaosPhysics folder
+
+This folder builds a class library of KaosPhysics in the form of a `.nuget` package.
+Another way to consume KaosPhysics is to include the source by using a shared project reference.
+The executables presented here use the latter method.
 
 #### Source folder
 
 This folder contains the C# source to the KaosPhysics model in a shared project.
-The preferred way to consume KaosPhysics is to include this shared project directly.
-
 This library source defines the `Kaos.Physics` namespace with 2 classes:
 
 * The `Nuclide` class which consists of the neutron followed by the elements.
@@ -137,11 +144,18 @@ Next is a trimmed excerpt of that object:
 Here is a JavaScript example that shows the symbol for **Z**=2 followed by its name in Spain.
 
 ```js
-alert ("Symbol=" + nuclides[2].symbol);
-alert ("Name in Spain=" + nuclideNames["es"][2]);
+console.log ("Symbol = " + nuclides[2].symbol);
+console.log ("Name in Spain = " + nuclideNames["es"][2]);
 ```
 
-Keys in the `nuclides` object with the `Index` suffix require a lookup in another object.
+Console output:
+
+```
+Symbol = He
+Name in Spain = Helio
+```
+
+Keys in the `nuclides` object named with the suffix of `Index` require a lookup in another object.
 Corresponding lookup tables are provided with language translations.
 
 The `isotopes` arrays vary in length depending on isotope radioactivity:
@@ -189,8 +203,18 @@ Actual property names of the object are camel-cased versions of the argument nam
 
 The `name` parameter supplies the element name in the default language of world-English ('en').
 Element name translations are supplied by the `nameMap` constructor parameter.
-The `GetName(string)` method may then be used to get the element's language-specific name.
+The `GetName(string)` method may then be used to get the element's language-specific name like so:
 
 ```cs
-Console.WriteLine ("H name in Spain: " + Nuclide.Table[1].GetName("es"));
+Console.WriteLine ("H name in Spain = " + Nuclide.Table[1].GetName("es"));
 ```
+
+Console output:
+
+```
+H name in Spain = Hidrógeno
+```
+
+### License
+
+All work here falls under the [MIT License](/LICENSE).

@@ -191,7 +191,7 @@
   </style>
 </head>
 <body>
-<div class="OpenBtn">&#x2630;</div>
+<div id="app-menu-id" class="OpenBtn" title="Tap for menu">&#x2630;</div>
 <div id="t32-id">
   <table id="t32stan-id" class="Toe">
     <caption class="MainCap TextXL">
@@ -1086,9 +1086,9 @@
     <span class="Direction">&#x25B2;</span>
   </button>
   <div id="cols32-menu-id" class="MenuLine DropMenu">
-    <button id="always-cols32-id" class="MenuLine RadioBtn TextXL"><span>Always</span><span style="display:none" lang="de">Immer</span><span style="display:none" lang="es">Siempre</span><span style="display:none" lang="fr">Toujours</span><span style="display:none" lang="it">Sempre</span><span style="display:none" lang="ru">Всегда</span></button>
-    <button id="auto-cols32-id" class="MenuLine RadioBtn TextXL"><span>Auto</span><span style="display:none" lang="ru">Авто</span></button>
     <button id="never-cols32-id" class="MenuLine RadioBtn TextXL"><span>Never</span><span style="display:none" lang="de">Noch nie</span><span style="display:none" lang="es">Nunca</span><span style="display:none" lang="fr">Jamais</span><span style="display:none" lang="it">Mai</span><span style="display:none" lang="ru">Никогда</span></button>
+    <button id="auto-cols32-id" class="MenuLine RadioBtn TextXL"><span>Auto</span><span style="display:none" lang="ru">Авто</span></button>
+    <button id="always-cols32-id" class="MenuLine RadioBtn TextXL"><span>Always</span><span style="display:none" lang="de">Immer</span><span style="display:none" lang="es">Siempre</span><span style="display:none" lang="fr">Toujours</span><span style="display:none" lang="it">Sempre</span><span style="display:none" lang="ru">Всегда</span></button>
   </div>
   <button id="table-top-id" class="MenuLine RadioTop">
     <span class="TextXL"><span>Table</span><span style="display:none" lang="de">Tabelle</span><span style="display:none" lang="es">Tabla</span><span style="display:none" lang="fr">Tableau</span><span style="display:none" lang="it">Tavola</span><span style="display:none" lang="ru">Таблица</span>: </span>
@@ -1137,6 +1137,14 @@ var decayModeNames = {
   "fr": ["Radioactivité α", "Émission de positron", "Rayonnement β-", "Double désintégration bêta", "Capture électronique", "Double capture électronique", "Émission de neutron", "Rayonnement γ", "Conversion interne", "Isomérie nucléaire", "Fission spontanée" ],
   "it": ["Decadimento alfa", "Emissione di positroni", "Decadimento beta", "Doppio decadimento beta", "Cattura elettronica", "Doppia cattura elettronica", "Emissione di neutroni", "Transizione isomerica", "Conversione interna", "Transizione isomerica", "Fissione spontanea" ],
   "ru": ["Альфа распад", "Бета плюс распад", "Бета минус распад", "Двойной бета минус распад", "Электронный захват", "Двойной электронный захват", "Нейтронная эмиссия", "Гамма-распад", "Внутренняя конверсия", "Изомерия атомных ядер", "Спонтанное деление" ]
+};
+var tapPhrases = {
+  "de": "Tippen Sie für das Menü",
+  "en": "Tap for menu",
+  "es": "Toque para el menú",
+  "fr": "Appuyez pour accéder au menu",
+  "it": "Tocca per il menu",
+  "ru": "Нажмите для меню"
 };
 var nuclideNames = {
   "de":   [ "Neutron",  "Wasserstoff", "Helium", "Lithium", "Beryllium", "Bor",   "Kohlensto", "Stickstoff", "Sauerstoff", "Fluor",    "Neon", "Natrium", "Magnesium", "Aluminium", "Silicium", "Phosphor",   "Schwefel", "Chlor",    "Argon", "Kalium",    "Calcium", "Scandium", "Titan",    "Vanadium", "Chrom",    "Mangan",    "Eisen",  "Cobalt",  "Nickel", "Kupfer", "Zink",  "Gallium", "Germanium", "Arsen",    "Selen",    "Brom",    "Krypton", "Rubidium", "Strontium", "Yttrium", "Zirconium", "Niob",    "Molybdän",   "Technetium", "Ruthenium", "Rhodium", "Palladium", "Silber",  "Cadmium", "Indium", "Zinn",   "Antimon",   "Tellur",    "Iod",    "Xenon",  "Cäsium",  "Barium", "Lanthan",   "Cer",    "Praseodym",    "Neodym",    "Promethium", "Samarium", "Europium", "Gadolinium", "Terbium", "Dysprosium", "Holmium", "Erbium", "Thulium", "Ytterbium", "Lutetium", "Hafnium", "Tantal",   "Wolfram",   "Rhénium", "Osmium", "Iridium", "Platin",   "Gold",   "Quecksilber", "Thallium", "Blei",   "Bismut",  "Polonium", "Astat",    "Radon", "Francium", "Radium", "Actinium", "Thorium", "Protaktinium", "Uran",    "Neptunium", "Plutonium", "Americium", "Curium", "Berkelium", "Californium", "Einsteinium", "Fermium", "Mendelevium", "Nobelium", "Lawrencium", "Rutherfordium", "Dubnium", "Seaborgium", "Bohrium", "Hassium", "Meitnerium", "Darmstadtium", "Roentgenium", "Copernicium", "Nihonium", "Flerovium", "Moscovium", "Livermorium", "Tennessine", "Oganesson" ],
@@ -1632,6 +1640,7 @@ function setLang(lang) {
       p.children[1].title = nn[z];
     }
   }
+  document.getElementById("app-menu-id").title = tapPhrases[lang.substr(0,2)];
   if (isTheme("diff"))
     diffTheme();
   if (isTheme("stat")) {
@@ -1891,10 +1900,10 @@ for (var i = 0; i < mc.children.length; i++) {
 }
 mc = document.getElementById("cols32-menu-id");
 var argL = getArgL("long");
-ix = argL=="always" ? 0 : argL=="never" ? 2 : 1;
-if (ix==0)
+ix = argL=="never" ? 0 : argL=="always" ? 2 : 1;
+if (ix==2)
   cols32Always(true);
-else if (ix==2)
+else if (ix==0)
   cols32Never(true);
 setSelectedIx(mc,ix);
 for (var i = 0; i < mc.children.length; i++)
