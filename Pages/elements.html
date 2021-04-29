@@ -72,26 +72,29 @@
     .YAxis1 { display:none; text-align:center; font-weight:bold; }
     .YPadSmall { display:none; }
     .YPadBig { width:61px; display:inline-block; }
-    .EdgeMenu {
-      height:100%; width:0;
-      z-index:1;
-      position:fixed; top:1px; left:0px;
+    .EdgeMenu,.AboutBox {
       background-color:#111;
       opacity:0.9;
+      z-index:1;
+      position:fixed;
+      height:100%; width:0;
+      top:1px; left:0px;
       overflow-x:hidden;
-      padding-top:24px;
       transition:0.5s;
     }
-    .CloseBtn,.MenuLabel,.NumberBtn,.RadioBtn,.RadioTop {
-      padding:0;
-      border:none;
+    .CloseBtn,.MenuBtn,.MenuLabel,.NumberBtn,.RadioBtn,.RadioTop {
       color:#888;
       background:none;
-      cursor:pointer;
       font-size:22px;
       text-align:left;
+      border:none;
+      padding:0;
+      cursor:pointer;
     }
-    .CloseBtn:hover,.NumberBtn:hover,.RadioBtn:hover,.RadioTop:hover {
+    .Anchor {
+      color:#888;
+    }
+    .Anchor:hover,.MenuBtn:hover,.NumberBtn:hover,.RadioBtn:hover,.RadioTop:hover {
       color:#eee;
       transition:0.5s;
     }
@@ -100,12 +103,22 @@
       transition:0.25s;
     }
     .OpenBtn {
-      font-size:24px; cursor:pointer; z-index:1; position:fixed; top:0; left:0;
+      color:#00d;
+      font-size:24px;
+      z-index:1;
+      position:fixed;
+      top:0; left:0;
+      padding:0 3px 0 3px;
+      cursor:pointer;
     }
     .CloseBtn {
-      position:absolute;
-      top:0; right:10px;
-      font-size:36px; color:#aaa;
+      color:#bbb;
+      font-size:36px;
+      padding:0 0 6px 24px;
+    }
+    .CloseBtn:hover {
+      color:#fff;
+      transition:0.25s;
     }
     .MenuLine {
       display:block;
@@ -119,7 +132,8 @@
       -webkit-appearance:none; -moz-appearance:textfield;      
     }
     .Direction {
-      float:right; padding-right:8px;
+      float:right;
+      padding-right:8px;
     }
     .DropMenu {
       display:none;
@@ -191,7 +205,7 @@
   </style>
 </head>
 <body>
-<div id="app-menu-id" class="OpenBtn" title="Tap for menu">&#x2630;</div>
+<div id="burger-id" class="OpenBtn" title="enable JavaScript for menu">&#x2630;</div>
 <div id="t32-id">
   <table id="t32stan-id" class="Toe">
     <caption class="MainCap TextXL">
@@ -995,8 +1009,7 @@
             <span id="dets-bigZ-id" style="font-size:x-large;">Z</span>
             <span id="dets-bigSymbol-id" style="font-size:xx-large; font-weight:bolder;">E</span>
           </td>
-          <td id="rt-spin-id" class="SpinBtn" style="float:right; transform:rotate(45deg);">
-          </td>
+          <td id="rt-spin-id" class="SpinBtn" style="float:right; transform:rotate(45deg);"></td>
         </tr>
       </table>
     </div>
@@ -1041,8 +1054,9 @@
   </div>
 </div>
 <div id="edge-menu-id" class="EdgeMenu">
-  <button class="CloseBtn">&times;</button>
-  <p></p>
+  <button class="CloseBtn">
+    &times;
+  </button>
   <button id="lang-top-id" class="MenuLine RadioTop">
     <span class="TextXL"><span>Language</span><span style="display:none" lang="de">Sprache</span><span style="display:none" lang="es">Idioma</span><span style="display:none" lang="fr">Langue</span><span style="display:none" lang="it">Linguaggio</span><span style="display:none" lang="ru">язык</span>: </span>
     <span class="SelectedValue">S</span>
@@ -1116,6 +1130,17 @@
   <div id="syns-menu-id" class="MenuLine DropMenu">
     <button class="MenuLine RadioBtn TextXL"><span>Off</span><span style="display:none" lang="de">Aus</span><span style="display:none" lang="es">Apagar</span><span style="display:none" lang="fr">Éteindre</span><span style="display:none" lang="it">Spegnere</span><span style="display:none" lang="ru">Выключить</span></button>
     <button class="MenuLine RadioBtn TextXL"><span>On</span><span style="display:none" lang="de">Auf</span><span style="display:none" lang="es">Encender</span><span style="display:none" lang="fr">Allumer</span><span style="display:none" lang="it">Sopra</span><span style="display:none" lang="ru">Включить</span></button>
+  </div>
+  <button id="about-btn-id" class="MenuLine MenuBtn">
+    <span class="TextXL"><span>About</span><span style="display:none" lang="de">Über</span><span style="display:none" lang="es">Acerca de</span><span style="display:none" lang="fr">À propos</span><span style="display:none" lang="it">Di</span><span style="display:none" lang="ru">Около</span></span>
+  </button>
+</div>
+<div id="about-box-id" class="AboutBox">
+  <div style="padding-left:24px;">
+    <div class="MenuLabel" style="margin:51px 0 24px 0; font-size:48px; color:#ccc;">Elements</div>
+    <a class="Anchor" style="padding:6px 0 6px 0;" href="https://github.com/kaosborn/KaosPhysics/">github.com/kaosborn/KaosPhysics</a>
+    <div class="MenuLabel" style="margin:30px 0 3px 0;">MIT License:</div>
+    <div class="MenuLabel" style="font-size:15px;">Use and redistribute freely.</div>
   </div>
 </div>
 <script>
@@ -1640,7 +1665,7 @@ function setLang(lang) {
       p.children[1].title = nn[z];
     }
   }
-  document.getElementById("app-menu-id").title = tapPhrases[lang.substr(0,2)];
+  document.getElementById("burger-id").title = tapPhrases[lang.substr(0,2)];
   if (isTheme("diff"))
     diffTheme();
   if (isTheme("stat")) {
@@ -1778,14 +1803,22 @@ var ec = document.getElementsByClassName("OpenBtn");
 for (var i = 0; i < ec.length; i++)
   ec[i].addEventListener("click",openMenuClick);
 function openMenuClick() {
-  document.getElementById("edge-menu-id").style.width = "380px";
+  document.getElementById("edge-menu-id").style.width = Math.max(Math.min(document.body.offsetWidth,380),240)+"px";
 }
 ec = document.getElementsByClassName("CloseBtn");
 for (var i = 0; i < ec.length; i++)
   ec[i].addEventListener("click",closeMenuClick);
 function closeMenuClick() {
-  if (this.classList.contains("CloseBtn"))
+  if (this.classList.contains("CloseBtn")) {
     document.getElementById("edge-menu-id").style.width = "0";
+    document.getElementById("about-box-id").style.width = "0";
+  }
+}
+document.getElementById("about-btn-id").addEventListener("click",aboutClick);
+function aboutClick(e) {
+  var id = document.getElementById("about-box-id");
+  document.getElementById("about-box-id").style.left = document.getElementById("edge-menu-id").style.width;
+  id.style.width = (280-id.offsetWidth)+"px";
 }
 var ec = document.getElementsByClassName("RadioTop");
 for (var i = 0; i < ec.length; i++) {
