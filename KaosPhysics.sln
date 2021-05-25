@@ -18,14 +18,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pages", "Pages", "{6C15CAF7
 		Pages\elements.html = Pages\elements.html
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotKaosPhysics", "DotKaosPhysics\DotKaosPhysics.csproj", "{7C6378F5-6856-4070-A388-9B51CD27E4F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotKaosPhysics", "DotKaosPhysics\DotKaosPhysics.csproj", "{7C6378F5-6856-4070-A388-9B51CD27E4F4}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Source\KaosPhysics\KaosPhysics.projitems*{5ca42032-0c46-41f3-b069-b772d30984e1}*SharedItemsImports = 5
 		Source\KaosPhysics\KaosPhysics.projitems*{7c6378f5-6856-4070-a388-9b51cd27e4f4}*SharedItemsImports = 5
 		Source\KaosPhysics\KaosPhysics.projitems*{a66e42c6-1e80-42fb-a098-bb080f2a546a}*SharedItemsImports = 5
-		Source\KaosPhysics\KaosPhysics.projitems*{d5a6e714-76d0-40e8-8911-96dd1b317aef}*SharedItemsImports = 5
 		Source\KaosPhysics\KaosPhysics.projitems*{e84e7589-fdce-4a7b-bf59-51ec76f90ad1}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

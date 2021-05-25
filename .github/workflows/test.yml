@@ -8,10 +8,12 @@ jobs:
       with:
         fetch-depth: 1
     - name: Initialize
-      run: mkdir TestResults
+      run: dotnet tool install dotnet-reportgenerator-globaltool --global
     - name: Run standard suite
-      run: dotnet test -c Debug TestCore
+      run: dotnet test --collect:"XPlat Code Coverage" TestCore
+    - name: Generate coverage report
+      run: reportgenerator.exe -reports:.\TestCore\TestResults\**\coverage.cobertura.xml -reporttypes:html -targetdir:.\TestCore\TestResults\CovRep
     - uses: actions/upload-artifact@v1
       with:
         name: KaosPhysics-Test
-        path: TestResults
+        path: TestCore\TestResults
