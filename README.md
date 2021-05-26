@@ -1,5 +1,6 @@
 ﻿<a href="https://github.com/kaosborn/KaosPhysics/blob/master/.github/workflows/test.yml">
 <img src="https://github.com/kaosborn/KaosPhysics/workflows/test/badge.svg"></a>
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/kaosborn/KaosPhysics/blob/master/LICENSE)
 
 # KaosPhysics
 
