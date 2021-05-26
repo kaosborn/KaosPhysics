@@ -17,9 +17,9 @@ jobs:
         dotnet build -c Release DotGenJson
     - name: Run executables
       run: |
-        DotElements\bin\Release\**\DotElements.exe > .\RunResults\nuclides.txt
-        DotGenJson\bin\Release\**\DotGenJson.exe > .\RunResults\nuclides.json
-        DotGenJson\bin\Release\**\DotGenJson.exe -js > .\RunResults\nuclides.js
+        DotElements\bin\Release\netcoreapp3.1\DotElements.exe > .\RunResults\nuclides.txt
+        DotGenJson\bin\Release\netcoreapp3.1\DotGenJson.exe > .\RunResults\nuclides.json
+        DotGenJson\bin\Release\netcoreapp3.1\DotGenJson.exe -js > .\RunResults\nuclides.js
     - name: Copy build artifacts
       run: |
         move .\DotKaosPhysics\bin\Release\*.nupkg .\RunResults
