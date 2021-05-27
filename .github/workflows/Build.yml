@@ -10,7 +10,7 @@ jobs:
     - name: Initialize
       run: mkdir RunResults
     - name: Build library
-      run: dotnet build -c Release DotKaosPhysics
+      run: dotnet build -c Release KaosPhysics
     - name: Build executables
       run: |
         dotnet build -c Release DotElements
@@ -22,8 +22,8 @@ jobs:
         DotGenJson\bin\Release\netcoreapp3.1\DotGenJson.exe -js > .\RunResults\nuclides.js
     - name: Copy build artifacts
       run: |
-        move .\DotKaosPhysics\bin\Release\*.nupkg .\RunResults
-        move .\DotKaosPhysics\obj\Release\**\KaosPhysics.xml .\RunResults
+        move .\KaosPhysics\bin\Release\*.nupkg .\RunResults
+        move .\KaosPhysics\obj\Release\**\KaosPhysics.xml .\RunResults
     - uses: actions/upload-artifact@v1
       with:
         name: KaosPhysics-Run
