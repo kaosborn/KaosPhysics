@@ -1,5 +1,7 @@
-﻿[![Test](https://github.com/kaosborn/KaosPhysics/workflows/test/badge.svg)](https://github.com/kaosborn/KaosPhysics/blob/master/.github/workflows/test.yml)
-[![Build](https://github.com/kaosborn/KaosPhysics/workflows/build/badge.svg)](https://github.com/kaosborn/KaosPhysics/blob/master/.github/workflows/build.yml)
+﻿![logo](Images/elements-logo.svg)
+
+[![Test](https://github.com/kaosborn/KaosPhysics/workflows/Test/badge.svg)](https://github.com/kaosborn/KaosPhysics/blob/master/.github/workflows/Test.yml)
+[![Build](https://github.com/kaosborn/KaosPhysics/workflows/Build/badge.svg)](https://github.com/kaosborn/KaosPhysics/blob/master/.github/workflows/Build.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/kaosborn/KaosPhysics/blob/master/LICENSE)
 
 # KaosPhysics

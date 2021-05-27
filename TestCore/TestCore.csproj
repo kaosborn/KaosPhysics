@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DotKaosPhysics\DotKaosPhysics.csproj" />
+    <ProjectReference Include="..\KaosPhysics\KaosPhysics.csproj" />
   </ItemGroup>
 
 </Project>
