@@ -1,4 +1,4 @@
-﻿![logo](Images/elements-logo.svg)
+﻿![logo](Images/physics-logo.svg)
 
 [![Test](https://github.com/kaosborn/KaosPhysics/workflows/Test/badge.svg)](https://github.com/kaosborn/KaosPhysics/blob/master/.github/workflows/Test.yml)
 [![Build](https://github.com/kaosborn/KaosPhysics/workflows/Build/badge.svg)](https://github.com/kaosborn/KaosPhysics/blob/master/.github/workflows/Build.yml)

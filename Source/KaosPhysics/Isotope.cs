@@ -39,6 +39,8 @@ namespace Kaos.Physics
     /// </remarks>
     public class Isotope
     {
+        private static readonly string TimeUnitCodes = "nitsmhdy";
+
         /// <summary>Create a stable isotope.</summary>
         /// <param name="z">Proton count.</param>
         /// <param name="a">Nucleon count.</param>
@@ -59,8 +61,12 @@ namespace Kaos.Physics
         /// <param name="decayMode">Ored bitflags of possible isotope mutations.</param>
         /// <param name="halflife">Time to decay by half scaler.</param>
         /// <param name="timeUnit">Time to decay by half scale.</param>
+        /// <exception cref="ArgumentException">When <em>timeUnit</em> not valid.</exception>
         public Isotope (int z, int a, double? abundance, Decay decayMode, double halflife, char timeUnit)
         {
+            if (TimeUnitCodes.IndexOf (timeUnit) < 0)
+                throw new ArgumentException ("Invalid code.", nameof (timeUnit));
+
             Z = z;
             A = a;
             Abundance = abundance;
@@ -122,7 +128,7 @@ namespace Kaos.Physics
           : TimeUnit == 's' ? Halflife
           : TimeUnit == 'm' ? Halflife * 60
           : TimeUnit == 'h' ? Halflife * 3600
-          : TimeUnit == 'd' ? Halflife * (3600*24)
+          : TimeUnit == 'd' ? Halflife * (3600 * 24)
           : TimeUnit == 'y' ? Halflife * Nuclide.SecondsPerYear
           : double.NaN;
 
@@ -135,26 +141,8 @@ namespace Kaos.Physics
             if (DecayMode == Decay.None)
                 return string.Empty;
 
-            var suffix = "?";
-            if (Nuclide.TemperatureSuffix.TryGetValue (culture.TwoLetterISOLanguageName, out string[] vocab))
-                if (TimeUnit == 'n')
-                    suffix = vocab[0];
-                else if (TimeUnit == 'i')
-                    suffix = vocab[1];
-                else if (TimeUnit == 't')
-                    suffix = vocab[2];
-                else if (TimeUnit == 's')
-                    suffix = vocab[3];
-                else if (TimeUnit == 'm')
-                    suffix = vocab[4];
-                else if (TimeUnit == 'h')
-                    suffix = vocab[5];
-                else if (TimeUnit == 'd')
-                    suffix = vocab[6];
-                else if (TimeUnit == 'y')
-                    suffix = vocab[7];
-
-            return Halflife.ToString (culture) + ' ' + suffix;
+            Nuclide.TemperatureSuffix.TryGetValue (culture.TwoLetterISOLanguageName, out string[] vocab);
+            return Halflife.ToString (culture) + ' ' + vocab[TimeUnitCodes.IndexOf (TimeUnit)];
         }
 
         /// <summary>Returns <b>true</b> if the isotope is not synthetic, else <b>false</b>.</summary>
@@ -319,7 +307,7 @@ namespace Kaos.Physics
 
         /// <summary>Provide isotope contents in short form.</summary>
         /// <returns>Returns the key of the isotope.</returns>
-        public override string ToString() => "Z="+Z+", A="+A;
+        public override string ToString() => $"Z={Z}, A={A}";
 
         /// <summary>Convert this isotope to another.</summary>
         /// <param name="decayModeBitflag">Bitflag of an isotope mutation.</param>

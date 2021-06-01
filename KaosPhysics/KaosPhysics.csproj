@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.0</TargetFramework>
+    <PackageId>Kaos.Physics</PackageId>
     <Version>0.1.0</Version>
     <Authors>Kasey O.</Authors>
     <Company>github.com/kaosborn</Company>
     <Description>Immutable table of the elements and isotopes including translations of chemical terms.</Description>
-    <PackageId>Kaos.Physics</PackageId>
     <Copyright>Copyright © 2021 github.com/kaosborn</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/kaosborn/KaosPhysics</PackageProjectUrl>
@@ -17,8 +17,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath></OutputPath>
-    <DocumentationFile>obj\Release\netstandard1.0\KaosPhysics.dll</DocumentationFile>
+    <DocumentationFile>obj\Release\netstandard1.0\KaosPhysics.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

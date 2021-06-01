@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="640" height="160" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+  <title>Physics</title>
+  <rect x="0"   y="120" width="280" height="40"  fill="#0d0"/>
+  <rect x="280" y="80"  width="200" height="80"  fill="#0dd"/>
+  <rect x="480" y="40"  width="120" height="120" fill="#dd0"/>
+  <rect x="600" y="0"   width="40"  height="160" fill="#d50"/>
+</svg>

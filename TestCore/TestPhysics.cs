@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Kaos.Physics;
@@ -268,7 +267,7 @@ namespace TestPhysics
         [TestMethod]
         public void TestNuclide_CheckMethods()
         {
-            Assert.AreEqual (Nuclide.Table.Count() - 1, Nuclide.GetElements().Count());
+            Assert.AreEqual (Nuclide.Table.Count - 1, Nuclide.GetElements().Count());
             Assert.IsTrue (Nuclide.GetLongTable().Count() >= 7);
             Assert.AreEqual ("Kalium", Nuclide.Table[19].GetName("de"));
             Assert.AreEqual ("Yodo", Nuclide.Table[53].GetName (new CultureInfo ("es")));
@@ -282,6 +281,13 @@ namespace TestPhysics
     [TestClass]
     public class Test_Isotope
     {
+        [TestMethod]
+        [ExpectedException (typeof (ArgumentException))]
+        public void CrashIsotope_Ctor5_ArgumentException()
+        {
+            var _ = new Isotope (2, 5, 0.0, Decay.Alpha, 1.2, '!');
+        }
+
         [TestMethod]
         public void TestIsotope_Ctor()
         {
@@ -324,7 +330,7 @@ namespace TestPhysics
         public void TestIsotope_Nuclide_ArgumentOutOfRange()
         {
             var badIsotope = new Isotope (200, 400, 0.0);
-            Nuclide unreachableResult = badIsotope.Nuclide;
+            Nuclide _ = badIsotope.Nuclide;
         }
 
         [TestMethod]
@@ -370,7 +376,6 @@ namespace TestPhysics
         [TestMethod]
         public void TestIsotope_GetDecayIndexes()
         {
-            var nuc = Nuclide.Table[19][40];
             var actualBe9 = 0;
             foreach (int decayIndex in Nuclide.Table[4][9].GetDecayIndexes())
                 ++actualBe9;
